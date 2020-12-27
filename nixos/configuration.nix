@@ -113,8 +113,21 @@
 
     # basic packages for i3 environment
     alacritty
+    blueman
+    dunst
+    feh
     firefox-bin
     flameshot
+    i3lock
+    imagemagick
+    libnotify
+    light
+    lxappearance
+    mate.mate-polkit
+    pavucontrol
+    playerctl
+    scrot
+    xfce.thunar
   ];
 
   # enable gpg-agent
