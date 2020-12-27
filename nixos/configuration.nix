@@ -58,6 +58,8 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.windowManager.i3.package = pkgs.i3-gaps;
 
   # keyboard layout
   services.xserver.layout = "us";
@@ -90,14 +92,20 @@
 
   # system-wide packages
   environment.systemPackages = with pkgs; [
+    alacritty
+    bc
+    curl
     firefox-bin
+    gawk
     git
-    gparted
     gnupg
+    gparted
+    killall
     neovim
     rcm
     tree
     wget
+    zsh
   ];
 
   # enable gpg-agent
