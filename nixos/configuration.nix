@@ -104,11 +104,13 @@
     # base packages
     bc
     curl
+    cpufrequtils
     gawk
     git
     gnupg
     gparted
     killall
+    lm_sensors
     neovim
     rcm
     tree
