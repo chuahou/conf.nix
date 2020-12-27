@@ -74,6 +74,52 @@
   # touchpad support
   services.xserver.libinput.enable = true;
 
+  # picom
+  services.picom = {
+    enable = true;
+    backend = "xrender";
+    fade = true;
+    fadeDelta = 10;
+    fadeSteps = [ 0.1 0.1 ];
+    opacityRules = [
+      "88:class_g *?= 'zathura'" # zathura
+      "90:class_g *?= 'rofi'"    # rofi
+    ];
+    vSync = true;
+    wintypes = {
+      tooltip = {
+        fade = true;
+        shadow = false;
+        opacity = 0.85;
+        focus = true;
+      };
+      dock = { shadow = false; };
+      dnd = { shadow = false; };
+      popup_menu = {
+        opacity = 1.0;
+        shadow = false;
+        fade = false;
+      };
+      dropdown_menu = {
+        opacity = 1.0;
+        fade = false;
+      };
+    };
+    settings = {
+      no-fading-openclose = false;
+      inactive-dim = 0.03; # dim inactive windows
+      inactive-dim-fixed = true; # dim independently of opacity
+      detect-client-opacity = true; # detect _NET_WM_OPACITY
+      dbe = true;
+      mark-wmwin-focused = true; # try to detect WM windows and mark them as active
+      mark-ovredir-focused = true; # mark override-redirect windows active
+      use-ewmh-active-win = true; # use EWMH to determine focused window
+      detect-transient = true; # use WM_TRANSIENT_FOR to group windows and focus all
+      detect-client-leader = true; # use WM_CLIENT_LEADER to group windows
+      focus-exclude = [ ]; # windows that should always be focused
+    };
+  };
+
   # user accounts
   users = {
     mutableUsers = false;
@@ -132,6 +178,7 @@
     mate.mate-polkit
     pavucontrol
     playerctl
+    rofi
     scrot
     xfce.thunar
   ];

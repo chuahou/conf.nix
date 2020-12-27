@@ -1,0 +1,41 @@
+configuration {
+	// general
+	modi: "drun,run,window";
+	m: "-4"; // on monitor with focused window
+
+	// drun
+	drun-display-format: "<span weight='500'>{name}</span> [<span weight='300' size="small">(<i>{generic}</i>)</span>]";
+	drun-match-fields: "name,generic,exec,categories";
+	display-drun: "RUN λ>";
+
+	// run
+	run-command: "{cmd}";
+	run-shell-command: "{terminal} -e {cmd}";
+	display-run: "RUN $>";
+
+	// window
+	window-format: "{c}   {t}";
+	window-command: "wmctrl -i -R {window}";
+	window-match-fields: "all";
+	display-window: "WIN ?>";
+
+	// behaviour
+	disable-history: false;
+	sort: false;
+	case-sensitive: false;
+	cycle: true;
+	sidebar-mode: false;
+	matching: "normal";
+	tokenize: true;
+	threads: 0;
+	scroll-method: 1;
+	click-to-exit: true;
+	show-match: true;
+	
+	// appearance
+	theme: ".config/rofi/theme.rasi";
+	show-icons: false;
+
+	// TODO
+	separator-style: "dash";
+}

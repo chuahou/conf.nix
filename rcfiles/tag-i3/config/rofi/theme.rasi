@@ -1,0 +1,105 @@
+* {
+	cgray0: #2E3440;
+	cgray1: #3B4252;
+	cgray2: #434C5E;
+	cgray3: #7B8394;
+	cgray4: #D8DEE9;
+	cgray5: #E5E9F0;
+	cgray6: #ECEFF4;
+	cgray7: #ECEFF4;
+	cred: #D14949;
+	cgreen: #48874F;
+	cyellow: #AFA75A;
+	cblue: #599797;
+	cmagenta: #8F6089;
+	ccyan: #5C9FA8;
+	cwhite: #8C8C8C;
+	clred: #5F4351;
+	clgreen: #3E5651;
+	clyellow: #686754;
+	clblue: #3F525D;
+	clmagenta : #4B465A;
+	clcyan: #405461;
+	clwhite: #585B64;
+
+	cbg: @cgray0;
+	cbg-alt: @cgray1;
+	cbg-alt2: @cgray2;
+	cfg: @cgray5;
+
+	font: "Iosevka 15";
+	padding: 2;
+
+	background-color: @cbg;
+	color: @cfg;
+}
+
+#window {
+	// geometry
+	width: 40%;
+	padding: 30;
+	position: "centre";
+	fullscreen: false;
+
+	// border
+	border: 2;
+	border-color: @cgray7;
+}
+
+#inputbar {
+	background-color: @clblue;
+	border: 0 solid 0 solid 2 solid;
+	border-color: @cblue;
+	padding: 6 2 4 2;
+	margin: 0 0 2;
+}
+
+#prompt, entry, case-indicator {
+	background-color: inherit;
+}
+#prompt {
+	margin: 0 2 0 1ch;
+}
+#entry {
+	font: "Iosevka Light 14";
+}
+
+#listview {
+	// geometry
+	lines: 8;
+	columns: 1;
+	fixed-height: true;
+	padding: 10;
+	spacing: 0;
+
+	// behaviour
+	layout: vertical;
+	dynamic: false;
+	cycle: true;
+	scrollbar: true;
+}
+
+#scrollbar {
+	background-color: @cbg-alt;
+	handle-color: @cfg;
+	handle-width: 10;
+}
+
+#element {
+	padding: 7 5 7 8;
+	font: "Iosevka 14";
+	border: 0 solid 0 solid 0 solid 3 solid;
+}
+#element normal.normal {
+	background-color: @cbg-alt;
+	border-color: @cbg-alt;
+}
+#element alternate.normal {
+	background-color: @cbg-alt2;
+	border-color: @cbg-alt2;
+}
+#element selected.normal {
+	background-color: @clyellow;
+	border: 0 solid 0 solid 0 solid 3 solid;
+	border-color: @cyellow;
+}

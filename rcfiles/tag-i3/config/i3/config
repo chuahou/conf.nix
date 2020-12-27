@@ -1,0 +1,235 @@
+##### CONFIGURATION #####
+
+# meta key mappings
+# use Alt as mod key and Super as "Alt" key
+set $mod Mod1
+set $alt Mod4
+
+# applications with options
+set $terminal   --no-startup-id alacritty
+set $browser    firefox
+set $rofi       rofi
+set $filemgr    thunar
+set $screenshot --no-startup-id flameshot gui
+
+# do not follow mouse
+focus_follows_mouse no
+
+# wallpaper
+set $wallpaper $HOME/.config/i3/wallpaper.jpg
+
+# blueman window always floating
+for_window [class="Blueman-manager"] floating enable
+
+##### STARTUP #####
+
+# appearance
+exec --no-startup-id dunst
+exec_always --no-startup-id feh --bg-fill $wallpaper
+
+# user programs
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id /nix/store/*-mate-polkit-*/libexec/polkit-mate-authentication-agent-1
+
+# startup scripts
+exec --no-startup-id $HOME/.config/i3/startup.sh
+
+##### FROM XRESOURCES #####
+
+# workspace names
+set_from_resource $ws1 i3ch.ws1 "1"
+set_from_resource $ws2 i3ch.ws2 "2"
+set_from_resource $ws3 i3ch.ws3 "3"
+set_from_resource $ws4 i3ch.ws4 "4"
+set_from_resource $ws5 i3ch.ws5 "5"
+set_from_resource $ws6 i3ch.ws6 "6"
+set_from_resource $ws7 i3ch.ws7 "7"
+set_from_resource $ws8 i3ch.ws8 "8"
+set_from_resource $ws9 i3ch.ws9 "9"
+set_from_resource $ws0 i3ch.ws0 "0"
+
+# colours
+set_from_resource $colour_gray0   i3ch.colour_gray0 "#FFFFFF"
+set_from_resource $colour_gray1   i3ch.colour_gray1 "#FFFFFF"
+set_from_resource $colour_gray2   i3ch.colour_gray2 "#FFFFFF"
+set_from_resource $colour_gray3   i3ch.colour_gray3 "#FFFFFF"
+set_from_resource $colour_gray4   i3ch.colour_gray4 "#FFFFFF"
+set_from_resource $colour_gray5   i3ch.colour_gray5 "#FFFFFF"
+set_from_resource $colour_gray6   i3ch.colour_gray6 "#FFFFFF"
+set_from_resource $colour_gray7   i3ch.colour_gray7 "#FFFFFF"
+set_from_resource $colour_red     i3ch.colour_red "#FFFFFF"
+set_from_resource $colour_green   i3ch.colour_green "#FFFFFF"
+set_from_resource $colour_yellow  i3ch.colour_yellow "#FFFFFF"
+set_from_resource $colour_orange  i3ch.colour_orange "#FFFFFF"
+set_from_resource $colour_blue    i3ch.colour_blue "#FFFFFF"
+set_from_resource $colour_magenta i3ch.colour_magenta "#FFFFFF"
+set_from_resource $colour_violet  i3ch.colour_violet "#FFFFFF"
+set_from_resource $colour_cyan    i3ch.colour_cyan "#FFFFFF"
+set_from_resource $colour_white   i3ch.colour_white "#FFFFFF"
+
+##### APPEARANCE #####
+
+# font
+set_from_resource $font i3ch.font Ioslabka Medium 14
+font pango:$font
+
+# disable titlebar
+default_border          pixel 2
+default_floating_border pixel 2
+
+# gaps
+gaps inner 8
+gaps outer 2
+
+# class                 border        background    text \
+#	indicator     child_border
+client.focused          $colour_red   $colour_gray2 $colour_gray7 \
+	$colour_blue  $colour_red
+client.focused_inactive $colour_gray4 $colour_gray1 $colour_gray4 \
+	$colour_gray1 $colour_gray4
+client.unfocused        $colour_gray4 $colour_gray1 $colour_gray4 \
+	$colour_gray1 $colour_gray4
+client.urgent           $colour_gray0 $colour_red   $colour_gray7 \
+	$colour_red   $colour_gray0
+
+# float these windows
+for_window [ title="floatthis" ] floating enable
+
+##### BINDINGS #####
+
+# window navigation
+bindsym $mod+h        focus left
+bindsym $mod+j        focus down
+bindsym $mod+k        focus up
+bindsym $mod+l        focus right
+bindsym $mod+Tab      focus mode_toggle
+bindsym $mod+Shift+h  move  left
+bindsym $mod+Shift+j  move  down
+bindsym $mod+Shift+k  move  up
+bindsym $mod+Shift+l  move  right
+bindsym $mod+a        focus parent
+bindsym $mod+Shift+a  focus child
+
+# workspace navigation
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws0
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws0
+bindsym $mod+Ctrl+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Ctrl+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Ctrl+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Ctrl+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Ctrl+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Ctrl+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Ctrl+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Ctrl+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Ctrl+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Ctrl+0 move container to workspace number $ws0; workspace number $ws0
+
+# multiple monitors
+bindsym $mod+m move workspace to output right
+bindsym $mod+Shift+m move workspace to output left
+
+# scratchpad
+bindsym $mod+Ctrl+a scratchpad show
+bindsym $mod+Ctrl+m move to scratchpad
+
+# next window split
+bindsym $mod+v split vertical
+bindsym $mod+c split horizontal
+
+# fullscreen / floating
+bindsym $mod+f       fullscreen toggle
+bindsym $mod+Shift+f floating   toggle
+floating_modifier $mod
+
+# resizing
+mode "Resize Mode" {
+	bindsym h       resize shrink width  6  px or 6  ppt
+	bindsym k       resize grow   height 6  px or 6  ppt
+	bindsym j       resize shrink height 6  px or 6  ppt
+	bindsym l       resize grow   width  6  px or 6  ppt
+	bindsym Shift+h resize shrink width  36 px or 36 ppt
+	bindsym Shift+k resize grow   height 36 px or 36 ppt
+	bindsym Shift+j resize shrink height 36 px or 36 ppt
+	bindsym Shift+l resize grow   width  36 px or 36 ppt
+	bindsym Ctrl+h  resize shrink width  3  px or 3  ppt
+	bindsym Ctrl+k  resize grow   height 3  px or 3  ppt
+	bindsym Ctrl+j  resize shrink height 3  px or 3  ppt
+	bindsym Ctrl+l  resize grow   width  3  px or 3  ppt
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "Resize Mode"
+
+# close app
+bindsym $mod+Shift+q [con_id="__focused__"] kill
+bindsym $mod+$alt+q  [con_id="__focused__"] exec --no-startup-id kill -9 \
+	$(xdotool getwindowfocus getwindowpid)
+
+# launch applications
+bindsym $mod+Return       exec $terminal
+bindsym $mod+Shift+Return exec $browser
+bindsym $mod+space        exec $rofi -show drun
+bindsym $mod+Shift+space  exec $rofi -show run
+bindsym $mod+Ctrl+space   exec $rofi -show window
+bindsym $mod+Shift+n      exec $filemgr
+bindsym $mod+p            exec $screenshot
+bindsym Print             exec $screenshot
+bindsym $mod+o            exec $terminal -o background_opacity=0.95 -t floatthis -e zsh -c 'org'
+
+# reload i3 config / restart
+bindsym $mod+Shift+r reload
+bindsym $mod+Ctrl+r  restart
+
+# terminate session
+mode "End Session  [mod+l] logout  [mod+p] shutdown  [mod+r] restart" {
+	bindsym $mod+l exec i3-msg exit
+	bindsym $mod+p exec systemctl poweroff
+	bindsym $mod+r exec systemctl reboot
+
+	bindsym $mod+Shift+e mode "default"
+	bindsym $mod+Shift+p mode "default"
+	bindsym Escape       mode "default"
+	bindsym Return       mode "default"
+}
+bindsym $mod+Shift+e mode "End Session  [mod+l] logout  [mod+p] shutdown  [mod+r] restart"
+bindsym $mod+Shift+p mode "End Session  [mod+l] logout  [mod+p] shutdown  [mod+r] restart"
+
+# multimedia controls
+bindsym XF86AudioLowerVolume exec volume.sh voldn && polybar-msg hook sound_ipc 1
+bindsym XF86AudioRaiseVolume exec volume.sh volup && polybar-msg hook sound_ipc 1
+bindsym XF86AudioMute exec volume.sh mute && polybar-msg hook sound_ipc 1
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+
+# lock screen
+bindsym $mod+Shift+Escape exec lock.sh --show-failed-attempts
+
+# fallback xrandr command to recover
+bindsym $mod+Shift+Ctrl+x exec xrandr --auto
+
+# redo xconfig
+bindsym $mod+Shift+Ctrl+z exec xconfig.sh
