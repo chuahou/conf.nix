@@ -90,9 +90,13 @@
     };
   };
 
-  # standard Iosevka
+  # fonts to install system-wide
   fonts.fonts = with pkgs; [
+    fira
     iosevka
+    ipafont
+    ipaexfont
+    roboto-slab
   ];
 
   # system-wide packages
