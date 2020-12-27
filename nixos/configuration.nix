@@ -90,12 +90,16 @@
     };
   };
 
+  # standard Iosevka
+  fonts.fonts = with pkgs; [
+    iosevka
+  ];
+
   # system-wide packages
   environment.systemPackages = with pkgs; [
-    alacritty
+    # base packages
     bc
     curl
-    firefox-bin
     gawk
     git
     gnupg
@@ -106,6 +110,10 @@
     tree
     wget
     zsh
+
+    # basic packages for i3 environment
+    alacritty
+    firefox-bin
   ];
 
   # enable gpg-agent
