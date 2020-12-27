@@ -114,6 +114,7 @@
     # basic packages for i3 environment
     alacritty
     firefox-bin
+    flameshot
   ];
 
   # enable gpg-agent
