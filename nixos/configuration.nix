@@ -158,6 +158,7 @@
     killall
     lm_sensors
     neovim
+    pciutils
     rcm
     tree
     wget
