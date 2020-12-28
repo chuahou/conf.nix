@@ -29,9 +29,6 @@
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
 
-  # enable nvidia drivers
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   # use systemd-boot
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -56,7 +53,7 @@
 
   # GNOME 3 (for now)
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
   services.xserver.windowManager.i3.enable = true;
   services.xserver.windowManager.i3.package = pkgs.i3-gaps;
