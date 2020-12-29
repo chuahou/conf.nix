@@ -1,30 +1,11 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware.nix ];
-
-  # opt in persistence
-  environment.etc = {
-    nixos.source = "/persist/etc/nixos";
-    "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
-  };
-  security.sudo.extraConfig = "Defaults lecture = never";
-
-  # make root blank on boot
-  boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''
-    mkdir -p /mnt
-    mount /dev/mapper/data-root /mnt
-    btrfs sub list -o /mnt/root | awk '{print $NF}' |
-      while read sub; do
-        btrfs sub del /mnt/$sub
-      done && btrfs sub del /mnt/root
-    btrfs sub snap /mnt/root-blank /mnt/root
-    umount /mnt
-  '';
+  imports = [
+    ./fs.nix
+    ./hardware.nix
+    ./persist.nix
+  ];
 
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
@@ -70,52 +51,6 @@
 
   # touchpad support
   services.xserver.libinput.enable = true;
-
-  # picom
-  services.picom = {
-    enable = true;
-    backend = "xrender";
-    fade = true;
-    fadeDelta = 10;
-    fadeSteps = [ 0.1 0.1 ];
-    opacityRules = [
-      "88:class_g *?= 'zathura'" # zathura
-      "90:class_g *?= 'rofi'"    # rofi
-    ];
-    vSync = true;
-    wintypes = {
-      tooltip = {
-        fade = true;
-        shadow = false;
-        opacity = 0.85;
-        focus = true;
-      };
-      dock = { shadow = false; };
-      dnd = { shadow = false; };
-      popup_menu = {
-        opacity = 1.0;
-        shadow = false;
-        fade = false;
-      };
-      dropdown_menu = {
-        opacity = 1.0;
-        fade = false;
-      };
-    };
-    settings = {
-      no-fading-openclose = false;
-      inactive-dim = 0.03; # dim inactive windows
-      inactive-dim-fixed = true; # dim independently of opacity
-      detect-client-opacity = true; # detect _NET_WM_OPACITY
-      dbe = true;
-      mark-wmwin-focused = true; # try to detect WM windows and mark them as active
-      mark-ovredir-focused = true; # mark override-redirect windows active
-      use-ewmh-active-win = true; # use EWMH to determine focused window
-      detect-transient = true; # use WM_TRANSIENT_FOR to group windows and focus all
-      detect-client-leader = true; # use WM_CLIENT_LEADER to group windows
-      focus-exclude = [ ]; # windows that should always be focused
-    };
-  };
 
   # user accounts
   users = {
