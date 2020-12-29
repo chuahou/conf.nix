@@ -36,8 +36,6 @@
   services.xserver.enable = true;
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.i3.enable = true;
-  services.xserver.windowManager.i3.package = pkgs.i3-gaps;
 
   # keyboard layout
   services.xserver.layout = "us";
@@ -95,25 +93,6 @@
     tree
     wget
     zsh
-
-    # basic packages for i3 environment
-    alacritty
-    blueman
-    dunst
-    feh
-    firefox-bin
-    flameshot
-    i3lock
-    imagemagick
-    libnotify
-    light
-    lxappearance
-    mate.mate-polkit
-    pavucontrol
-    playerctl
-    rofi
-    scrot
-    xfce.thunar
   ];
 
   # enable gpg-agent
