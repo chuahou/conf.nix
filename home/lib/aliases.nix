@@ -42,7 +42,7 @@
     let
       username = (import ../lib/me.nix).github.username;
     in
-      "git remote set-url origin \$(git remote get-url origin | sed 's/https:\/\/\(${username}@\)\?github.com\/${username}\/\([^\.]*\)\(\.git\)\?/git@github.com:${username}\/\2/')";
+      ''git remote set-url origin $(git remote get-url origin | sed "s/https:\/\/\(${username}@\)\?github.com\/${username}\/\([^\.]*\)\(\.git\)\?/git@github.com:${username}\/\2/")'';
 
   # editor
   e = "$VISUAL";
