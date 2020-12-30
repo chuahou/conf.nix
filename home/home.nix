@@ -1,15 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    let
-      importFolder = folder:
-        builtins.map (file: folder + "/${file}")
-          (builtins.attrNames (builtins.readDir folder));
-    in
-      builtins.concatMap importFolder [
-        ./core
-      ];
+  imports = builtins.concatMap (import ./lib/lib.nix).importFolder [
+    ./core
+  ];
 
   # basic settings
   programs.home-manager.enable = true;

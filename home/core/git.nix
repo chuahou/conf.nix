@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  me = import ../me.nix;
+  me = import ../lib/me.nix;
 in
   {
     programs.git = {
