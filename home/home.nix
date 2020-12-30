@@ -7,8 +7,9 @@
 
   # basic settings
   programs.home-manager.enable = true;
-  home.username = "sgepk";
-  home.homeDirectory = "/home/sgepk";
+  home = {
+    inherit ((import ./lib/me.nix).home) username homeDirectory;
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

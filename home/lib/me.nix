@@ -1,6 +1,12 @@
 {
   name = "Chua Hou";
 
+  home = rec {
+    username      = "sgepk";
+    homeDirectory = "/home/" + username;
+    devDirectory  = homeDirectory + "/dev";
+    confDirectory = homeDirectory + "/conf.nix";
+  };
   github = {
     username = "chuahou";
     email    = "human+github@chuahou.dev";
