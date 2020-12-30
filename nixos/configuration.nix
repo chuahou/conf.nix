@@ -57,12 +57,17 @@
       root = {
         hashedPassword = (import ./secrets.nix).root.hashedPassword;
       };
-      sgepk = {
-        isNormalUser = true;
-        description = "Chua Hou";
-        extraGroups = [ "wheel" "networkmanager" ];
-        hashedPassword = (import ./secrets.nix).sgepk.hashedPassword;
-      };
+      user =
+        let
+          me = (import ../home/lib/me.nix);
+        in
+          {
+            isNormalUser = true;
+            name = me.home.username;
+            description = me.name;
+            extraGroups = [ "wheel" "networkmanager" ];
+            hashedPassword = (import ./secrets.nix).user.hashedPassword;
+          };
     };
   };
 
