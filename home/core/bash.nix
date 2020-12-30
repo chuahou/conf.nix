@@ -1,8 +1,8 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   programs.bash = {
-    enable           = true;
-    shellAliases     = import ../lib/aliases.nix;
+    enable    = true;
+    initExtra = import ../lib/shell { inherit config lib; };
   };
 }
