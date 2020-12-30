@@ -5,7 +5,7 @@
     username      = "sgepk";
     homeDirectory = "/home/" + username;
     devDirectory  = homeDirectory + "/dev";
-    confDirectory = homeDirectory + "/conf.nix";
+    confDirectory = homeDirectory + "/dev/conf.nix";
   };
   github = {
     username = "chuahou";
