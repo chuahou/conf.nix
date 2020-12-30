@@ -5,15 +5,12 @@ let
 in
   {
     programs.git = {
-      enable = true;
-      userName = me.name;
+      enable    = true;
+      userName  = me.name;
       userEmail = me.github.email;
       signing = {
-        key = me.github.gpgKey;
+        key           = me.github.gpgKey;
         signByDefault = true;
-      };
-      extraConfig = {
-        core.editor = "nvim";
       };
     };
   }
