@@ -73,6 +73,7 @@
 
   # fonts to install system-wide
   fonts.fonts = with pkgs; [
+    corefonts
     fira
     iosevka
     ipafont
