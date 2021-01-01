@@ -11,6 +11,9 @@ in
       enable   = true;
       envExtra = import ../lib/shell { inherit config lib; };
 
+      # import them again as plugins will overwrite some of them
+      shellAliases = import ../lib/shell/aliases.nix;
+
       sessionVariables = {
         # prevent less paging from disappearing
         LESS = "-Xr";
