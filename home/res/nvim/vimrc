@@ -1,0 +1,5 @@
+" vim-compatible init file
+" keeping this around for easy copying if/when on a computer with only 'vim'
+set nocompatible
+set runtimepath^=~/.config/nvim runtimepath+=~/.config/nvim/after
+set runtimepath^=~/.local/share/nvim/site
