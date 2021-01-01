@@ -3,6 +3,7 @@
 {
   imports = builtins.concatMap (import ./lib/lib.nix).importFolder [
     ./core
+    ./gui
   ];
 
   # basic settings
