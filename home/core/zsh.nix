@@ -28,6 +28,9 @@ in
 
         # faster key timeout for snappier vim mode
         KEYTIMEOUT = 1;
+
+        # only consider _ and . as part of a word
+        WORDCHARS = "_.";
       };
 
       localVariables = {
