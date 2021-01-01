@@ -1,4 +1,7 @@
-{ config, ... }:
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2021 Chua Hou
+
+{ ... }:
 
 {
   boot.initrd.luks.devices.crypt = {
@@ -8,8 +11,8 @@
   fileSystems =
     let
       btrfsFs = subvol: {
-        device = "/dev/mapper/data-root";
-        fsType = "btrfs";
+        device  = "/dev/mapper/data-root";
+        fsType  = "btrfs";
         options = [
           ("subvol=" + subvol)
           "noatime" "ssd" "space_cache" "commit=120" "compress=zstd"
@@ -17,9 +20,9 @@
       };
     in
       {
-        "/" = btrfsFs "root";
-        "/home" = btrfsFs "home";
-        "/nix" = btrfsFs "nix";
+        "/"        = btrfsFs "root";
+        "/home"    = btrfsFs "home";
+        "/nix"     = btrfsFs "nix";
         "/persist" = btrfsFs "persist";
         "/var/log" = btrfsFs "log";
         "/boot" = {

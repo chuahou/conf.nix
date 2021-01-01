@@ -1,4 +1,7 @@
-{ config, lib, pkgs, modulesPath, ... }:
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2021 Chua Hou
+
+{ lib, modulesPath, ... }:
 
 {
   imports = [
@@ -11,15 +14,15 @@
   hardware.nvidia.prime = {
     sync.enable = true;
     nvidiaBusId = "PCI:1:0:0";
-    intelBusId = "PCI:0:2:0";
+    intelBusId  = "PCI:0:2:0";
   };
 
   boot.initrd.availableKernelModules = [
     "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules        = [ "kvm-intel" ];
+  boot.extraModulePackages  = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
