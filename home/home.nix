@@ -10,10 +10,7 @@
   programs.home-manager.enable = true;
   home = {
     inherit ((import ./lib/me.nix).home) username homeDirectory;
-    sessionVariables = rec {
-      EDITOR = "nvim";
-      VISUAL = EDITOR;
-    };
+    sessionVariables = import ./lib/shell/vars.nix;
   };
 
   # This value determines the Home Manager release that your
