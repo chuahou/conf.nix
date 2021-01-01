@@ -67,9 +67,13 @@
             description = me.name;
             extraGroups = [ "wheel" "networkmanager" ];
             hashedPassword = (import ./secrets.nix).user.hashedPassword;
+            shell = pkgs.zsh;
           };
     };
   };
+
+  # enable zsh as an interactive shell, needed to set it as default shell
+  programs.zsh.enable = true;
 
   # fonts to install system-wide
   fonts.fonts = with pkgs; [
