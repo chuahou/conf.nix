@@ -1,4 +1,7 @@
-{ config, ... }:
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2021 Chua Hou
+
+{ ... }:
 
 let
   me = import ../lib/me.nix;
