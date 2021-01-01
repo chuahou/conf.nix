@@ -12,7 +12,15 @@ in
       envExtra = import ../lib/shell { inherit config lib; };
 
       # import them again as plugins will overwrite some of them
-      shellAliases = import ../lib/shell/aliases.nix;
+      shellAliases =
+        let
+          # alias 0 to 9 to cd +0 to cd +9
+          dirStackAliases =
+            (builtins.foldl' (x: y: x // y) {}
+              (builtins.genList
+                (x: { "${toString x}" = "cd +${toString x}"; }) 10));
+        in
+          import ../lib/shell/aliases.nix // dirStackAliases;
 
       sessionVariables = {
         # prevent less paging from disappearing
@@ -29,6 +37,8 @@ in
         ZSH_AUTOSUGGEST_USE_ASYNC         = "yes";
       };
 
+      autocd = true;
+
       initExtra = ''
         [[ ! -f ${p10k-config-path} ]] || source ${p10k-config-path}
 
@@ -38,6 +48,9 @@ in
         # zsh-autosuggestions config
         bindkey '^ ' autosuggest-accept
         bindkey '^N' autosuggest-accept
+
+        # enable dir stack
+        setopt autopushd
       '';
 
       # plugins
