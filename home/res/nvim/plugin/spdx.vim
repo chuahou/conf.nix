@@ -17,13 +17,16 @@ augroup spdxautocmd
 	" clear existing
 	autocmd!
 
+	" add copyright notice
+	autocmd BufNewFile * call s:InsertCopyright()
+
 	" comment notice for each filetype
 	autocmd BufNewFile *.c,*.cpp,*.rs,*.scala,*.java norm gg0i// 
 	autocmd BufNewFile *.c,*.cpp,*.rs,*.scala,*.java norm ggj0i// 
 	autocmd BufNewFile *.hs norm gg0i-- 
 	autocmd BufNewFile *.hs norm ggj0i-- 
-	autocmd BufNewFile *.py,*.sh,*.zsh norm gg0i# 
-	autocmd BufNewFile *.py,*.sh,*.zsh norm ggj0i# 
+	autocmd BufNewFile *.py,*.sh,*.zsh,*.nix norm gg0i# 
+	autocmd BufNewFile *.py,*.sh,*.zsh,*.nix norm ggj0i# 
 	autocmd BufNewFile *.sh norm ggO#!/usr/bin/env bash
 	autocmd BufNewFile *.zsh norm ggO#!/usr/bin/env zsh
 augroup END
