@@ -106,6 +106,7 @@
     curl
     cpufrequtils
     gawk
+    file
     git
     gnupg
     gparted
