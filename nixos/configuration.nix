@@ -53,7 +53,8 @@
     desktopManager.gnome3.enable = true;
 
     # keyboard layout
-    layout = "us";
+    layout     = "us";
+    xkbOptions = "ctrl:nocaps";
   };
 
   # hardware services
