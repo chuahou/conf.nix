@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ ... }:
+{ config, ... }:
 
 {
   xsession = {
@@ -29,6 +29,10 @@
         endShutdown = "p";
         endRestart  = "r";
         endKey      = "${mod}+Shift+e";
+
+        # programs
+        rofi = "${config.programs.rofi.package}/bin/rofi";
+
       in
         {
           enable = true;
@@ -123,6 +127,11 @@
               # modes
               "${resizeKey}" = "mode \"${resizeMode}\"";
               "${endKey}"    = "mode \"${endMode}\"";
+
+              # launch applications
+              "${mod}+space"       = "exec ${rofi} -show drun";
+              "${mod}+Shift+space" = "exec ${rofi} -show run";
+              "${mod}+Ctrl+space"  = "exec ${rofi} -show window";
             } //
 
             # workspace navigation
