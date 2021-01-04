@@ -95,8 +95,10 @@
     corefonts
     fira
     iosevka
-    ipafont
     ipaexfont
+    ipafont
+    open-sans
+    roboto
     roboto-slab
   ];
 
