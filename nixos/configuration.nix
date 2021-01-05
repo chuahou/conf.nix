@@ -10,6 +10,12 @@
     ./persist.nix
   ];
 
+  # enable nix flakes
+  nix = {
+    package      = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+  };
+
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
 
