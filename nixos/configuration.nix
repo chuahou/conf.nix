@@ -8,13 +8,10 @@
     ./fs.nix
     ./hardware.nix
     ./persist.nix
-  ];
 
-  # enable nix flakes
-  nix = {
-    package      = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
+    # nix flakes
+    ./flakes.nix
+  ];
 
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
