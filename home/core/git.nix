@@ -4,7 +4,7 @@
 { ... }:
 
 let
-  me = import ../lib/me.nix;
+  me = (import ../../lib).me;
 in
   {
     programs.git = {

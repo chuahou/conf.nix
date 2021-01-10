@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ config, pkgs, ... }:
+{ overlays ? [] }: { config, pkgs, ... }:
 
 {
-  imports = builtins.concatMap (import ./lib/lib.nix).importFolder [
+  imports = builtins.concatMap (import ../lib).importFolder [
     ./core
     ./gui
     ./misc
@@ -13,9 +13,11 @@
   # basic settings
   programs.home-manager.enable = true;
   home = {
-    inherit ((import ./lib/me.nix).home) username homeDirectory;
     sessionVariables = import ./lib/shell/vars.nix;
   };
+
+  # import overlays from flakes
+  nixpkgs.overlays = overlays;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

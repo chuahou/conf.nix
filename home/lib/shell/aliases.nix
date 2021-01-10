@@ -45,7 +45,7 @@
   # git convert https GitHub remote URL to ssh
   gh2ssh =
     let
-      username = (import ../me.nix).github.username;
+      username = (import ../../../lib).me.github.username;
     in
       ''git remote set-url origin $(git remote get-url origin | sed "s/https:\/\/\(${username}@\)\?github.com\/${username}\/\([^\.]*\)\(\.git\)\?/git@github.com:${username}\/\2/")'';
 
@@ -57,5 +57,5 @@
   org   = "emacs ~/org/index.org";
 
   # enter conf.nix directory
-  ccd = "cd ${(import ../me.nix).home.confDirectory}";
+  ccd = "cd ${(import ../../../lib).me.home.confDirectory}";
 }

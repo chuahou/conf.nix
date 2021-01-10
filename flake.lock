@@ -1,5 +1,56 @@
 {
   "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1609010567,
+        "narHash": "sha256-N6WslRAtrvCPCpQnxQqo+VlSivX/KylL9Xy/OZr0kMg=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "22f6736e628958f05222ddaadd7df7818fe8f59d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-20.09",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "instantRstPy": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1585927958,
+        "narHash": "sha256-HKRFTyO51zILkmPl0gadwIAyyxnojN92w5Gb40euf9U=",
+        "owner": "gu-fan",
+        "repo": "instant-rst.py",
+        "rev": "305be3a7e10481a546f5802ec2e5e53d450a8a18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gu-fan",
+        "repo": "instant-rst.py",
+        "type": "github"
+      }
+    },
+    "instantRstVim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1584117236,
+        "narHash": "sha256-ixiXYNW91FJhhBjMe1Gt2aiU8T5t8z8zMstZ0Ib189k=",
+        "owner": "gu-fan",
+        "repo": "InstantRst",
+        "rev": "52144e8adb307db2c101432d2b90d84fb4255f61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gu-fan",
+        "repo": "InstantRst",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1609915993,
@@ -17,6 +68,20 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1610243697,
+        "narHash": "sha256-hI1F2H32uCbLlxZhTn62YzEq3dAUhYfgglBQZqgScS4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2032339e5bbce8a57655b8742190ecb32b7af863",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1610124236,
         "narHash": "sha256-jLUcft5MxVuYL0gQIgS55cPLdF2R7p736zpXecZNLes=",
         "owner": "NixOS",
@@ -32,9 +97,13 @@
     },
     "root": {
       "inputs": {
+        "home-manager": "home-manager",
+        "instantRstPy": "instantRstPy",
+        "instantRstVim": "instantRstVim",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
-        "secrets": "secrets"
+        "nixpkgs": "nixpkgs_2",
+        "secrets": "secrets",
+        "zsh-vim-mode": "zsh-vim-mode"
       }
     },
     "secrets": {
@@ -47,6 +116,22 @@
       "original": {
         "path": "/home/sgepk/dev/secrets.nix",
         "type": "path"
+      }
+    },
+    "zsh-vim-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1609487318,
+        "narHash": "sha256-zxFSqean33tFKV916HU7ml4ZeuSuNm+16CkpovJotVA=",
+        "owner": "softmoth",
+        "repo": "zsh-vim-mode",
+        "rev": "e5bf1aa6aab354007c0e041ff3f0fd091634e77b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "softmoth",
+        "repo": "zsh-vim-mode",
+        "type": "github"
       }
     }
   },

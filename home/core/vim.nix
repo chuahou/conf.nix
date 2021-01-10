@@ -6,26 +6,6 @@
 let
   configDir = "${config.xdg.configHome}/nvim";
 
-  # python package used by InstantRst plugin
-  instantRst =
-    pkgs.python3Packages.buildPythonPackage rec {
-      name    = "instantRst";
-      version = "0.9.9.1";
-      doCheck = false;
-      src = builtins.fetchGit {
-        inherit name;
-        url = "https://github.com/gu-fan/instant-rst.py";
-        ref = "refs/heads/master";
-        rev = "305be3a7e10481a546f5802ec2e5e53d450a8a18";
-      };
-      propagatedBuildInputs = with pkgs.python3Packages; [
-        docutils
-        flask
-        flask-socketio
-        pygments
-      ];
-    };
-
 in
   {
     # copy entire nvim configuration directory
@@ -90,7 +70,7 @@ in
           endfunction
 
           " add instantRst to path for InstantRst plugin
-          let $PATH .= ':' . '${instantRst}/bin'
+          let $PATH .= ':' . '${pkgs.instantRstPy}/bin'
         '';
 
         packages.myVimPackage = with pkgs.vimPlugins; {
@@ -111,15 +91,7 @@ in
             vim-gitgutter
 
             # InstantRst
-            (pkgs.vimUtils.buildVimPlugin rec {
-              name = "InstantRst";
-              src  = builtins.fetchGit {
-                inherit name;
-                url = "https://github.com/gu-fan/InstantRst";
-                ref = "refs/heads/master";
-                rev = "52144e8adb307db2c101432d2b90d84fb4255f61";
-              };
-            })
+            pkgs.instantRstVim
           ];
         };
       };
@@ -132,6 +104,6 @@ in
       withNodeJs = true;
 
       # for InstantRst
-      extraPython3Packages = _: [ instantRst ];
+      extraPython3Packages = _: [ pkgs.instantRstPy ];
     };
   }

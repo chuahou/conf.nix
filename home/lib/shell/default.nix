@@ -11,7 +11,7 @@
 { config, lib }:
 
 let
-  me      = import ../me.nix;
+  me      = (import ../../../lib).me;
   home    = me.home;
   dev     = me.dev;
   aliases = import ./aliases.nix;
