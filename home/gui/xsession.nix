@@ -47,7 +47,7 @@ in
   ];
 
   xsession = {
-    enable = false;
+    enable = true;
 
     initExtra = ''
       ${xconfigScript}/bin/xconfig.sh
