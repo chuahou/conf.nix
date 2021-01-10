@@ -141,6 +141,11 @@ in
               ];
             };
 
+            # startup
+            startup = [
+              { command = "i3-msg workspace 1"; notification = false; }
+            ];
+
             # keybindings
             keybindings = {
               # window navigation
