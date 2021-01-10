@@ -3,23 +3,21 @@
 
 {
   inputs = {
-    nixpkgs.url        = "nixpkgs/nixos-20.09";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    home-manager.url   = "github:nix-community/home-manager/release-20.09";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs        = { url = "nixpkgs/nixos-20.09"; };
+    nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-20.09";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    secrets.url   = "/home/sgepk/dev/secrets.nix";
-    secrets.flake = false;
+    secrets = { url = "/home/sgepk/dev/secrets.nix"; flake = false; };
 
     # instant RST plugin and pip package
-    instantRstPy.url    = "github:gu-fan/instant-rst.py";
-    instantRstPy.flake  = false;
-    instantRstVim.url   = "github:gu-fan/InstantRst";
-    instantRstVim.flake = false;
+    instantRstPy  = { url = "github:gu-fan/instant-rst.py"; flake = false; };
+    instantRstVim = { url = "github:gu-fan/InstantRst";     flake = false; };
 
     # zsh-vim-mode plugin
-    zsh-vim-mode.url   = "github:softmoth/zsh-vim-mode";
-    zsh-vim-mode.flake = false;
+    zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
   };
 
   outputs =
