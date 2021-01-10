@@ -39,11 +39,28 @@ let
         [ $(pactl list short modules | grep module-stream-restore -c || true) -gt 0 ] &&
           pactl unload-module module-stream-restore
       '';
+
+  lockScript =
+    let
+      picPath = "${config.xdg.dataHome}/lock.sh";
+      scrot   = "${pkgs.scrot}/bin/scrot";
+      convert = "${pkgs.imagemagick7}/bin/convert";
+      i3lock  = "${pkgs.i3lock}/bin/i3lock";
+    in
+      pkgs.writeShellScriptBin "lock.sh" ''
+        set -e
+        mkdir -p ${picPath}
+        ${scrot} ${picPath}/screen.png
+        ${convert} ${picPath}/screen.png -blur 0x15 ${picPath}/blur.png
+        ${i3lock} --nofork -i ${picPath}/blur.png "$@"
+        rm ${picPath}/{screen,blur}.png || true
+      '';
 in
 {
   home.packages = [
     # shell script that does all X-related configuration
     xconfigScript
+    lockScript
   ];
 
   xsession = {
@@ -187,6 +204,9 @@ in
 
               # redo xconfig
               "${mod}+Shift+Ctrl+z" = "exec ${xconfigScript}/bin/xconfig.sh";
+
+              # lock screen
+              "${mod}+Shift+Escape" = "exec ${lockScript}/bin/lock.sh --show-failed-attempts";
             } //
 
             # workspace navigation
