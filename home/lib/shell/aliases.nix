@@ -1,4 +1,8 @@
-# shell-agnostic aliases
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2021 Chua Hou
+#
+# Shell-agnostic aliases
+
 {
   # basic commands
   ls   = "ls --group-directories-first --color=tty";

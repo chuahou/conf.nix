@@ -1,4 +1,7 @@
-# common shell setup to use for aliases, functions
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2021 Chua Hou
+#
+# Common shell setup to use for aliases, functions
 #
 # home-manager's current setup is a bit of a mess, where 'bash' and 'zsh' have
 # different behaviour in what goes into profile, zshenv, rc, etc. I want these

@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
+#
+# direnv integration for nix-shells
 
-# direnv and lorri integration for nix-shells
 { ... }:
 
 {
