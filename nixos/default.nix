@@ -84,7 +84,7 @@ secrets: { pkgs, ... }:
             isNormalUser   = true;
             name           = me.home.username;
             description    = me.name;
-            extraGroups    = [ "wheel" "networkmanager" ];
+            extraGroups    = [ "wheel" "networkmanager" "video" ];
             hashedPassword = secrets.user.hashedPassword;
             shell          = pkgs.zsh;
           };
@@ -96,6 +96,9 @@ secrets: { pkgs, ... }:
 
   # enable gpg-agent
   programs.gnupg.agent.enable = true;
+
+  # enable light to control backlight
+  programs.light.enable = true;
 
   # fonts to install system-wide
   fonts.fonts = with pkgs; [

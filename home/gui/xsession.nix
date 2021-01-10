@@ -158,6 +158,10 @@ in
 
                 # lock screen
                 "${mod}+Shift+Escape" = "exec ${lockScript}/bin/lock.sh --show-failed-attempts";
+
+                # multimedia controls
+                "XF86MonBrightnessUp"   = "exec ${pkgs.light}/bin/light -A 10";
+                "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
               } //
 
               # workspace navigation
