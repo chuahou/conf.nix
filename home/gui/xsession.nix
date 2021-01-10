@@ -20,6 +20,7 @@ in
 
       initExtra = ''
         ${xconfigScript}/bin/xconfig.sh
+        eval $(ssh-agent)
       '';
 
       windowManager.i3 =
