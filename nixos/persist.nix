@@ -10,6 +10,9 @@
     "NetworkManager/system-connections".source =
       "/persist/etc/NetworkManager/system-connections";
   };
+  systemd.tmpfiles.rules = [
+    "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
+  ];
   security.sudo.extraConfig = "Defaults lecture = never";
 
   # make root blank on boot
