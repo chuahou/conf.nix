@@ -5,10 +5,8 @@
 
 {
   services.picom = {
-    enable = true;
-
-    # blur translucent windows
-    blur = true;
+    enable  = true;
+    backend = "xrender";
 
     # inactive windows
     inactiveDim = "0.03";
