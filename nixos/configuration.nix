@@ -72,7 +72,7 @@ secrets: { pkgs, ... }:
       };
       user =
         let
-          me = (import ../home/lib/me.nix);
+          inherit (import ../lib) me;
         in
           {
             isNormalUser   = true;
