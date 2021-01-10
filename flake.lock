@@ -2,7 +2,9 @@
   "nodes": {
     "home-manager": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1609010567,
@@ -68,20 +70,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1610243697,
-        "narHash": "sha256-hI1F2H32uCbLlxZhTn62YzEq3dAUhYfgglBQZqgScS4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2032339e5bbce8a57655b8742190ecb32b7af863",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
         "lastModified": 1610124236,
         "narHash": "sha256-jLUcft5MxVuYL0gQIgS55cPLdF2R7p736zpXecZNLes=",
         "owner": "NixOS",
@@ -101,7 +89,7 @@
         "instantRstPy": "instantRstPy",
         "instantRstVim": "instantRstVim",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "secrets": "secrets",
         "zsh-vim-mode": "zsh-vim-mode"
       }
