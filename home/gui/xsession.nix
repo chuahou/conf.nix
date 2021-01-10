@@ -48,6 +48,7 @@ in
 
   xsession = {
     enable = true;
+    scriptPath = ".hm-xsession";
 
     initExtra = ''
       ${xconfigScript}/bin/xconfig.sh

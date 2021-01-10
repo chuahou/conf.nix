@@ -48,9 +48,15 @@ secrets: { pkgs, ... }:
     enable = true;
 
     displayManager.lightdm.enable = true;
-
-    # GNOME 3 (for now)
-    desktopManager.gnome3.enable = true;
+    desktopManager.session = [
+      {
+        name = "home-manager-xsession";
+        start = ''
+          ${pkgs.runtimeShell} $HOME/.hm-xsession &
+          waitPID=$!
+        '';
+      }
+    ];
 
     # keyboard layout
     layout     = "us";
