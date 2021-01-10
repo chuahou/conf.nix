@@ -1,0 +1,55 @@
+{
+  "nodes": {
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1609915993,
+        "narHash": "sha256-lQYxrkVy7I5YZN+Ojv3hrdQFohRpLWa8XR6gr0r8HsY=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "fb1682bab43b9dd8daf43ae28f09e44541ce33a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1610124236,
+        "narHash": "sha256-jLUcft5MxVuYL0gQIgS55cPLdF2R7p736zpXecZNLes=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0cfd08f4881bbfdaa57e68835b923d4290588d98",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-20.09",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs",
+        "secrets": "secrets"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-vcMNDOpnvChfwAUQ/Jy/+znZFYhMv3qFKd0qR8gRykc=",
+        "path": "/home/sgepk/dev/secrets.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/sgepk/dev/secrets.nix",
+        "type": "path"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

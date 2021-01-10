@@ -1,16 +1,13 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ pkgs, ... }:
+secrets: { pkgs, ... }:
 
 {
   imports = [
     ./fs.nix
     ./hardware.nix
     ./persist.nix
-
-    # nix flakes
-    ./flakes.nix
   ];
 
   # allow unfree software
@@ -71,7 +68,7 @@
     mutableUsers = false;
     users = {
       root = {
-        hashedPassword = (import ./secrets.nix).root.hashedPassword;
+        hashedPassword = secrets.root.hashedPassword;
       };
       user =
         let
@@ -82,7 +79,7 @@
             name           = me.home.username;
             description    = me.name;
             extraGroups    = [ "wheel" "networkmanager" ];
-            hashedPassword = (import ./secrets.nix).user.hashedPassword;
+            hashedPassword = secrets.user.hashedPassword;
             shell          = pkgs.zsh;
           };
     };
