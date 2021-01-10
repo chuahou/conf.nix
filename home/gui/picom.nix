@@ -15,8 +15,8 @@
 
     # fading
     fade      = true;
-    fadeDelta = 10;
-    fadeSteps = [ "0.1" "0.1" ];
+    fadeDelta = 5;
+    fadeSteps = [ "0.05" "0.05" ];
 
     # vsync
     vSync = true;
