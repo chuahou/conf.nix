@@ -76,7 +76,7 @@ in
         packages.myVimPackage = with pkgs.vimPlugins; {
           start = [
             # language plugins
-            coc-nvim
+            pkgs.coc-nvim
             haskell-vim
             vim-nix
 

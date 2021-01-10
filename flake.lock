@@ -91,6 +91,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "secrets": "secrets",
+        "unstable": "unstable",
         "zsh-vim-mode": "zsh-vim-mode"
       }
     },
@@ -104,6 +105,21 @@
       "original": {
         "path": "/home/sgepk/dev/secrets.nix",
         "type": "path"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1610243697,
+        "narHash": "sha256-hI1F2H32uCbLlxZhTn62YzEq3dAUhYfgglBQZqgScS4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2032339e5bbce8a57655b8742190ecb32b7af863",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixpkgs-unstable",
+        "type": "indirect"
       }
     },
     "zsh-vim-mode": {

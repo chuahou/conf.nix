@@ -4,6 +4,7 @@
 {
   inputs = {
     nixpkgs        = { url = "nixpkgs/nixos-20.09"; };
+    unstable       = { url = "nixpkgs/nixpkgs-unstable"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager/release-20.09";
@@ -22,7 +23,7 @@
 
   outputs =
     inputs@{
-      self, nixpkgs, nixos-hardware, secrets, home-manager, ...
+      self, nixpkgs, unstable, nixos-hardware, secrets, home-manager, ...
     }: let system = "x86_64-linux"; in {
 
     nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
@@ -71,12 +72,15 @@
             src  = inputs.zsh-vim-mode;
           };
         };
+        cocNvimOverlay = self: super: {
+          inherit ((import unstable { inherit system; }).vimPlugins) coc-nvim;
+        };
       in
         home-manager.lib.homeManagerConfiguration {
           inherit system;
           inherit ((import ./lib).me.home) username homeDirectory;
           configuration = import ./home {
-            overlays = [ instantRstOverlay zshOverlay ];
+            overlays = [ instantRstOverlay zshOverlay cocNvimOverlay ];
           };
         };
 
