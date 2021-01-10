@@ -24,7 +24,7 @@
         })
 
         # main NixOS configuration
-        (import nixos/configuration.nix (import secrets))
+        (import ./nixos (import secrets))
 
         # nixos-hardware tweaks
         nixos-hardware.nixosModules.common-pc-laptop
