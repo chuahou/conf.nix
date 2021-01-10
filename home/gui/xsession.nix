@@ -112,6 +112,10 @@ in
               # startup
               startup = [
                 { command = "i3-msg workspace 1"; notification = false; }
+                {
+                  command = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+                  notification = false;
+                }
               ];
 
               # keybindings
