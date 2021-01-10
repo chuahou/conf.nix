@@ -156,10 +156,16 @@ in
                 # redo xconfig
                 "${mod}+Shift+Ctrl+z" = "exec ${xconfigScript}/bin/xconfig.sh";
 
+                # fallback xrandr command to recover
+                "${mod}+Shift+Ctrl+x" = "exec ${pkgs.xorg.xrandr}/bin/xrandr --auto";
+
                 # lock screen
                 "${mod}+Shift+Escape" = "exec ${lockScript}/bin/lock.sh --show-failed-attempts";
 
                 # multimedia controls
+                "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+                "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+                "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
                 "XF86MonBrightnessUp"   = "exec ${pkgs.light}/bin/light -A 10";
                 "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
               } //
