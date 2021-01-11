@@ -121,6 +121,10 @@ in
                   command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.copyPathToStore ../res/wallpaper.jpg}";
                   always = true; notification = false;
                 }
+                {
+                  command = "${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet";
+                  notification = false;
+                }
               ];
 
               # keybindings
