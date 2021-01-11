@@ -58,7 +58,7 @@ in
             '';
             config = {
               # basics
-              #bars              = [];
+              bars              = [];
               focus.followMouse = false;
               modifier          = mod;
 
