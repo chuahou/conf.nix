@@ -5,7 +5,15 @@
 
 let
   inherit (import ../lib/gui/scripts.nix { inherit config pkgs; })
-    xconfigScript lockScript;
+    xconfigScript lockScript volumeScript;
+  volumeScriptBin = "${volumeScript}/bin/volume.sh";
+  soundIpcHook =
+    let
+      ipc = "sound_ipc";
+    in
+      if builtins.hasAttr "module/${ipc}" config.services.polybar.config
+      then "polybar-msg hook sound_ipc 1"
+      else "true";
 in
   {
     xsession = {
@@ -190,6 +198,9 @@ in
                 "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
                 "XF86MonBrightnessUp"   = "exec ${pkgs.light}/bin/light -A 10";
                 "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
+                "XF86AudioLowerVolume"  = "exec ${volumeScriptBin} voldn && ${soundIpcHook}";
+                "XF86AudioRaiseVolume"  = "exec ${volumeScriptBin} volup && ${soundIpcHook}";
+                "XF86AudioMute"         = "exec ${volumeScriptBin} mute  && ${soundIpcHook}";
               } //
 
               # workspace navigation
