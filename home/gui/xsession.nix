@@ -135,6 +135,9 @@ in
 
               # keybindings
               keybindings = {
+                # applications
+                "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
+
                 # window navigation
                 "${mod}+Tab"     = "focus mode_toggle";
                 "${mod}+a"       = "focus parent";
