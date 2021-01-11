@@ -1,11 +1,9 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  home.packages = [ pkgs.cpufreq-plugin-wrapped ];
-
   services.polybar = {
     enable = true;
 
@@ -27,6 +25,20 @@
         bad             = colours.red;
         other           = colours.blue;
         format-padding  = 1;
+
+        mkIpcPair = name: interval: ipc:
+          let
+            hook = "polybar-msg hook ${name}_ipc 1";
+          in {
+            "module/${name}" = {
+              type  = "custom/script";
+              exec  = hook;
+              label = "";
+              inherit interval;
+            };
+            "module/${name}_ipc" = { type = "custom/ipc"; } // ipc hook;
+          };
+
       in {
         "bar/main" = {
           width              = "100%";
@@ -42,7 +54,7 @@
           enable-ipc         = true;
           modules-left       = "battery fs mem maxtemp cpu";
           modules-center     = "i3";
-          modules-right      = "date"; # "dnd dnd_ipc nordvpn nordvpn_ipc sound_ipc sound cpufreq_ipc cpufreq date";
+          modules-right      = "sound_ipc sound cpufreq_ipc cpufreq date"; # "dnd dnd_ipc nordvpn nordvpn_ipc sound_ipc sound cpufreq_ipc cpufreq date";
           inherit background foreground format-padding;
         };
 
@@ -140,15 +152,39 @@
           format-underline  = colours.white;
           inherit format-padding;
         };
-      };
+      } //
 
-    script = ''
-      polybar main &
+      mkIpcPair "cpufreq" 60
+        (let
+          cpufreq-plugin = "${pkgs.cpufreq-plugin-wrapped}/bin/cpufreq-plugin";
+          sed            = "${pkgs.gnused}/bin/sed";
+        in (hook: {
+          hook-0            = "${cpufreq-plugin} | ${sed} 's/powersave/save/' | ${sed} 's/performance/perf/'";
+          click-left        = "sudo ${cpufreq-plugin} gov; ${hook}";
+          scroll-up         = "sudo ${cpufreq-plugin} increase 500; ${hook}";
+          scroll-down       = "sudo ${cpufreq-plugin} decrease 500; ${hook}";
+          format-background = colours.gray.red;
+          format-underline  = colours.red;
+          inherit format-padding;
+        })) //
 
-      #sleep 1
-      #for ipc in dnd_ipc nordvpn_ipc sound_ipc cpufreq_ipc; do
-      #  polybar-msg hook $ipc 1; sleep 1
-      #done
-    '';
+      mkIpcPair "sound" 10
+        (let
+          script =
+            (import ../lib/gui/scripts.nix { inherit config pkgs; }).volumeScript;
+          scriptBin = "${script}/bin/volume.sh";
+        in (hook: {
+          hook-0            = scriptBin;
+          click-left        = "${scriptBin} sink; ${hook}";
+          click-middle      = "${scriptBin} mute; ${hook}";
+          click-right       = "${pkgs.pavucontrol}/bin/pavucontrol & disown";
+          scroll-up         = "${scriptBin} volup; ${hook}";
+          scroll-down       = "${scriptBin} voldn; ${hook}";
+          format-background = colours.gray.yellow;
+          format-underline  = colours.yellow;
+          inherit format-padding;
+        }));
+
+    script = "polybar main &";
   };
 }

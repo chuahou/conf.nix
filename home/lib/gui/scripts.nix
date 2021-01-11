@@ -57,4 +57,10 @@
         ${i3lock} --nofork -i ${picPath}/blur.png "$@"
         rm ${picPath}/{screen,blur}.png || true
       '';
+
+  volumeScript = pkgs.writeScriptBin "volume.sh" ''
+    export PATH=${pkgs.gnugrep}/bin:${pkgs.gawk}/bin:${pkgs.gnused}/bin:$PATH
+    export PATH=${pkgs.pulseaudio}/bin:$PATH
+    ${builtins.readFile ../../res/volume.sh}
+  '';
 }
