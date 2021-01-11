@@ -27,7 +27,17 @@
   outputs =
     inputs@{
       self, nixpkgs, unstable, nixos-hardware, secrets, home-manager, ...
-    }: let system = "x86_64-linux"; in {
+    }: let system = "x86_64-linux"; in rec {
+
+    cpufreqPluginOverlay = self: super: {
+      cpufreq-plugin = super.haskell.lib.doJailbreak
+        (super.haskellPackages.callCabal2nix "cpufreq-plugin"
+          (inputs.cpufreq-plugin) {});
+      cpufreq-plugin-wrapped = super.writeScriptBin "cpufreq-plugin" ''
+        PATH=${super.cpufrequtils}/bin:${super.gnused}/bin
+        ${self.cpufreq-plugin}/bin/cpufreq-plugin "$@"
+      '';
+    };
 
     nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -38,6 +48,11 @@
             package      = pkgs.nixFlakes;
             extraOptions = "experimental-features = nix-command flakes";
           };
+        })
+
+        # extra overlays
+        ({ ... }: {
+          nixpkgs.overlays = [ cpufreqPluginOverlay ];
         })
 
         # main NixOS configuration
@@ -77,15 +92,6 @@
         };
         cocNvimOverlay = self: super: {
           inherit ((import unstable { inherit system; }).vimPlugins) coc-nvim;
-        };
-        cpufreqPluginOverlay = self: super: {
-          cpufreq-plugin = super.haskell.lib.doJailbreak
-            (super.haskellPackages.callCabal2nix "cpufreq-plugin"
-              (inputs.cpufreq-plugin) {});
-          cpufreq-plugin-wrapped = super.writeScriptBin "cpufreq-plugin" ''
-            PATH=${super.cpufrequtils}/bin:${super.gnused}/bin
-            ${self.cpufreq-plugin}/bin/cpufreq-plugin "$@"
-          '';
         };
       in
         home-manager.lib.homeManagerConfiguration {

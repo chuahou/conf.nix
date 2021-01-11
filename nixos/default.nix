@@ -132,6 +132,19 @@ secrets: { pkgs, ... }:
     zsh
   ];
 
+  # extra sudoers rules
+  security.sudo.extraRules = [
+    {
+      groups   = [ "wheel" ];
+      commands = [
+        {
+          command = "${pkgs.cpufreq-plugin-wrapped}/bin/cpufreq-plugin *";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
