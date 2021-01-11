@@ -5,7 +5,7 @@
 
 { config, pkgs }:
 
-{
+rec {
   xconfigScript =
     let
       xrandr = "${pkgs.xorg.xrandr}/bin/xrandr";
@@ -44,17 +44,20 @@
 
   lockScript =
     let
-      picPath = "${config.xdg.dataHome}/lock.sh";
-      scrot   = "${pkgs.scrot}/bin/scrot";
-      convert = "${pkgs.imagemagick7}/bin/convert";
-      i3lock  = "${pkgs.i3lock}/bin/i3lock";
+      picPath      = "${config.xdg.dataHome}/lock.sh";
+      scrot        = "${pkgs.scrot}/bin/scrot";
+      convert      = "${pkgs.imagemagick7}/bin/convert";
+      i3lock       = "${pkgs.i3lock}/bin/i3lock";
+      dndScriptBin = "${dndScript ""}/bin/donotdisturb.sh";
     in
       pkgs.writeShellScriptBin "lock.sh" ''
         set -e
         mkdir -p ${picPath}
         ${scrot} ${picPath}/screen.png
         ${convert} ${picPath}/screen.png -blur 0x15 ${picPath}/blur.png
+        ${dndScriptBin} on
         ${i3lock} --nofork -i ${picPath}/blur.png "$@"
+        ${dndScriptBin} off
         rm ${picPath}/{screen,blur}.png || true
       '';
 
