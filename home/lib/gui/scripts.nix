@@ -58,9 +58,51 @@
         rm ${picPath}/{screen,blur}.png || true
       '';
 
-  volumeScript = pkgs.writeScriptBin "volume.sh" ''
+  volumeScript = pkgs.writeShellScriptBin "volume.sh" ''
     export PATH=${pkgs.gnugrep}/bin:${pkgs.gawk}/bin:${pkgs.gnused}/bin:$PATH
     export PATH=${pkgs.pulseaudio}/bin:$PATH
     ${builtins.readFile ../../res/volume.sh}
   '';
+
+  dndScript =
+    let
+      killall   = "${pkgs.psmisc}/bin/killall";
+      touch     = "${pkgs.coreutils}/bin/touch";
+      rm        = "${pkgs.coreutils}/bin/rm";
+      stateFile = "${config.xdg.dataHome}/dndenable";
+    in
+      hook: pkgs.writeShellScriptBin "donotdisturb.sh" ''
+        get_status () {
+          if [ -f "${stateFile}" ]; then
+            echo "do not disturb"
+          else
+            echo "notif on"
+          fi
+        }
+
+        dnd_on () {
+          ${killall} -SIGUSR1 -r '.*dunst' && ${touch} ${stateFile}
+          ${hook}
+        }
+
+        dnd_off () {
+          ${killall} -SIGUSR2 -r '.*dunst' && ${rm} ${stateFile}
+          ${hook}
+        }
+
+        toggle () {
+          [ -f "${stateFile}" ] && dnd_off || dnd_on
+        }
+
+        if [ "$#" -lt 1 ]; then
+          get_status
+        else
+          case "$1" in
+            toggle) toggle     ;;
+            on)     dnd_on     ;;
+            off)    dnd_off    ;;
+            *)      get_status ;;
+          esac
+        fi
+      '';
 }

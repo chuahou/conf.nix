@@ -54,7 +54,7 @@
           enable-ipc         = true;
           modules-left       = "battery fs mem maxtemp cpu";
           modules-center     = "i3";
-          modules-right      = "sound_ipc sound cpufreq_ipc cpufreq date"; # "dnd dnd_ipc nordvpn nordvpn_ipc sound_ipc sound cpufreq_ipc cpufreq date";
+          modules-right      = "dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
           inherit background foreground format-padding;
         };
 
@@ -183,7 +183,20 @@
           format-background = colours.gray.yellow;
           format-underline  = colours.yellow;
           inherit format-padding;
-        }));
+        })) //
+
+      mkIpcPair "dnd" 60 (hook:
+        let
+          script =
+            (import ../lib/gui/scripts.nix { inherit config pkgs; }).dndScript;
+          scriptBin = "${script hook}/bin/donotdisturb.sh";
+        in {
+          hook-0            = scriptBin;
+          click-left        = "${scriptBin} toggle; ${hook}";
+          format-background = colours.gray.red;
+          format-underline  = colours.red;
+          inherit format-padding;
+        });
 
     script = "polybar main &";
   };
