@@ -33,8 +33,8 @@
       cpufreq-plugin = super.haskell.lib.doJailbreak
         (super.haskellPackages.callCabal2nix "cpufreq-plugin"
           (inputs.cpufreq-plugin) {});
-      cpufreq-plugin-wrapped = super.writeScriptBin "cpufreq-plugin" ''
-        PATH=${super.cpufrequtils}/bin:${super.gnused}/bin
+      cpufreq-plugin-wrapped = super.writeShellScriptBin "cpufreq-plugin" ''
+        export PATH=${super.cpufrequtils}/bin:${super.gnused}/bin
         ${self.cpufreq-plugin}/bin/cpufreq-plugin "$@"
       '';
     };
