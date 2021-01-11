@@ -125,6 +125,10 @@ in
                   command = "${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet";
                   notification = false;
                 }
+                {
+                  command = "systemctl --user restart polybar";
+                  always = true; notification = false;
+                }
               ];
 
               # keybindings
