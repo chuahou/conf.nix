@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   inherit (import ../lib/gui/scripts.nix { inherit config pkgs; })
@@ -125,10 +125,18 @@ in
                   command = "${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet";
                   notification = false;
                 }
-                {
-                  command = "systemctl --user restart polybar";
-                  always = true; notification = false;
-                }
+                (let
+                  cfg = builtins.attrNames config.services.polybar.config;
+                  mods = builtins.filter (lib.hasPrefix "module/") cfg;
+                  ipcs = builtins.filter (lib.hasSuffix "_ipc") mods;
+                in
+                  {
+                    command = "systemctl --user restart polybar; sleep 5; ${
+                      lib.concatMapStringsSep "; sleep 1; "
+                        (ipc: "polybar-msg hook ${
+                          lib.removePrefix "module/" ipc} 1") ipcs}";
+                    always = true; notification = false;
+                  })
               ];
 
               # keybindings
