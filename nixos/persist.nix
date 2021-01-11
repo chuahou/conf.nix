@@ -12,6 +12,7 @@
     adjtime.source = "/persist/etc/adjtime";
   };
   systemd.tmpfiles.rules = [
+    "L /var/lib/alsa      - - - - /persist/var/lib/alsa"
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
   ];
   security.sudo.extraConfig = "Defaults lecture = never";
