@@ -117,6 +117,10 @@ in
                   command = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
                   notification = false;
                 }
+                {
+                  command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.copyPathToStore ../res/wallpaper.jpg}";
+                  always = true; notification = false;
+                }
               ];
 
               # keybindings
