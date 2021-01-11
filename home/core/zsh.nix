@@ -50,6 +50,8 @@ in
 
         # vi mode config
         bindkey -rpM viins '^[^['
+        vim-mode-bindkey viins vicmd -- up-line-or-history   Up
+        vim-mode-bindkey viins vicmd -- down-line-or-history Down
 
         # zsh-autosuggestions config
         bindkey '^ ' autosuggest-accept
