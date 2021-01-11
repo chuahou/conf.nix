@@ -19,6 +19,9 @@
 
     # zsh-vim-mode plugin
     zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
+
+    # cpufreq-plugin
+    cpufreq-plugin = { url = "github:chuahou/cpufreq-plugin"; flake = false; };
   };
 
   outputs =
@@ -75,12 +78,23 @@
         cocNvimOverlay = self: super: {
           inherit ((import unstable { inherit system; }).vimPlugins) coc-nvim;
         };
+        cpufreqPluginOverlay = self: super: {
+          cpufreq-plugin = super.haskell.lib.doJailbreak
+            (super.haskellPackages.callCabal2nix "cpufreq-plugin"
+              (inputs.cpufreq-plugin) {});
+          cpufreq-plugin-wrapped = super.writeScriptBin "cpufreq-plugin" ''
+            PATH=${super.cpufrequtils}/bin:${super.gnused}/bin
+            ${self.cpufreq-plugin}/bin/cpufreq-plugin "$@"
+          '';
+        };
       in
         home-manager.lib.homeManagerConfiguration {
           inherit system;
           inherit ((import ./lib).me.home) username homeDirectory;
           configuration = import ./home {
-            overlays = [ instantRstOverlay zshOverlay cocNvimOverlay ];
+            overlays = [
+              instantRstOverlay zshOverlay cocNvimOverlay cpufreqPluginOverlay
+            ];
           };
         };
 
