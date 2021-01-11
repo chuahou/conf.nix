@@ -104,7 +104,7 @@ in
               floating = {
                 modifier = mod;
                 criteria = [
-                  { class = "Blueman-manager"; }
+                  { class = "blueman-manager"; }
                   { class = "Pavucontrol";     }
                   { title = "floatthis";       }
                 ];

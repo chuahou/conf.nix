@@ -68,6 +68,7 @@ secrets: { pkgs, ... }:
   sound.enable                     = true;
   hardware.pulseaudio.enable       = true;
   services.xserver.libinput.enable = true; # touchpad support
+  hardware.bluetooth.enable        = true;
 
   # user accounts
   users = {
@@ -99,6 +100,9 @@ secrets: { pkgs, ... }:
 
   # enable light to control backlight
   programs.light.enable = true;
+
+  # enable blueman
+  services.blueman.enable = true;
 
   # fonts to install system-wide
   fonts.fonts = with pkgs; [
