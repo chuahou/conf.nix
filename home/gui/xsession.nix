@@ -8,12 +8,6 @@ let
     xconfigScript lockScript;
 in
   {
-    home.packages = [
-      # shell script that does all X-related configuration
-      xconfigScript
-      lockScript
-    ];
-
     xsession = {
       enable = true;
       scriptPath = ".hm-xsession";
