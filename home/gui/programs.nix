@@ -5,6 +5,27 @@
 
 {
   home.packages = with pkgs; [
+
+    # development
+    gitg
+    meld
+
+    # productivity
+    pandoc
+    pdftk
+
+    # media
+    gimp
+    minecraft
+    obs-studio
+    vlc
+
+    # communications
+    discord
     tdesktop
+
+    # system utilities
+    arandr
+
   ];
 }

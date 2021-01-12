@@ -91,12 +91,13 @@
           };
         };
         unstableOverlay =
-          let
-            pkgs = import unstable { inherit system; };
-          in self: super: {
-            inherit (pkgs) tdesktop;
-            inherit (pkgs.vimPlugins) coc-nvim;
-          };
+          self: super:
+            let
+              pkgs = import unstable { inherit (super) system config; };
+            in {
+              inherit (pkgs) discord tdesktop;
+              inherit (pkgs.vimPlugins) coc-nvim;
+            };
       in
         home-manager.lib.homeManagerConfiguration {
           inherit system;
