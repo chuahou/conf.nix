@@ -48,6 +48,10 @@ in
           endRestart  = "r";
           endKey      = "${mod}+Shift+e";
 
+          # passthrough mode for gaming
+          passthroughMode = "Passthrough Mode [mod+super+a]";
+          passthroughKey  = "${mod}+${super}+a";
+
           # programs
           rofi = "${config.programs.rofi.package}/bin/rofi";
 
@@ -178,8 +182,9 @@ in
                 "${mod}+Ctrl+r"  = "restart";
 
                 # modes
-                "${resizeKey}" = "mode \"${resizeMode}\"";
-                "${endKey}"    = "mode \"${endMode}\"";
+                "${resizeKey}"      = "mode \"${resizeMode}\"";
+                "${endKey}"         = "mode \"${endMode}\"";
+                "${passthroughKey}" = "mode \"${passthroughMode}\"";
 
                 # launch applications
                 "${mod}+space"       = "exec ${rofi} -show drun";
@@ -256,6 +261,10 @@ in
                   "Escape"                = "mode \"default\"";
                   "Return"                = "mode \"default\"";
                   "${endKey}"             = "mode \"default\"";
+                };
+
+                "${passthroughMode}" = {
+                  "${passthroughKey}" = "mode \"default\"";
                 };
               };
             };
