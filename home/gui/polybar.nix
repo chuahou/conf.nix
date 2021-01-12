@@ -194,8 +194,8 @@
         in {
           hook-0            = scriptBin;
           click-left        = "${scriptBin} toggle; ${hook}";
-          format-background = colours.gray.red;
-          format-underline  = colours.red;
+          format-background = colours.gray.magenta;
+          format-underline  = colours.magenta;
           inherit format-padding;
         });
 
