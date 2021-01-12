@@ -93,13 +93,20 @@
         cocNvimOverlay = self: super: {
           inherit ((import unstable { inherit system; }).vimPlugins) coc-nvim;
         };
+        telegramOverlay = self: super: {
+          inherit (import unstable { inherit system; }) tdesktop;
+        };
       in
         home-manager.lib.homeManagerConfiguration {
           inherit system;
           inherit ((import ./lib).me.home) username homeDirectory;
           configuration = import ./home {
             overlays = [
-              instantRstOverlay zshOverlay cocNvimOverlay cpufreqPluginOverlay
+              cocNvimOverlay
+              cpufreqPluginOverlay
+              instantRstOverlay
+              telegramOverlay
+              zshOverlay
             ];
           };
         };
