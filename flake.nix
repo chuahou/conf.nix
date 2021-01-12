@@ -90,22 +90,22 @@
             src  = inputs.zsh-vim-mode;
           };
         };
-        cocNvimOverlay = self: super: {
-          inherit ((import unstable { inherit system; }).vimPlugins) coc-nvim;
-        };
-        telegramOverlay = self: super: {
-          inherit (import unstable { inherit system; }) tdesktop;
-        };
+        unstableOverlay =
+          let
+            pkgs = import unstable { inherit system; };
+          in self: super: {
+            inherit (pkgs) tdesktop;
+            inherit (pkgs.vimPlugins) coc-nvim;
+          };
       in
         home-manager.lib.homeManagerConfiguration {
           inherit system;
           inherit ((import ./lib).me.home) username homeDirectory;
           configuration = import ./home {
             overlays = [
-              cocNvimOverlay
               cpufreqPluginOverlay
               instantRstOverlay
-              telegramOverlay
+              unstableOverlay
               zshOverlay
             ];
           };
