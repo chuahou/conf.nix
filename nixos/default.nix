@@ -6,6 +6,7 @@ secrets: { pkgs, ... }:
 {
   imports = [
     ./fs.nix
+    ./gc.nix
     ./hardware.nix
     ./persist.nix
   ];
