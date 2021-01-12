@@ -117,6 +117,12 @@ secrets: { pkgs, ... }:
     roboto-slab
   ];
 
+  # input methods
+  i18n.inputMethod = {
+    enabled       = "fcitx";
+    fcitx.engines = [ pkgs.fcitx-engines.mozc ];
+  };
+
   # system-wide packages
   environment.systemPackages = with pkgs; [
     bc
