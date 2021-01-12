@@ -59,6 +59,9 @@ in
 
         # enable dir stack
         setopt autopushd
+
+        # disable <C-s> <C-q> on interactive shells
+        [[ $- != *i* ]] || stty -ixon -ixoff
       '';
 
       # plugins
