@@ -5,7 +5,8 @@
 
 {
   programs.firefox = {
-    enable = true;
+    enable  = true;
+    package = pkgs.firefox-bin;
 
     profiles =
       let
