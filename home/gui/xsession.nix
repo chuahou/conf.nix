@@ -42,7 +42,7 @@ in
           resizeKey  = "${mod}+r";
 
           # end session mode
-          endMode     = "End Session  [mod+${endLogout}] logout [mod+${endShutdown}] shutdown  [mod+${endRestart}] restart";
+          endMode     = "End Session  [mod+${endLogout}] logout  [mod+${endShutdown}] shutdown  [mod+${endRestart}] restart";
           endLogout   = "l";
           endShutdown = "p";
           endRestart  = "r";
