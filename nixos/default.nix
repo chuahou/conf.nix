@@ -105,6 +105,9 @@ secrets: { pkgs, ... }:
   # enable upower
   services.upower.enable = true;
 
+  # enable cron
+  services.cron.enable = true;
+
   # fonts to install system-wide
   fonts.fonts = with pkgs; [
     corefonts
