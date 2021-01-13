@@ -16,6 +16,21 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1610051610,
+        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -69,6 +84,25 @@
         "type": "github"
       }
     },
+    "ioslabka": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1610565777,
+        "narHash": "sha256-MeTrwWI+uEWiHrLqPVfnGc+T1cGRIuiNxEFSb2ghMlE=",
+        "owner": "chuahou",
+        "repo": "ioslabka.nix",
+        "rev": "4b9ff96d1fe1074561cda56fe5e12fa8d0d4a433",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chuahou",
+        "repo": "ioslabka.nix",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1609915993,
@@ -85,6 +119,21 @@
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1610425436,
+        "narHash": "sha256-ITKdkfWhFrBTTQjYPNdNZqq9JrI3M9oObk8mbrYczuM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "980c4c3c2f664ccc5002f7fd6e08059cf1f00e75",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixpkgs-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1610411012,
         "narHash": "sha256-zjh0UuMINNhmyo3M8TEvju4+mo0swRrcKoojr2EH37M=",
@@ -105,8 +154,9 @@
         "home-manager": "home-manager",
         "instantRstPy": "instantRstPy",
         "instantRstVim": "instantRstVim",
+        "ioslabka": "ioslabka",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "secrets": "secrets",
         "unstable": "unstable",
         "zsh-vim-mode": "zsh-vim-mode"

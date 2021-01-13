@@ -114,6 +114,8 @@ secrets: { pkgs, ... }:
     corefonts
     fira
     iosevka
+    iosevkaFixed
+    ioslabka
     ipaexfont
     ipafont
     open-sans

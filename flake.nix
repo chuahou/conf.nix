@@ -22,6 +22,9 @@
 
     # cpufreq-plugin
     cpufreq-plugin = { url = "github:chuahou/cpufreq-plugin"; flake = false; };
+
+    # ioslabka
+    ioslabka = { url = "github:chuahou/ioslabka.nix"; };
   };
 
   outputs =
@@ -52,7 +55,7 @@
 
         # extra overlays
         ({ ... }: {
-          nixpkgs.overlays = [ cpufreqPluginOverlay ];
+          nixpkgs.overlays = [ cpufreqPluginOverlay inputs.ioslabka.overlay ];
         })
 
         # main NixOS configuration
