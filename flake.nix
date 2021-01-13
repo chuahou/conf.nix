@@ -64,7 +64,7 @@
       ];
     };
 
-    hmConfigs."${(import ./lib).me.home.username}" =
+    hmConfigs."${(import ./lib {}).me.home.username}" =
       let
         instantRstOverlay = self: super: {
           instantRstVim = super.vimUtils.buildVimPlugin {
@@ -101,7 +101,7 @@
       in
         home-manager.lib.homeManagerConfiguration {
           inherit system;
-          inherit ((import ./lib).me.home) username homeDirectory;
+          inherit ((import ./lib {}).me.home) username homeDirectory;
           configuration = import ./home {
             overlays = [
               cpufreqPluginOverlay

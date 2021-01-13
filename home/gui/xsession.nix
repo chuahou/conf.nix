@@ -4,8 +4,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  inherit (import ../lib/gui/scripts.nix { inherit config pkgs; })
-    xconfigScript lockScript volumeScript;
+  inherit (import ../lib/gui/scripts.nix { inherit config pkgs lib; })
+    xconfigScript lockScript volumeScript powerScript;
   volumeScriptBin = "${volumeScript}/bin/volume.sh";
   soundIpcHook =
     let
@@ -130,6 +130,9 @@ in
                 {
                   command = "${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet";
                   notification = false;
+                }
+                {
+                  command = "${powerScript}/bin/power.sh"; notification = false;
                 }
                 (let
                   cfg = builtins.attrNames config.services.polybar.config;

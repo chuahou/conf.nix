@@ -172,7 +172,7 @@
       mkIpcPair "sound" 10
         (let
           script =
-            (import ../lib/gui/scripts.nix { inherit config pkgs; }).volumeScript;
+            (import ../lib/gui/scripts.nix { inherit config pkgs lib; }).volumeScript;
           scriptBin = "${script}/bin/volume.sh";
         in (hook: {
           hook-0            = scriptBin;
@@ -189,7 +189,7 @@
       mkIpcPair "dnd" 60 (hook:
         let
           script =
-            (import ../lib/gui/scripts.nix { inherit config pkgs; }).dndScript;
+            (import ../lib/gui/scripts.nix { inherit config pkgs lib; }).dndScript;
           scriptBin = "${script hook}/bin/donotdisturb.sh";
         in {
           hook-0            = scriptBin;

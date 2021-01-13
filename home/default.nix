@@ -4,7 +4,7 @@
 { overlays ? [] }: { config, pkgs, ... }:
 
 {
-  imports = builtins.concatMap (import ../lib).importFolder [
+  imports = builtins.concatMap (import ../lib {}).importFolder [
     ./core
     ./gui
     ./misc

@@ -3,7 +3,7 @@
 #
 # Common scripts for GUI actions
 
-{ config, pkgs }:
+{ config, pkgs, lib }:
 
 rec {
   xconfigScript =
@@ -62,9 +62,9 @@ rec {
       '';
 
   volumeScript = pkgs.writeShellScriptBin "volume.sh" ''
-    export PATH=${pkgs.gnugrep}/bin:${pkgs.gawk}/bin:${pkgs.gnused}/bin:$PATH
-    export PATH=${pkgs.pulseaudio}/bin:$PATH
-    ${builtins.readFile ../../res/volume.sh}
+    ${(import ../../../lib { inherit lib; }).mkPath
+      (with pkgs; [ gnugrep gawk gnused pulseaudio ])}
+    ${builtins.readFile ../../res/scripts/volume.sh}
   '';
 
   dndScript =
@@ -108,4 +108,12 @@ rec {
           esac
         fi
       '';
+
+  powerScript = pkgs.writeShellScriptBin "power.sh" ''
+    ${(import ../../../lib { inherit lib; }).mkPath (with pkgs; [
+      coreutils gnugrep gnused libnotify pulseaudio upower systemd
+    ])}
+    AUDIO_FILE=${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/phone-incoming-call.oga
+    ${builtins.readFile ../../res/scripts/power.sh}
+  '';
 }

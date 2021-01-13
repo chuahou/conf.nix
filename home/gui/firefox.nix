@@ -10,7 +10,7 @@
 
     profiles =
       let
-        me = (import ../../lib).me;
+        me = (import ../../lib {}).me;
       in {
         "${me.home.username}" = {
           inherit (me) name;
