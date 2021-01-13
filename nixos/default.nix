@@ -32,10 +32,7 @@ secrets: { pkgs, ... }:
   };
 
   # time settings
-  time = {
-    timeZone                 = "Asia/Singapore";
-    hardwareClockInLocalTime = true; # compatibility with Windows
-  };
+  time.timeZone = "Asia/Singapore";
 
   # locale
   i18n.defaultLocale = "en_SG.UTF-8";
@@ -80,7 +77,7 @@ secrets: { pkgs, ... }:
       };
       user =
         let
-          inherit (import ../lib) me;
+          inherit (import ../lib {}) me;
         in
           {
             isNormalUser   = true;
