@@ -95,7 +95,7 @@
             let
               pkgs = import unstable { inherit (super) system config; };
             in {
-              inherit (pkgs) discord tdesktop;
+              inherit (pkgs) discord syncthing tdesktop;
               inherit (pkgs.vimPlugins) coc-nvim;
             };
       in
