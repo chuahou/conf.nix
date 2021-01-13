@@ -28,6 +28,7 @@
     # system utilities
     arandr
     baobab
+    font-manager
 
   ];
 
