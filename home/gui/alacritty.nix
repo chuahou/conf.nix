@@ -17,9 +17,9 @@
       draw_bold_text_with_bright_colors = false;
 
       font = {
-        normal.family = "Iosevka"; # other weights will inherit
+        normal.family = "Ioslabka"; # other weights will inherit
         size          = 13.0;
-        offset.y      = 2;         # increased line spacing
+        offset.y      = 3;         # increased line spacing
       };
 
       colors =

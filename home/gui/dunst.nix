@@ -23,7 +23,7 @@
           separator_color    = "frame";
           sort               = "yes";
           idle_threshold     = 300;
-          font               = "Iosevka Regular 12";
+          font               = "Ioslabka Regular 12";
           markup             = "full";
           format             = "<u><i>%a</i></u>\\n<b>%s</b>\\n%b";
           show_age_threshold = 60;
