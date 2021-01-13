@@ -5,6 +5,7 @@ secrets: { pkgs, ... }:
 
 {
   imports = [
+    ./cachix.nix
     ./fs.nix
     ./gc.nix
     ./hardware.nix
@@ -129,6 +130,7 @@ secrets: { pkgs, ... }:
   # system-wide packages
   environment.systemPackages = with pkgs; [
     bc
+    cachix
     curl
     cpufrequtils
     gawk
