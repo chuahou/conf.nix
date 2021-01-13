@@ -3,7 +3,7 @@
 #
 # Common shared functions and variables.
 
-{ lib ? {} }:
+{ pkgs ? {}, lib ? {} }:
 
 rec {
   # import entire folder's expressions
@@ -12,19 +12,28 @@ rec {
       (builtins.attrNames (builtins.readDir folder));
 
   # produce export statement exporting the 'bin' folders of each of the input
-  # 'pkgs' prepended to $PATH
+  # 'deps' prepended to $PATH
   addToPath = addToPath' true;
 
   # produce export statement exporting the 'bin' folders of each of the input
-  # 'pkgs' replacing $PATH
+  # 'deps' replacing $PATH
   mkPath = addToPath' false;
 
   # internal
-  addToPath' = prepend: paths: ''
+  addToPath' = prepend: deps: ''
     export PATH=${
-      lib.concatMapStringsSep ":" (pkg: "${pkg}/bin") paths
+      lib.concatMapStringsSep ":" (dep: "${dep}/bin") deps
     }${if prepend then ":$PATH" else ""}
   '';
+
+  # prepends either of 'addToPath' if 'prepend' is true, or 'mkPath' otherwise,
+  # with each of the dependencies 'deps' to an input script 'infile' with name
+  # given by the base name of 'infile'
+  mkScriptWithDeps = { prepend ? true, deps ? [], infile }:
+    pkgs.writeShellScriptBin (baseNameOf infile) ''
+      ${addToPath' prepend deps}
+      ${builtins.readFile infile}
+    '';
 
   # information about me
   me = import ./me.nix;

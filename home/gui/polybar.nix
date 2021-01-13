@@ -190,7 +190,7 @@
         let
           script =
             (import ../lib/gui/scripts.nix { inherit config pkgs lib; }).dndScript;
-          scriptBin = "${script hook}/bin/donotdisturb.sh";
+          scriptBin = "${script}/bin/donotdisturb.sh";
         in {
           hook-0            = scriptBin;
           click-left        = "${scriptBin} toggle; ${hook}";
