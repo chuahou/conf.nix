@@ -17,7 +17,12 @@ in
           ${mkPath (with pkgs; [ git findutils gnugrep ncurses ])}
           git_dir=${dir}
           ${builtins.readFile ../res/scripts/check-git.sh}
-        ''
-      )
+        '')
+      (pkgs.writeShellScriptBin "prepend-date" ''
+        ${mkPath [ pkgs.coreutils ]}
+        for x in "''${@}"; do
+          mv "''${x}" "$(date -I)-''${x}"
+        done
+      '')
     ];
   }
