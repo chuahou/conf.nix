@@ -7,6 +7,10 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      env = {
+        TERM = "xterm-256color"; # so we do not run into trouble with ssh/emacs
+      };
+
       window.padding     = rec { x = 40; y = x; };
       scrolling.history  = 10000;
       background_opacity = 0.85;
