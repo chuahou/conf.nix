@@ -29,4 +29,6 @@
     arandr
 
   ];
+
+  services.dropbox.enable = true;
 }

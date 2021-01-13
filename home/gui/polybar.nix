@@ -39,6 +39,12 @@
             "module/${name}_ipc" = { type = "custom/ipc"; } // ipc hook;
           };
 
+        launchTerminal = command:
+          "${config.programs.alacritty.package}/bin/alacritty -e ${command} & disown";
+
+        launchTerminalWatch = command:
+          launchTerminal "${pkgs.procps}/bin/watch -n 2 ${command}";
+
       in {
         "bar/main" = {
           width              = "100%";
@@ -52,7 +58,7 @@
           padding            = 1;
           module-margin-left = 1;
           enable-ipc         = true;
-          modules-left       = "battery fs mem maxtemp cpu";
+          modules-left       = "battery fs mem maxtemp cpu dropbox";
           modules-center     = "i3";
           modules-right      = "dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
           inherit background foreground format-padding;
@@ -132,7 +138,7 @@
           format-background = colours.gray.red;
           format-underline  = colours.red;
           interval          = 1;
-          click-left        = "${config.programs.alacritty.package}/bin/alacritty -e ${pkgs.procps}/bin/watch -n 2 ${pkgs.lm_sensors}/bin/sensors & disown";
+          click-left        = launchTerminalWatch "${pkgs.lm_sensors}/bin/sensors";
           inherit format-padding;
         };
 
@@ -141,6 +147,26 @@
           format            = "cpu <label>";
           format-background = colours.gray.magenta;
           format-underline  = colours.magenta;
+          inherit format-padding;
+        };
+
+        "module/dropbox" = {
+          type = "custom/script";
+          exec = "${pkgs.writeShellScriptBin "polybar-dropbox" ''
+            echo -n "dropbox"
+            case $(${pkgs.dropbox-cli}/bin/dropbox status |
+                ${pkgs.coreutils}/bin/head -n 1 |
+                ${pkgs.gawk}/bin/awk '{ print $1 }') in
+              Up)         echo ""         ;;
+              Syncing)    echo " syncing" ;;
+              Syncing...) echo " syncing" ;;
+              *)          echo " ???"     ;;
+            esac
+          ''}/bin/polybar-dropbox";
+          interval          = 5;
+          format-background = colours.gray.yellow;
+          format-underline  = colours.yellow;
+          click-left        = launchTerminalWatch "${pkgs.dropbox-cli}/bin/dropbox status";
           inherit format-padding;
         };
 
