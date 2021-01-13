@@ -3,14 +3,14 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 #
-# Creates a repo ../secrets.nix with a single file ../secrets.nix/default.nix
-# containing the desired secrets (prompted during the script's run), and a
-# pseudorandom generated file ../secrets.nix/random to minimimze predictability
-# of the git revision hash.
+# Creates a repo ${1}/secrets.nix with a single file
+# ${1}/secrets.nix/default.nix containing the desired secrets (prompted during
+# the script's run), and a pseudorandom generated file ${1}/secrets.nix/random
+# to minimimze predictability of the git revision hash.
 
 set -eu
 
-SECRETS_REPO=../secrets.nix
+SECRETS_REPO=${1}/secrets.nix
 SECRETS_FILE=${SECRETS_REPO}/default.nix
 RANDOM_FILE=${SECRETS_REPO}/random
 
@@ -20,7 +20,7 @@ mkpasswdfn ()
 }
 gitfn ()
 {
-	git -C ${SECRETS_REPO} "${@}"
+	git -C ${SECRETS_REPO} -c user.name="bleh" -c user.email="a@b.c" "${@}"
 }
 
 mkdir ${SECRETS_REPO}

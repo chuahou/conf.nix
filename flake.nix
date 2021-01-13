@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    secrets = { url = "/home/sgepk/dev/secrets.nix"; flake = false; };
+    secrets = { url = "/persist/secrets.nix"; flake = false; };
 
     # instant RST plugin and pip package
     instantRstPy  = { url = "github:gu-fan/instant-rst.py"; flake = false; };
