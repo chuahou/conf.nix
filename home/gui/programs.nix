@@ -27,6 +27,7 @@
 
     # system utilities
     arandr
+    baobab
 
   ];
 
