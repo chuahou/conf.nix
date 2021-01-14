@@ -155,6 +155,7 @@ in
                 "${mod}+Shift+Return" = "exec ${config.programs.firefox.package}/bin/firefox";
                 "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
                 "${mod}+p"            = Print;
+                "${mod}+o"            = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty -o background_opacity=0.95 -t floatthis -e zsh -c 'org'";
 
                 # window navigation
                 "${mod}+Tab"     = "focus mode_toggle";
