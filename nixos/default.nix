@@ -63,11 +63,20 @@ secrets: { pkgs, ... }:
   };
 
   # hardware services
-  services.printing.enable         = true; # printer CUPS
   sound.enable                     = true;
   hardware.pulseaudio.enable       = true;
   services.xserver.libinput.enable = true; # touchpad support
   hardware.bluetooth.enable        = true;
+
+  # printing and scanning
+  services.printing = {
+    enable  = true;
+    drivers = [ pkgs.hplipWithPlugin ];
+  };
+  hardware.sane = {
+    enable        = true;
+    extraBackends = [ pkgs.hplipWithPlugin ];
+  };
 
   # user accounts
   users = {
@@ -84,9 +93,11 @@ secrets: { pkgs, ... }:
             isNormalUser   = true;
             name           = me.home.username;
             description    = me.name;
-            extraGroups    = [ "wheel" "networkmanager" "video" ];
             hashedPassword = secrets.user.hashedPassword;
             shell          = pkgs.zsh;
+            extraGroups = [
+              "wheel" "networkmanager" "video" "scanner" "lp"
+            ];
           };
     };
   };

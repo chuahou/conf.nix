@@ -11,6 +11,7 @@
     meld
 
     # productivity
+    gnome3.simple-scan
     pandoc
     pdftk
 

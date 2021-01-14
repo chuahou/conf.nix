@@ -5,6 +5,7 @@
   inputs = {
     nixpkgs        = { url = "nixpkgs/nixos-20.09"; };
     unstable       = { url = "nixpkgs/nixpkgs-unstable"; };
+    small          = { url = "nixpkgs/nixos-20.09-small"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager/release-20.09";
@@ -29,7 +30,7 @@
 
   outputs =
     inputs@{
-      self, nixpkgs, unstable, nixos-hardware, secrets, home-manager, ...
+      self, nixpkgs, unstable, small, nixos-hardware, secrets, home-manager, ...
     }: let system = "x86_64-linux"; in rec {
 
     cpufreqPluginOverlay = self: super: {
@@ -40,6 +41,11 @@
         export PATH=${super.cpufrequtils}/bin:${super.gnused}/bin
         ${self.cpufreq-plugin}/bin/cpufreq-plugin "$@"
       '';
+    };
+
+    hplipOverlay = self: super: {
+      inherit (import small { inherit (super) system config; })
+        hplip hlipWithPlugin;
     };
 
     nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
@@ -55,7 +61,9 @@
 
         # extra overlays
         ({ ... }: {
-          nixpkgs.overlays = [ cpufreqPluginOverlay inputs.ioslabka.overlay ];
+          nixpkgs.overlays = [
+            cpufreqPluginOverlay inputs.ioslabka.overlay hplipOverlay
+          ];
         })
 
         # main NixOS configuration
