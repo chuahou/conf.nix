@@ -31,6 +31,12 @@ in
             \ 'vim': ['trailing'],
             \ }
 
+          " custom symbols for vim-airline
+          if !exists('g:airline_symbols')
+            let g:airline_symbols = {}
+          endif
+          let g:airline_symbols.maxlinenr = ' ln'
+
           " faster updates for coc/vim-gitgutter etc
           set updatetime=100
 
