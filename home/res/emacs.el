@@ -37,7 +37,7 @@
 (setq org-agenda-start-on-weekday nil)
 (setq org-agenda-time-grid
       '((weekly today remove-match)
-        (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200)
+        (800 1000 1200 1400 1600 1800 2000 2200)
         "......" "----------------"))
 (setq org-log-done 'time)
 (setq safe-local-variable-values '((eval org-content 2)))
