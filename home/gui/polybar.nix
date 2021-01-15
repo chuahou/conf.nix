@@ -59,9 +59,9 @@
           padding            = 1;
           module-margin-left = 1;
           enable-ipc         = true;
-          modules-left       = "battery fs mem maxtemp cpu dropbox";
+          modules-left       = "battery fs mem maxtemp cpu";
           modules-center     = "i3";
-          modules-right      = "dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
+          modules-right      = "dropbox dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
           inherit background foreground format-padding;
         };
 
@@ -165,8 +165,8 @@
             esac
           ''}/bin/polybar-dropbox";
           interval          = 5;
-          format-background = colours.gray.yellow;
-          format-underline  = colours.yellow;
+          format-background = colours.gray.blue;
+          format-underline  = colours.blue;
           click-left        = launchTerminalWatch "${pkgs.dropbox-cli}/bin/dropbox status";
           inherit format-padding;
         };
