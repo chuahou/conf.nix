@@ -249,7 +249,7 @@ in
                 (builtins.foldl' (x: y: x // y) {}
                     (builtins.attrValues (builtins.mapAttrs (key: dirn: {
                       "${key}"       = "resize ${dirn} 6 px or 6 ppt";
-                      "Shift+${key}" = "resize ${dirn} 36 px or 36 ppt";
+                      "Shift+${key}" = "resize ${dirn} 18 px or 18 ppt";
                       "Ctrl+${key}"  = "resize ${dirn} 3 px or 3 ppt";
                     }) {
                       "${left}"  = "shrink width";
