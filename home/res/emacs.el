@@ -59,6 +59,7 @@
 (setq-default mode-line-format nil) ;; remove statusline
 (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
 (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+(setq-default display-line-numbers 'visual) ;; fold-respecting relativenumber
 
 ;; disable autosave/backup files
 (setq auto-save-default nil)
