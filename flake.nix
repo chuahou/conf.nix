@@ -45,7 +45,7 @@
 
     hplipOverlay = self: super: {
       inherit (import small { inherit (super) system config; })
-        hplip hlipWithPlugin;
+        hplip hplipWithPlugin;
     };
 
     nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
