@@ -38,7 +38,7 @@ secrets: { pkgs, ... }:
   # locale
   i18n.defaultLocale = "en_SG.UTF-8";
   console = {
-    font = "Lat2-Terminus16";
+    font   = "Lat2-Terminus16";
     keyMap = "us";
   };
 
@@ -86,19 +86,17 @@ secrets: { pkgs, ... }:
         hashedPassword = secrets.root.hashedPassword;
       };
       user =
-        let
-          inherit (import ../lib {}) me;
-        in
-          {
-            isNormalUser   = true;
-            name           = me.home.username;
-            description    = me.name;
-            hashedPassword = secrets.user.hashedPassword;
-            shell          = pkgs.zsh;
-            extraGroups = [
-              "wheel" "networkmanager" "video" "scanner" "lp"
-            ];
-          };
+        let inherit (import ../lib {}) me;
+        in {
+          isNormalUser   = true;
+          name           = me.home.username;
+          description    = me.name;
+          hashedPassword = secrets.user.hashedPassword;
+          shell          = pkgs.zsh;
+          extraGroups = [
+            "wheel" "networkmanager" "video" "scanner" "lp"
+          ];
+        };
     };
   };
 

@@ -14,8 +14,7 @@
 
   # systemd timer unit to run gcal script every 5 minutes
   systemd.user =
-    let
-      name = "org-gcal";
+    let name = "org-gcal";
     in {
       services.${name} = {
         Service = {

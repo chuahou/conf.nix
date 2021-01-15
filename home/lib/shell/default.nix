@@ -16,32 +16,31 @@ let
   dev     = me.dev;
   aliases = import ./aliases.nix;
   vars    = import ./vars.nix;
-in
-  ''
-    # environment variables
-    ${config.lib.zsh.exportAll vars}
+in ''
+  # environment variables
+  ${config.lib.zsh.exportAll vars}
 
-    # aliases
-    ${lib.concatStringsSep "\n" (
-      lib.mapAttrsToList (k: v: "alias ${k}=${lib.escapeShellArg v}") aliases
-    )}
+  # aliases
+  ${lib.concatStringsSep "\n" (
+    lib.mapAttrsToList (k: v: "alias ${k}=${lib.escapeShellArg v}") aliases
+  )}
 
-    # additional functions
+  # additional functions
 
-    # miscellanous shell functions
+  # miscellanous shell functions
 
-    # use xdg-open on multiple files at once
-    open () {
-      for i in "$@"; do xdg-open $i; done
-    }
-    alias o="open"
+  # use xdg-open on multiple files at once
+  open () {
+    for i in "$@"; do xdg-open $i; done
+  }
+  alias o="open"
 
-    # disown by default when running some applications
-    _run_and_disown () {
-      $@ & disown
-    }
-    _disown_progs=( zathura meld gitg thunar xdg-open )
-    for prog in "''${_disown_progs[@]}"; do
-      alias $prog="_run_and_disown $prog"
-    done
-  ''
+  # disown by default when running some applications
+  _run_and_disown () {
+    $@ & disown
+  }
+  _disown_progs=( zathura meld gitg thunar xdg-open )
+  for prog in "''${_disown_progs[@]}"; do
+    alias $prog="_run_and_disown $prog"
+  done
+''

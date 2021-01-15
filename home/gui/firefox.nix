@@ -9,10 +9,9 @@
     package = pkgs.firefox-bin;
 
     profiles =
-      let
-        me = (import ../../lib {}).me;
+      let me = (import ../../lib {}).me;
       in {
-        "${me.home.username}" = {
+        ${me.home.username} = {
           inherit (me) name;
           settings = {
             # always ask for downloads

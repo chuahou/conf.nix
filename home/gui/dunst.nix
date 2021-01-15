@@ -8,8 +8,7 @@
     enable = true;
 
     settings =
-      let
-        colours = import ../lib/gui/colours.nix;
+      let colours = import ../lib/gui/colours.nix;
       in rec {
         global = {
           follow             = "keyboard";

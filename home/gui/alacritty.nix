@@ -23,25 +23,23 @@
       };
 
       colors =
-        let
-          colours = import ../lib/gui/colours.nix;
-        in
-          {
-            primary = {
-              background        = colours.term.bg;
-              foreground        = colours.term.fg;
-              bright-foreground = colours.term.fg-bright;
-            };
-            cursor.cursor = colours.term.fg;
-            normal = {
-              inherit (colours)
-                black red green yellow blue magenta cyan white;
-            };
-            bright = {
-              inherit (colours.bright)
-                black red green yellow blue magenta cyan white;
-            };
+        let colours = import ../lib/gui/colours.nix;
+        in {
+          primary = {
+            background        = colours.term.bg;
+            foreground        = colours.term.fg;
+            bright-foreground = colours.term.fg-bright;
           };
+          cursor.cursor = colours.term.fg;
+          normal = {
+            inherit (colours)
+              black red green yellow blue magenta cyan white;
+          };
+          bright = {
+            inherit (colours.bright)
+              black red green yellow blue magenta cyan white;
+          };
+        };
     };
   };
 }

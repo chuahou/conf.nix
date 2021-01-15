@@ -31,7 +31,11 @@
   outputs =
     inputs@{
       self, nixpkgs, unstable, small, nixos-hardware, secrets, home-manager, ...
-    }: let system = "x86_64-linux"; in rec {
+    }:
+    let
+      system = "x86_64-linux";
+      pkgs   = nixpkgs.legacyPackages.${system};
+    in rec {
 
     cpufreqPluginOverlay = self: super: {
       cpufreq-plugin = super.haskell.lib.doJailbreak
@@ -75,7 +79,7 @@
       ];
     };
 
-    hmConfigs."${(import ./lib {}).me.home.username}" =
+    hmConfigs.${(import ./lib {}).me.home.username} =
       let
         instantRstOverlay = self: super: {
           instantRstVim = super.vimUtils.buildVimPlugin {
@@ -109,19 +113,18 @@
               inherit (pkgs) alacritty discord syncthing tdesktop;
               inherit (pkgs.vimPlugins) coc-nvim;
             };
-      in
-        home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit ((import ./lib {}).me.home) username homeDirectory;
-          configuration = import ./home {
-            overlays = [
-              cpufreqPluginOverlay
-              instantRstOverlay
-              unstableOverlay
-              zshOverlay
-            ];
-          };
+      in home-manager.lib.homeManagerConfiguration {
+        inherit system;
+        inherit ((import ./lib {}).me.home) username homeDirectory;
+        configuration = import ./home {
+          overlays = [
+            cpufreqPluginOverlay
+            instantRstOverlay
+            unstableOverlay
+            zshOverlay
+          ];
         };
+      };
 
     };
 }
