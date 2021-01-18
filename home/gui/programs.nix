@@ -25,6 +25,7 @@
     # communications
     discord
     tdesktop
+    teams
 
     # system utilities
     arandr
