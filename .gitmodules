@@ -1,0 +1,6 @@
+[submodule "submod/ioslabka.nix"]
+	path = submod/ioslabka.nix
+	url = git@github.com:chuahou/ioslabka.nix
+[submodule "submod/latex.sty"]
+	path = submod/latex.sty
+	url = git@github.com:chuahou/latex.sty
