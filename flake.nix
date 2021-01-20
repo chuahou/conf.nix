@@ -26,6 +26,9 @@
 
     # ioslabka
     ioslabka = { url = "github:chuahou/ioslabka.nix"; };
+
+    # latex.sty styles
+    latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
   };
 
   outputs =
@@ -105,6 +108,7 @@
             src  = inputs.zsh-vim-mode;
           };
         };
+        latexOverlay = self: super: { inherit (inputs) latex-sty; };
         unstableOverlay = self: super:
           let
             pkgs = import unstable { inherit (super) system config; };
@@ -119,6 +123,7 @@
           overlays = [
             cpufreqPluginOverlay
             instantRstOverlay
+            latexOverlay
             unstableOverlay
             zshOverlay
           ];

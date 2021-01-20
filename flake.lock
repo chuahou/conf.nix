@@ -103,6 +103,22 @@
         "type": "github"
       }
     },
+    "latex-sty": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1607785231,
+        "narHash": "sha256-3/8UElx5lG9bNQxhCb8TRwdPYP5Hbzqz6Hyz8cyFGLA=",
+        "owner": "chuahou",
+        "repo": "latex.sty",
+        "rev": "216e5a8943e2ba908e9c460f979955d1b1093c8d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chuahou",
+        "repo": "latex.sty",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1610430373,
@@ -155,6 +171,7 @@
         "instantRstPy": "instantRstPy",
         "instantRstVim": "instantRstVim",
         "ioslabka": "ioslabka",
+        "latex-sty": "latex-sty",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "secrets": "secrets",
