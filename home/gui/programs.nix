@@ -40,10 +40,11 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "x-scheme-handler/http"  = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-      "text/html"              = "firefox.desktop";
-      "application/pdf"        = "org.pwmt.zathura.desktop";
+      "x-scheme-handler/http"    = "firefox.desktop";
+      "x-scheme-handler/https"   = "firefox.desktop";
+      "x-scheme-handler/msteams" = "teams.desktop";
+      "text/html"                = "firefox.desktop";
+      "application/pdf"          = "org.pwmt.zathura.desktop";
     };
   };
 }
