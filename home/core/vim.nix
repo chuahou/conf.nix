@@ -74,6 +74,9 @@ in {
 
         " add instantRst to path for InstantRst plugin
         let $PATH .= ':' . '${pkgs.instantRstPy}/bin'
+
+        " use LaTeX flavour by default for vimtex
+        let g:tex_flavor = 'latex'
       '';
 
       packages.myVimPackage = with pkgs.vimPlugins; {
@@ -82,6 +85,7 @@ in {
           pkgs.coc-nvim
           haskell-vim
           vim-nix
+          vimtex
 
           # alignment
           tabular
