@@ -105,14 +105,13 @@
             src  = inputs.zsh-vim-mode;
           };
         };
-        unstableOverlay =
-          self: super:
-            let
-              pkgs = import unstable { inherit (super) system config; };
-            in {
-              inherit (pkgs) alacritty discord syncthing tdesktop;
-              inherit (pkgs.vimPlugins) coc-nvim;
-            };
+        unstableOverlay = self: super:
+          let
+            pkgs = import unstable { inherit (super) system config; };
+          in {
+            inherit (pkgs) alacritty discord syncthing tdesktop;
+            inherit (pkgs.vimPlugins) coc-nvim;
+          };
       in home-manager.lib.homeManagerConfiguration {
         inherit system;
         inherit ((import ./lib {}).me.home) username homeDirectory;
