@@ -40,7 +40,8 @@
         (800 1000 1200 1400 1600 1800 2000 2200)
         "......" "----------------"))
 (setq org-log-done 'time)
-(setq safe-local-variable-values '((eval org-content 2)))
+(setq safe-local-variable-values '((eval org-content 2)
+                                   (eval org-content 3)))
 (setq org-startup-indented t)
 (setq org-loop-over-headlines-in-active-region t)
 
