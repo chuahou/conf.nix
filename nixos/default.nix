@@ -10,6 +10,7 @@ secrets: { pkgs, ... }:
     ./gc.nix
     ./hardware.nix
     ./persist.nix
+    ./podman.nix
   ];
 
   # allow unfree software
@@ -71,7 +72,9 @@ secrets: { pkgs, ... }:
   # printing and scanning
   services.printing = {
     enable  = true;
-    drivers = [ pkgs.hplipWithPlugin ];
+    clientConf = ''
+      ServerName 127.0.0.1:65432
+    '';
   };
   hardware.sane = {
     enable        = true;
