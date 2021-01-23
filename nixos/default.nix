@@ -10,7 +10,7 @@ secrets: { pkgs, ... }:
     ./gc.nix
     ./hardware.nix
     ./persist.nix
-    ./printing
+    (import ../printing).nixosModule
   ];
 
   # allow unfree software

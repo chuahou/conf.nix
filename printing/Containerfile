@@ -4,7 +4,7 @@
 # Ubuntu container that will run all our printer/scanner drivers, since that's
 # sadly a weak point of NixOS for now.
 
-FROM debian:stable-slim
+FROM docker.io/library/debian:stable-slim
 
 # build-args used for configuration
 # We have some arguments (e.g. printer URIs) that might make more sense to keep
