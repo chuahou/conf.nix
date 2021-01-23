@@ -50,10 +50,6 @@
       '';
     };
 
-    hplipOverlay = self: super: {
-      inherit (import small { inherit (super) system config; })
-        hplip hplipWithPlugin;
-    };
 
     nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -69,7 +65,7 @@
         # extra overlays
         ({ ... }: {
           nixpkgs.overlays = [
-            cpufreqPluginOverlay inputs.ioslabka.overlay hplipOverlay
+            cpufreqPluginOverlay inputs.ioslabka.overlay
           ];
         })
 

@@ -10,6 +10,7 @@ secrets: { pkgs, ... }:
     ./gc.nix
     ./hardware.nix
     ./persist.nix
+    (import ../printing).nixosModule
   ];
 
   # allow unfree software
@@ -67,16 +68,6 @@ secrets: { pkgs, ... }:
   hardware.pulseaudio.enable       = true;
   services.xserver.libinput.enable = true; # touchpad support
   hardware.bluetooth.enable        = true;
-
-  # printing and scanning
-  services.printing = {
-    enable  = true;
-    drivers = [ pkgs.hplipWithPlugin ];
-  };
-  hardware.sane = {
-    enable        = true;
-    extraBackends = [ pkgs.hplipWithPlugin ];
-  };
 
   # user accounts
   users = {
