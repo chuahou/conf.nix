@@ -8,8 +8,6 @@
     ./core
     ./gui
     ./misc
-  ] ++ [
-    (import ../printing).hmModule
   ];
 
   # basic settings

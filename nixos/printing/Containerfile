@@ -63,6 +63,7 @@ RUN \
 RUN rm ./* -rf
 
 # Start cupsd and setup printers
+COPY cupsd.conf /etc/cups
 COPY setup.sh .
 RUN chmod +x setup.sh
 ENV BRPRINTER_IP=${BRPRINTER_IP}
