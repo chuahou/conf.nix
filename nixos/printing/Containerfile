@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 #
-# Ubuntu container that will run all our printer/scanner drivers, since that's
-# sadly a weak point of NixOS for now.
+# Container that will run all our printer/scanner drivers, since that's sadly a
+# weak point of NixOS for now.
 
 FROM docker.io/library/debian:stable-slim
 
@@ -21,51 +21,66 @@ ARG HPPLUGIN_SHA256=84a0dc385083ffc9acd66d3ab9a22a9a0943b9f6ed7db8e406682f6bc7f6
 ARG HPPRINTER_IP=192.168.1.1
 
 # Expose ports
-# 6566 is the sane control port
-EXPOSE ${CUPS_PORT} ${SANED_PORT} 6566
+# 631:  cupsd
+# 6566: saned
+EXPOSE 631 6566
 
-# Temporary work will be done in /workdir
-WORKDIR /workdir
-
-# Install apt packages
+# Install packages, then clean up
 RUN \
 	apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	&& apt-get install -y \
 		ca-certificates curl wget whois cups sane-utils lpr hplip \
 
 	# configure timezone
 	&& ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime \
 	&& dpkg-reconfigure --frontend noninteractive tzdata \
 
-	# remove extraneous cached lists
+	# clean cache and package lists
+	&& apt-get clean \
 	&& rm /var/lib/apt/lists -rf
 
-# Add 'print' user for authentication with password 'print'
+# Add 'print' user for authentication in CUPS with password 'print'
 RUN useradd --groups=sudo,lp,lpadmin --password=$(mkpasswd print) print
 
-# Install MFC-J625DW drivers
+# Temporary work will be done here
+WORKDIR /work
+
+# Install Brother MFC-J625DW drivers
+COPY brprinter-installer.response .
 RUN \
 	curl https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-${BRPRINTER_INST_VERSION}.gz \
 		| gunzip --uncompress > brprinter-installer \
 	&& echo "${BRPRINTER_INST_SHA256} brprinter-installer" | sha256sum --check \
-	&& chmod +x brprinter-installer
-COPY brprinter-installer.response .
-RUN cat brprinter-installer.response | ./brprinter-installer
+	&& chmod +x brprinter-installer \
+	&& cat brprinter-installer.response | ./brprinter-installer
 
-# Install HPLIP drivers
+# Install HPLIP plugin
 RUN \
 	wget https://developers.hp.com/sites/default/files/hplip-${HPPLUGIN_VERSION}-plugin.run \
 	&& echo "${HPPLUGIN_SHA256} hplip-${HPPLUGIN_VERSION}-plugin.run" | \
 		sha256sum --check \
 	&& yes | hp-plugin -p hplip-${HPPLUGIN_VERSION}-plugin.run -i ${HPPRINTER_IP}
 
-# Remove temporary work in workdir
-RUN rm ./* -rf
+# Remove no-longer needed packages and extraneous working directory clutter
+RUN \
+	apt-get purge --auto-remove -y ca-certificates curl whois \
+	&& rm ./* -rf
 
-# Start cupsd and setup printers
-COPY cupsd.conf /etc/cups
+# Setup script to add printers, and its systemd unit with the correct
+# environment variables.
 COPY setup.sh .
-RUN chmod +x setup.sh
-ENV BRPRINTER_IP=${BRPRINTER_IP}
-ENV HPPRINTER_IP=${HPPRINTER_IP}
-CMD [ "./setup.sh" ]
+COPY setup.service /etc/systemd/system/setup.service
+RUN \
+	chmod +x setup.sh \
+	&& sed -i \
+		-e "s/@BRPRINTER_IP@/${BRPRINTER_IP}/" \
+		-e "s/@HPPRINTER_IP@/${HPPRINTER_IP}/" \
+		/etc/systemd/system/setup.service
+
+# Copy configuration files
+COPY cupsd.conf /etc/cups
+COPY saned.conf /etc/sane.d
+
+# Enable systemd services and start with systemd's init
+RUN systemctl enable cups.socket saned.socket setup.service
+CMD [ "/sbin/init" ]

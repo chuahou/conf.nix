@@ -2,11 +2,9 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 #
-# Sets up printers then starts cupsd.
+# Sets up printers.
 
 set -euo pipefail
-
-/etc/init.d/cups start
 
 BRPRINTER_DEST=MFC-J625DW
 lpadmin -p ${BRPRINTER_DEST} \
@@ -25,7 +23,3 @@ cupsaccept ${HPPRINTER_DEST}
 # set default printer options
 lpadmin -p ${BRPRINTER_DEST} -o PageSize=A4
 lpadmin -p ${BRPRINTER_DEST} -o BRDuplex=DuplexNoTumble
-
-while :; do
-	sleep infinity
-done

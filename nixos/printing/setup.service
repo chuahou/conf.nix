@@ -1,0 +1,12 @@
+[Unit]
+Description=Printer adding script
+Requires=cups.socket
+
+[Service]
+Environment=BRPRINTER_IP=@BRPRINTER_IP@
+Environment=HPPRINTER_IP=@HPPRINTER_IP@
+Type=oneshot
+ExecStart=/work/setup.sh
+
+[Install]
+WantedBy=default.target
