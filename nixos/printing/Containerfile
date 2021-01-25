@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 #
-# Container that will run all our printer/scanner drivers, since that's sadly a
-# weak point of NixOS for now.
+# Container that will run all our printer drivers, since that's sadly a weak
+# point of NixOS for now.
 
 FROM docker.io/library/debian:stable-slim
 
@@ -29,7 +29,7 @@ EXPOSE 631 6566
 RUN \
 	apt-get update \
 	&& apt-get install -y \
-		ca-certificates curl wget whois cups sane-utils lpr hplip \
+		ca-certificates curl wget whois cups lpr hplip \
 
 	# configure timezone
 	&& ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime \
@@ -61,10 +61,8 @@ RUN \
 		sha256sum --check \
 	&& yes | hp-plugin -p hplip-${HPPLUGIN_VERSION}-plugin.run -i ${HPPRINTER_IP}
 
-# Remove no-longer needed packages and extraneous working directory clutter
-RUN \
-	apt-get purge --auto-remove -y ca-certificates curl whois \
-	&& rm ./* -rf
+# Remove extraneous working directory clutter
+RUN rm ./* -rf
 
 # Setup script to add printers, and its systemd unit with the correct
 # environment variables.
@@ -79,8 +77,7 @@ RUN \
 
 # Copy configuration files
 COPY cupsd.conf /etc/cups
-COPY saned.conf /etc/sane.d
 
 # Enable systemd services and start with systemd's init
-RUN systemctl enable cups.socket saned.socket setup.service
+RUN systemctl enable cups.socket setup.service
 CMD [ "/sbin/init" ]

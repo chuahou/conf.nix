@@ -14,9 +14,11 @@ in {
     clientConf = ''
       ServerName 127.0.0.1:${toString cupsPort}
     '';
+    drivers = [ pkgs.hplipWithPlugin ];
   };
   hardware.sane = {
     enable = true;
+    extraBackends = [ pkgs.hplipWithPlugin ];
   };
 
   # container configuration
@@ -31,14 +33,34 @@ in {
     };
   };
 
-  # script to rebuild image
-  environment.systemPackages = [ (pkgs.writeShellScriptBin "rebuild-printers" ''
-    if [ "$EUID" -ne 0 ]; then echo "Run as root"; exit 1; fi
-    ${pkgs.podman}/bin/podman build -t printing \
-        --build-arg BRPRINTER_IP=${brPrinterIp} \
-        --build-arg HPPRINTER_IP=${hpPrinterIp} \
-        ${(import ../../lib {}).me.home.confDirectory + "/nixos/printing"}
-  '') ];
+  environment.systemPackages = [
+    # script to rebuild image
+    (pkgs.writeShellScriptBin "rebuild-printers" ''
+      if [ "$EUID" -ne 0 ]; then echo "Run as root"; exit 1; fi
+      ${pkgs.podman}/bin/podman build -t printing \
+          --build-arg BRPRINTER_IP=${brPrinterIp} \
+          --build-arg HPPRINTER_IP=${hpPrinterIp} \
+          ${(import ../../lib {}).me.home.confDirectory + "/nixos/printing"}
+    '')
+
+    # scripts to switch CUPS server and setup hp-setup if necessary
+    # 'scanmode' to switch to localhost:631 for scanning
+    # 'printmode' to switch to localhost:${cupsPort} for printing
+    (pkgs.writeShellScriptBin "scanmode" ''
+      [ -f /var/lib/cups/client.conf ] \
+          && sudo mv /var/lib/cups/client.conf{,.tmp} \
+          || true
+      lpstat -v | grep ${hpPrinterIp} \
+          || cat | sudo hp-setup -i ${hpPrinterIp} << EOF
+      ${builtins.readFile ./hp-setup.response}
+      EOF
+    '')
+    (pkgs.writeShellScriptBin "printmode" ''
+      [ -f /var/lib/cups/client.conf.tmp ] \
+          && sudo mv /var/lib/cups/client.conf{.tmp,} \
+          || true
+    '')
+  ];
 
   # override timeout
   systemd.services.podman-printing.serviceConfig = {
