@@ -1,1 +1,4 @@
 home/res/p10k.zsh linguist-generated
+home/res/nvim/ftplugin/rst_header.vim linguist-vendored
+Containerfile linguist-language=Dockerfile
+*.containerfile linguist-language=Dockerfile
