@@ -21,7 +21,7 @@
           Type      = "oneshot";
           ExecStart = "${pkgs.writeShellScript "org-gcal-systemd" ''
             ${(import ../../lib { inherit lib; }).mkPath (with pkgs; [
-              bash curl gawk
+              bash coreutils curl git gnused nix
             ])}
             ${config.home.homeDirectory}/org/gcal/gcal.sh
           ''}";
