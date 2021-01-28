@@ -22,5 +22,11 @@
   boot.kernelModules        = [ "kvm-intel" ];
   boot.extraModulePackages  = [ ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement = {
+    cpuFreqGovernor = "powersave";
+    cpufreq.max     = 2000000;
+  };
+
+  hardware.cpu.intel.updateMicrocode = true;
+  hardware.enableAllFirmware         = true;
 }
