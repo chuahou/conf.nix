@@ -26,6 +26,9 @@
             # prevent Alt from showing window menu
             "ui.key.menuAccessKeyFocuses" = false;
 
+            # enable userChrome.css
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
             # disable telemetry, reporting, experiments etc.
             # source:
             # https://www.reddit.com/r/firefox/comments/8izzu1/how_to_turn_off_telemetry_using_userjs/dywdews/
@@ -46,6 +49,11 @@
             "toolkit.telemetry.unified"                    = false;
             "toolkit.telemetry.updatePing.enabled"         = false;
           };
+
+          # prevent mouseover reveal toolbar when full-screen
+          userChrome = ''
+            #fullscr-toggler { display:none!important; }
+          '';
         };
       };
   };
