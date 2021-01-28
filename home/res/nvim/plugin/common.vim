@@ -4,11 +4,10 @@
 set undofile
 
 " add indentation settings
-set smartindent   " smart indentation
-set noexpandtab   " use hard tabs
-set tabstop=4     " hard tab width of 4
-set softtabstop=4 " soft tab width of 4
-set shiftwidth=0
+set smartindent  " smart indentation
+set noexpandtab  " use hard tabs
+set tabstop=4    " hard tab width of 4
+set shiftwidth=0 " sync shiftwidth with tabstop
 
 " auto wrap after 80 columns
 set textwidth=80
