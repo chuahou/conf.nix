@@ -22,7 +22,6 @@
       "/home"    = btrfsFs "home";
       "/nix"     = btrfsFs "nix";
       "/persist" = btrfsFs "persist";
-      "/var/log" = btrfsFs "log";
       "/boot" = {
         device = "/dev/disk/by-uuid/F787-F54F";
         fsType = "vfat";
