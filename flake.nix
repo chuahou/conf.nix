@@ -28,6 +28,9 @@
 
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
+
+    # ical2orgpy package for org-mode use
+    ical2orgpy = { url = "github:asoroa/ical2org.py"; flake = false; };
   };
 
   outputs =
@@ -110,12 +113,40 @@
             inherit (pkgs) alacritty discord syncthing tdesktop;
             inherit (pkgs.vimPlugins) coc-nvim;
           };
+        ical2orgOverlay = self: super: {
+          ical2orgpy = super.python3Packages.buildPythonPackage rec {
+            pname       = "ical2orgpy";
+            version     = "0.3+git";
+            PBR_VERSION = version;
+            src         = inputs.ical2orgpy;
+            propagatedBuildInputs = with super.python3Packages; [
+              click future icalendar pbr tzlocal
+            ];
+          };
+          ical2orgpy-wrapper = super.writeShellScriptBin "ical2orgpy-wrapper" ''
+            set -eu
+            icsUrl=$1
+            orgPath=$2
+            icsPath=$(mktemp)
+            # get calendar
+            ${self.curl}/bin/curl $icsUrl > $icsPath
+            # convert to org
+            ${self.ical2orgpy}/bin/ical2orgpy $icsPath $orgPath
+            # remove unneeded calendar file
+            ${self.coreutils}/bin/rm $icsPath -f
+            # make into calendar event
+            ${self.gnused}/bin/sed -i -e 's/^  <\([0-9\-]\{10\} [A-Za-z]\{3\} \)\([0-9][0-9]:[0-9][0-9]\)>--<\1\([0-9][0-9]:[0-9][0-9]\)>/<\1\2-\3>/' $orgPath
+            # remove recurring tag
+            ${self.gnused}/bin/sed -i -e 's/:RECURRING://' $orgPath
+          '';
+        };
       in home-manager.lib.homeManagerConfiguration {
         inherit system;
         inherit ((import ./lib {}).me.home) username homeDirectory;
         configuration = import ./home {
           overlays = [
             cpufreqPluginOverlay
+            ical2orgOverlay
             instantRstOverlay
             latexOverlay
             unstableOverlay

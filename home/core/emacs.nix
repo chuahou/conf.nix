@@ -13,6 +13,7 @@
   home.file.".emacs".source = ../res/emacs.el;
 
   # systemd timer unit to run gcal script every 5 minutes
+  home.packages = [ pkgs.ical2orgpy-wrapper ];
   systemd.user =
     let name = "org-gcal";
     in {
@@ -20,10 +21,10 @@
         Service = {
           Type      = "oneshot";
           ExecStart = "${pkgs.writeShellScript "org-gcal-systemd" ''
-            ${(import ../../lib { inherit lib; }).mkPath (with pkgs; [
-              bash coreutils curl git gnused nix
+            ${(import ../../lib { inherit lib; }).addToPath (with pkgs; [
+              coreutils ical2orgpy-wrapper
             ])}
-            ${config.home.homeDirectory}/org/gcal/gcal.sh
+            ${pkgs.runtimeShell} ${config.home.homeDirectory}/org/gcal/gcal.sh
           ''}";
         };
       };
