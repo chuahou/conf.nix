@@ -122,11 +122,11 @@
     "latex-sty": {
       "flake": false,
       "locked": {
-        "lastModified": 1611992861,
-        "narHash": "sha256-G95Ap0mr9pVun/6Av5iV5MU1MdW9FxxvQ09GYXEHQs8=",
+        "lastModified": 1612173949,
+        "narHash": "sha256-ECnXSODaOA3YYdMNWS1lyZvbzspwFHvP4pf3//s+4Dw=",
         "owner": "chuahou",
         "repo": "latex.sty",
-        "rev": "3bb1885d2f025dcadea777a1e99d2134069191b8",
+        "rev": "c1f174498072bcbac675a338df3d79957741f22d",
         "type": "github"
       },
       "original": {
