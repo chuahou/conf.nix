@@ -28,9 +28,6 @@
 
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
-
-    # ical2orgpy package for org-mode use
-    ical2orgpy = { url = "github:asoroa/ical2org.py"; flake = false; };
   };
 
   outputs =
@@ -107,14 +104,6 @@
               src  = inputs.zsh-vim-mode;
             };
           };
-          ical2orgOverlay = self: super: {
-            ical2orgpy = super.python3Packages.buildPythonPackage rec {
-              pname       = "ical2orgpy";
-              version     = "0.3+git";
-              PBR_VERSION = version;
-              src         = inputs.ical2orgpy;
-              propagatedBuildInputs = with super.python3Packages; [
-                click future icalendar pbr tzlocal
           latexOverlay = self: super: { inherit (inputs) latex-sty; };
           unstableOverlay = self: super:
             let
@@ -129,7 +118,6 @@
           configuration = import ./home {
             overlays = [
               cpufreqPluginOverlay
-              ical2orgOverlay
               instantRstOverlay
               latexOverlay
               unstableOverlay

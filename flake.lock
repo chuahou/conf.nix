@@ -52,22 +52,6 @@
         "type": "github"
       }
     },
-    "ical2orgpy": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1572969112,
-        "narHash": "sha256-UHsJgtUjgbR+QSLBJY5WBX1tO2LIIJpTiWRZf6kU1ZM=",
-        "owner": "asoroa",
-        "repo": "ical2org.py",
-        "rev": "d7b58b0efe831a2afb39cc2be9cbec0ecc872362",
-        "type": "github"
-      },
-      "original": {
-        "owner": "asoroa",
-        "repo": "ical2org.py",
-        "type": "github"
-      }
-    },
     "instantRstPy": {
       "flake": false,
       "locked": {
@@ -184,7 +168,6 @@
       "inputs": {
         "cpufreq-plugin": "cpufreq-plugin",
         "home-manager": "home-manager",
-        "ical2orgpy": "ical2orgpy",
         "instantRstPy": "instantRstPy",
         "instantRstVim": "instantRstVim",
         "ioslabka": "ioslabka",
