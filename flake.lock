@@ -199,7 +199,7 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-bmqiDLxqm6krAFZn2DldqVlKwGauQHx4NJ18AGt+n0A=",
+        "narHash": "sha256-r+G8h6I1PQZxht8X3pNmgcisbhBZsdOgMZG/l1WkvdM=",
         "path": "/persist/secrets.nix",
         "type": "path"
       },
