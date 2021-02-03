@@ -106,5 +106,4 @@
 (setq org-gcal-remove-api-cancelled-events t)
 (setq org-gcal-up-days 1)
 (setq org-gcal-down-days 7)
-(org-gcal-fetch)
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-fetch)))
