@@ -78,6 +78,7 @@
 (set-face-foreground 'org-agenda-done           "white")
 (set-face-foreground 'org-agenda-structure      "magenta")
 (set-face-foreground 'org-date                  "white")
+(set-face-foreground 'org-drawer                "white")
 (set-face-foreground 'org-headline-done         "white")
 (set-face-foreground 'org-hide                  "brightblack")
 (set-face-foreground 'org-level-1               "brightblue")
