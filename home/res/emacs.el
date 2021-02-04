@@ -31,6 +31,8 @@
         ("TODO" . (:foreground "red"       :weight bold))
         ("NEXT" . (:foreground "brightred" :weight bold :underline t))
         ("DONE" . (:foreground "green"     :weight bold))))
+(setq org-todo-repeat-to-state "TODO")
+(setq org-log-repeat nil)
 (setq org-fontify-done-headline t)
 (setq org-link-frame-setup '((file . find-file)))
 (setq org-agenda-span 14)
