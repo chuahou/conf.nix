@@ -54,6 +54,7 @@ in {
       lpstat -v | grep ${hpPrinterIp} \
           || cat | sudo hp-setup -i ${hpPrinterIp} << EOF
       ${builtins.readFile ./hp-setup.response}
+
       EOF
     '')
     (pkgs.writeShellScriptBin "printmode" ''
