@@ -54,7 +54,7 @@ for dir in $(find "$git_dir" -mindepth 1 -maxdepth 1 -type d); do
 	fi
 
 	# check at least 1 remote
-	if [ -z $(git -C "$dir" remote) ]; then
+	if [ -z "$(git -C "$dir" remote)" ]; then
 		fancy_print "$dir"
 		echo "WARNING: $dir has no git remote"
 	fi
