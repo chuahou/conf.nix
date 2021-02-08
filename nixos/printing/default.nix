@@ -47,6 +47,7 @@ in {
     # 'scanmode' to switch to localhost:631 for scanning
     # 'printmode' to switch to localhost:${cupsPort} for printing
     (pkgs.writeShellScriptBin "scanmode" ''
+      pingcups
       [ -f /var/lib/cups/client.conf ] \
           && sudo mv /var/lib/cups/client.conf{,.tmp} \
           || true
@@ -56,9 +57,18 @@ in {
       EOF
     '')
     (pkgs.writeShellScriptBin "printmode" ''
+      pingcups
       [ -f /var/lib/cups/client.conf.tmp ] \
           && sudo mv /var/lib/cups/client.conf{.tmp,} \
           || true
+    '')
+
+    # initialize cups by pinging server
+    # Due to our / erasure, /var/lib/cups/* et al are not initialized before the
+    # first request to the server
+    (pkgs.writeShellScriptBin "pingcups" ''
+      curl localhost:631 > /dev/null
+      curl localhost:${toString cupsPort} > /dev/null
     '')
   ];
 
