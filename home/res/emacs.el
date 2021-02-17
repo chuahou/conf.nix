@@ -22,7 +22,10 @@
                 (lambda () (interactive)(find-file "~/org/universe.org")))
 (global-set-key (kbd "C-c 4")
                 (lambda () (interactive)(find-file "~/org/zz_archive.org")))
-(setq org-agenda-files '("~/org/" "~/org/gcal/"))
+(setq org-agenda-files '("~/org/main.org"
+                         "~/org/acad.org"
+                         "~/org/universe.org"
+                         "~/org/gcal/"))
 (setq org-todo-keywords
       '((sequence "HOLD" "KIV?" "TODO" "NEXT" "|" "DONE")))
 (setq org-todo-keyword-faces
@@ -35,7 +38,7 @@
 (setq org-log-repeat nil)
 (setq org-fontify-done-headline t)
 (setq org-link-frame-setup '((file . find-file)))
-(setq org-agenda-span 14)
+(setq org-agenda-span 7)
 (setq org-agenda-start-on-weekday nil)
 (setq org-agenda-time-grid
       '((weekly today remove-match)
