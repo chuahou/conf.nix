@@ -11,6 +11,7 @@
     ./hardware.nix
     ./persist.nix
     ./printing
+    ./virt.nix
   ];
 
   # allow unfree software
