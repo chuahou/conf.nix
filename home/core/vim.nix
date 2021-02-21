@@ -77,6 +77,14 @@ in {
 
         " use LaTeX flavour by default for vimtex
         let g:tex_flavor = 'latex'
+
+        " load vim-pandoc-syntax
+        augroup pandoc_syntax
+          au! BufNewFile,BufFilePre,BufRead *.md set ft=markdown.pandoc
+        augroup END
+
+        " don't conceal
+        let g:pandoc#syntax#conceal#use = 0
       '';
 
       packages.myVimPackage = with pkgs.vimPlugins; {
@@ -86,6 +94,7 @@ in {
           haskell-vim
           vim-nix
           vimtex
+          vim-pandoc-syntax
 
           # alignment
           tabular
