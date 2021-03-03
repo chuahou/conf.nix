@@ -13,13 +13,16 @@ in {
 
     configure = {
       customRC = ''
+        " faster updates for coc/vim-gitgutter etc
+        set updatetime=100
+
         " we use the full configuration copied
         set runtimepath^=${configDir} runtimepath+=${configDir}/after
         source ${configDir}/init.vim
 
-        " additional plugin customization
-
-        " vim-airline
+        "-------------"
+        " vim-airline "
+        "-------------"
         let g:airline_theme = 'angr'
         let g:airline#extensions#whitespace#mixed_indent_algo = 1
         let g:airline#extensions#checks = [
@@ -34,10 +37,10 @@ in {
         endif
         let g:airline_symbols.maxlinenr = ' ln'
 
-        " faster updates for coc/vim-gitgutter etc
-        set updatetime=100
+        "----------"
+        " coc.nvim "
+        "----------"
 
-        " coc configuration
         " original example at
         " https://github.com/neoclide/coc.nvim#example-vim-configuration
 
@@ -75,11 +78,19 @@ in {
         " add instantRst to path for InstantRst plugin
         let $PATH .= ':' . '${pkgs.instantRstPy}/bin'
 
-        " use LaTeX flavour by default for vimtex
+        "--------"
+        " vimtex "
+        "--------"
+
+        " use LaTeX flavour by default
         let g:tex_flavor = 'latex'
 
         " disable alignment of ampersands
         let g:vimtex_indent_on_ampersands = 0
+
+        "-------------------"
+        " vim-pandoc-syntax "
+        "-------------------"
 
         " load vim-pandoc-syntax
         augroup pandoc_syntax
