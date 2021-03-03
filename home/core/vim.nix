@@ -78,6 +78,9 @@ in {
         " use LaTeX flavour by default for vimtex
         let g:tex_flavor = 'latex'
 
+        " disable alignment of ampersands
+        let g:vimtex_indent_on_ampersands = 0
+
         " load vim-pandoc-syntax
         augroup pandoc_syntax
           au! BufNewFile,BufFilePre,BufRead *.md set ft=markdown.pandoc
