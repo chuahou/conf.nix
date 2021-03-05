@@ -109,6 +109,7 @@ in {
           vim-nix
           vimtex
           vim-pandoc-syntax
+          purescript-vim
 
           # alignment
           tabular
