@@ -10,6 +10,7 @@
     ./gc.nix
     ./hardware.nix
     ./persist.nix
+    ./piper.nix
     ./printing
     ./virt.nix
   ];
