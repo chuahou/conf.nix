@@ -12,7 +12,6 @@
     ./persist.nix
     ./piper.nix
     ./printing
-    ./virt.nix
   ];
 
   # allow unfree software
