@@ -28,6 +28,9 @@
 
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
+
+    # Ionide-vim plugin for F#
+    ionideVim = { url = "github:ionide/Ionide-vim"; flake = false; };
   };
 
   outputs =
@@ -105,6 +108,22 @@
             };
           };
           latexOverlay = self: super: { inherit (inputs) latex-sty; };
+          ionideVimOverlay = self: super: {
+            ionideVim = super.vimUtils.buildVimPlugin {
+              name = "Ionide-vim";
+              src  = inputs.ionideVim;
+
+              # We only want the syntax file
+              dontBuild = true;
+              postInstall = ''
+                # Delete all .vim files except syntax and ftdetect file
+                find $target \
+                  \( -path $target/syntax -o -path $target/ftdetect \) \
+                  -prune -false -o \
+                  -name '*.vim' -exec rm {} \;
+              '';
+            };
+          };
           unstableOverlay = self: super:
             let
               pkgs = import unstable { inherit (super) system config; };
@@ -119,6 +138,7 @@
             overlays = [
               cpufreqPluginOverlay
               instantRstOverlay
+              ionideVimOverlay
               latexOverlay
               unstableOverlay
               secretsOverlay
