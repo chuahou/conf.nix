@@ -31,6 +31,15 @@
 					"addSpagoSources": true
 				}
 			}
+		},
+		"fsharp": {
+			"command": "dotnet",
+			"args": ["/home/sgepk/dev/FsAutoComplete/src/FsAutoComplete/bin/Release/net5.0/fsautocomplete.dll", "--background-service-enabled"],
+			"filetypes": ["fsharp"],
+			"rootPatterns": ["*.fsproj"],
+			"initializationOptions": {
+				"AutomaticWorkspaceInit": true
+			}
 		}
 	},
 	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"]
