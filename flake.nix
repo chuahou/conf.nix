@@ -35,24 +35,33 @@
 
   outputs =
     inputs@{
-      self, nixpkgs, unstable, nixos-hardware, home-manager, ...
+      self, nixpkgs, nixos-hardware, home-manager, ...
     }:
     let
       system = "x86_64-linux";
       pkgs   = nixpkgs.legacyPackages.${system};
 
-      secretsOverlay = self: super: { secrets = import inputs.secrets; };
+      overlays = with inputs; {
+        cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
+        instantRst     = import pkgs/instantRst/overlay.nix instantRstVim instantRstPy;
+        ionideVim      = import pkgs/ionide/overlay.nix ionideVim;
+        ioslabka       = ioslabka.overlay;
+        latex-sty      = self: super: { inherit (inputs) latex-sty; };
+        secrets        = self: super: { secrets = import secrets; };
+        zsh-vim-mode   = self: super: {
+          zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
+        };
 
-    in rec {
-      cpufreqPluginOverlay = self: super: {
-        cpufreq-plugin = super.haskell.lib.doJailbreak
-          (super.haskellPackages.callCabal2nix "cpufreq-plugin"
-            (inputs.cpufreq-plugin) {});
-        cpufreq-plugin-wrapped = super.writeShellScriptBin "cpufreq-plugin" ''
-          export PATH=${super.cpufrequtils}/bin:${super.gnused}/bin
-          ${self.cpufreq-plugin}/bin/cpufreq-plugin "$@"
-        '';
+        unstable = self: super:
+          let
+            pkgs = import unstable { inherit (super) system config; };
+          in {
+            inherit (pkgs) alacritty discord syncthing tdesktop;
+            inherit (pkgs.vimPlugins) coc-nvim;
+          };
       };
+
+    in {
 
       nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -67,8 +76,8 @@
 
           # extra overlays
           ({ ... }: {
-            nixpkgs.overlays = [
-              cpufreqPluginOverlay inputs.ioslabka.overlay secretsOverlay
+            nixpkgs.overlays = with overlays; [
+              cpufreq-plugin ioslabka secrets
             ];
           })
 
@@ -82,67 +91,18 @@
       };
 
       hmConfigs.${(import ./lib {}).me.home.username} =
-        let
-          instantRstOverlay = self: super: {
-            instantRstVim = super.vimUtils.buildVimPlugin {
-              name = "InstantRst";
-              src  = inputs.instantRstVim;
-            };
-            instantRstPy = super.python3Packages.buildPythonPackage {
-              pname   = "instantRst";
-              version = "0.9.9.1";
-              doCheck = false;
-              src     = inputs.instantRstPy;
-              propagatedBuildInputs = with super.python3Packages; [
-                docutils
-                flask
-                flask-socketio
-                pygments
-              ];
-            };
-          };
-          zshOverlay = self: super: {
-            zsh-vim-mode = {
-              name = "zsh-vim-mode";
-              src  = inputs.zsh-vim-mode;
-            };
-          };
-          latexOverlay = self: super: { inherit (inputs) latex-sty; };
-          ionideVimOverlay = self: super: {
-            ionideVim = super.vimUtils.buildVimPlugin {
-              name = "Ionide-vim";
-              src  = inputs.ionideVim;
-
-              # We only want the syntax file
-              dontBuild = true;
-              postInstall = ''
-                # Delete all .vim files except syntax and ftdetect file
-                find $target \
-                  \( -path $target/syntax -o -path $target/ftdetect \) \
-                  -prune -false -o \
-                  -name '*.vim' -exec rm {} \;
-              '';
-            };
-          };
-          unstableOverlay = self: super:
-            let
-              pkgs = import unstable { inherit (super) system config; };
-            in {
-              inherit (pkgs) alacritty discord syncthing tdesktop;
-              inherit (pkgs.vimPlugins) coc-nvim;
-            };
-        in home-manager.lib.homeManagerConfiguration {
+        home-manager.lib.homeManagerConfiguration {
           inherit system;
           inherit ((import ./lib {}).me.home) username homeDirectory;
           configuration = import ./home {
-            overlays = [
-              cpufreqPluginOverlay
-              instantRstOverlay
-              ionideVimOverlay
-              latexOverlay
-              unstableOverlay
-              secretsOverlay
-              zshOverlay
+            overlays = with overlays; [
+              cpufreq-plugin
+              instantRst
+              ionideVim
+              latex-sty
+              unstable
+              secrets
+              zsh-vim-mode
             ];
           };
         };
