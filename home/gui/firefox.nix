@@ -14,6 +14,10 @@
         ${me.home.username} = {
           inherit (me) name;
           settings = {
+            # use WebRender
+            "gfx.webrender.all"        = true;
+            "gfx.webrender.compositor" = true;
+
             # always ask for downloads
             "browser.download.useDownloadDir" = false;
 
