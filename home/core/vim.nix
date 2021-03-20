@@ -124,6 +124,9 @@ in {
 
           # InstantRst
           pkgs.instantRstVim
+
+          # NERDtree
+          nerdtree
         ];
       };
     };
