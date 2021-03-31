@@ -87,11 +87,11 @@
     "ionideVim": {
       "flake": false,
       "locked": {
-        "lastModified": 1604923336,
-        "narHash": "sha256-t/iypJA43tj08lrx61JnyyxU5UkbO+0shimxBJ15G7A=",
+        "lastModified": 1617130071,
+        "narHash": "sha256-6Pn417urwsUXvCM4l9bW+noY3vM9rhxdXY/KnAye0Fw=",
         "owner": "ionide",
         "repo": "Ionide-vim",
-        "rev": "ffc77f710b18cee4e8d9280668da502eef679142",
+        "rev": "2fda4adf588aec8dad6bb1e7ac2c38d4e30e1dc0",
         "type": "github"
       },
       "original": {
@@ -137,11 +137,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1615652054,
-        "narHash": "sha256-jqXKU8Ovpi7MmPRqGf2FB3QOPcZtGwO2MFc0AYiOPjg=",
+        "lastModified": 1616493443,
+        "narHash": "sha256-xMDBWCa7oXFU1pBr25Fza/uv+IciMHogJMQ6g+gHQG4=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "31f61b90ddb9257b94888ee17ccf96236e180c76",
+        "rev": "758bc63af2bde87563f9c27710f3dcc16ff9096f",
         "type": "github"
       },
       "original": {
@@ -167,11 +167,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1615879109,
-        "narHash": "sha256-2FX/qmp6IX255zhJaYL6ClGIaCyJVh4sNDYcnT7TvJU=",
+        "lastModified": 1617042094,
+        "narHash": "sha256-c8w5/Dz+r8gHIGZs1BHJPSzpP3Sga/BYebRkqBoDANY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "36e15cd6e7d55ba143caf3dc930467ace573d85c",
+        "rev": "310885ec804f9fa0db5c705c7f5d35d415f50564",
         "type": "github"
       },
       "original": {
@@ -210,11 +210,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1615949961,
-        "narHash": "sha256-4H/yj5nXo/BztcYUyAaz5NkNmF1Gb02nxeQ6C2w95ig=",
+        "lastModified": 1616670887,
+        "narHash": "sha256-wn+l9qJfR5sj5Gq4DheJHAcBDfOs9K2p9seW2f35xzs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8e1891d5b8d0b898db8890ddab73141f0cd3c2bc",
+        "rev": "c0e881852006b132236cbf0301bd1939bb50867e",
         "type": "github"
       },
       "original": {
@@ -226,11 +226,11 @@
     "zsh-vim-mode": {
       "flake": false,
       "locked": {
-        "lastModified": 1609487318,
-        "narHash": "sha256-zxFSqean33tFKV916HU7ml4ZeuSuNm+16CkpovJotVA=",
+        "lastModified": 1616290526,
+        "narHash": "sha256-a+6EWMRY1c1HQpNtJf5InCzU7/RphZjimLdXIXbO6cQ=",
         "owner": "softmoth",
         "repo": "zsh-vim-mode",
-        "rev": "e5bf1aa6aab354007c0e041ff3f0fd091634e77b",
+        "rev": "1f9953b7d6f2f0a8d2cb8e8977baa48278a31eab",
         "type": "github"
       },
       "original": {
