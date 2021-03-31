@@ -5,7 +5,7 @@
 # Updates everything.
 
 # update commits
-nix flake update --recreate-lock-file
+nix flake update
 sudo nix-channel --update
 
 # upgrade NixOS, home and nix-env packages
