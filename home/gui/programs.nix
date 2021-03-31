@@ -19,7 +19,6 @@
     gimp
     minecraft
     obs-studio
-    spotify
     vlc
 
     # communications
