@@ -17,6 +17,13 @@
     instantRstPy  = { url = "github:gu-fan/instant-rst.py"; flake = false; };
     instantRstVim = { url = "github:gu-fan/InstantRst";     flake = false; };
 
+    # instant markdown plugin
+    vim-instant-markdown = {
+      url = "github:instant-markdown/vim-instant-markdown";
+      flake = false;
+    };
+    smdv = { url = "github:flaport/smdv"; flake = false; };
+
     # zsh-vim-mode plugin
     zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
 
@@ -44,6 +51,7 @@
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
         instantRst     = import pkgs/instantRst/overlay.nix instantRstVim instantRstPy;
+        vim-instant-md = import pkgs/vim-instant-markdown/overlay.nix vim-instant-markdown smdv;
         ionideVim      = import pkgs/ionide/overlay.nix ionideVim;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
@@ -62,6 +70,9 @@
       };
 
     in {
+
+      testing = (import nixpkgs { overlays = [ overlays.vim-instant-md ];
+      inherit system; }).smdv;
 
       nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -101,6 +112,7 @@
               ionideVim
               latex-sty
               unstable
+              vim-instant-md
               secrets
               zsh-vim-mode
             ];

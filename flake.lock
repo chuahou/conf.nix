@@ -192,7 +192,9 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "secrets": "secrets",
+        "smdv": "smdv",
         "unstable": "unstable",
+        "vim-instant-markdown": "vim-instant-markdown",
         "zsh-vim-mode": "zsh-vim-mode"
       }
     },
@@ -208,6 +210,22 @@
         "type": "path"
       }
     },
+    "smdv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1598103981,
+        "narHash": "sha256-9FV0iFkRj9gWTzzaa7vYtb+UYQJuQnxysIyPd7JtajY=",
+        "owner": "flaport",
+        "repo": "smdv",
+        "rev": "ea953f1b72a8a0b59d3abad5c95cb807e30dc1d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "flaport",
+        "repo": "smdv",
+        "type": "github"
+      }
+    },
     "unstable": {
       "locked": {
         "lastModified": 1616670887,
@@ -221,6 +239,22 @@
         "id": "nixpkgs",
         "ref": "nixpkgs-unstable",
         "type": "indirect"
+      }
+    },
+    "vim-instant-markdown": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1611571334,
+        "narHash": "sha256-5yd6gqXW9NLli4C88z0gpOXQeUogaI9Fit1EP58ca2o=",
+        "owner": "instant-markdown",
+        "repo": "vim-instant-markdown",
+        "rev": "eb52cb6d651023c6507033d2f87715addbd55aab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "instant-markdown",
+        "repo": "vim-instant-markdown",
+        "type": "github"
       }
     },
     "zsh-vim-mode": {

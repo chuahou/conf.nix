@@ -78,6 +78,11 @@ in {
         " add instantRst to path for InstantRst plugin
         let $PATH .= ':' . '${pkgs.instantRstPy}/bin'
 
+        " use smdv in vim-instant-markdown
+        let $PATH .= ':' . '${pkgs.smdv}/bin'
+        let g:instant_markdown_python = 1
+        let g:instant_markdown_autostart = 0 " manual startup
+
         "--------"
         " vimtex "
         "--------"
@@ -125,6 +130,9 @@ in {
           # InstantRst
           pkgs.instantRstVim
 
+          # vim-instant-markdown
+          pkgs.vim-instant-markdown
+
           # NERDtree
           nerdtree
         ];
@@ -139,6 +147,6 @@ in {
     withNodeJs = true;
 
     # for InstantRst
-    extraPython3Packages = _: [ pkgs.instantRstPy ];
+    extraPython3Packages = _: with pkgs; [ instantRstPy smdv ];
   };
 }
