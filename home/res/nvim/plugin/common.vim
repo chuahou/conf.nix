@@ -18,6 +18,11 @@ set fixeol
 " only save folds with mkview / loadview
 set viewoptions=folds
 
+" set wildmenu settings
+" complete to longest completion on first <Tab>
+set wildmenu
+set wildmode=longest:full,full
+
 " Create backup directory by default
 if empty(glob('~/.local/share/nvim/backup'))
 	silent !mkdir -p ~/.local/share/nvim/backup
