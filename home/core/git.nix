@@ -13,5 +13,6 @@ in {
       key           = me.github.gpgKey;
       signByDefault = true;
     };
+    extraConfig.pull.ff = "only";
   };
 }
