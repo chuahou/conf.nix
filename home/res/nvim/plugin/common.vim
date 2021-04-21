@@ -23,6 +23,9 @@ set viewoptions=folds
 set wildmenu
 set wildmode=longest:full,full
 
+" only insert single space after punctuation
+set nojoinspaces
+
 " Create backup directory by default
 if empty(glob('~/.local/share/nvim/backup'))
 	silent !mkdir -p ~/.local/share/nvim/backup
