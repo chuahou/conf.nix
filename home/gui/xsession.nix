@@ -118,7 +118,7 @@ in {
               notification = false;
             }
             {
-              command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.copyPathToStore ../res/wallpaper.jpg}";
+              command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.copyPathToStore ../res/wallpaper.png}";
               always = true; notification = false;
             }
             {
