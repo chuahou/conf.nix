@@ -35,9 +35,6 @@
 
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
-
-    # Ionide-vim plugin for F#
-    ionideVim = { url = "github:ionide/Ionide-vim"; flake = false; };
   };
 
   outputs =
@@ -52,7 +49,6 @@
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
         instantRst     = import pkgs/instantRst/overlay.nix instantRstVim instantRstPy;
         vim-instant-md = import pkgs/vim-instant-markdown/overlay.nix vim-instant-markdown smdv;
-        ionideVim      = import pkgs/ionide/overlay.nix ionideVim;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
         secrets        = self: super: { secrets = import secrets; };
@@ -109,7 +105,6 @@
             overlays = with overlays; [
               cpufreq-plugin
               instantRst
-              ionideVim
               latex-sty
               unstable
               vim-instant-md

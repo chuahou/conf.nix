@@ -84,22 +84,6 @@
         "type": "github"
       }
     },
-    "ionideVim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1617130071,
-        "narHash": "sha256-6Pn417urwsUXvCM4l9bW+noY3vM9rhxdXY/KnAye0Fw=",
-        "owner": "ionide",
-        "repo": "Ionide-vim",
-        "rev": "2fda4adf588aec8dad6bb1e7ac2c38d4e30e1dc0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ionide",
-        "repo": "Ionide-vim",
-        "type": "github"
-      }
-    },
     "ioslabka": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -186,7 +170,6 @@
         "home-manager": "home-manager",
         "instantRstPy": "instantRstPy",
         "instantRstVim": "instantRstVim",
-        "ionideVim": "ionideVim",
         "ioslabka": "ioslabka",
         "latex-sty": "latex-sty",
         "nixos-hardware": "nixos-hardware",

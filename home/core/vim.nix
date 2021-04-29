@@ -115,7 +115,6 @@ in {
           vimtex
           vim-pandoc-syntax
           purescript-vim
-          pkgs.ionideVim
 
           # alignment
           tabular
