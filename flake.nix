@@ -61,7 +61,7 @@
             pkgs = import unstable { inherit (super) system config; };
           in {
             inherit (pkgs) alacritty discord syncthing tdesktop teams;
-            inherit (pkgs.vimPlugins) coc-nvim;
+            inherit (pkgs.vimPlugins) coc-nvim coc-clangd;
           };
       };
 

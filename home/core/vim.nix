@@ -110,6 +110,7 @@ in {
         start = [
           # language plugins
           pkgs.coc-nvim
+          pkgs.coc-clangd
           haskell-vim
           vim-nix
           vimtex
