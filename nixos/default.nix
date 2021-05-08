@@ -145,9 +145,12 @@
     lm_sensors
     neovim
     pciutils
+    pv
     rcm
     tree
+    unzip
     wget
+    zip
     zsh
   ];
 
