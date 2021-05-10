@@ -11,9 +11,9 @@
     adjtime.source = "/persist/etc/adjtime";
   };
   systemd.tmpfiles.rules = [
-    "L /var/lib/alsa       - - - - /persist/var/lib/alsa"
-    "L /var/lib/bluetooth  - - - - /persist/var/lib/bluetooth"
-    "L /var/lib/containers - - - - /persist/var/lib/containers"
+    "L /var/lib/alsa      - - - - /persist/var/lib/alsa"
+    "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
+    "L /var/lib/cups      - - - - /persist/var/lib/cups"
   ];
   security.sudo.extraConfig = "Defaults lecture = never";
 
