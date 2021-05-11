@@ -49,6 +49,7 @@
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
         instantRst     = import pkgs/instantRst/overlay.nix instantRstVim instantRstPy;
         vim-instant-md = import pkgs/vim-instant-markdown/overlay.nix vim-instant-markdown smdv;
+        fdr            = import pkgs/fdr/overlay.nix;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
         secrets        = self: super: { secrets = import secrets; };
@@ -104,6 +105,7 @@
           configuration = import ./home {
             overlays = with overlays; [
               cpufreq-plugin
+              fdr
               instantRst
               latex-sty
               unstable
