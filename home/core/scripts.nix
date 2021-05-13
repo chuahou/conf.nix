@@ -24,5 +24,13 @@ in
           mv "''${x}" "$(date -I)-''${x}"
         done
       '')
+
+      # renames a problem sheet with name, course and number
+      (pkgs.writeShellScriptBin "rename-ps" ''
+        DIR=$(realpath $(dirname $1))
+        COURSE=$(basename $(realpath ''${DIR}/../..))
+        NUM=$(basename $DIR)
+        cp $1 $DIR/chua_''${COURSE}_ps''${NUM}.pdf
+      '')
     ];
   }
