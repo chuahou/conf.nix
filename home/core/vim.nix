@@ -135,6 +135,9 @@ in {
 
           # NERDtree
           nerdtree
+
+          # editorconfig
+          editorconfig-vim
         ];
       };
     };
