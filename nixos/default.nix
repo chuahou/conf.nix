@@ -86,7 +86,7 @@
           hashedPassword = pkgs.secrets.user.hashedPassword;
           shell          = pkgs.zsh;
           extraGroups = [
-            "wheel" "networkmanager" "video" "scanner" "lp"
+            "wheel" "networkmanager" "video" "scanner" "lp" "docker"
           ];
         };
     };
@@ -109,6 +109,9 @@
 
   # enable cron
   services.cron.enable = true;
+
+  # enable docker
+  virtualisation.docker.enable = true;
 
   # fonts to install system-wide
   fonts.fonts = with pkgs; [
