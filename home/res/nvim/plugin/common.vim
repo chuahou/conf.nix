@@ -44,10 +44,10 @@ function s:TrimEndLines()
 endfunction
 
 " runs make if Makefile exists in pwd
-function s:MaybeMake()
-	if executable("make")
-		if filereadable("Makefile")
-			call jobstart('make')
+function s:MaybeRun(cmd, file)
+	if executable(a:cmd)
+		if filereadable(a:file)
+			call jobstart(a:cmd)
 		endif
 	endif
 endfunction
@@ -64,7 +64,10 @@ augroup commonautocmd
 	autocmd BufWritePre * call s:TrimEndLines()
 
 	" run make upon LaTeX written silently
-	autocmd BufWritePost *.tex silent exec "call s:MaybeMake()"
+	autocmd BufWritePost *.tex silent exec "call s:MaybeRun('make', 'Makefile')"
+
+	" run hpack upon package.yaml written silently
+	autocmd BufWritePost package.yaml silent exec "call s:MaybeRun('hpack', 'package.yaml')"
 
 	" load and save folds automatically
 	" https://vi.stackexchange.com/a/13874
