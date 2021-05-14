@@ -68,9 +68,6 @@
 
     in {
 
-      testing = (import nixpkgs { overlays = [ overlays.vim-instant-md ];
-      inherit system; }).smdv;
-
       nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
