@@ -8,6 +8,9 @@ in {
   # copy entire nvim configuration directory
   xdg.configFile.nvim.source = ../res/nvim;
 
+  # copy editorconfig
+  home.file.".editorconfig".source = ../res/editorconfig;
+
   programs.neovim = {
     enable = true;
 

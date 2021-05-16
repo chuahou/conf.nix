@@ -1,0 +1,18 @@
+[*]
+end_of_line          = lf
+insert_final_newline = true
+
+# Overrides below for when default plugins don't have satisfactory indentation
+# settings.
+
+[*.{cabal,fs,fsi,hs}]
+indent_style = space
+indent_size  = 4
+
+[*.{csp,ml,mli,purs}]
+indent_style = space
+indent_size  = 2
+
+[*.{cs,rs}]
+indent_style = tab
+indent_size  = 4
