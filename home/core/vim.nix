@@ -96,6 +96,9 @@ in {
         " disable alignment of ampersands
         let g:vimtex_indent_on_ampersands = 0
 
+        " disable imaps mappings since ` is used often
+        let g:vimtex_imaps_enabled = 0
+
         "-------------------"
         " vim-pandoc-syntax "
         "-------------------"
