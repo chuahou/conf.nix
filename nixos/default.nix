@@ -11,7 +11,7 @@
     ./hardware.nix
     ./persist.nix
     ./piper.nix
-    ./printing
+    ./printing.nix
   ];
 
   # allow unfree software
