@@ -8,6 +8,7 @@
 
     # development
     fdr
+    fdr-desktop
     gitg
     meld
 

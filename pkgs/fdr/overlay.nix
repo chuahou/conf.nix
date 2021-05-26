@@ -14,7 +14,8 @@ let
     };
   });
 in {
-  fdr = super.makeDesktopItem {
+  fdr = package;
+  fdr-desktop = super.makeDesktopItem {
     name        = package.pname;
     exec        = "${package}/bin/fdr4";
     desktopName = "FDR4";
