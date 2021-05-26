@@ -13,7 +13,7 @@
 
       window.padding     = rec { x = 40; y = x; };
       scrolling.history  = 10000;
-      background_opacity = 0.85;
+      background_opacity = 0.92;
       draw_bold_text_with_bright_colors = false;
 
       font = {
