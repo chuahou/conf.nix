@@ -62,6 +62,11 @@ in {
 
       # disable <C-s> <C-q> on interactive shells
       [[ $- != *i* ]] || stty -ixon -ixoff
+
+      # source new nix completion script
+      # temporary fix until local.mk merge propagates to release branches on
+      # nixpkgs
+      source ${pkgs.nixFlakes.src}/misc/zsh/completion.zsh
     '';
 
     # plugins
