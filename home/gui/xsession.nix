@@ -95,7 +95,11 @@ in {
                 childBorder = colours.gray."0";
               };
             };
-          fonts = [ "Iosevka Medium 14" ];
+          fonts = {
+            names = [ "Iosevka " ];
+            style = "Medium";
+            size  = 14.0;
+          };
           gaps = {
             inner = 8;
             outer = 2;
