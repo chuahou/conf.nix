@@ -31,6 +31,10 @@
 					"addSpagoSources": true
 				}
 			}
+		},
+		"scala": {
+			"command": "metals",
+			"filetypes": ["scala"]
 		}
 	},
 	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"]
