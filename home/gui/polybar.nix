@@ -98,7 +98,6 @@
           time-format                   = "%H:%M";
           battery                       = "BAT0";
           adapter                       = "AC";
-          full-at                       = "96%";
           format-charging-padding       = format-padding;
           format-discharging-padding    = format-charging-padding;
           format-full-padding           = format-charging-padding;
