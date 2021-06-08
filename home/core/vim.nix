@@ -45,6 +45,8 @@ in {
       " coc.nvim "
       "----------"
 
+      let g:coc_config_home = "${configDir}"
+
       " original example at
       " https://github.com/neoclide/coc.nvim#example-vim-configuration
 
