@@ -36,13 +36,6 @@
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
 
-    # neuron zettelkasten
-    neuron = {
-      url = "github:srid/neuron";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    neuron-vim = { url = "github:chiefnoah/neuron-v2.vim"; flake = false; };
-
     # neovim nightly
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
@@ -69,13 +62,6 @@
         secrets        = self: super: { secrets = import secrets; };
         zsh-vim-mode   = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
-        };
-
-        neuron = self: super: {
-          neuron     = neuron.defaultPackage.${system};
-          neuron-vim = super.vimPlugins.neuron-vim.overrideAttrs (old: {
-            src = neuron-vim;
-          });
         };
 
         unstable = self: super:
@@ -127,7 +113,6 @@
               instantRst
               latex-sty
               neovim
-              neuron
               unstable
               vim-instant-md
               secrets

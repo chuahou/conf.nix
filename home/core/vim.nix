@@ -115,11 +115,6 @@ in {
 
       " don't conceal
       let g:pandoc#syntax#conceal#use = 0
-
-      "---------------"
-      " neuron-v2.vim "
-      "---------------"
-      set hidden
     '';
 
     plugins = with pkgs.vimPlugins; [
@@ -153,10 +148,6 @@ in {
 
       # editorconfig
       editorconfig-vim
-
-      # zettelkasten
-      pkgs.neuron-vim
-      fzfWrapper
     ];
 
     viAlias      = true;
