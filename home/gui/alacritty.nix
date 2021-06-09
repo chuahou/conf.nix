@@ -11,15 +11,14 @@
         TERM = "xterm-256color"; # so we do not run into trouble with ssh/emacs
       };
 
-      window.padding     = rec { x = 40; y = x; };
+      window.padding     = rec { x = 30; y = x; };
       scrolling.history  = 10000;
       background_opacity = 0.92;
       draw_bold_text_with_bright_colors = false;
 
       font = {
-        normal.family = "Ioslabka"; # other weights will inherit
-        size          = 13.0;
-        offset.y      = 3;         # increased line spacing
+        normal.family = "Latin Modern Mono";
+        size          = 14.0;
       };
 
       colors =
