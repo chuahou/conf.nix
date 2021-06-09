@@ -16,6 +16,8 @@ in {
   programs.neovim = {
     enable = true;
 
+    package = pkgs.neovim;
+
     extraConfig = ''
       " faster updates for coc/vim-gitgutter etc
       set updatetime=100

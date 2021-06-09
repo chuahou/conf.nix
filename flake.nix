@@ -35,6 +35,12 @@
 
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
+
+    # neovim nightly
+    neovim = {
+      url = "github:neovim/neovim?dir=contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -52,6 +58,7 @@
         fdr            = import pkgs/fdr/overlay.nix;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
+        neovim         = neovim.overlay;
         secrets        = self: super: { secrets = import secrets; };
         zsh-vim-mode   = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
@@ -105,6 +112,7 @@
               fdr
               instantRst
               latex-sty
+              neovim
               unstable
               vim-instant-md
               secrets

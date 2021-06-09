@@ -31,6 +31,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1610051610,
+        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -119,6 +134,29 @@
         "type": "github"
       }
     },
+    "neovim": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "contrib",
+        "lastModified": 1623084223,
+        "narHash": "sha256-lhKgG4L5UAt9zb5KH8YvpR/y7E4Dh9Ekb4BkEPHAY+Y=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "93f15db5d61800a2029aa20684be31c96ebcca5b",
+        "type": "github"
+      },
+      "original": {
+        "dir": "contrib",
+        "owner": "neovim",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1622521809,
@@ -172,6 +210,7 @@
         "instantRstVim": "instantRstVim",
         "ioslabka": "ioslabka",
         "latex-sty": "latex-sty",
+        "neovim": "neovim",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "secrets": "secrets",
