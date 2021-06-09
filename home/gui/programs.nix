@@ -33,6 +33,10 @@
     baobab
     font-manager
 
+    # zettelkasten
+    ag
+    neuron
+
   ];
 
   services.dropbox.enable   = true;

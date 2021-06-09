@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606424373,
+        "narHash": "sha256-oq8d4//CJOrVj+EcOaSXvMebvuTkmBJuT5tzlfewUnQ=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1610051610,
@@ -38,6 +54,21 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_3": {
+      "locked": {
+        "lastModified": 1617631617,
+        "narHash": "sha256-PARRCz55qN3gy07VJZIlFeOX420d0nGF0RzGI/9hVlw=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b2c27d1a81b0dc266270fa8aeecebbd1807fc610",
         "type": "github"
       },
       "original": {
@@ -157,6 +188,44 @@
         "type": "github"
       }
     },
+    "neuron": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1621823698,
+        "narHash": "sha256-FhOtMyxv3AR1u+GXulR51hGx9TFRuXOFowC00p7oDU4=",
+        "owner": "srid",
+        "repo": "neuron",
+        "rev": "164956fdab8242b78e6c51753aa3d2f0b3fdc2fc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "neuron",
+        "type": "github"
+      }
+    },
+    "neuron-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1621798504,
+        "narHash": "sha256-acTD3werX53a8NTaagaNpT//Abw96Mg53gVbcUIjpKQ=",
+        "owner": "chiefnoah",
+        "repo": "neuron-v2.vim",
+        "rev": "e4347873592c31a125e1b70b863ed047660757e8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chiefnoah",
+        "repo": "neuron-v2.vim",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1622521809,
@@ -211,6 +280,8 @@
         "ioslabka": "ioslabka",
         "latex-sty": "latex-sty",
         "neovim": "neovim",
+        "neuron": "neuron",
+        "neuron-vim": "neuron-vim",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "secrets": "secrets",
