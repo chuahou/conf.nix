@@ -149,7 +149,6 @@
     neovim
     pciutils
     pv
-    rcm
     tree
     unzip
     wget
