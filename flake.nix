@@ -13,10 +13,6 @@
 
     secrets = { url = "/persist/secrets.nix"; flake = false; };
 
-    # instant RST plugin and pip package
-    instantRstPy  = { url = "github:gu-fan/instant-rst.py"; flake = false; };
-    instantRstVim = { url = "github:gu-fan/InstantRst";     flake = false; };
-
     # instant markdown plugin
     vim-instant-markdown = {
       url = "github:instant-markdown/vim-instant-markdown";
@@ -53,7 +49,6 @@
 
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
-        instantRst     = import pkgs/instantRst/overlay.nix instantRstVim instantRstPy;
         vim-instant-md = import pkgs/vim-instant-markdown/overlay.nix vim-instant-markdown smdv;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
@@ -108,7 +103,6 @@
           configuration = import ./home {
             overlays = with overlays; [
               cpufreq-plugin
-              instantRst
               latex-sty
               neovim
               unstable

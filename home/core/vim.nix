@@ -83,9 +83,6 @@ in {
         endif
       endfunction
 
-      " add instantRst to path for InstantRst plugin
-      let $PATH .= ':' . '${pkgs.instantRstPy}/bin'
-
       " use smdv in vim-instant-markdown
       let $PATH .= ':' . '${pkgs.smdv}/bin'
       let g:instant_markdown_python = 1
@@ -137,9 +134,6 @@ in {
       # git sign column
       vim-gitgutter
 
-      # InstantRst
-      pkgs.instantRstVim
-
       # vim-instant-markdown
       pkgs.vim-instant-markdown
 
@@ -157,7 +151,7 @@ in {
     # for coc.nvim
     withNodeJs = true;
 
-    # for InstantRst
-    extraPython3Packages = _: with pkgs; [ instantRstPy smdv ];
+    # for instant-markdown
+    extraPython3Packages = _: with pkgs; [ smdv ];
   };
 }

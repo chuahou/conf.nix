@@ -67,38 +67,6 @@
         "type": "github"
       }
     },
-    "instantRstPy": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1585927958,
-        "narHash": "sha256-HKRFTyO51zILkmPl0gadwIAyyxnojN92w5Gb40euf9U=",
-        "owner": "gu-fan",
-        "repo": "instant-rst.py",
-        "rev": "305be3a7e10481a546f5802ec2e5e53d450a8a18",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gu-fan",
-        "repo": "instant-rst.py",
-        "type": "github"
-      }
-    },
-    "instantRstVim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1584117236,
-        "narHash": "sha256-ixiXYNW91FJhhBjMe1Gt2aiU8T5t8z8zMstZ0Ib189k=",
-        "owner": "gu-fan",
-        "repo": "InstantRst",
-        "rev": "52144e8adb307db2c101432d2b90d84fb4255f61",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gu-fan",
-        "repo": "InstantRst",
-        "type": "github"
-      }
-    },
     "ioslabka": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -206,8 +174,6 @@
       "inputs": {
         "cpufreq-plugin": "cpufreq-plugin",
         "home-manager": "home-manager",
-        "instantRstPy": "instantRstPy",
-        "instantRstVim": "instantRstVim",
         "ioslabka": "ioslabka",
         "latex-sty": "latex-sty",
         "neovim": "neovim",
