@@ -69,6 +69,10 @@
 
     in {
 
+      # Forward inputs for easier debugging. To access each input simply use
+      # .#inputs.[input].
+      inherit inputs;
+
       nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
