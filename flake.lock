@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "cfgeq": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1623579258,
+        "narHash": "sha256-Ya0OBuMn1NHUFc4mkpA/hRMQEuG6bhy84kDFoEW1iQY=",
+        "owner": "chuahou",
+        "repo": "cfgeq",
+        "rev": "e87a243ba89cffdc5d16f4770e4b95c6d2e58892",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chuahou",
+        "repo": "cfgeq",
+        "type": "github"
+      }
+    },
     "cpufreq-plugin": {
       "flake": false,
       "locked": {
@@ -70,7 +88,7 @@
     "ioslabka": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1610565987,
@@ -142,6 +160,21 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1622503062,
+        "narHash": "sha256-5QHhFydG1+ImYjeE7XLrPbCUZhWcSYrebXpYuY0XWz4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3a2e0c36e79cecaf196cbea23e75e74710140ea4",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-21.05",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1610425436,
         "narHash": "sha256-ITKdkfWhFrBTTQjYPNdNZqq9JrI3M9oObk8mbrYczuM=",
         "owner": "NixOS",
@@ -155,7 +188,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1623309731,
         "narHash": "sha256-UZVcWcMEuWr6QmoFNryxUwjnokXXREJO7CSRe8ob6E4=",
@@ -172,13 +205,14 @@
     },
     "root": {
       "inputs": {
+        "cfgeq": "cfgeq",
         "cpufreq-plugin": "cpufreq-plugin",
         "home-manager": "home-manager",
         "ioslabka": "ioslabka",
         "latex-sty": "latex-sty",
         "neovim": "neovim",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "secrets": "secrets",
         "smdv": "smdv",
         "unstable": "unstable",

@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
 
     # development
+    cfgeq
     fdr
     (makeDesktopItem {
       name        = fdr.pname or fdr.name;

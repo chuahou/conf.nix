@@ -32,6 +32,9 @@
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
 
+    # cfgeq
+    cfgeq = { url = "github:chuahou/cfgeq"; };
+
     # neovim nightly
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
@@ -52,6 +55,7 @@
         vim-instant-md = import pkgs/vim-instant-markdown/overlay.nix vim-instant-markdown smdv;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
+        cfgeq          = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
         neovim         = neovim.overlay;
         secrets        = self: super: { secrets = import secrets; };
         zsh-vim-mode   = self: super: {
@@ -106,6 +110,7 @@
           inherit ((import ./lib {}).me.home) username homeDirectory;
           configuration = import ./home {
             overlays = with overlays; [
+              cfgeq
               cpufreq-plugin
               latex-sty
               neovim
