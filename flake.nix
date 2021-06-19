@@ -13,13 +13,6 @@
 
     secrets = { url = "/persist/secrets.nix"; flake = false; };
 
-    # instant markdown plugin
-    vim-instant-markdown = {
-      url = "github:instant-markdown/vim-instant-markdown";
-      flake = false;
-    };
-    smdv = { url = "github:flaport/smdv"; flake = false; };
-
     # zsh-vim-mode plugin
     zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
 
@@ -52,7 +45,6 @@
 
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
-        vim-instant-md = import pkgs/vim-instant-markdown/overlay.nix vim-instant-markdown smdv;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
         cfgeq          = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -115,7 +107,6 @@
               latex-sty
               neovim
               unstable
-              vim-instant-md
               secrets
               zsh-vim-mode
             ];

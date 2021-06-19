@@ -83,11 +83,6 @@ in {
         endif
       endfunction
 
-      " use smdv in vim-instant-markdown
-      let $PATH .= ':' . '${pkgs.smdv}/bin'
-      let g:instant_markdown_python = 1
-      let g:instant_markdown_autostart = 0 " manual startup
-
       "--------"
       " vimtex "
       "--------"
@@ -134,9 +129,6 @@ in {
       # git sign column
       vim-gitgutter
 
-      # vim-instant-markdown
-      pkgs.vim-instant-markdown
-
       # NERDtree
       nerdtree
 
@@ -150,8 +142,5 @@ in {
 
     # for coc.nvim
     withNodeJs = true;
-
-    # for instant-markdown
-    extraPython3Packages = _: with pkgs; [ smdv ];
   };
 }
