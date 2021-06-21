@@ -18,9 +18,10 @@ function s:LivereloadMarkdownStart()
 		autocmd BufUnload * if @% == g:lrmd_watched_filename |
 					\ exec 'LivereloadMarkdownStop'
 	augroup END
+	call s:LivereloadMarkdownRunPandoc()
 
 	" Start livereload if executable, otherwise start livereload in nix-shell.
-	let l:livereload_cmd = "livereload " . expand('%:r') . ".html"
+	let l:livereload_cmd = "livereload " . expand('%:r') . ".html -o 1"
 	if !executable('livereload') && executable('nix-shell')
 		let l:livereload_cmd = "nix-shell -p python3Packages.livereload --run '"
 					\ . l:livereload_cmd . "'"
@@ -29,11 +30,6 @@ function s:LivereloadMarkdownStart()
 	if l:jobid > 0
 		let g:lrmd_jobid = l:jobid " Save job ID if successful to stop later.
 	endif
-
-	" Open livereload URL.
-	call s:LivereloadMarkdownRunPandoc()
-	call jobstart("xdg-open http://localhost:35729 & disown")
-	echo "If connection failed, refresh after a second."
 endfunction
 
 " Runs pandoc once (to be run after writing).
