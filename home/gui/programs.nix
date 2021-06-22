@@ -24,7 +24,6 @@
 
     # media
     gimp
-    minecraft
     obs-studio
     vlc
 
