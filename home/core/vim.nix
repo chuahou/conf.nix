@@ -16,7 +16,7 @@ in {
   programs.neovim = {
     enable = true;
 
-    package = pkgs.neovim;
+    package = pkgs.neovim-unwrapped;
 
     extraConfig = ''
       " faster updates for coc/vim-gitgutter etc

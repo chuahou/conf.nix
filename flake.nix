@@ -27,12 +27,6 @@
 
     # cfgeq
     cfgeq = { url = "github:chuahou/cfgeq"; };
-
-    # neovim nightly
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -48,7 +42,6 @@
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
         cfgeq          = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
-        neovim         = neovim.overlay;
         secrets        = self: super: { secrets = import secrets; };
         zsh-vim-mode   = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
@@ -58,7 +51,7 @@
           let
             pkgs = import unstable { inherit (super) system config; };
           in {
-            inherit (pkgs) alacritty syncthing tdesktop teams;
+            inherit (pkgs) alacritty neovim-unwrapped syncthing tdesktop teams;
             inherit (pkgs.vimPlugins) coc-nvim coc-clangd;
           };
       };
@@ -105,7 +98,6 @@
               cfgeq
               cpufreq-plugin
               latex-sty
-              neovim
               unstable
               secrets
               zsh-vim-mode
