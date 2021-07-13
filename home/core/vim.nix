@@ -8,7 +8,17 @@ let
   configDir = "${config.xdg.configHome}/${configLocation}";
 in {
   # copy entire nvim configuration directory
-  xdg.configFile.${configLocation}.source = ../res/nvim;
+  xdg.configFile = {
+    ${configLocation}.source = ../res/nvim;
+  }
+
+  # copy tree-sitter grammars
+  // builtins.foldl' (x: y: x // y) {} (builtins.map
+    (lang: {
+      "nvim/parser/${lang}.so".source =
+        "${pkgs.tree-sitter.builtGrammars."tree-sitter-${lang}"}/parser";
+    })
+    [ "c" "haskell" ]);
 
   # copy editorconfig
   home.file.".editorconfig".source = ../res/editorconfig;
@@ -33,8 +43,6 @@ in {
         require "nvim-treesitter.configs".setup {
           highlight = { enable = true }
         }
-        vim.treesitter.require_language("c", "${
-          pkgs.tree-sitter.builtGrammars.tree-sitter-c}/parser")
       EOF
 
       "-------------"
@@ -124,9 +132,7 @@ in {
       # language plugins
       coc-clangd
       coc-nvim
-      haskell-vim
       nvim-treesitter
-      purescript-vim
       vim-nix
       vim-pandoc-syntax
       vimtex
