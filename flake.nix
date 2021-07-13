@@ -51,8 +51,13 @@
           let
             pkgs = import unstable { inherit (super) system config; };
           in {
-            inherit (pkgs) alacritty neovim-unwrapped syncthing tdesktop teams;
-            inherit (pkgs.vimPlugins) coc-nvim coc-clangd;
+            inherit (pkgs)
+              alacritty
+              neovim-unwrapped
+              syncthing
+              tdesktop
+              teams
+              vimPlugins;
           };
       };
 

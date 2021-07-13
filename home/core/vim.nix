@@ -26,6 +26,17 @@ in {
       set runtimepath^=${configDir} runtimepath+=${configDir}/after
       source ${configDir}/init.vim
 
+      "-----------------"
+      " nvim-treesitter "
+      "-----------------"
+      lua <<EOF
+        require "nvim-treesitter.configs".setup {
+          highlight = { enable = true }
+        }
+        vim.treesitter.require_language("c", "${
+          pkgs.tree-sitter.builtGrammars.tree-sitter-c}/parser")
+      EOF
+
       "-------------"
       " vim-airline "
       "-------------"
@@ -111,13 +122,14 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       # language plugins
-      pkgs.coc-nvim
-      pkgs.coc-clangd
+      coc-clangd
+      coc-nvim
       haskell-vim
-      vim-nix
-      vimtex
-      vim-pandoc-syntax
+      nvim-treesitter
       purescript-vim
+      vim-nix
+      vim-pandoc-syntax
+      vimtex
 
       # alignment
       tabular
