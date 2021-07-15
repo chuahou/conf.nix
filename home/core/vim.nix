@@ -48,8 +48,9 @@ in {
       "-------------"
       " vim-airline "
       "-------------"
+
       let g:airline_theme = 'angr'
-      let g:airline#extensions#whitespace#mixed_indent_algo = 1
+      let g:airline#extensions#whitespace#mixed_indent_algo = 2
       let g:airline#extensions#checks = [
         \ 'indent', 'long', 'trailing', 'mixed-indent-file', 'conflicts' ]
       let g:airline#extensions#whitespace#skip_indent_check_ft = {
