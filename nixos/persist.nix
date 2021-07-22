@@ -14,6 +14,7 @@
     "L /var/lib/alsa      - - - - /persist/var/lib/alsa"
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
     "L /var/lib/cups      - - - - /persist/var/lib/cups"
+    "L /var/lib/docker    - - - - /persist/var/lib/docker"
   ];
   security.sudo.extraConfig = "Defaults lecture = never";
 
