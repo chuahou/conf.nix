@@ -19,6 +19,7 @@
 
     # productivity
     gnome3.simple-scan
+    libreoffice
     pandoc
     pdftk
 
