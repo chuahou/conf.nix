@@ -44,11 +44,14 @@ in {
       "-----------------"
       " nvim-treesitter "
       "-----------------"
+
       lua <<EOF
-        require "nvim-treesitter.configs".setup {
-          highlight = { enable = true }
-        }
+        require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
       EOF
+
+      "----------------"
+      " nvim-lspconfig "
+      "----------------"
 
       "-------------"
       " vim-airline "
@@ -96,6 +99,8 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       # language plugins
+      coc-clangd
+      coc-nvim
       nvim-treesitter
       vim-nix
       vim-pandoc-syntax
