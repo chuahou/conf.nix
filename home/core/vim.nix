@@ -23,6 +23,11 @@ in {
   # copy editorconfig
   home.file.".editorconfig".source = ../res/editorconfig;
 
+  # language servers to be installed
+  home.packages = with pkgs; [
+    clang-tools haskell-language-server
+  ];
+
   programs.neovim = {
     enable = true;
 
