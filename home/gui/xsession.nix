@@ -122,7 +122,17 @@ in {
               notification = false;
             }
             {
-              command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.copyPathToStore ../res/wallpaper.png}";
+              command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.stdenv.mkDerivation {
+                name = "wallpaper";
+                src = builtins.fetchurl {
+                  url    = "https://cdnb.artstation.com/p/assets/images/images/033/355/705/large/arseniy-chebynkin-port-sunse-up1.jpg";
+                  sha256 = "sha256-pwox1fWXi0uw0PlOeDqwWoTHmuDeg1HyquJSweV8E7A=";
+                };
+                dontUnpack   = true;
+                buildPhase   = "waifu2x-converter-cpp -i $src -o $(realpath ./out.jpg)";
+                installPhase = "cp out.jpg $out";
+                nativeBuildInputs = with pkgs; [ waifu2x-converter-cpp ];
+              }}";
               always = true; notification = false;
             }
             {
