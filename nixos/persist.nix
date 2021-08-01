@@ -29,4 +29,13 @@
     btrfs sub snap /mnt/root-blank /mnt/root
     umount /mnt
   '';
+
+  # make /bin/bash after boot
+  boot.postBootCommands = ''
+    cat > /bin/bash << EOF
+        #!/bin/sh
+        /usr/bin/env bash \$@
+    EOF
+    chmod +x /bin/bash
+  '';
 }
