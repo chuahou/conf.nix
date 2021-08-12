@@ -123,6 +123,7 @@
     ioslabka
     ipaexfont
     ipafont
+    noto-fonts-cjk
     open-sans
     roboto
     roboto-slab
