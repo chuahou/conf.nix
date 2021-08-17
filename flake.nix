@@ -39,6 +39,7 @@
 
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
+        sioyek         = import pkgs/sioyek/overlay.nix;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
         cfgeq          = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -105,6 +106,7 @@
               latex-sty
               unstable
               secrets
+              sioyek
               zsh-vim-mode
             ];
           };
