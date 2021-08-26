@@ -25,7 +25,9 @@
     pdftk
 
     # media
-    gimp
+    (gimp-with-plugins.override {
+      plugins = with gimpPlugins; [ resynthesizer ];
+    })
     obs-studio
     vlc
 
