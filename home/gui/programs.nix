@@ -15,6 +15,7 @@
       desktopName = "FDR4";
     })
     gitg
+    isabelle
     meld
 
     # productivity
