@@ -22,6 +22,7 @@
     gnome3.simple-scan
     libreoffice
     pandoc
+    pdfgrep
     pdftk
 
     # media
