@@ -54,7 +54,6 @@
           in {
             inherit (pkgs)
               alacritty
-              isabelle
               neovim-unwrapped
               syncthing
               tdesktop
