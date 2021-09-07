@@ -17,8 +17,9 @@
       draw_bold_text_with_bright_colors = false;
 
       font = {
-        normal.family = "Latin Modern Mono";
-        size          = 14.0;
+        normal.family = "Ioslabka";
+        size          = 13.0;
+        offset.y      = 3;
       };
 
       colors =
