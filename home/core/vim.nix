@@ -121,6 +121,15 @@ in {
       " disable imaps mappings since ` is used often
       let g:vimtex_imaps_enabled = 0
 
+      " configure vimtex folding
+      let g:vimtex_fold_enabled = 1
+      let g:vimtex_fold_types = {
+                  \'items': { 'enabled': 0 },
+                  \'envs': {
+                      \'blacklist': [ 'itemize', 'enumerate' ],
+                      \},
+                  \}
+
       "-------------------"
       " vim-pandoc-syntax "
       "-------------------"
