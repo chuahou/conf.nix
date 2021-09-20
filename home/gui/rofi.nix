@@ -4,6 +4,8 @@
 { pkgs, lib, config, ... }:
 
 {
+  services.picom.opacityRule = [ "90:class_g *?= 'rofi'" ];
+
   programs.rofi = {
     enable = true;
 

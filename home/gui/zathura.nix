@@ -4,6 +4,8 @@
 { ... }:
 
 {
+  services.picom.opacityRule = [ "88:class_g *?= 'zathura'" ];
+
   programs.zathura = {
     enable  = true;
     options = with (import ../lib/gui/colours.nix); rec {

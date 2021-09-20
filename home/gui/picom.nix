@@ -19,12 +19,6 @@
     # vsync
     vSync = true;
 
-    # custom application opacities
-    opacityRule = [
-      "88:class_g *?= 'zathura'"
-      "90:class_g *?= 'rofi'"
-    ];
-
     extraOptions = ''
       dbe = true;
       no-fading-openclose = false;
