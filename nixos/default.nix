@@ -59,10 +59,6 @@
         '';
       }
     ];
-
-    # keyboard layout
-    layout     = "us";
-    xkbOptions = "ctrl:nocaps";
   };
 
   # hardware services
