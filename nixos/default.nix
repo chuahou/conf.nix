@@ -142,6 +142,7 @@
     git
     gnupg
     gparted
+    jq
     killall
     lm_sensors
     neovim
