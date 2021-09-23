@@ -13,6 +13,9 @@ in {
       key           = me.github.gpgKey;
       signByDefault = true;
     };
-    extraConfig.pull.ff = "only";
+    extraConfig = {
+      pull.ff            = "only";
+      init.defaultBranch = "master";
+    };
   };
 }
