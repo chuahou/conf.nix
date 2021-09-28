@@ -39,3 +39,6 @@ nnoremap <C-_> :noh<CR>
 
 " escape using jj
 inoremap jj <Esc>
+
+" select pasted area using gp (similar to gv)
+nnoremap gp `[v`]
