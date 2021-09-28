@@ -40,123 +40,119 @@ in {
       " we use the full configuration copied
       set runtimepath^=${configDir} runtimepath+=${configDir}/after
       source ${configDir}/init.vim
-
-      "-----------------"
-      " nvim-treesitter "
-      "-----------------"
-      lua <<EOF
-        require "nvim-treesitter.configs".setup {
-          highlight = { enable = true }
-        }
-      EOF
-
-      "-------------"
-      " vim-airline "
-      "-------------"
-
-      let g:airline_theme = 'angr'
-      let g:airline#extensions#whitespace#mixed_indent_algo = 2
-      let g:airline#extensions#checks = [
-        \ 'indent', 'long', 'trailing', 'mixed-indent-file', 'conflicts' ]
-      let g:airline#extensions#whitespace#skip_indent_check_ft = {
-        \ 'vim': ['trailing'],
-        \ }
-
-      " custom symbols for vim-airline
-      if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-      endif
-      let g:airline_symbols.maxlinenr = ' ln'
-
-      "----------"
-      " coc.nvim "
-      "----------"
-
-      let g:coc_config_home = "${configDir}"
-
-      " original example at
-      " https://github.com/neoclide/coc.nvim#example-vim-configuration
-
-      " more space to display
-      set cmdheight=2
-
-      " trigger completion with <C-space>
-      inoremap <silent><expr> <C-space> coc#refresh()
-
-      " activate actions with <C-space>
-      nmap <C-space> :CocAction<CR>
-
-      " diagnostics navigation
-      nmap <silent> [g <Plug>(coc-diagnostic-prev)
-      nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-      " code navigation
-      nmap <silent> gd <Plug>(coc-definition)
-      nmap <silent> gy <Plug>(coc-type-definition)
-      nmap <silent> gi <Plug>(coc-implementation)
-      nmap <silent> gr <Plug>(coc-references)
-
-      " use K to show documentation in preview window
-      nnoremap <silent> K :call <SID>show_documentation()<CR>
-      function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-          execute 'h '.expand('<cword>')
-        elseif (coc#rpc#ready())
-          call CocActionAsync('doHover')
-        else
-          execute '!' . &keywordprg . " " . expand('<cword>')
-        endif
-      endfunction
-
-      "--------"
-      " vimtex "
-      "--------"
-
-      " use LaTeX flavour by default
-      let g:tex_flavor = 'latex'
-
-      " disable alignment of ampersands
-      let g:vimtex_indent_on_ampersands = 0
-
-      " disable imaps mappings since ` is used often
-      let g:vimtex_imaps_enabled = 0
-
-      " configure vimtex folding
-      let g:vimtex_fold_enabled = 1
-      let g:vimtex_fold_types = {
-                  \'items': { 'enabled': 0 },
-                  \'envs': {
-                      \'blacklist': [ 'itemize', 'enumerate' ],
-                      \},
-                  \}
-
-      "-------------------"
-      " vim-pandoc-syntax "
-      "-------------------"
-
-      " load vim-pandoc-syntax
-      augroup pandoc_syntax
-        au! BufNewFile,BufFilePre,BufRead *.md set ft=markdown.pandoc
-      augroup END
-
-      " don't conceal
-      let g:pandoc#syntax#conceal#use = 0
     '';
 
     plugins = with pkgs.vimPlugins; [
       # language plugins
       coc-clangd
-      coc-nvim
-      nvim-treesitter
       vim-nix
-      vim-pandoc-syntax
-      vimtex
+      {
+        plugin = coc-nvim;
+        config = ''
+          let g:coc_config_home = "${configDir}"
+
+          " original example at
+          " https://github.com/neoclide/coc.nvim#example-vim-configuration
+
+          " more space to display
+          set cmdheight=2
+
+          " trigger completion with <C-space>
+          inoremap <silent><expr> <C-space> coc#refresh()
+
+          " activate actions with <C-space>
+          nmap <C-space> :CocAction<CR>
+
+          " diagnostics navigation
+          nmap <silent> [g <Plug>(coc-diagnostic-prev)
+          nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+          " code navigation
+          nmap <silent> gd <Plug>(coc-definition)
+          nmap <silent> gy <Plug>(coc-type-definition)
+          nmap <silent> gi <Plug>(coc-implementation)
+          nmap <silent> gr <Plug>(coc-references)
+
+          " use K to show documentation in preview window
+          nnoremap <silent> K :call <SID>show_documentation()<CR>
+          function! s:show_documentation()
+            if (index(['vim','help'], &filetype) >= 0)
+              execute 'h '.expand('<cword>')
+            elseif (coc#rpc#ready())
+              call CocActionAsync('doHover')
+            else
+              execute '!' . &keywordprg . " " . expand('<cword>')
+            endif
+          endfunction
+        '';
+      }
+      {
+        plugin = nvim-treesitter;
+        config = ''
+          lua <<EOF
+            require "nvim-treesitter.configs".setup {
+              highlight = { enable = true }
+            }
+          EOF
+        '';
+      }
+      {
+        plugin = vim-pandoc-syntax;
+        config = ''
+          " load vim-pandoc-syntax
+          augroup pandoc_syntax
+            au! BufNewFile,BufFilePre,BufRead *.md set ft=markdown.pandoc
+          augroup END
+
+          " don't conceal
+          let g:pandoc#syntax#conceal#use = 0
+        '';
+      }
+      {
+        plugin = vimtex;
+        config = ''
+          " use LaTeX flavour by default
+          let g:tex_flavor = 'latex'
+
+          " disable alignment of ampersands
+          let g:vimtex_indent_on_ampersands = 0
+
+          " disable imaps mappings since ` is used often
+          let g:vimtex_imaps_enabled = 0
+
+          " configure vimtex folding
+          let g:vimtex_fold_enabled = 1
+          let g:vimtex_fold_types = {
+                      \'items': { 'enabled': 0 },
+                      \'envs': {
+                          \'blacklist': [ 'itemize', 'enumerate' ],
+                          \},
+                      \}
+        '';
+      }
 
       # alignment
       tabular
 
       # vim-airline
-      vim-airline
+      {
+        plugin = vim-airline;
+        config = ''
+          let g:airline_theme = 'angr'
+          let g:airline#extensions#whitespace#mixed_indent_algo = 2
+          let g:airline#extensions#checks = [
+            \ 'indent', 'long', 'trailing', 'mixed-indent-file', 'conflicts' ]
+          let g:airline#extensions#whitespace#skip_indent_check_ft = {
+            \ 'vim': ['trailing'],
+            \ }
+
+          " custom symbols for vim-airline
+          if !exists('g:airline_symbols')
+            let g:airline_symbols = {}
+          endif
+          let g:airline_symbols.maxlinenr = ' ln'
+        '';
+      }
       vim-airline-themes
 
       # git sign column
