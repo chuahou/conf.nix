@@ -54,7 +54,6 @@
           in {
             inherit (pkgs)
               alacritty
-              haskell-language-server
               neovim-unwrapped
               neovimUtils
               syncthing
