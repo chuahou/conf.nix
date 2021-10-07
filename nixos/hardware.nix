@@ -14,6 +14,7 @@
     nvidiaBusId = "PCI:1:0:0";
     intelBusId  = "PCI:0:2:0";
   };
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"
