@@ -29,9 +29,4 @@
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableAllFirmware         = true;
-
-  # disable ertm for bluetooth Xbox controller
-  boot.extraModprobeConfig = ''
-    options bluetooth disable_ertm=1
-  '';
 }
