@@ -112,4 +112,5 @@
 (setq org-gcal-remove-api-cancelled-events t)
 (setq org-gcal-up-days 1)
 (setq org-gcal-down-days 7)
+(setq org-gcal-local-timezone "Europe/London")
 (global-set-key (kbd "C-c g") 'org-gcal-fetch)
