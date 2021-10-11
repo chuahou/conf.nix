@@ -25,6 +25,9 @@ do
 	fi
 done
 
+# disable touchpad
+xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
+
 # disable X power saving
 xset s off -dpms
 
