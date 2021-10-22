@@ -122,12 +122,6 @@ in {
 
           " configure vimtex folding
           let g:vimtex_fold_enabled = 1
-          let g:vimtex_fold_types = {
-                      \'items': { 'enabled': 0 },
-                      \'envs': {
-                          \'blacklist': [ 'itemize', 'enumerate' ],
-                          \},
-                      \}
         '';
       }
 
