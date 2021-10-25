@@ -122,6 +122,11 @@ in {
 
           " configure vimtex folding
           let g:vimtex_fold_enabled = 1
+          let g:vimtex_indent_lists = [
+            \"itemize",
+            \"enumerate",
+            \"questionize",
+            \]
         '';
       }
 
