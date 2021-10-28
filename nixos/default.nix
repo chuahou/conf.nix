@@ -6,6 +6,7 @@
 {
   imports = [
     ./cachix.nix
+    ./direnv.nix
     ./fs.nix
     ./gc.nix
     ./hardware.nix
