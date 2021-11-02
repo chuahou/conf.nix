@@ -75,7 +75,7 @@
           # enable nix flakes
           ({ pkgs, ... }: {
             nix = {
-              package      = pkgs.nixUnstable;
+              package      = pkgs.nixFlakes;
               extraOptions = "experimental-features = nix-command flakes";
             };
           })
