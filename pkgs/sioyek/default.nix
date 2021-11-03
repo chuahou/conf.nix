@@ -8,10 +8,10 @@
 }:
 
 let
-  version = "0.31.5";
+  version = "1.0.0";
   appimage = builtins.fetchTarball {
     url    = "https://github.com/ahrm/sioyek/releases/download/v${version}/sioyek-release-linux.zip";
-    sha256 = "sha256-f4dHvxwRl5kIFU9xNqhYtXBnJLNR4MRGuiI5bGpZP7U=";
+    sha256 = "sha256-vlVXrn5nYDLSlWm6qXPCBJOFEM69vPJoAGUocPgtd8Q=";
   };
   script = writeShellScriptBin "sioyek" ''
     ${appimage-run}/bin/appimage-run ${appimage}
