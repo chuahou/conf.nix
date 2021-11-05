@@ -25,7 +25,7 @@ in {
 
   # language servers to be installed
   home.packages = with pkgs; [
-    clang-tools haskell-language-server
+    clang-tools haskell-language-server intelephense
   ];
 
   programs.neovim = {

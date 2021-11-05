@@ -35,6 +35,11 @@
 		"scala": {
 			"command": "metals",
 			"filetypes": ["scala"]
+		},
+		"php": {
+			"command": "intelephense",
+			"args": ["--stdio"],
+			"filetypes": ["php"]
 		}
 	},
 	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"]
