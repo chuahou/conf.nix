@@ -43,7 +43,6 @@
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
         cfgeq          = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
-        secrets        = self: super: { secrets = import secrets; };
         zsh-vim-mode   = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
@@ -87,7 +86,7 @@
           ({ ... }: {
             nixpkgs.overlays = with overlays; [
               flakeInputs # Give the rest access to pkgs.flakeInputs.
-              cpufreq-plugin ioslabka secrets
+              cpufreq-plugin ioslabka
             ];
           })
 
@@ -111,7 +110,6 @@
               cpufreq-plugin
               latex-sty
               unstable
-              secrets
               sioyek
               zsh-vim-mode
             ];

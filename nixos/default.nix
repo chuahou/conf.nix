@@ -72,7 +72,7 @@
     mutableUsers = false;
     users = {
       root = {
-        hashedPassword = pkgs.secrets.root.hashedPassword;
+        hashedPassword = (import pkgs.flakeInputs.secrets).root.hashedPassword;
       };
       user =
         let inherit (import ../lib {}) me;
@@ -80,7 +80,7 @@
           isNormalUser   = true;
           name           = me.home.username;
           description    = me.name;
-          hashedPassword = pkgs.secrets.user.hashedPassword;
+          hashedPassword = (import pkgs.flakeInputs.secrets).user.hashedPassword;
           shell          = pkgs.zsh;
           extraGroups = [
             "wheel" "networkmanager" "video" "scanner" "lp" "docker"
