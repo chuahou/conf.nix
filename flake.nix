@@ -61,6 +61,9 @@
               teams
               vimPlugins;
           };
+
+        # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
+        flakeInputs = self: super: { flakeInputs = inputs; };
       };
 
     in {
@@ -83,6 +86,7 @@
           # extra overlays
           ({ ... }: {
             nixpkgs.overlays = with overlays; [
+              flakeInputs # Give the rest access to pkgs.flakeInputs.
               cpufreq-plugin ioslabka secrets
             ];
           })
@@ -102,6 +106,7 @@
           inherit ((import ./lib {}).me.home) username homeDirectory;
           configuration = import ./home {
             overlays = with overlays; [
+              flakeInputs # Give the rest access to pkgs.flakeInputs.
               cfgeq
               cpufreq-plugin
               latex-sty
