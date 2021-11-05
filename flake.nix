@@ -38,7 +38,7 @@
       pkgs   = nixpkgs.legacyPackages.${system};
 
       overlays = with inputs; {
-        cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix cpufreq-plugin;
+        cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
         sioyek         = import pkgs/sioyek/overlay.nix;
         ioslabka       = ioslabka.overlay;
         latex-sty      = self: super: { inherit (inputs) latex-sty; };
