@@ -29,18 +29,18 @@ in ''
 
   # miscellanous shell functions
 
-  # use xdg-open on multiple files at once
-  open () {
-    for i in "$@"; do xdg-open $i; done
-  }
-  alias o="open"
-
   # disown by default when running some applications
   _run_and_disown () {
-    $@ & disown
+    $@ >/dev/null 2>&1 & disown
   }
   _disown_progs=( zathura meld gitg thunar xdg-open )
   for prog in "''${_disown_progs[@]}"; do
     alias $prog="_run_and_disown $prog"
   done
+
+  # use xdg-open on multiple files at once
+  open () {
+    for i in "$@"; do xdg-open $i; done
+  }
+  alias o="open"
 ''
