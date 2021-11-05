@@ -157,9 +157,6 @@ in {
       # git sign column
       vim-gitgutter
 
-      # NERDtree
-      nerdtree
-
       # editorconfig
       editorconfig-vim
     ];
