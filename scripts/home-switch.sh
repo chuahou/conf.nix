@@ -10,6 +10,10 @@ set -eu
 FLAKE=$(dirname ${0})/..#hmConfigs.${USER}.activationPackage
 nix build ${FLAKE}
 
+# delete old ~/.config/mimeapps.list if it is the same
+diff ${HOME}/.config/mimeapps.list result/home-files/.config/mimeapps.list &&
+	rm ${HOME}/.config/mimeapps.list
+
 # activate new generation, with 'VERBOSE' if '-v' is passed
 while getopts "v" opt; do
 	if [ ${opt} = "v" ]; then
