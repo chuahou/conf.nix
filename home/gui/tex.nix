@@ -5,5 +5,5 @@
 
 {
   home.packages = [ pkgs.texlive.combined.scheme-full ];
-  home.file."texmf/tex/latex/local".source = pkgs.latex-sty;
+  home.file."texmf/tex/latex/local".source = pkgs.flakeInputs.latex-sty;
 }

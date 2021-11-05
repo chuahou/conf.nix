@@ -41,7 +41,6 @@
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
         sioyek         = import pkgs/sioyek/overlay.nix;
         ioslabka       = ioslabka.overlay;
-        latex-sty      = self: super: { inherit (inputs) latex-sty; };
         cfgeq          = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
         zsh-vim-mode   = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
@@ -108,7 +107,6 @@
               flakeInputs # Give the rest access to pkgs.flakeInputs.
               cfgeq
               cpufreq-plugin
-              latex-sty
               unstable
               sioyek
               zsh-vim-mode
