@@ -159,6 +159,12 @@ in {
 
       # editorconfig
       editorconfig-vim
+
+      # window stabilization
+      {
+        plugin = pkgs.stabilize-nvim;
+        config = "lua require(\"stabilize\").setup()";
+      }
     ];
 
     viAlias      = true;
