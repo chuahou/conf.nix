@@ -119,6 +119,9 @@ highlight SpellCap   ctermfg=none ctermbg=none cterm=undercurl
 highlight SpellLocal ctermfg=9    ctermbg=1    cterm=none
 highlight SpellRare  ctermfg=none ctermbg=none cterm=none
 
+" Concealed characters
+highlight Conceal ctermfg=3 ctermbg=none cterm=none
+
 " --- Specific settings
 
 " 81 line
