@@ -10,6 +10,9 @@
     source $(fzf-share)/completion.zsh
     source $(fzf-share)/key-bindings.zsh
 
+    # fzf options.
+    export FZF_DEFAULT_OPTS='--border --info=inline'
+
     # Use fd instead of find, don't show hidden files.
     _fzf_compgen_path() {
       echo "$1"
