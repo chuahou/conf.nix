@@ -26,7 +26,10 @@ in {
   # language servers to be installed
   home.packages = with pkgs; [
     clang-tools haskell-language-server intelephense
-  ];
+  ]
+
+  # xdotool required for vimtex's synctex
+  ++ [ xdotool ];
 
   programs.neovim = {
     enable = true;
@@ -127,6 +130,9 @@ in {
             \"enumerate",
             \"questionize",
             \]
+
+          " use Zathura as viewer
+          let g:vimtex_view_method = 'zathura'
         '';
       }
 
