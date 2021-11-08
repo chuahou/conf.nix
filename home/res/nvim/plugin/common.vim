@@ -43,7 +43,7 @@ function s:TrimEndLines()
 	call setpos('.', save_cursor)
 endfunction
 
-" runs make if Makefile exists in pwd
+" runs cmd if file exists in pwd
 function s:MaybeRun(cmd, file)
 	if executable(a:cmd)
 		if filereadable(a:file)
@@ -62,9 +62,6 @@ augroup commonautocmd
 
 	" remove empty lines on write
 	autocmd BufWritePre * call s:TrimEndLines()
-
-	" run make upon LaTeX written silently
-	autocmd BufWritePost *.tex silent exec "call s:MaybeRun('make', 'Makefile')"
 
 	" run hpack upon package.yaml written silently
 	autocmd BufWritePost package.yaml silent exec "call s:MaybeRun('hpack', 'package.yaml')"
