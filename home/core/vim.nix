@@ -180,7 +180,28 @@ in {
       fastfold
 
       # fzf
-      fzf-vim
+      {
+        plugin = fzf-vim;
+        config = ''
+          " Buffer commands. Buffer functions thanks to
+          " https://github.com/junegunn/fzf.vim/pull/733#issuecomment-559720813.
+          function! FZF_list_buffers()
+              redir => list
+              silent ls
+              redir END
+              return split(list, "\n")
+          endfunction
+          function! FZF_del_buffers(lines)
+              execute 'bd' join(map(a:lines, {_, line -> split(line)[0]}))
+          endfunction
+          nnoremap <Leader>b :Buffers<CR>
+          nnoremap <Leader>B :call fzf#run(fzf#wrap({
+              \'source': FZF_list_buffers(),
+              \'sink*':  { lines -> FZF_del_buffers(lines) },
+              \'options': '--multi --reverse --bind ctrl-a:select-all'
+              \}))<CR>
+        '';
+      }
     ];
 
     viAlias      = true;

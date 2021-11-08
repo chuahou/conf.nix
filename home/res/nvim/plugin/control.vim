@@ -9,12 +9,6 @@ noremap <Leader>y "+y
 noremap <Leader>p "+p
 noremap <Leader>P "+P
 
-" list buffers and insert :b
-nnoremap <Leader>b :ls<CR>:b<Space>
-
-" list buffers and insert :bd
-nnoremap <Leader>B :ls<CR>:bd<Space>
-
 " open terminal buffer if there already is one, otherwise create one
 function OpenTerminal()
 	redir @a
