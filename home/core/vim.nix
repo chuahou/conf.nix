@@ -204,6 +204,11 @@ in {
           " <C-r> to search command history while in command mode. (Deletes all
           " current command text.)
           cnoremap <C-r> <C-\><C-n>:History:<CR>
+
+          " Shorter commands.
+          cnoreabbrev Hi History
+          cnoreabbrev Fi Files
+          cnoreabbrev GFi GFiles
         '';
       }
     ];
