@@ -173,7 +173,7 @@ in {
       # window stabilization
       {
         plugin = pkgs.stabilize-nvim;
-        config = "lua require(\"stabilize\").setup()";
+        config = "lua require('stabilize').setup()";
       }
 
       # fast folding (important for vimtex)
