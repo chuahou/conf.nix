@@ -40,6 +40,10 @@
 			"command": "intelephense",
 			"args": ["--stdio"],
 			"filetypes": ["php"]
+		},
+		"nix": {
+			"command": "rnix-lsp",
+			"filetypes": ["nix"]
 		}
 	},
 	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"]

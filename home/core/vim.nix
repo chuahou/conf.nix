@@ -25,7 +25,7 @@ in {
 
   # language servers to be installed
   home.packages = with pkgs; [
-    clang-tools haskell-language-server intelephense
+    clang-tools haskell-language-server intelephense rnix-lsp
   ]
 
   # xdotool required for vimtex's synctex
