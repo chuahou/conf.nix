@@ -29,7 +29,10 @@ in {
   ]
 
   # xdotool required for vimtex's synctex
-  ++ [ xdotool ];
+  ++ [ xdotool ]
+
+  # ripgrep for fzf.vim
+  ++ [ ripgrep ];
 
   programs.neovim = {
     enable = true;
@@ -175,6 +178,9 @@ in {
 
       # fast folding (important for vimtex)
       fastfold
+
+      # fzf
+      fzf-vim
     ];
 
     viAlias      = true;
