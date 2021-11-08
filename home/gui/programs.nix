@@ -24,6 +24,7 @@
     pandoc
     pdfgrep
     pdftk
+    ripgrep
 
     # media
     (gimp-with-plugins.override {
