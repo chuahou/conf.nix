@@ -111,6 +111,7 @@ in {
           let g:pandoc#syntax#conceal#use = 0
         '';
       }
+      coc-vimtex
       {
         plugin = vimtex;
         config = ''
