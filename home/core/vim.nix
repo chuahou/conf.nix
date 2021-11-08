@@ -211,6 +211,16 @@ in {
           cnoreabbrev GFi GFiles
         '';
       }
+
+      # snippets
+      {
+        plugin = ultisnips;
+        config = ''
+          let g:UltiSnipsExpandTrigger       = '<Tab>'
+          let g:UltiSnipsJumpForwardTrigger  = '<Tab>'
+          let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+        '';
+      }
     ];
 
     viAlias      = true;
