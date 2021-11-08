@@ -200,6 +200,10 @@ in {
               \'sink*':  { lines -> FZF_del_buffers(lines) },
               \'options': '--multi --reverse --bind ctrl-a:select-all'
               \}))<CR>
+
+          " <C-r> to search command history while in command mode. (Deletes all
+          " current command text.)
+          cnoremap <C-r> <C-\><C-n>:History:<CR>
         '';
       }
     ];

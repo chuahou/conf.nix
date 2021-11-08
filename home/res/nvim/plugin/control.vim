@@ -36,3 +36,9 @@ inoremap jj <Esc>
 
 " select pasted area using gp (similar to gv)
 nnoremap gp `[v`]
+
+" navigation in command line mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos() - 2]<CR>
+	" Thanks to https://github.com/tpope/vim-rsi/issues/15#issuecomment-198632142.
