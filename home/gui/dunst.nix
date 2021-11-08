@@ -12,7 +12,8 @@
       in rec {
         global = {
           follow             = "keyboard";
-          geometry           = "0x5-18+45";
+          geometry           = "450x5-18+45";
+          max_icon_size      = 96;
           transparency       = 15;
           separator_height   = 2;
           padding            = 8;
