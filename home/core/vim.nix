@@ -10,15 +10,7 @@ in {
   # copy entire nvim configuration directory
   xdg.configFile = {
     ${configLocation}.source = ../res/nvim;
-  }
-
-  # copy tree-sitter grammars
-  // builtins.foldl' (x: y: x // y) {} (builtins.map
-    (lang: {
-      "nvim/parser/${lang}.so".source =
-        "${pkgs.tree-sitter.builtGrammars."tree-sitter-${lang}"}/parser";
-    })
-    [ "c" "haskell" ]);
+  };
 
   # copy editorconfig
   home.file.".editorconfig".source = ../res/editorconfig;
@@ -51,6 +43,7 @@ in {
     plugins = with pkgs.vimPlugins; [
       # language plugins
       coc-clangd
+      haskell-vim
       vim-nix
       {
         plugin = coc-nvim;
@@ -90,16 +83,6 @@ in {
               execute '!' . &keywordprg . " " . expand('<cword>')
             endif
           endfunction
-        '';
-      }
-      {
-        plugin = nvim-treesitter;
-        config = ''
-          lua <<EOF
-            require "nvim-treesitter.configs".setup {
-              highlight = { enable = true }
-            }
-          EOF
         '';
       }
       {
