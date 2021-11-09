@@ -1,0 +1,298 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2021 Chua Hou
+#
+# Much inspiration taken from https://github.com/gillescastel/latex-snippets.
+
+global !p
+def in_math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+def in_env(env):
+	inner_env = vim.eval('vimtex#env#get_inner()')
+	return 'name' in inner_env and vim.eval('vimtex#env#get_inner()')['name'] == env
+def in_envs(envs):
+	return any(map(in_env, envs))
+def in_list():
+	return in_envs(["itemize", "enumerate", "questionize"])
+endglobal
+
+# Templates <<<1
+
+snippet document "Document Template" b
+\\documentclass[11pt]{article}
+\\usepackage{base-0.2.0.0}
+
+\\title{${1:${VISUAL:Title}}}
+\\author{Chua Hou}
+
+\\begin{document}
+
+\\maketitle
+
+$0
+
+\\end{document}
+endsnippet
+
+# Text replacements <<<1
+
+snippet ... "ldots" iA
+\\ldots
+endsnippet
+
+snippet "" "Quotes" iA
+\`\`${1:${VISUAL}}''
+endsnippet
+
+# Maths replacements <<<1
+
+priority 10
+context "in_math()"
+snippet ==> "Implies" iA
+\\implies
+endsnippet
+
+context "in_math()"
+snippet ==< "Implied by" iA
+\\impliedby
+endsnippet
+priority 0
+
+context "in_math()"
+snippet => "Double right arrow" iA
+\\Rightarrow
+endsnippet
+
+context "in_math()"
+snippet =< "Double left arrow" iA
+\\Leftarrow
+endsnippet
+
+context "in_math()"
+snippet -> "To arrow" iA
+\\to
+endsnippet
+
+context "in_math()"
+snippet |-> "Maps to arrow" iA
+\\mapsto
+endsnippet
+
+context "in_math()"
+snippet <- "From arrow" iA
+\\from
+endsnippet
+
+context "in_math()"
+snippet // "Fraction" iA
+\\frac{${1:${VISUAL}}}{$2}
+endsnippet
+
+context "in_math()"
+snippet != "Not equals" iA
+\\neq
+endsnippet
+
+context "in_math()"
+snippet ceil "Ceiling" iA
+\\lceil ${1:${VISUAL}} \\rceil
+endsnippet
+
+context "in_math()"
+snippet floor "Floor" iA
+\\lfloor ${1:${VISUAL}} \\rfloor
+endsnippet
+
+context "in_math()"
+snippet | "Set mid" i
+\\mid $0
+endsnippet
+
+context "in_math()"
+snippet abs "Norm/absolute value" i
+\\left| ${1:${VISUAL}} \\right|
+endsnippet
+
+context "in_math()"
+snippet set "Set" i
+\\left\\{ ${1:${VISUAL}} \\right\\}
+endsnippet
+
+context "in_math()"
+snippet <> "Left/right angle brackets" i
+\\left< ${1:${VISUAL}} \\right>
+endsnippet
+
+context "in_math()"
+snippet sum "Summation" w
+\\sum_{$1}^{$2} $3
+endsnippet
+
+context "in_math()"
+snippet <= "Less than or equal to" iA
+\\leq
+endsnippet
+
+context "in_math()"
+snippet >= "Greater than or equal to" iA
+\\geq
+endsnippet
+
+context "in_math()"
+snippet EE "Existential quantifier" iA
+\\exists $1.\; $0
+endsnippet
+
+context "in_math()"
+snippet AA "Universal quantifier" iA
+\\forall $1.\; $0
+endsnippet
+
+context "in_math()"
+snippet Nat "Naturals" w
+\\mathbb{N}
+endsnippet
+
+context "in_math()"
+snippet Nat+ "Positive naturals" w
+\\mathbb{N}^+
+endsnippet
+
+context "in_math()"
+snippet Int "Integers" w
+\\mathbb{Z}
+endsnippet
+
+context "in_math()"
+snippet Int+ "Positive integers" w
+\\mathbb{Z}^+
+endsnippet
+
+context "in_math()"
+snippet Real "Reals" w
+\\mathbb{R}
+endsnippet
+
+context "in_math()"
+snippet Real+ "Positive reals" w
+\\mathbb{R}^+
+endsnippet
+
+context "in_math()"
+snippet pset "Power set" w
+\\mathcal{P}(${1:${VISUAL}})
+endsnippet
+
+context "in_math()"
+snippet or "Logical or" w
+\\lor $0
+endsnippet
+
+context "in_math()"
+snippet and "Logical and" w
+\\land $0
+endsnippet
+
+context "in_math()"
+snippet === "Equivalent" iA
+\\equiv
+endsnippet
+
+# Environments <<<1
+
+snippet beg "Environment" b
+\\begin{$1}
+${0:${VISUAL}}
+\\end{$1}
+endsnippet
+
+snippet fig "Figure" b
+\\begin{figure}
+	\centering
+	$0
+	\caption{$1 \label{fig:$2}}
+\\end{figure}
+endsnippet
+
+snippet img "Include graphics" b
+\\includegraphics[width=${2:0.8\\textwidth}]{$1}
+endsnippet
+
+snippet im "Inline maths" w
+\\($1\\)$0
+endsnippet
+
+snippet dm "Display maths" b
+\\[
+	$1
+\\]
+endsnippet
+
+snippet am "Align environment" b
+\\begin{align*}
+	$1
+\\end{align*}
+endsnippet
+
+# Listings package <<<1
+
+snippet code "Inline code" w
+\\lstinline@${1:${VISUAL}}@
+endsnippet
+
+snippet cfile "Code from file" b
+\\lstinputlisting{$1}
+endsnippet
+
+# lstlistings should be flushed to the left.
+global !p
+def deindent():
+	line = snip.cursor[0]
+	snip.buffer[line] = ''
+	snip.cursor.set(line, 0)
+endglobal
+pre_expand "deindent()"
+snippet clist "Code listing" b
+\\begin{lstlisting}
+$0
+\\end{lstlisting}
+endsnippet
+
+# Lists <<<1
+
+snippet item "Itemize" b
+\\begin{itemize}
+	\\item
+		$0
+\\end{itemize}
+endsnippet
+
+snippet enum "Enumerate" b
+\\begin{enumerate}
+	\\item
+		$0
+\\end{enumerate}
+endsnippet
+
+# Fix indentation after inserting item.
+post_expand "vim.eval('feedkeys(\"\<C-f>\")')"
+context "in_list()"
+snippet - "Item in list"
+\\item
+endsnippet
+
+# Fix indentation after inserting item.
+post_expand "vim.eval('feedkeys(\"\<C-f>\")')"
+context "in_list()"
+snippet -c "Custom item in list"
+\\item[$1]
+endsnippet
+
+snippet questionize "Questionize" b
+\\begin{questionize}
+	\\item[$1]
+		$0
+\\end{questionize}
+endsnippet
+
+# Modeline <<<1
+# vim: foldmethod=marker:foldmarker=<<<,>>>:
