@@ -5,17 +5,24 @@
 
 {
   # opt in persistence
-  environment.etc = {
-    "NetworkManager/system-connections".source =
-      "/persist/etc/NetworkManager/system-connections";
-    adjtime.source = "/persist/etc/adjtime";
-  };
-  systemd.tmpfiles.rules = [
-    "L /var/lib/alsa      - - - - /persist/var/lib/alsa"
-    "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
-    "L /var/lib/cups      - - - - /persist/var/lib/cups"
-    "L /var/lib/docker    - - - - /persist/var/lib/docker"
-  ];
+  environment.etc =
+    let
+      link = path: { "${path}".source = "/persist/etc/${path}"; };
+      paths = [
+        "NetworkManager/system-connections"
+        "adjtime"
+      ];
+    in builtins.foldl' (x: y: x // y) {} (builtins.map link paths);
+  systemd.tmpfiles.rules =
+    let
+      mkRule = path: "L /${path} - - - - /persist/${path}";
+      paths = [
+        "var/lib/alsa"
+        "var/lib/bluetooth"
+        "var/lib/cups"
+        "var/lib/docker"
+      ];
+    in builtins.map mkRule paths;
   security.sudo.extraConfig = "Defaults lecture = never";
 
   # make root blank on boot
