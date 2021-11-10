@@ -11,6 +11,7 @@
       paths = [
         "NetworkManager/system-connections"
         "adjtime"
+        "machine-id"
       ];
     in builtins.foldl' (x: y: x // y) {} (builtins.map link paths);
   systemd.tmpfiles.rules =
