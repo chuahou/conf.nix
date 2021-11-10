@@ -35,8 +35,13 @@ endsnippet
 
 # Text replacements <<<1
 
-context "not in_envs(['lstlisting', 'lstinline'])"
+context "not in_envs(['lstlisting', 'lstinline']) and not in_math()"
 snippet ... "ldots" iA
+\\ldots\
+endsnippet
+
+context "in_math()"
+snippet ... "ldots maths" iA
 \\ldots
 endsnippet
 
