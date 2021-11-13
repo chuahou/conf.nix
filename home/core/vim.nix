@@ -155,7 +155,7 @@ in {
 
       # window stabilization
       {
-        plugin = pkgs.stabilize-nvim;
+        plugin = stabilize-nvim;
         config = "lua require('stabilize').setup()";
       }
 

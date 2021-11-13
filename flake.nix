@@ -27,9 +27,6 @@
 
     # cfgeq
     cfgeq = { url = "github:chuahou/cfgeq"; };
-
-    # stabilize.nvim branch of nixpkgs
-    stabilize-nvim = { url = "github:chuahou/nixpkgs/add-stabilize-nvim"; };
   };
 
   outputs =
@@ -50,11 +47,6 @@
 
         zsh-vim-mode = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
-        };
-
-        stabilize-nvim = self: super: {
-          inherit (stabilize-nvim.legacyPackages.${system}.vimPlugins)
-            stabilize-nvim;
         };
 
         unstable = self: super:
@@ -121,7 +113,6 @@
               intelephense
               unstable
               sioyek
-              stabilize-nvim
               zsh-vim-mode
             ];
           };

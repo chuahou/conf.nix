@@ -192,7 +192,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "secrets": "secrets",
-        "stabilize-nvim": "stabilize-nvim",
         "unstable": "unstable",
         "zsh-vim-mode": "zsh-vim-mode"
       }
@@ -211,22 +210,6 @@
       "original": {
         "type": "git",
         "url": "file:///persist/secrets.nix"
-      }
-    },
-    "stabilize-nvim": {
-      "locked": {
-        "lastModified": 1636310207,
-        "narHash": "sha256-cuh92D0bN++6hM6cZnBKP1AcrchZEXUiyqJdZj8yRfY=",
-        "owner": "chuahou",
-        "repo": "nixpkgs",
-        "rev": "155c4ad5ab5c5ef7f1da4fe012fae21bb97a25a8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chuahou",
-        "ref": "add-stabilize-nvim",
-        "repo": "nixpkgs",
-        "type": "github"
       }
     },
     "unstable": {
