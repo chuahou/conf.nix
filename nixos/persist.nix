@@ -24,7 +24,6 @@
         "var/lib/docker"
       ];
     in builtins.map mkRule paths;
-  security.sudo.extraConfig = "Defaults lecture = never";
 
   # make root blank on boot
   boot.initrd.postDeviceCommands = lib.mkBefore ''

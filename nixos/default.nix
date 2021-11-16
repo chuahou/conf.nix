@@ -7,6 +7,7 @@
   imports = [
     ./cachix.nix
     ./direnv.nix
+    ./doas.nix
     ./fs.nix
     ./gc.nix
     ./hardware.nix
@@ -156,19 +157,6 @@
     wget
     zip
     zsh
-  ];
-
-  # extra sudoers rules
-  security.sudo.extraRules = [
-    {
-      groups   = [ "wheel" ];
-      commands = [
-        {
-          command = "${pkgs.cpufreq-plugin-wrapped}/bin/cpufreq-plugin *";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
   ];
 
   # This value determines the NixOS release from which the default
