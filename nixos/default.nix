@@ -34,9 +34,6 @@
       enp60s0.useDHCP = true;
       wlp61s0.useDHCP = true;
     };
-    extraHosts = ''
-      192.168.1.231 nextcloud.homeport.lan
-    '';
   };
 
   # time settings
