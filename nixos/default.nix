@@ -84,7 +84,7 @@
           hashedPassword = (import pkgs.flakeInputs.secrets).user.hashedPassword;
           shell          = pkgs.zsh;
           extraGroups = [
-            "wheel" "networkmanager" "video" "scanner" "lp" "docker"
+            "wheel" "networkmanager" "video" "scanner" "lp"
           ];
         };
     };
@@ -107,9 +107,6 @@
 
   # enable cron
   services.cron.enable = true;
-
-  # enable docker
-  virtualisation.docker.enable = true;
 
   # fonts to install system-wide
   fonts.fonts = with pkgs; [
