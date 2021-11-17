@@ -15,10 +15,11 @@ in {
   # copy editorconfig
   home.file.".editorconfig".source = ../res/editorconfig;
 
+  # xsel for clipboard support
+  home.packages = with pkgs; [ xsel ]
+
   # language servers to be installed
-  home.packages = with pkgs; [
-    clang-tools haskell-language-server intelephense rnix-lsp
-  ]
+  ++ [ clang-tools haskell-language-server intelephense rnix-lsp ]
 
   # xdotool required for vimtex's synctex
   ++ [ xdotool ]
