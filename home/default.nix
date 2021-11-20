@@ -12,9 +12,6 @@
 
   # basic settings
   programs.home-manager.enable = true;
-  home = {
-    sessionVariables = import ./lib/shell/vars.nix;
-  };
 
   # import overlays from flakes
   nixpkgs.overlays = overlays;

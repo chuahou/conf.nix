@@ -207,10 +207,6 @@ in {
       }
     ];
 
-    viAlias      = true;
-    vimAlias     = true;
-    vimdiffAlias = true;
-
     # for coc.nvim
     withNodeJs = true;
   };
