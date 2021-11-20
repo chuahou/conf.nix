@@ -21,6 +21,7 @@ in {
     initExtra = ''
       ${xconfigScript}/bin/xconfig.sh
       eval $(ssh-agent)
+      umask 077
     '';
 
     windowManager.i3 =
