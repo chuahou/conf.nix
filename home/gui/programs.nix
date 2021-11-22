@@ -8,6 +8,7 @@
 
     # development
     cfgeq
+    cool-retro-term
     fdr
     (makeDesktopItem {
       name        = fdr.pname or fdr.name;
