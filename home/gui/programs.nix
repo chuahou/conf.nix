@@ -28,6 +28,7 @@
     ripgrep
 
     # media
+    feh
     (gimp-with-plugins.override {
       plugins = with gimpPlugins; [ resynthesizer ];
     })
