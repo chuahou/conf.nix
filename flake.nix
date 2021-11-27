@@ -40,7 +40,6 @@
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
         sioyek         = import pkgs/sioyek/overlay.nix;
-        intelephense   = import pkgs/intelephense/overlay.nix;
 
         ioslabka = ioslabka.overlay;
         cfgeq    = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -110,7 +109,6 @@
               flakeInputs # Give the rest access to pkgs.flakeInputs.
               cfgeq
               cpufreq-plugin
-              intelephense
               unstable
               sioyek
               zsh-vim-mode

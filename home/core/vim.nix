@@ -19,7 +19,7 @@ in {
   home.packages = with pkgs; [ xsel ]
 
   # language servers to be installed
-  ++ [ clang-tools haskell-language-server intelephense rnix-lsp ]
+  ++ [ clang-tools haskell-language-server rnix-lsp ]
 
   # xdotool required for vimtex's synctex
   ++ [ xdotool ]

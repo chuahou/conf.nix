@@ -36,11 +36,6 @@
 			"command": "metals",
 			"filetypes": ["scala"]
 		},
-		"php": {
-			"command": "intelephense",
-			"args": ["--stdio"],
-			"filetypes": ["php"]
-		},
 		"nix": {
 			"command": "rnix-lsp",
 			"filetypes": ["nix"]
