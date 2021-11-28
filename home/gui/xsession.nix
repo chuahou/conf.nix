@@ -159,7 +159,7 @@ in {
           # keybindings
           keybindings = rec {
             # applications
-            "${mod}+Return"       = "exec --no-startup-id ${pkgs.cool-retro-term}/bin/cool-retro-term";
+            "${mod}+Return"       = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty";
             "${mod}+Shift+Return" = "exec ${config.programs.firefox.package}/bin/firefox";
             "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "${mod}+p"            = Print;
