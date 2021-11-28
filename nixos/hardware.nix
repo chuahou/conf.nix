@@ -15,6 +15,9 @@
   boot.kernelModules        = [ "kvm-intel" ];
   boot.extraModulePackages  = [ ];
 
+  # Allow magic SysRq.
+  boot.kernel.sysctl."kernel.sysrq" = 1;
+
   powerManagement = {
     cpuFreqGovernor = "powersave";
     cpufreq.max     = 2000000;
