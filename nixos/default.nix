@@ -112,6 +112,7 @@
   fonts.fonts = with pkgs; [
     corefonts
     fira
+    fira-code
     iosevka
     iosevkaFixed
     ioslabka

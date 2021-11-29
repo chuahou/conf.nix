@@ -17,8 +17,12 @@
       draw_bold_text_with_bright_colors = false;
 
       font = {
-        normal.family = "Latin Modern Mono";
-        size          = 14.0;
+        normal.family = "Fira Code";
+        size          = 12.0;
+        offset = {
+          x = -1.0;
+          y = 6.0;
+        };
       };
 
       colors =
