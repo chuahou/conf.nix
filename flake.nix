@@ -53,13 +53,29 @@
             pkgs = import unstable { inherit (super) system config; };
           in {
             inherit (pkgs)
-              alacritty
               neovim-unwrapped
               neovimUtils
               syncthing
               tdesktop
               teams
               vimPlugins;
+
+            alacritty = pkgs.alacritty.overrideAttrs (old: rec {
+              src = super.fetchFromGitHub {
+                owner = "zenixls2";
+                repo = "alacritty";
+                rev = "3ed043046fc74f288d4c8fa7e4463dc201213500";
+                sha256 = "sha256-1dGk4ORzMSUQhuKSt5Yo7rOJCJ5/folwPX2tLiu0suA=";
+              };
+              version = "ligatures-git";
+              cargoDeps = old.cargoDeps.overrideAttrs (oldDeps: {
+                inherit src;
+                outputHash = "sha256-tY5sle1YUlUidJcq7RgTzkPsGLnWyG/3rtPqy2GklkY=";
+              });
+              buildInputs = (old.buildInputs or []) ++ (with super; [
+                stdenv.cc.cc.lib
+              ]);
+            });
           };
 
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
