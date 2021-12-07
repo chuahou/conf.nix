@@ -88,18 +88,27 @@
           font    = "Iosevka 14";
           border  = mkLiteral "0 solid 0 solid 0 solid 3 solid";
         };
-        "#element normal.normal" = rec {
+        "#element normal" = rec {
           background-color = mkLiteral "@cbg-alt";
           border-color     = background-color;
         };
-        "#element alternate.normal" = rec {
+        "#element alternate" = rec {
           background-color = mkLiteral "@cbg-alt2";
           border-color     = background-color;
         };
-        "#element selected.normal" = {
+        "#element selected" = {
           background-color = mkLiteral "@cgrayyellow";
           border           = mkLiteral "0 solid 0 solid 0 solid 3 solid";
           border-color     = mkLiteral "@cyellow";
+        };
+        "#element-text normal" = rec {
+          background-color = mkLiteral "@cbg-alt";
+        };
+        "#element-text alternate" = rec {
+          background-color = mkLiteral "@cbg-alt2";
+        };
+        "#element-text selected" = {
+          background-color = mkLiteral "@cgrayyellow";
         };
       };
 
