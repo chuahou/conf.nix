@@ -12,8 +12,8 @@ else
 	xrandr --output eDP-1-1 --auto --primary --output HDMI-0 --off
 fi
 
-# set DPI
-echo "Xft.dpi: 104" | xrdb -merge
+# ensure DPI is 96
+echo "Xft.dpi: 96" | xrdb -merge
 
 # disable mouse acceleration
 xset mouse 0 0

@@ -6,7 +6,7 @@
 {
   services.picom = {
     enable  = true;
-    backend = "glx";
+    backend = "xrender";
 
     # inactive windows
     inactiveDim = "0.03";
