@@ -3,11 +3,10 @@
 
 {
   inputs = {
-    nixpkgs        = { url = "nixpkgs/nixos-21.05"; };
-    unstable       = { url = "nixpkgs/nixpkgs-unstable"; };
+    nixpkgs        = { url = "nixpkgs/nixpkgs-unstable"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -48,35 +47,28 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
-        unstable = self: super:
-          let
-            pkgs = import unstable { inherit (super) system config; };
-          in {
-            inherit (pkgs)
-              neovim-unwrapped
-              neovimUtils
-              syncthing
-              tdesktop
-              teams
-              vimPlugins;
-
-            alacritty = pkgs.alacritty.overrideAttrs (old: rec {
-              src = super.fetchFromGitHub {
-                owner = "zenixls2";
-                repo = "alacritty";
-                rev = "3ed043046fc74f288d4c8fa7e4463dc201213500";
-                sha256 = "sha256-1dGk4ORzMSUQhuKSt5Yo7rOJCJ5/folwPX2tLiu0suA=";
-              };
-              version = "ligatures-git";
-              cargoDeps = old.cargoDeps.overrideAttrs (oldDeps: {
-                inherit src;
-                outputHash = "sha256-tY5sle1YUlUidJcq7RgTzkPsGLnWyG/3rtPqy2GklkY=";
-              });
-              buildInputs = (old.buildInputs or []) ++ (with super; [
-                stdenv.cc.cc.lib
-              ]);
+        alacritty-ligatures = self: super: {
+          alacritty = super.alacritty.overrideAttrs (old: rec {
+            src = super.fetchFromGitHub {
+              owner = "zenixls2";
+              repo = "alacritty";
+              rev = "3ed043046fc74f288d4c8fa7e4463dc201213500";
+              sha256 = "sha256-1dGk4ORzMSUQhuKSt5Yo7rOJCJ5/folwPX2tLiu0suA=";
+            };
+            version = "ligatures-git";
+            cargoDeps = old.cargoDeps.overrideAttrs (oldDeps: {
+              inherit src;
+              outputHash = "sha256-tY5sle1YUlUidJcq7RgTzkPsGLnWyG/3rtPqy2GklkY=";
             });
-          };
+            buildInputs = (old.buildInputs or []) ++ (with super; [
+              stdenv.cc.cc.lib
+            ]);
+            postInstall = (old.postInstall or "") + ''
+              patchelf --add-rpath "${super.lib.makeLibraryPath
+                [ super.stdenv.cc.cc.lib ]}" $out/bin/alacritty
+            '';
+          });
+        };
 
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
@@ -123,9 +115,9 @@
           configuration = import ./home {
             overlays = with overlays; [
               flakeInputs # Give the rest access to pkgs.flakeInputs.
+              alacritty-ligatures
               cfgeq
               cpufreq-plugin
-              unstable
               sioyek
               zsh-vim-mode
             ];
