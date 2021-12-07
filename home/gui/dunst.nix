@@ -42,14 +42,6 @@
           frame_color = "#FF0000";
           timeout     = 0;
         };
-        shortcuts =
-          let
-            mod = lib.toLower config.xsession.windowManager.i3.config.modifier;
-          in {
-            close     = "${mod}+bracketright";
-            history   = "${mod}+bracketleft";
-            close_all = "${mod}+backslash";
-          };
       };
   };
 }
