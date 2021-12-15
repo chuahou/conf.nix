@@ -40,9 +40,11 @@
     teams
 
     # system utilities
+    appimage-run
     arandr
     baobab
     font-manager
+    steam-run
 
   ];
 
