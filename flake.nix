@@ -47,6 +47,27 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
+        # Use steam-run instead for FDR.
+        fdr = self: super: {
+          fdr = super.fdr.overrideAttrs (old: {
+            libPath = [];
+            dontPatchELF = true;
+            installPhase = ''
+              mkdir -p $out/old
+              cp -r * $out/old
+              mkdir -p $out/bin
+              for b in fdr4 _fdr4 refines _refines cspmprofiler cspmexplorerprof
+              do
+                  cat << EOF > $out/bin/$b
+                      #!${super.runtimeShell}
+                      ${super.steam-run}/bin/steam-run $out/old/bin/$b \$@
+              EOF
+                  chmod +x $out/bin/$b
+              done
+            '';
+          });
+        };
+
         alacritty-ligatures = self: super: {
           alacritty = super.alacritty.overrideAttrs (old: rec {
             src = super.fetchFromGitHub {
@@ -118,6 +139,7 @@
               alacritty-ligatures
               cfgeq
               cpufreq-plugin
+              fdr
               sioyek
               zsh-vim-mode
             ];
