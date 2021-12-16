@@ -32,6 +32,7 @@
       plugins = with gimpPlugins; [ resynthesizer ];
     })
     obs-studio
+    kdenlive
     vlc
 
     # communications
