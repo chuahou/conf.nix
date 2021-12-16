@@ -32,4 +32,6 @@
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableAllFirmware         = true;
+
+  services.tlp.enable = false;
 }
