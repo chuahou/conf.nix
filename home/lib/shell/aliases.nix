@@ -61,4 +61,7 @@
 
   # view thumbnails with feh
   thumbs = "sh -c 'feh -t --thumb-width 300 --thumb-height 300 >/dev/null 2>&1 & disown'";
+
+  # nix-shell with zsh
+  nix-zsh = "nix-shell --run zsh";
 }
