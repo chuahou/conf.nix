@@ -103,14 +103,3 @@
 (set-face-foreground 'org-warning                   "brightred")
 (set-face-foreground 'region                        "brightwhite")
 (set-face-background 'region                        "brightblack")
-
-;; org-gcal sync with Google Calendar
-;; secrets added in emacs.nix
-(require 'org-gcal)
-(setq org-gcal-fetch-file-alist '(("e5q3avl0qqb8cj4f3oevtti4u4@group.calendar.google.com" . "~/org/gcal/oxford.org")
-                                  ("939j39h5dtgd8577mpm7ruvhos@group.calendar.google.com" . "~/org/gcal/general.org")))
-(setq org-gcal-remove-api-cancelled-events t)
-(setq org-gcal-up-days 1)
-(setq org-gcal-down-days 7)
-(setq org-gcal-local-timezone "Europe/London")
-(global-set-key (kbd "C-c g") 'org-gcal-fetch)

@@ -10,12 +10,5 @@
     extraPackages = epkgs: with epkgs; [ evil evil-org org-gcal ];
   };
 
-  home.file.".emacs".text =
-    let
-      secrets = import pkgs.flakeInputs.secrets;
-    in ''
-      ${builtins.readFile ../res/emacs.el}
-      (setq org-gcal-client-id     "${secrets.org-gcal.clientId}"
-            org-gcal-client-secret "${secrets.org-gcal.clientSecret}")
-    '';
+  home.file.".emacs".source = ../res/emacs.el;
 }
