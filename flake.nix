@@ -101,6 +101,12 @@
       # .#inputs.[input].
       inherit inputs;
 
+      # nixpkgs with all overlays applied.
+      overlayed = import nixpkgs {
+        inherit system;
+        overlays = builtins.attrValues overlays;
+      };
+
       nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
