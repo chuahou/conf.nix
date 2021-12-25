@@ -39,6 +39,7 @@
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
         sioyek         = import pkgs/sioyek/overlay.nix;
+        fanficfare     = import pkgs/fanficfare/overlay.nix;
 
         ioslabka = ioslabka.overlay;
         cfgeq    = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -145,6 +146,7 @@
               alacritty-ligatures
               cfgeq
               cpufreq-plugin
+              fanficfare
               fdr
               sioyek
               zsh-vim-mode
