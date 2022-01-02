@@ -120,11 +120,8 @@
         inherit system;
         modules = [
           # enable nix flakes
-          ({ pkgs, ... }: {
-            nix = {
-              package      = pkgs.nixFlakes;
-              extraOptions = "experimental-features = nix-command flakes";
-            };
+          ({ ... }: {
+            nix.extraOptions = "experimental-features = nix-command flakes";
           })
 
           # extra overlays
