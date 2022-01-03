@@ -39,6 +39,7 @@
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
         sioyek         = import pkgs/sioyek/overlay.nix;
+        tdesktop-bin   = import pkgs/tdesktop-bin/overlay.nix;
 
         ioslabka = ioslabka.overlay;
         cfgeq    = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -89,15 +90,6 @@
                 [ super.stdenv.cc.cc.lib ]}" $out/bin/alacritty
             '';
           });
-        };
-
-        tdesktop-3-4-0 = self: super: {
-          inherit (import (super.fetchFromGitHub {
-            owner = "MrMebelMan";
-            repo = "nixpkgs";
-            rev = "a1e9f72acd569c2045936b29fb724a55f3aa4c5c";
-            sha256 = "sha256-Om1Bo3mpPT7HSOkywB9fUybPxR65LwF16/18QZzuSHo=";
-          }) { inherit system; }) tdesktop;
         };
 
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
@@ -153,7 +145,7 @@
               cpufreq-plugin
               fdr
               sioyek
-              tdesktop-3-4-0
+              tdesktop-bin
               zsh-vim-mode
             ];
           };
