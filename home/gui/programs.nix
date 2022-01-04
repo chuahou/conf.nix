@@ -37,7 +37,7 @@
 
     # communications
     discord
-    tdesktop-bin
+    tdesktop
     teams
 
     # system utilities

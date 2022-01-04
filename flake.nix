@@ -26,6 +26,9 @@
 
     # cfgeq
     cfgeq = { url = "github:chuahou/cfgeq"; };
+
+    # tdesktop latest version branch from nixpkgs fork
+    tdesktop-latest = { url = "github:ch-fork/nixpkgs/tdesktop-latest"; };
   };
 
   outputs =
@@ -39,7 +42,6 @@
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
         sioyek         = import pkgs/sioyek/overlay.nix;
-        tdesktop-bin   = import pkgs/tdesktop-bin/overlay.nix;
 
         ioslabka = ioslabka.overlay;
         cfgeq    = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -67,6 +69,11 @@
               done
             '';
           });
+        };
+
+        tdesktop-latest = self: super: {
+          inherit (import tdesktop-latest { inherit (super) system config; })
+            tdesktop;
         };
 
         alacritty-ligatures = self: super: {
@@ -145,7 +152,7 @@
               cpufreq-plugin
               fdr
               sioyek
-              tdesktop-bin
+              tdesktop-latest
               zsh-vim-mode
             ];
           };
