@@ -193,7 +193,7 @@ in {
           " We only care about setting options when entering, and count on
           " restarting to restore options, since it is not scalable to maintain.
           function! s:writing_goyo_enter()
-              set nolist
+              set listchars=tab:\ \ ,trail:+
               set signcolumn=no
               set foldcolumn=0
               set spell
