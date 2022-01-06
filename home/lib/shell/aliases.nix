@@ -51,6 +51,7 @@
 
   # editor
   e = "nvim";
+  write = "nvim +:Write";
 
   # emacs
   emacs = "emacs --color=16";
