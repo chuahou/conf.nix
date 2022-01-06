@@ -143,12 +143,6 @@ in {
       # editorconfig
       editorconfig-vim
 
-      # window stabilization
-      {
-        plugin = stabilize-nvim;
-        config = "lua require('stabilize').setup()";
-      }
-
       # fzf
       {
         plugin = fzf-vim;
