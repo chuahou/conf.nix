@@ -196,6 +196,7 @@ in {
               set nolist
               set signcolumn=no
               set foldcolumn=0
+              set spell
               call goyo#execute(0, "")
           endfunction
 
