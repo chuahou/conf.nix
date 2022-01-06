@@ -160,9 +160,6 @@ in {
         config = "lua require('stabilize').setup()";
       }
 
-      # fast folding (important for vimtex)
-      fastfold
-
       # fzf
       {
         plugin = fzf-vim;
@@ -205,6 +202,11 @@ in {
           let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
         '';
       }
+
+      # misc
+      fastfold # fast folding (important for vimtex)
+      goyo-vim
+      nerdtree
     ];
 
     # for coc.nvim
