@@ -126,8 +126,8 @@ in {
               command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.stdenv.mkDerivation {
                 name = "wallpaper";
                 src = builtins.fetchurl {
-                  url    = "https://cdnb.artstation.com/p/assets/images/images/033/355/705/large/arseniy-chebynkin-port-sunse-up1.jpg";
-                  sha256 = "sha256-pwox1fWXi0uw0PlOeDqwWoTHmuDeg1HyquJSweV8E7A=";
+                  url    = "https://cdnb.artstation.com/p/assets/images/images/000/561/041/large/arseniy-chebynkin-oldbridge.jpg";
+                  sha256 = "sha256-yVATF2jg02bkdQQ6fvf0byWGMw4fQsjEuUNOJZG89xM=";
                 };
                 dontUnpack   = true;
                 buildPhase   = "waifu2x-converter-cpp -i $src -o $(realpath ./out.jpg)";
