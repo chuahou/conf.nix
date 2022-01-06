@@ -45,6 +45,7 @@ in {
       # language plugins
       coc-clangd
       haskell-vim
+      vim-markdown
       vim-nix
       {
         plugin = coc-nvim;
@@ -84,18 +85,6 @@ in {
               execute '!' . &keywordprg . " " . expand('<cword>')
             endif
           endfunction
-        '';
-      }
-      {
-        plugin = vim-pandoc-syntax;
-        config = ''
-          " load vim-pandoc-syntax
-          augroup pandoc_syntax
-            au! BufNewFile,BufFilePre,BufRead *.md set ft=markdown.pandoc
-          augroup END
-
-          " don't conceal
-          let g:pandoc#syntax#conceal#use = 0
         '';
       }
       coc-vimtex
