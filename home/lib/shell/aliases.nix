@@ -50,8 +50,8 @@
       ''git remote set-url origin $(git remote get-url origin | sed "s/https:\/\/\(${username}@\)\?github.com\/${username}\/\([^\.]*\)\(\.git\)\?/git@github.com:${username}\/\2/")'';
 
   # editor
-  e = "nvim";
-  write = "nvim +:Write";
+  e = "$VISUAL";
+  write = "$VISUAL +:Write";
 
   # emacs
   emacs = "emacs --color=16";

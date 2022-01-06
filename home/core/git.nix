@@ -16,7 +16,6 @@ in {
     extraConfig = {
       pull.ff            = "only";
       init.defaultBranch = "master";
-      core.editor        = "sudo -u ${me.home.username} -g nonet nvim";
     };
   };
 }

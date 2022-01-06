@@ -15,7 +15,11 @@ let
   home    = me.home;
   dev     = me.dev;
   aliases = import ./aliases.nix;
+  vars    = import ./vars.nix;
 in ''
+  # environment variables
+  ${config.lib.zsh.exportAll vars}
+
   # aliases
   ${lib.concatStringsSep "\n" (
     lib.mapAttrsToList (k: v: "alias ${k}=${lib.escapeShellArg v}") aliases

@@ -239,6 +239,10 @@ in {
       fastfold # fast folding (important for vimtex)
     ];
 
+    viAlias      = true;
+    vimAlias     = true;
+    vimdiffAlias = true;
+
     # for coc.nvim
     withNodeJs = true;
   };
