@@ -190,25 +190,16 @@ in {
       {
         plugin = goyo-vim;
         config = ''
+          " We only care about setting options when entering, and count on
+          " restarting to restore options, since it is not scalable to maintain.
           function! s:writing_goyo_enter()
               set nolist
-              call goyo#execute(0, "83")
+              set signcolumn=no
+              set foldcolumn=0
+              call goyo#execute(0, "")
           endfunction
 
-          function! s:writing_goyo_leave()
-              call goyo#execute(!0, "")
-              set list
-          endfunction
-
-          function! s:writing_goyo_cmd(bang)
-              if a:bang
-                  call <SID>writing_goyo_leave()
-              else
-                  call <SID>writing_goyo_enter()
-              endif
-          endfunction
-
-          command! -bang Write call <SID>writing_goyo_cmd(<bang>0)
+          command! Write call <SID>writing_goyo_enter()
         '';
       }
 
@@ -218,9 +209,28 @@ in {
         config = ''
           augroup GoyoNERDTree
               autocmd!
-              autocmd user GoyoEnter nested NERDTree | wincmd p
+              autocmd user GoyoEnter nested NERDTree
               autocmd user GoyoLeave nested NERDTreeClose
           augroup END
+
+          " \n to open and focus NERDTree
+          nmap <Leader>n :NERDTreeFocus<CR>
+
+          " <C-w> bindings rebound when Goyo is active
+          function! s:goyo_cw_nerdtree(command)
+              if exists("#goyo")
+                  NERDTreeClose
+              endif
+              execute "normal!" . a:command
+              if exists("#goyo")
+                  NERDTree | wincmd p
+              endif
+          endfunction
+          nnoremap <silent> <C-w>= :call <SID>goyo_cw_nerdtree("\<lt>C-w>=")<CR>
+          nnoremap <silent> <C-w>> :call <SID>goyo_cw_nerdtree("\<lt>C-w>>")<CR>
+          nnoremap <silent> <C-w>< :call <SID>goyo_cw_nerdtree("\<lt>C-w><")<CR>
+          nnoremap <silent> <C-w>+ :call <SID>goyo_cw_nerdtree("\<lt>C-w>+")<CR>
+          nnoremap <silent> <C-w>- :call <SID>goyo_cw_nerdtree("\<lt>C-w>-")<CR>
         '';
       }
 
