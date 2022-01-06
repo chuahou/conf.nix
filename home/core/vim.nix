@@ -186,10 +186,46 @@ in {
         '';
       }
 
+      # goyo.vim
+      {
+        plugin = goyo-vim;
+        config = ''
+          function! s:writing_goyo_enter()
+              set nolist
+              call goyo#execute(0, "83")
+          endfunction
+
+          function! s:writing_goyo_leave()
+              call goyo#execute(!0, "")
+              set list
+          endfunction
+
+          function! s:writing_goyo_cmd(bang)
+              if a:bang
+                  call <SID>writing_goyo_leave()
+              else
+                  call <SID>writing_goyo_enter()
+              endif
+          endfunction
+
+          command! -bang Write call <SID>writing_goyo_cmd(<bang>0)
+        '';
+      }
+
+      # NERDTree to be automatically opened by Goyo
+      {
+        plugin = nerdtree;
+        config = ''
+          augroup GoyoNERDTree
+              autocmd!
+              autocmd user GoyoEnter nested NERDTree | wincmd p
+              autocmd user GoyoLeave nested NERDTreeClose
+          augroup END
+        '';
+      }
+
       # misc
       fastfold # fast folding (important for vimtex)
-      goyo-vim
-      nerdtree
     ];
 
     # for coc.nvim
