@@ -29,10 +29,6 @@
     hostName              = "CH-21N";
     networkmanager.enable = true;
     useDHCP               = false;
-    interfaces = {
-      enp60s0.useDHCP = true;
-      wlp61s0.useDHCP = true;
-    };
   };
 
   # time settings
