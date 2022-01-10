@@ -26,9 +26,6 @@
 
     # cfgeq
     cfgeq = { url = "github:chuahou/cfgeq"; };
-
-    # tdesktop latest version branch from nixpkgs fork
-    tdesktop-latest = { url = "github:ch-fork/nixpkgs/tdesktop-latest"; };
   };
 
   outputs =
@@ -69,11 +66,6 @@
               done
             '';
           });
-        };
-
-        tdesktop-latest = self: super: {
-          inherit (import tdesktop-latest { inherit (super) system config; })
-            tdesktop;
         };
 
         alacritty-ligatures = self: super: {
@@ -152,7 +144,6 @@
               cpufreq-plugin
               fdr
               sioyek
-              tdesktop-latest
               zsh-vim-mode
             ];
           };

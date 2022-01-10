@@ -191,7 +191,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "secrets": "secrets",
-        "tdesktop-latest": "tdesktop-latest",
         "zsh-vim-mode": "zsh-vim-mode"
       }
     },
@@ -209,22 +208,6 @@
       "original": {
         "type": "git",
         "url": "file:///persist/secrets.nix"
-      }
-    },
-    "tdesktop-latest": {
-      "locked": {
-        "lastModified": 1641266916,
-        "narHash": "sha256-+Jio6Obj1eQXOK/NAPC6hTJou0r5cloU+BE8Asvch6E=",
-        "owner": "ch-fork",
-        "repo": "nixpkgs",
-        "rev": "caa597f955f17e8ed25c50b34fe1869b69a8016e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ch-fork",
-        "ref": "tdesktop-latest",
-        "repo": "nixpkgs",
-        "type": "github"
       }
     },
     "zsh-vim-mode": {
