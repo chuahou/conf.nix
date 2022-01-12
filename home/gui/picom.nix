@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   services.picom = {
     enable  = true;
-    backend = "xrender";
+
+    package = pkgs.picom-next;
+
+    backend = "glx";
+    experimentalBackends = true;
+
+    shadow = true;
 
     # inactive windows
     inactiveDim = "0.03";
@@ -28,6 +34,11 @@
       use-ewmh-active-win = true; # use EWMH to determine focused window
       detect-transient = true; # use WM_TRANSIENT_FOR to group windows and focus all
       detect-client-leader = true; # use WM_CLIENT_LEADER to group windows
+      blur:
+      {
+        method = "dual_kawase";
+        strength = 3;
+      };
     '';
   };
 }
