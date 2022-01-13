@@ -12,7 +12,10 @@
       in rec {
         global = {
           follow             = "keyboard";
-          geometry           = "450x5-18+45";
+          width              = 400;
+          origin             = "top-right";
+          offset             = "-18x45";
+          notification_limit = 5;
           max_icon_size      = 96;
           transparency       = 15;
           separator_height   = 2;
