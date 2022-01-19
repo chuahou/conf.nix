@@ -9,13 +9,13 @@
   ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.prime = {
     sync.enable = true;
     nvidiaBusId = "PCI:1:0:0";
     intelBusId  = "PCI:0:2:0";
   };
   services.xserver.screenSection = ''
-    Option "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
     Option "AllowIndirectGLXProtocol" "off"
     Option "TripleBuffer" "on"
   '';
