@@ -224,9 +224,9 @@ in {
             "XF86AudioMute"         = "exec ${volumeScriptBin} mute  && ${soundIpcHook}";
 
             # dunst controls
-            "${mod}+bracketright" = "exec ${pkgs.dunst}/bin/dunstctl close";
-            "${mod}+bracketleft"  = "exec ${pkgs.dunst}/bin/dunstctl history-pop";
-            "${mod}+backslash"    = "exec ${pkgs.dunst}/bin/dunstctl close-all";
+            "${mod}+bracketright" = "exec --no-startup-id ${pkgs.dunst}/bin/dunstctl close";
+            "${mod}+bracketleft"  = "exec --no-startup-id ${pkgs.dunst}/bin/dunstctl history-pop";
+            "${mod}+backslash"    = "exec --no-startup-id ${pkgs.dunst}/bin/dunstctl close-all";
           } //
 
           # workspace navigation
