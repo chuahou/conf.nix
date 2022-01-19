@@ -70,29 +70,6 @@
           });
         };
 
-        alacritty-ligatures = self: super: {
-          alacritty = super.alacritty.overrideAttrs (old: rec {
-            src = super.fetchFromGitHub {
-              owner = "zenixls2";
-              repo = "alacritty";
-              rev = "3ed043046fc74f288d4c8fa7e4463dc201213500";
-              sha256 = "sha256-1dGk4ORzMSUQhuKSt5Yo7rOJCJ5/folwPX2tLiu0suA=";
-            };
-            version = "ligatures-git";
-            cargoDeps = old.cargoDeps.overrideAttrs (oldDeps: {
-              inherit src;
-              outputHash = "sha256-tY5sle1YUlUidJcq7RgTzkPsGLnWyG/3rtPqy2GklkY=";
-            });
-            buildInputs = (old.buildInputs or []) ++ (with super; [
-              stdenv.cc.cc.lib
-            ]);
-            postInstall = (old.postInstall or "") + ''
-              patchelf --add-rpath "${super.lib.makeLibraryPath
-                [ super.stdenv.cc.cc.lib ]}" $out/bin/alacritty
-            '';
-          });
-        };
-
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
@@ -141,7 +118,6 @@
           configuration = import ./home {
             overlays = with overlays; [
               flakeInputs # Give the rest access to pkgs.flakeInputs.
-              alacritty-ligatures
               cfgeq
               cpufreq-plugin
               fdr
