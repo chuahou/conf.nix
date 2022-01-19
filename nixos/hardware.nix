@@ -19,7 +19,7 @@
     Option "AllowIndirectGLXProtocol" "off"
     Option "TripleBuffer" "on"
   '';
-  services.xserver.dpi = 104;
+  services.xserver.dpi = 96;
 
   boot.initrd.availableKernelModules = [
     "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"
