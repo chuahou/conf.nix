@@ -18,7 +18,7 @@
 
       font = {
         normal.family = "Fira Code";
-        size          = 12.0;
+        size          = 13.0;
         offset = {
           x = -1.0;
           y = 6.0;
