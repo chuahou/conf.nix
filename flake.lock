@@ -121,6 +121,22 @@
         "type": "github"
       }
     },
+    "nix-rice": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1631715971,
+        "narHash": "sha256-PBJLwCEzfZ6hipO1hj7qq5iBwICT8aBNlcLZGuVZFhI=",
+        "owner": "bertof",
+        "repo": "nix-rice",
+        "rev": "1e2c9f859f34c8632ec43a17ab78533b8098e5ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bertof",
+        "repo": "nix-rice",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1641965797,
@@ -188,6 +204,7 @@
         "home-manager": "home-manager",
         "ioslabka": "ioslabka",
         "latex-sty": "latex-sty",
+        "nix-rice": "nix-rice",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "secrets": "secrets",

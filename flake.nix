@@ -10,6 +10,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-rice = { url = "github:bertof/nix-rice"; flake = false; };
+
     secrets = { url = "/persist/secrets.nix"; flake = false; };
 
     # zsh-vim-mode plugin
