@@ -1,9 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-# force full composition pipeline for nvidia to prevent tearing
-nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
-
 # check if external monitor connected to HDMI-0
 if [ $(xrandr -q | grep -c "HDMI-0 connected") -gt 0 ]; then
 	# turn off eDP-1-1 and connect only to HDMI-0
@@ -11,9 +8,6 @@ if [ $(xrandr -q | grep -c "HDMI-0 connected") -gt 0 ]; then
 else
 	xrandr --output eDP-1-1 --auto --primary --output HDMI-0 --off
 fi
-
-# set DPI
-echo "Xft.dpi: 104" | xrdb -merge
 
 # disable mouse acceleration
 xset mouse 0 0
