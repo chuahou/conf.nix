@@ -9,6 +9,9 @@ else
 	xrandr --output eDP-1-1 --auto --primary --output HDMI-0 --off
 fi
 
+# set DPI
+echo "Xft.dpi: 96" | xrdb -merge
+
 # disable mouse acceleration
 xset mouse 0 0
 for mouse in $(xinput --list | sed -n 's/^.*[Mm]ouse.*id=\([0-9]\+\).*$/\1/p')
