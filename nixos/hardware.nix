@@ -10,15 +10,10 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.prime = {
-    sync.enable = true;
+    offload.enable = true;
     nvidiaBusId = "PCI:1:0:0";
     intelBusId  = "PCI:0:2:0";
   };
-  services.xserver.screenSection = ''
-    Option "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
-    Option "AllowIndirectGLXProtocol" "off"
-    Option "TripleBuffer" "on"
-  '';
   services.xserver.dpi = 96;
 
   boot.initrd.availableKernelModules = [
