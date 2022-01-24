@@ -11,7 +11,6 @@
       paths = [
         "NetworkManager/system-connections"
         "adjtime"
-        "machine-id"
       ];
     in builtins.foldl' (x: y: x // y) {} (builtins.map link paths);
   systemd.tmpfiles.rules =
@@ -25,8 +24,8 @@
     in builtins.map mkRule paths;
   security.sudo.extraConfig = "Defaults lecture = never";
 
-  # make root blank on boot
   boot.initrd.postDeviceCommands = lib.mkBefore ''
+    # Make root blank on boot.
     mkdir -p /mnt
     mount /dev/mapper/data-root /mnt
     btrfs sub list -o /mnt/root | awk '{print $NF}' |
@@ -34,8 +33,16 @@
         btrfs sub del /mnt/$sub
       done && btrfs sub del /mnt/root
     btrfs sub snap /mnt/root-blank /mnt/root
+
+    # Make /etc/machine-id available early enough for logs to persist.
+    mkdir -p /mnt/root/etc
+    ln -s /persist/etc/machine-id /mnt/root/etc/machine-id
     umount /mnt
   '';
+
+  # Mark /persist and /var/log needed for boot for logs to persist correctly.
+  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
 
   # make /bin/bash after boot
   boot.postBootCommands = ''
