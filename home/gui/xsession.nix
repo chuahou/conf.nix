@@ -137,7 +137,7 @@ in {
               always = true; notification = false;
             }
             {
-              command = "${pkgs.gnome3.networkmanagerapplet}/bin/nm-applet";
+              command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
               notification = false;
             }
             {
