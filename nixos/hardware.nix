@@ -27,7 +27,7 @@
   boot.kernel.sysctl."kernel.sysrq" = 1;
 
   powerManagement = {
-    cpuFreqGovernor = "powersave";
+    cpuFreqGovernor = "performance";
     cpufreq.max     = 2000000;
   };
 
