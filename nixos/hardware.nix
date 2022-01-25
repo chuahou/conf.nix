@@ -8,12 +8,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    nvidiaBusId = "PCI:1:0:0";
-    intelBusId  = "PCI:0:2:0";
-  };
   services.xserver.dpi = 96;
 
   boot.initrd.availableKernelModules = [
