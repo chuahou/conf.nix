@@ -11,6 +11,7 @@
     };
 
     nix-rice = { url = "github:bertof/nix-rice"; flake = false; };
+    impermanence = { url = "github:nix-community/impermanence"; };
 
     secrets = { url = "/persist/secrets.nix"; flake = false; };
 
@@ -108,6 +109,9 @@
           # nixos-hardware tweaks
           nixos-hardware.nixosModules.common-pc-laptop
           nixos-hardware.nixosModules.common-pc-laptop-ssd
+
+          # impermanence opt-in persistence
+          inputs.impermanence.nixosModules.impermanence
         ];
       };
 
