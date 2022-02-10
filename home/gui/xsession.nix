@@ -14,6 +14,11 @@ let
       then "polybar-msg hook sound_ipc 1"
       else "true";
 in {
+  home.keyboard = {
+    layout = "us";
+    options = [ "ctrl:nocaps" ];
+  };
+
   xsession = {
     enable = true;
     scriptPath = ".hm-xsession";

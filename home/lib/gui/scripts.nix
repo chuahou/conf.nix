@@ -12,7 +12,7 @@ let
 in rec {
   xconfigScript = mkScriptWithDeps {
     deps = with pkgs; [
-      xorg.setxkbmap xorg.xrandr xorg.xset xorg.xinput gnugrep gnused pulseaudio
+      xorg.xrandr xorg.xset xorg.xinput gnugrep gnused pulseaudio
     ];
     infile = ../../res/scripts/xconfig.sh;
   };

@@ -56,6 +56,8 @@
         '';
       }
     ];
+
+    xkbOptions = "ctrl:nocaps";
   };
 
   # hardware services
