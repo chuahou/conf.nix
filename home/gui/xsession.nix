@@ -24,6 +24,8 @@ in {
       umask 077
     '';
 
+    numlock.enable = true;
+
     windowManager.i3 =
       let
         # use Alt as mod key
