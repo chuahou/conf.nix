@@ -82,6 +82,17 @@
           }) { inherit (super) system config; }) spice-gtk;
         };
 
+        # Temporary fix until #160499 gets merged to nixos-unstable.
+        # https://github.com/NixOS/nixpkgs/pull/160499
+        nixpkgs-160499 = self: super: {
+          inherit (import (super.fetchFromGitHub {
+            owner = "NixOS";
+            repo = "nixpkgs";
+            rev = "9a688b90d15f09a93f8e69d6e153dbdc4d78e7cc";
+            sha256 = "sha256-JToJHgPAto5aYWYmtcHc9xJ7d5/gjMTruyhUbL1FhqM=";
+          }) { inherit (super) system config; }) discord;
+        };
+
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
@@ -137,6 +148,7 @@
               cfgeq
               cpufreq-plugin
               fdr
+              nixpkgs-160499
               sioyek
               zsh-vim-mode
             ];
