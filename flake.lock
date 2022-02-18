@@ -223,19 +223,36 @@
         "nix-rice": "nix-rice",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
-        "secrets": "secrets",
+        "secrets-CH-21N": "secrets-CH-21N",
+        "secrets-CH-22T": "secrets-CH-22T",
         "zsh-vim-mode": "zsh-vim-mode"
       }
     },
-    "secrets": {
+    "secrets-CH-21N": {
       "flake": false,
       "locked": {
         "narHash": "sha256-l31DWWQC6EXp6mzvum0z6pz14Ek8iOP5QkMnlWorKqo=",
-        "path": "/persist/secrets.nix",
+        "path": "/persist/CH-21N/secrets.nix",
         "type": "path"
       },
       "original": {
-        "path": "/persist/secrets.nix",
+        "path": "/persist/CH-21N/secrets.nix",
+        "type": "path"
+      }
+    },
+    "secrets-CH-22T": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645204181,
+        "narHash": "sha256-xPeFQEZj6ArDaxIru6r54SRsFTcxstp7AsfIcRoDL20=",
+        "ref": "master",
+        "rev": "fc92960c3b7a60302dc2e8ffbc65875c7945d72a",
+        "revCount": 1,
+        "type": "git",
+        "url": "file:///persist/CH-22T/secrets.nix"
+      },
+      "original": {
+        "path": "/persist/CH-22T/secrets.nix",
         "type": "path"
       }
     },

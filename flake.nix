@@ -13,7 +13,8 @@
     nix-rice = { url = "github:bertof/nix-rice"; flake = false; };
     impermanence = { url = "github:nix-community/impermanence"; };
 
-    secrets = { url = "/persist/secrets.nix"; flake = false; };
+    secrets-CH-21N = { url = "/persist/CH-21N/secrets.nix"; flake = false; };
+    secrets-CH-22T = { url = "/persist/CH-22T/secrets.nix"; flake = false; };
 
     # zsh-vim-mode plugin
     zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
@@ -109,34 +110,44 @@
         overlays = builtins.attrValues overlays;
       };
 
-      nixosConfigurations.CH-21N = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          # enable nix flakes
-          ({ ... }: {
-            nix.extraOptions = "experimental-features = nix-command flakes";
-          })
+      nixosConfigurations =
+        let
+          base = {
+            inherit system;
+            modules = [
+              # enable nix flakes
+              ({ ... }: {
+                nix.extraOptions = "experimental-features = nix-command flakes";
+              })
 
-          # extra overlays
-          ({ ... }: {
-            nixpkgs.overlays = with overlays; [
-              flakeInputs # Give the rest access to pkgs.flakeInputs.
-              cpufreq-plugin ioslabka
-              nixpkgs-159340
+              # extra overlays
+              ({ ... }: {
+                nixpkgs.overlays = with overlays; [
+                  flakeInputs # Give the rest access to pkgs.flakeInputs.
+                  cpufreq-plugin ioslabka
+                  nixpkgs-159340
+                ];
+              })
+
+              # main NixOS configuration
+              (import ./nixos)
+
+              # nixos-hardware tweaks
+              nixos-hardware.nixosModules.common-pc-laptop
+              nixos-hardware.nixosModules.common-pc-laptop-ssd
+
+              # impermanence opt-in persistence
+              inputs.impermanence.nixosModules.impermanence
             ];
-          })
-
-          # main NixOS configuration
-          (import ./nixos)
-
-          # nixos-hardware tweaks
-          nixos-hardware.nixosModules.common-pc-laptop
-          nixos-hardware.nixosModules.common-pc-laptop-ssd
-
-          # impermanence opt-in persistence
-          inputs.impermanence.nixosModules.impermanence
-        ];
-      };
+          };
+          hosts = [ "CH-21N" "CH-22T" ];
+        in
+          builtins.listToAttrs (builtins.map (host: {
+            name = host;
+            value = nixpkgs.lib.nixosSystem (base // {
+              modules = (base.modules or []) ++ [ (import ./nixos/${host}) ];
+            });
+          }) hosts);
 
       hmConfigs.${(import ./lib {}).me.home.username} =
         home-manager.lib.homeManagerConfiguration {

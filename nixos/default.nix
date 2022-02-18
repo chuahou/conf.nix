@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [
@@ -27,7 +27,6 @@
 
   # networking settings
   networking = {
-    hostName              = "CH-21N";
     networkmanager.enable = true;
     useDHCP               = false;
   };
@@ -71,7 +70,8 @@
     mutableUsers = false;
     users = {
       root = {
-        hashedPassword = (import pkgs.flakeInputs.secrets).root.hashedPassword;
+        hashedPassword = (import
+          pkgs.flakeInputs."secrets-${config.networking.hostName}").root.hashedPassword;
       };
       user =
         let inherit (import ../lib {}) me;
@@ -79,7 +79,8 @@
           isNormalUser   = true;
           name           = me.home.username;
           description    = me.name;
-          hashedPassword = (import pkgs.flakeInputs.secrets).user.hashedPassword;
+          hashedPassword = (import
+            pkgs.flakeInputs."secrets-${config.networking.hostName}").user.hashedPassword;
           shell          = pkgs.zsh;
           extraGroups = [
             "wheel" "networkmanager" "video" "scanner" "lp"
