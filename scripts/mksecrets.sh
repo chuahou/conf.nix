@@ -18,11 +18,6 @@ mkpasswdfn ()
 {
 	mkpasswd -m sha-512
 }
-promptfn ()
-{
-	read -p "$@" tmp
-	echo -n $tmp
-}
 gitfn ()
 {
 	git -C ${SECRETS_REPO} -c user.name="bleh" -c user.email="a@b.c" "${@}"
@@ -35,11 +30,6 @@ cat > ${SECRETS_FILE} <<EOF
 {
 	root.hashedPassword = "$(mkpasswdfn)";
 	user.hashedPassword = "$(mkpasswdfn)";
-
-	org-gcal = {
-		clientId = "$(promptfn "Google client ID: ")";
-		clientSecret = "$(promptfn "Google client secret: ")";
-	};
 }
 EOF
 
