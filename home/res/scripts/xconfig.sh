@@ -1,12 +1,14 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-# check if external monitor connected to HDMI-0
-if [ $(xrandr -q | grep -c "HDMI-0 connected") -gt 0 ]; then
-	# turn off eDP-1-1 and connect only to HDMI-0
-	xrandr --output HDMI-0 --auto --primary --output eDP-1-1 --off
-else
-	xrandr --output eDP-1-1 --auto --primary --output HDMI-0 --off
+# check if external monitor connected
+if [ $(hostname) = "CH-21N" ]; then
+	if [ $(xrandr -q | grep -c "HDMI-0 connected") -gt 0 ]; then
+		# turn off eDP-1-1 and connect only to HDMI-0
+		xrandr --output HDMI-0 --auto --primary --output eDP-1-1 --off
+	else
+		xrandr --output eDP-1-1 --auto --primary --output HDMI-0 --off
+	fi
 fi
 
 # set DPI
@@ -23,7 +25,9 @@ do
 done
 
 # disable touchpad
-xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
+if [ $(hostname) = "CH-21N" ]; then
+	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
+fi
 
 # disable X power saving
 xset s off -dpms

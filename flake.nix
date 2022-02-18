@@ -98,6 +98,9 @@
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
 
+      # Hosts to generate configs over.
+      hosts = [ "CH-21N" "CH-22T" ];
+
     in {
 
       # Forward inputs for easier debugging. To access each input simply use
@@ -138,7 +141,6 @@
             ];
             specialArgs = { inherit inputs; };
           };
-          hosts = [ "CH-21N" "CH-22T" ];
         in
           builtins.listToAttrs (builtins.map (host: {
             name = host;
@@ -147,21 +149,28 @@
             });
           }) hosts);
 
-      hmConfigs.${(import ./lib {}).me.home.username} =
-        home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          inherit ((import ./lib {}).me.home) username homeDirectory;
-          configuration = import ./home {
-            overlays = with overlays; [
-              flakeInputs # Give the rest access to pkgs.flakeInputs.
-              cfgeq
-              cpufreq-plugin
-              fdr
-              nixpkgs-160499
-              sioyek
-              zsh-vim-mode
-            ];
-          };
-        };
+      hmConfigs =
+        let
+          inherit ((import ./lib {}).me) home;
+        in
+          builtins.listToAttrs (builtins.map (host: {
+            name = "${host}-${home.username}";
+            value = home-manager.lib.homeManagerConfiguration {
+              inherit system;
+              inherit (home) username homeDirectory;
+              configuration = import ./home {
+                overlays = with overlays; [
+                  flakeInputs # Give the rest access to pkgs.flakeInputs.
+                  cfgeq
+                  cpufreq-plugin
+                  fdr
+                  nixpkgs-160499
+                  sioyek
+                  zsh-vim-mode
+                ];
+                inherit host;
+              };
+            };
+          }) hosts);
     };
 }

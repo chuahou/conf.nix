@@ -7,7 +7,7 @@
 set -eu
 
 # build activation package
-FLAKE=$(dirname ${0})/..#hmConfigs.${USER}.activationPackage
+FLAKE=$(dirname ${0})/..#hmConfigs.$(hostname)-${USER}.activationPackage
 nix build ${FLAKE}
 
 # delete old ~/.config/mimeapps.list if it is the same
