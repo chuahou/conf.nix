@@ -7,7 +7,7 @@
   programs.emacs = {
     enable        = true;
     package       = pkgs.emacs-nox;
-    extraPackages = epkgs: with epkgs; [ evil evil-org org-gcal ];
+    extraPackages = epkgs: with epkgs; [ evil evil-org ];
   };
 
   home.file.".emacs".source = ../res/emacs.el;
