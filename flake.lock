@@ -243,13 +243,9 @@
     "secrets-CH-22T": {
       "flake": false,
       "locked": {
-        "lastModified": 1645204181,
-        "narHash": "sha256-xPeFQEZj6ArDaxIru6r54SRsFTcxstp7AsfIcRoDL20=",
-        "ref": "master",
-        "rev": "fc92960c3b7a60302dc2e8ffbc65875c7945d72a",
-        "revCount": 1,
-        "type": "git",
-        "url": "file:///persist/CH-22T/secrets.nix"
+        "narHash": "sha256-YhfbymSCVFPkYS0WpD9VXt/AeVlWSXqANVfHXvdfpMk=",
+        "path": "/persist/CH-22T/secrets.nix",
+        "type": "path"
       },
       "original": {
         "path": "/persist/CH-22T/secrets.nix",

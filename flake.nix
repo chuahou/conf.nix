@@ -170,6 +170,10 @@
                 ];
                 inherit host;
               };
+              stateVersion = builtins.getAttr host {
+                "CH-21N" = "20.09";
+                "CH-22T" = "21.11";
+              };
             };
           }) hosts);
     };

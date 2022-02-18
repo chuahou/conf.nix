@@ -134,7 +134,7 @@ in {
                 name = "wallpaper";
                 src = builtins.fetchurl {
                   url    = "https://cdnb.artstation.com/p/assets/images/images/000/561/041/large/arseniy-chebynkin-oldbridge.jpg";
-                  sha256 = "sha256-yVATF2jg02bkdQQ6fvf0byWGMw4fQsjEuUNOJZG89xM=";
+                  sha256 = "sha256-3W3eiQhNY4xsjkS60jX9mJL2Xv4daFsr5TiUDvb7OMU=";
                 };
                 dontUnpack   = true;
                 buildPhase   = "waifu2x-converter-cpp -i $src -o $(realpath ./out.jpg)";
