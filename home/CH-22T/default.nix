@@ -1,9 +1,15 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2022 Chua Hou
 
-{ ... }:
+{ lib, ... }:
 
 {
+  # Polybar changes due to system differences.
+  services.polybar.config = {
+    "module/battery".battery = lib.mkForce "BAT1";
+    "module/fshd" = lib.mkForce {};
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
