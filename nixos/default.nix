@@ -1,15 +1,13 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 
 {
   imports = [
     ./cachix.nix
     ./direnv.nix
-    ./fs.nix
     ./gc.nix
-    ./hardware.nix
     ./persist.nix
     ./piper.nix
     ./printing.nix
@@ -18,6 +16,12 @@
 
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
+
+  # enable all firmware
+  hardware.enableAllFirmware = true;
+
+  # allow magic SysRq
+  boot.kernel.sysctl."kernel.sysrq" = 1;
 
   # use systemd-boot
   boot.loader = {
@@ -45,6 +49,9 @@
   services.xserver = {
     enable = true;
 
+    # Set DPI to a constant 96.
+    dpi = 96;
+
     displayManager.lightdm.enable = true;
     desktopManager.session = [
       {
@@ -59,52 +66,37 @@
     xkbOptions = "ctrl:nocaps";
   };
 
-  # hardware services
-  sound.enable                     = true;
-  hardware.pulseaudio.enable       = true;
-  services.xserver.libinput.enable = true; # touchpad support
-  hardware.bluetooth.enable        = true;
-
   # user accounts
-  users = {
-    mutableUsers = false;
-    users = {
-      root = {
-        hashedPassword = (import
-          pkgs.flakeInputs."secrets-${config.networking.hostName}").root.hashedPassword;
-      };
-      user =
-        let inherit (import ../lib {}) me;
-        in {
-          isNormalUser   = true;
-          name           = me.home.username;
-          description    = me.name;
-          hashedPassword = (import
-            pkgs.flakeInputs."secrets-${config.networking.hostName}").user.hashedPassword;
-          shell          = pkgs.zsh;
-          extraGroups = [
-            "wheel" "networkmanager" "video" "scanner" "lp"
-          ];
+  users =
+    let
+      secrets = import inputs."secrets-${config.networking.hostName}";
+    in {
+      mutableUsers = false;
+      users = {
+        root = {
+          hashedPassword = secrets.root.hashedPassword;
         };
+        user =
+          let inherit (import ../lib {}) me;
+          in {
+            isNormalUser   = true;
+            name           = me.home.username;
+            description    = me.name;
+            hashedPassword = secrets.user.hashedPassword;
+            shell          = pkgs.zsh;
+            extraGroups = [
+              "wheel" "networkmanager" "video" "scanner" "lp"
+            ];
+          };
+      };
     };
-  };
 
-  # enable zsh as an interactive shell, needed to set it as default shell
-  programs.zsh.enable = true;
-
-  # enable gpg-agent
+  # various programs/services
+  programs.zsh.enable = true; # enable as interactive shell
   programs.gnupg.agent.enable = true;
-
-  # enable light to control backlight
-  programs.light.enable = true;
-
-  # enable blueman
-  services.blueman.enable = true;
-
-  # enable upower
+  programs.light.enable = true; # backlight control
+  services.blueman.enable = true; # bluetooth
   services.upower.enable = true;
-
-  # enable cron
   services.cron.enable = true;
 
   # fonts to install system-wide
@@ -165,12 +157,4 @@
       ];
     }
   ];
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
 }

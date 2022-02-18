@@ -133,13 +133,10 @@
               # main NixOS configuration
               (import ./nixos)
 
-              # nixos-hardware tweaks
-              nixos-hardware.nixosModules.common-pc-laptop
-              nixos-hardware.nixosModules.common-pc-laptop-ssd
-
               # impermanence opt-in persistence
               inputs.impermanence.nixosModules.impermanence
             ];
+            specialArgs = { inherit inputs; };
           };
           hosts = [ "CH-21N" "CH-22T" ];
         in
