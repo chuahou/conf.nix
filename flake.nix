@@ -107,6 +107,7 @@
       # nixpkgs with all overlays applied.
       overlayed = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
         overlays = builtins.attrValues overlays;
       };
 
