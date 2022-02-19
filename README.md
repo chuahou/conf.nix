@@ -34,7 +34,8 @@ Personal configuration for NixOS, home-manager and others.
 	   an input. Then run `scripts/mksecrets.sh /persist/NEWHOSTNAME`.
 	1. `for i in $(find nixos -mindepth 1 -maxdepth 1 -type d); do mkdir -p /persist/$(basename $i)/secrets.nix`
 1. `nix-env -iA nixos.nixFlakes`
-1. `nixos-install --flake /path/to/conf.nix#NEWHOSTNAME`
+1. `nixos-install --impure --flake /path/to/conf.nix#NEWHOSTNAME`
+	1. May need `mount --bind /mnt /mnt/mnt` workaround.
 
 ## Previously
 
