@@ -14,6 +14,7 @@ Personal configuration for NixOS, home-manager and others.
 	1. `vgcreate data /dev/mapper/crypt`
 	1. `lvcreate -n swap -L 4G data`
 	1. `lvcreate -n root -l 100%FREE data`
+	1. `mkswap /dev/mapper/data-swap`
 	1. `mkfs.btrfs /dev/mapper/data-root`
 1. Create subvolumes.
 	1. `mount -t btrfs /dev/mapper/data-root -o noatime,ssd,space_cache=v2,commit=120,compress=zstd /mnt`
