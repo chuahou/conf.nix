@@ -5,7 +5,7 @@
 
 {
   boot.initrd.luks.devices.crypt.device =
-    "/dev/disk/by-uuid/e038ea8f-2a40-46b5-a812-94144c1fd089";
+    "/dev/disk/by-uuid/fc5767d6-0635-4e4b-a5b7-7a760737a6e3";
 
   fileSystems =
     let btrfsFs = subvol: {
@@ -24,7 +24,7 @@
       "/var/log" = btrfsFs "log";
 
       "/boot" = {
-        device = "/dev/disk/by-uuid/1838-9F62";
+        device = "/dev/disk/by-uuid/B752-510A";
         fsType = "vfat";
       };
     };

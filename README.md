@@ -28,6 +28,7 @@ Personal configuration for NixOS, home-manager and others.
 1. `nixos-generate-config --root /mnt` and copy relevant generated details to a
    new host under `nixos/`.
 1. Write host-specific config under new host under `nixos/`.
+	1. UUIDs can be found using `blkid | grep UUID`.
 1. Setup secrets.
 	1. `ln -s /mnt/persist /persist` since we have `/persist` subdirectories as
 	   an input. Then run `scripts/mksecrets.sh /persist/NEWHOSTNAME`.
