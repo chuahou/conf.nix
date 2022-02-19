@@ -73,11 +73,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1645025890,
-        "narHash": "sha256-pwlZPAsuGS14VXjjDYUBau+NzvUCDxwOfn1NwQOMDnQ=",
+        "lastModified": 1645140957,
+        "narHash": "sha256-WTJzLSCDLBI537o2L/3kRyqEV5YRT7+1QSGryeKReHE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a3c18a60d598157f34d7774956c05fb975838994",
+        "rev": "4f4165a8b9108818ab0193bbd1a252106870b2a2",
         "type": "github"
       },
       "original": {
@@ -243,7 +243,7 @@
     "secrets-CH-22T": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-YhfbymSCVFPkYS0WpD9VXt/AeVlWSXqANVfHXvdfpMk=",
+        "narHash": "sha256-wDpekm2tuKsgNjgljzm+vuhkfiNQi1RseUWnoOA9VGE=",
         "path": "/persist/CH-22T/secrets.nix",
         "type": "path"
       },
