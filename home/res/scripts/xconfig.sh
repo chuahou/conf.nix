@@ -16,7 +16,9 @@ else
 fi
 
 # set DPI
-echo "Xft.dpi: 96" | xrdb -merge
+# We take advantage of the ccd alias (only present in zsh) to enter the config
+# directory to perform nix eval, getting the correct DPI value. (Ew!)
+zsh -c '(ccd; echo "Xft.dpi: $(nix eval .\#nixosConfigurations.$(hostname).config.services.xserver.dpi)" | xrdb -merge)'
 
 # disable mouse acceleration
 xset mouse 0 0

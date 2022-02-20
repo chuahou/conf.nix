@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2022 Chua Hou
 
-{ ... }:
+{ lib, ... }:
 
 {
   imports = [
@@ -11,6 +11,9 @@
   ];
 
   networking.hostName = "CH-22T";
+
+  # Increase DPI.
+  services.xserver.dpi = lib.mkForce 120;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
