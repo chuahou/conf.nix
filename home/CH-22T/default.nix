@@ -17,9 +17,12 @@
   };
 
   # Smaller font on alacritty to counter increased DPI.
-  programs.alacritty.settings.font = {
-    size = lib.mkForce 12.0;
-    offset.x = lib.mkForce (-2.0);
+  programs.alacritty.settings = {
+    font = {
+      size = lib.mkForce 12.0;
+      offset.x = lib.mkForce (-2.0);
+    };
+    window.padding = lib.mkForce rec { x = 20; y = x; };
   };
 
   # This value determines the Home Manager release that your
