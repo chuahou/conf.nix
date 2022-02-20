@@ -10,6 +10,12 @@
     "module/fshd" = lib.mkForce {};
   };
 
+  # Smaller gaps on smaller screen.
+  xsession.windowManager.i3.config.gaps = {
+    inner = lib.mkForce 4;
+    outer = lib.mkForce 4;
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
