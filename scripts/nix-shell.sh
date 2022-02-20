@@ -4,4 +4,4 @@
 # Copyright (c) 2021 Chua Hou
 
 nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/$(cat flake.lock |
-	jq .nodes.nixpkgs_2.locked.rev | sed 's/^"\(.*\)"$/\1/').tar.gz $@
+	jq .nodes.nixpkgs_3.locked.rev | sed 's/^"\(.*\)"$/\1/').tar.gz $@
