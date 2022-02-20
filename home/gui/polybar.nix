@@ -108,8 +108,8 @@
           format-full-background        = colours.gray.green;
           format-full-underline         = colours.green;
           bar-capacity-width            = 4;
-          label-charging                = "ac %percentage%% %{T3}⇡%{T-} %time%";
-          label-discharging             = "dc %percentage%% %{T3}⇣%{T-} %time%";
+          label-charging                = "ac %percentage%% %{T3}⇡%{T-} %consumption%W %time%";
+          label-discharging             = "dc %percentage%% %{T3}⇣%{T-} %consumption%W %time%";
           label-full                    = "ac FULL";
         };
 
