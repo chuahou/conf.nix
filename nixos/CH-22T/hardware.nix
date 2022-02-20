@@ -29,7 +29,7 @@
 
   # Default CPU power management.
   powerManagement = {
-    cpuFreqGovernor = "powersave";
+    cpuFreqGovernor = "performance";
     cpufreq.max     = 3000000;
   };
 
