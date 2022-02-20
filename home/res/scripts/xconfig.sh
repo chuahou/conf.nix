@@ -46,3 +46,9 @@ xset s off -dpms
 # disable stream restore module if loaded
 [ $(pactl list short modules | grep module-stream-restore -c || true) -gt 0 ] &&
 	pactl unload-module module-stream-restore
+
+# cope with UK keyboard layout (ew) by mapping the physical \ button to left
+# shift
+if [ $(hostname) = "CH-22T" ]; then
+	xmodmap -e "keycode 94 = Shift_L"
+fi
