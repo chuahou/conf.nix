@@ -16,6 +16,12 @@
     outer = lib.mkForce 4;
   };
 
+  # Smaller font on alacritty to counter increased DPI.
+  programs.alacritty.settings.font = {
+    size = lib.mkForce 12.0;
+    offset.x = lib.mkForce (-2.0);
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
