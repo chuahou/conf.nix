@@ -1,14 +1,18 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2022 Chua Hou
 
-# check if external monitor connected
+# have exactly one of internal and external displays connected and primary
 if [ $(hostname) = "CH-21N" ]; then
-	if [ $(xrandr -q | grep -c "HDMI-0 connected") -gt 0 ]; then
-		# turn off eDP-1-1 and connect only to HDMI-0
-		xrandr --output HDMI-0 --auto --primary --output eDP-1-1 --off
-	else
-		xrandr --output eDP-1-1 --auto --primary --output HDMI-0 --off
-	fi
+	internal=eDP-1-1
+	external=HDMI-0
+elif [ $(hostname) = "CH-22T" ]; then
+	internal=eDP-1
+	external=HDMI-1
+fi
+if [ $(xrandr -q | grep -c "$external connected") -gt 0 ]; then
+	xrandr --output $external --auto --primary --output $internal --off
+else
+	xrandr --output $internal --auto --primary --output $external --off
 fi
 
 # set DPI
@@ -27,6 +31,11 @@ done
 # disable touchpad
 if [ $(hostname) = "CH-21N" ]; then
 	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
+fi
+
+# disable touchscreen
+if [ $(hostname) = "CH-22T" ]; then
+	xinput set-prop "Raydium Corporation Raydium Touch System" "Device Enabled" 0
 fi
 
 # disable X power saving
