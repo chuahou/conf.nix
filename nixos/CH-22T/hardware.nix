@@ -10,6 +10,8 @@
 
     # nixos-hardware tweaks
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t470s
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
   ];
 
   boot.initrd.availableKernelModules = [
