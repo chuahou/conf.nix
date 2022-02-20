@@ -14,6 +14,9 @@ in rec {
     deps = with pkgs; [
       xorg.xrandr xorg.xset xorg.xinput xorg.xmodmap
       gnugrep gnused pulseaudio nix
+      (writeShellScriptBin "conf-dir-path" ''
+        echo ${(import ../../../lib {}).me.home.confDirectory}
+      '')
     ];
     infile = ../../res/scripts/xconfig.sh;
   };
