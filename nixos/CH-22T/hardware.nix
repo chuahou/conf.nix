@@ -38,4 +38,34 @@
 
   # Enable TLP.
   services.tlp.enable = true;
+
+  # Thinkfan config.
+  boot.extraModprobeConfig = "options thinkpad_acpi fan_control=1";
+  services.thinkfan = {
+    enable = true;
+    sensors = [
+      {
+        type = "hwmon";
+        query = "/sys/class/hwmon";
+        name = "coretemp";
+        indices = [ 1 2 3 ];
+      }
+      {
+        type = "tpacpi";
+        query = "/proc/acpi/ibm/thermal";
+        indices = [ 0 ];
+      }
+    ];
+    fans = [
+      {
+       type = "tpacpi";
+       query = "/proc/acpi/ibm/fan";
+      }
+    ];
+    levels = [
+      [ 0 0 45 ]
+      [ "level auto" 45 80 ]
+      [ "level full-speed" 75 255 ]
+    ];
+  };
 }
