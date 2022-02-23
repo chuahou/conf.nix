@@ -72,28 +72,6 @@
           });
         };
 
-        # Temporary fix until #159340 gets merged to nixos-unstable.
-        # https://github.com/NixOS/nixpkgs/pull/159340
-        nixpkgs-159340 = self: super: {
-          inherit (import (super.fetchFromGitHub {
-            owner = "NixOS";
-            repo = "nixpkgs";
-            rev = "5c5f2b547f20b7801231253f070a93e1ed9a8546";
-            sha256 = "sha256-h7bXsmm+SUREXNBvG/mxwG5vZYTHdqRgkR1Ufo6uPFs=";
-          }) { inherit (super) system config; }) spice-gtk;
-        };
-
-        # Temporary fix until #160499 gets merged to nixos-unstable.
-        # https://github.com/NixOS/nixpkgs/pull/160499
-        nixpkgs-160499 = self: super: {
-          inherit (import (super.fetchFromGitHub {
-            owner = "NixOS";
-            repo = "nixpkgs";
-            rev = "9a688b90d15f09a93f8e69d6e153dbdc4d78e7cc";
-            sha256 = "sha256-JToJHgPAto5aYWYmtcHc9xJ7d5/gjMTruyhUbL1FhqM=";
-          }) { inherit (super) system config; }) discord;
-        };
-
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
@@ -129,7 +107,6 @@
                 nixpkgs.overlays = with overlays; [
                   flakeInputs # Give the rest access to pkgs.flakeInputs.
                   cpufreq-plugin ioslabka
-                  nixpkgs-159340
                 ];
               })
 
@@ -164,7 +141,6 @@
                   cfgeq
                   cpufreq-plugin
                   fdr
-                  nixpkgs-160499
                   sioyek
                   zsh-vim-mode
                 ];
