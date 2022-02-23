@@ -29,6 +29,9 @@
             # prevent Alt from showing window menu
             "ui.key.menuAccessKeyFocuses" = false;
 
+            # only show context menu after mouseup to prevent misclicks
+            "ui.context_menus.after_mouseup" = true;
+
             # enable userChrome.css
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
