@@ -170,8 +170,6 @@ in {
             "${mod}+Shift+Return" = "exec ${config.programs.firefox.package}/bin/firefox";
             "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "${mod}+p"            = Print;
-            "${mod}+o"            = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty -o font.size=11.5 -e zsh -c 'org'";
-            "${mod}+Shift+o"      = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty -o font.size=11.5 -e zsh -c \"emacs --eval '(progn (org-agenda-list 1) (delete-other-windows))'\"";
 
             # window navigation
             "${mod}+Tab"     = "focus mode_toggle";

@@ -51,7 +51,6 @@
   ];
 
   services.dropbox.enable   = true;
-  services.syncthing.enable = true;
 
   xdg.mimeApps = {
     enable = true;

@@ -53,10 +53,6 @@
   e = "$VISUAL";
   write = "$VISUAL +:Write";
 
-  # emacs
-  emacs = "emacs --color=16";
-  org   = "emacs ~/org/index.org";
-
   # enter conf.nix directory
   ccd = "cd ${(import ../../../lib {}).me.home.confDirectory}";
 
