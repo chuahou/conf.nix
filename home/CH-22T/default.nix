@@ -25,6 +25,18 @@
     window.padding = lib.mkForce rec { x = 20; y = x; };
   };
 
+  # Override wezterm config to accommodate smaller screen.
+  xdg.configFile."wezterm/override.lua".text = ''
+    local wezterm = require 'wezterm';
+
+    return function(config)
+        -- Override font to Iosevka, which is more horizontally condensed.
+        config["font"]["font"][1] = wezterm.font("Iosevka")["font"][1];
+        config["line_height"] = 1.3;
+        return config
+    end
+  '';
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

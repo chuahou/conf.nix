@@ -3,18 +3,17 @@
 #
 # Default file manager.
 
-{ config, ... }:
+{ pkgs, ... }:
 
 let
-  desktopName = "alacritty-browse";
+  desktopName = "wezterm-browse";
 
 in {
   xdg.mimeApps.defaultApplications."inode/directory" = "${desktopName}.desktop";
   xdg.desktopEntries.${desktopName} = {
-    name = "Go to directory in Alacritty";
+    name = "Go to directory in Wezterm";
     genericName = "File Manager";
-    exec = "sh -c \"${config.programs.alacritty.package
-      }/bin/alacritty --working-directory=%f\"";
+    exec = "sh -c \"${pkgs.wezterm}/bin/wezterm start --cwd %f\"";
     categories = [ "Application" ];
     mimeType = [ "inode/directory" ];
   };
