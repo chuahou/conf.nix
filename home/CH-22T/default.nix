@@ -1,13 +1,30 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2022 Chua Hou
 
-{ lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Polybar changes due to system differences.
-  services.polybar.config = {
+  services.polybar.config = let colours = import ../lib/gui/colours.nix; in {
     "module/battery".battery = lib.mkForce "BAT1";
     "module/fshd" = lib.mkForce {};
+
+    # Additional fan level module.
+    # For some reason lib.mkAfter doesn't work with home-manager, hence this
+    # copy-paste. :(
+    "bar/main".modules-left = lib.mkForce "battery fs fshd mem maxtemp cpu fanlevel";
+    "module/fanlevel" = {
+      type = "custom/script";
+      exec = "${pkgs.coreutils-full}/bin/cat /proc/acpi/ibm/fan | ${pkgs.gnused}/bin/sed -n 's/level:\\s\\+\\([^\\s]\\+\\)/\\1/p'";
+      label = "fan level %output%";
+      format-background = colours.gray.white;
+      format-underline = colours.white;
+
+      # Sadly these two are hardcoded since we don't have access to the let
+      # expressions in ../gui/polybar.nix.
+      format-padding = 1;
+      click-left = "${pkgs.wezterm}/bin/wezterm start -- ${pkgs.systemd}/bin/journalctl -fu thinkfan";
+    };
   };
 
   # Smaller gaps on smaller screen.
