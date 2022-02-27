@@ -137,7 +137,7 @@
           label             = "mem %gb_used%";
           format-background = colours.gray.green;
           format-underline  = colours.green;
-          format-padding    = 1;
+          inherit format-padding;
         };
 
         "module/maxtemp" = {
