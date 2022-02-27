@@ -31,7 +31,10 @@
 
     return function(config)
         -- Override font to Iosevka, which is more horizontally condensed.
-        config["font"]["font"][1] = wezterm.font("Iosevka")["font"][1];
+        config["font"]["font"][1] = wezterm.font({
+            family = "Iosevka",
+            harfbuzz_features = { "calt=0", "HSKL=1" },
+        })["font"][1];
         config["line_height"] = 1.3;
         return config
     end
