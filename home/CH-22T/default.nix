@@ -27,6 +27,12 @@
     };
   };
 
+  # Load tabs on demand for Firefox due to slower CPU.
+  programs.firefox.profiles.${(import ../../lib {}).me.home.username}.settings = {
+    "browser.sessionstore.restore_on_demand" = lib.mkForce true;
+    "browser.sessionstore.restore_pinned_tabs_on_demand" = lib.mkForce true;
+  };
+
   # Smaller gaps on smaller screen.
   xsession.windowManager.i3.config.gaps = {
     inner = lib.mkForce 4;
