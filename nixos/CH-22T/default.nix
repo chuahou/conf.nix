@@ -8,6 +8,7 @@
     ./fs.nix
     ./hardware.nix
     ./persist.nix
+    ./printing.nix
   ];
 
   networking.hostName = "CH-22T";
