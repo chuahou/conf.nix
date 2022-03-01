@@ -119,6 +119,7 @@ in {
             criteria = [
               { class = "blueman-manager"; }
               { class = "Pavucontrol";     }
+              { class = "Galculator";      }
             ];
           };
 
@@ -159,6 +160,7 @@ in {
             "${mod}+Shift+Return" = "exec ${config.programs.firefox.package}/bin/firefox";
             "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "${mod}+p"            = Print;
+            "${mod}+Shift+c"      = "exec ${pkgs.galculator}/bin/galculator";
 
             # window navigation
             "${mod}+Tab"     = "focus mode_toggle";
