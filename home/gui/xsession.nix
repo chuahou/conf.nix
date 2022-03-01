@@ -150,17 +150,6 @@ in {
             {
               command = "${powerScript}/bin/power.sh"; notification = false;
             }
-            (let
-              cfg = builtins.attrNames config.services.polybar.config;
-              mods = builtins.filter (lib.hasPrefix "module/") cfg;
-              ipcs = builtins.filter (lib.hasSuffix "_ipc") mods;
-            in {
-              command = "systemctl --user restart polybar; sleep 5; ${
-                lib.concatMapStringsSep "; sleep 1; "
-                  (ipc: "polybar-msg hook ${
-                    lib.removePrefix "module/" ipc} 1") ipcs}";
-              always = true; notification = false;
-            })
           ];
 
           # keybindings
