@@ -234,21 +234,30 @@
           inherit format-padding;
         });
 
-      script =
-        let
-          i3 = config.xsession.windowManager.i3.package;
-          cfg = builtins.attrNames config.services.polybar.config;
-          mods = builtins.filter (lib.hasPrefix "module/") cfg;
-          ipcs = builtins.filter (lib.hasSuffix "_ipc") mods;
-        in ''
+    # The systemd unit script "polybar-start" will fork and call the inner
+    # script "polybar-start-i3-ipc" (otherwise the session will block waiting
+    # for this to execute, and i3 cannot start properly!). The inner script
+    # waits for i3 to start before executing polybar, and also forks a process
+    # that calls each IPC module at startup to make them appear for the first
+    # time.
+    script =
+      let
+        i3 = config.xsession.windowManager.i3.package;
+        cfg = builtins.attrNames config.services.polybar.config;
+        mods = builtins.filter (lib.hasPrefix "module/") cfg;
+        ipcs = builtins.filter (lib.hasSuffix "_ipc") mods;
+        script = pkgs.writeShellScript "polybar-start-i3-ipc" ''
           until ${i3}/bin/i3 --get-socket; do ${pkgs.coreutils}/bin/sleep 1; done
-          polybar main &
-          until polybar-msg cmd show; do ${pkgs.coreutils}/bin/sleep 1; done
-          ${lib.concatMapStringsSep "\n${pkgs.coreutils}/bin/sleep 1\n"
-            (ipc: ''
-              until polybar-msg hook ${lib.removePrefix "module/" ipc} 1; do
-                ${pkgs.coreutils}/bin/sleep 1; done
-            '') ipcs}
+          (
+              until polybar-msg cmd show; do ${pkgs.coreutils}/bin/sleep 1; done
+              ${lib.concatMapStringsSep "\n${pkgs.coreutils}/bin/sleep 1\n"
+                (ipc: ''
+                  until polybar-msg hook ${lib.removePrefix "module/" ipc} 1; do
+                    ${pkgs.coreutils}/bin/sleep 1; done
+                '') ipcs}
+          ) &
+          exec polybar main # Must be exec! Otherwise polybar will be killed.
         '';
+      in "${script} &";
   };
 }
