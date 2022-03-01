@@ -19,7 +19,7 @@ while true; do
 	sleep $LOOP_INTERVAL
 
 	# if charging, skip
-	[ ! $(cat /sys/class/power_supply/BAT0/status) = "Discharging" ] && \
+	[ ! $(cat /sys/class/power_supply/BAT*/status) = "Discharging" ] && \
 		continue
 
 	# get battery level
@@ -42,7 +42,7 @@ while true; do
 			"Shutting down in $SHUTDOWN_DELAY seconds!" && \
 		paplay $AUDIO_FILE && \
 		sleep $SHUTDOWN_DELAY && \
-		[ $(cat /sys/class/power_supply/BAT0/status) = "Discharging" ] && \
+		[ $(cat /sys/class/power_supply/BAT*/status) = "Discharging" ] && \
 		systemctl poweroff
 
 done
