@@ -190,6 +190,9 @@ in {
             "${mod}+Shift+r" = "reload";
             "${mod}+Ctrl+r"  = "restart";
 
+            # reload polybar
+            "${mod}+Ctrl+Shift+r" = "exec --no-startup-id ${pkgs.systemd}/bin/systemctl --user restart polybar";
+
             # modes
             "${resizeKey}"      = "mode \"${resizeMode}\"";
             "${endKey}"         = "mode \"${endMode}\"";
