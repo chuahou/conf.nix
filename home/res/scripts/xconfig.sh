@@ -28,13 +28,15 @@ do
 	fi
 done
 
-# disable touchpad
+# disable touchpad, enable natural scrolling
 if [ $(hostname) = "CH-21N" ]; then
+	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "libinput Natural Scrolling Enabled" 1
 	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
 fi
 
-# disable touchscreen
+# disable touchscreen, enable natural scrolling on touchpad
 if [ $(hostname) = "CH-22T" ]; then
+	xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 	xinput set-prop "Raydium Corporation Raydium Touch System" "Device Enabled" 0
 fi
 
