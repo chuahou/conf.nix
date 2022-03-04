@@ -204,23 +204,23 @@ in {
             "${mod}+Ctrl+space"  = "exec ${rofi} -show window";
 
             # redo xconfig
-            "${mod}+Shift+Ctrl+z" = "exec ${xconfigScript}/bin/xconfig.sh";
+            "${mod}+Shift+Ctrl+z" = "exec --no-startup-id ${xconfigScript}/bin/xconfig.sh";
 
             # fallback xrandr command to recover
-            "${mod}+Shift+Ctrl+x" = "exec ${pkgs.xorg.xrandr}/bin/xrandr --auto";
+            "${mod}+Shift+Ctrl+x" = "exec --no-startup-id ${pkgs.xorg.xrandr}/bin/xrandr --auto";
 
             # lock screen
-            "${mod}+Shift+Escape" = "exec ${lockScript}/bin/lock.sh --show-failed-attempts";
+            "${mod}+Shift+Escape" = "exec --no-startup-id ${lockScript}/bin/lock.sh --show-failed-attempts";
 
             # multimedia controls
-            "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
-            "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
-            "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
-            "XF86MonBrightnessUp"   = "exec ${pkgs.light}/bin/light -A 10";
-            "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 10";
-            "XF86AudioLowerVolume"  = "exec ${volumeScriptBin} voldn && ${soundIpcHook}";
-            "XF86AudioRaiseVolume"  = "exec ${volumeScriptBin} volup && ${soundIpcHook}";
-            "XF86AudioMute"         = "exec ${volumeScriptBin} mute  && ${soundIpcHook}";
+            "XF86AudioPlay" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl play-pause";
+            "XF86AudioNext" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl next";
+            "XF86AudioPrev" = "exec --no-startup-id ${pkgs.playerctl}/bin/playerctl previous";
+            "XF86MonBrightnessUp"   = "exec --no-startup-id ${pkgs.light}/bin/light -A 10";
+            "XF86MonBrightnessDown" = "exec --no-startup-id ${pkgs.light}/bin/light -U 10";
+            "XF86AudioLowerVolume"  = "exec --no-startup-id ${volumeScriptBin} voldn && ${soundIpcHook}";
+            "XF86AudioRaiseVolume"  = "exec --no-startup-id ${volumeScriptBin} volup && ${soundIpcHook}";
+            "XF86AudioMute"         = "exec --no-startup-id ${volumeScriptBin} mute  && ${soundIpcHook}";
 
             # dunst controls
             "${mod}+bracketright" = "exec --no-startup-id ${pkgs.dunst}/bin/dunstctl close";
@@ -278,9 +278,9 @@ in {
                 })));
 
             "${endMode}" = {
-              "${mod}+${endLogout}"   = "exec i3-msg exit";
-              "${mod}+${endShutdown}" = "exec systemctl poweroff";
-              "${mod}+${endRestart}"  = "exec systemctl reboot";
+              "${mod}+${endLogout}"   = "exec --no-startup-id i3-msg exit";
+              "${mod}+${endShutdown}" = "exec --no-startup-id systemctl poweroff";
+              "${mod}+${endRestart}"  = "exec --no-startup-id systemctl reboot";
               "Escape"                = "mode \"default\"";
               "Return"                = "mode \"default\"";
               "${endKey}"             = "mode \"default\"";
