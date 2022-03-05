@@ -14,7 +14,7 @@
           follow             = "keyboard";
           width              = 400;
           origin             = "top-right";
-          offset             = "-18x45";
+          offset             = "18x45";
           notification_limit = 5;
           max_icon_size      = 96;
           transparency       = 15;
