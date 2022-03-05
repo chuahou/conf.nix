@@ -16,11 +16,11 @@ end
 return override({
 	-- Font settings.
 	font = wezterm.font_with_fallback({
-		"Fira Code",
+		{ family = "Iosevka", harfbuzz_features = { "calt=0", "HSKL=1" } },
 		"Noto Sans Mono CJK JP", -- 日本語用のフォント
 	}),
-	font_size = 12.0,
-	line_height = 1.2,
+	font_size = 14.0,
+	line_height = 1.3,
 
 	-- Disable scroll and tab bars completely.
 	enable_scroll_bar = false,

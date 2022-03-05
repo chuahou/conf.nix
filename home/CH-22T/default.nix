@@ -50,15 +50,9 @@
 
   # Override wezterm config to accommodate smaller screen.
   xdg.configFile."wezterm/override.lua".text = ''
-    local wezterm = require 'wezterm';
-
     return function(config)
-        -- Override font to Iosevka, which is more horizontally condensed.
-        config["font"]["font"][1] = wezterm.font({
-            family = "Iosevka",
-            harfbuzz_features = { "calt=0", "HSKL=1" },
-        })["font"][1];
-        config["line_height"] = 1.3;
+        -- Make font size smaller for smaller screen.
+        config["font_size"] = 12.0;
         return config
     end
   '';
