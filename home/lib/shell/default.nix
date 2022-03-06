@@ -8,11 +8,11 @@
 # to be in multiple of these, so this text will be added to 'extraConfig' fields
 # in the home configuration.
 
-{ config, lib }:
+{ pkgs, config, lib }:
 
 let
   aliases = import ./aliases.nix;
-  vars    = import ./vars.nix;
+  vars    = import ./vars.nix { inherit pkgs; };
 in ''
   # environment variables
   ${config.lib.zsh.exportAll vars}

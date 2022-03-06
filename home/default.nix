@@ -12,7 +12,7 @@
 
   # basic settings
   programs.home-manager.enable = true;
-  home.sessionVariables = import ./lib/shell/vars.nix;
+  home.sessionVariables = import ./lib/shell/vars.nix { inherit pkgs; };
 
   # import overlays from flakes
   nixpkgs.overlays = overlays;

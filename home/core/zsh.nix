@@ -11,7 +11,7 @@ in {
 
   programs.zsh = {
     enable   = true;
-    envExtra = import ../lib/shell { inherit config lib; };
+    envExtra = import ../lib/shell { inherit config lib pkgs; };
 
     # import them again as plugins will overwrite some of them
     shellAliases =
