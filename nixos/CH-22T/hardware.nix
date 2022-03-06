@@ -63,7 +63,7 @@
       }
       { # NVME drive.
         type = "hwmon";
-        query = "/sys/devices/pci0000:00/0000:00:1d.2/0000:3e:00.0/hwmon";
+        query = "/sys/devices/pci0000:00/0000:00:1d.2/0000:3e:00.0/nvme/nvme0/hwmon0";
         indices = [ 1 ];
         correction = [ 25 ]; # Generous correction since it does not heat up
                              # much typically.
