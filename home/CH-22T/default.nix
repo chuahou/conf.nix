@@ -53,6 +53,8 @@
     return function(config)
         -- Make font size smaller for smaller screen.
         config["font_size"] = 12.0;
+        config["line_height"] = 1.3;
+        config["font"]["font"][1]["stretch"] = "Normal";
         return config
     end
   '';
