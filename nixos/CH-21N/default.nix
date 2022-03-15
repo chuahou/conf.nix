@@ -12,9 +12,6 @@
 
   networking.hostName = "CH-21N";
 
-  # Increase DPI.
-  services.xserver.dpi = lib.mkForce 104;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
