@@ -72,6 +72,17 @@
           });
         };
 
+        # Temporary fix until #164067 gets merged to nixos-unstable.
+        # https://github.com/NixOS/nixpkgs/pull/164067
+        nixpkgs-164067 = self: super: {
+          inherit (import (super.fetchFromGitHub {
+            owner = "NixOS";
+            repo = "nixpkgs";
+            rev = "57d2ba462f71e52b534dc2b5d77591b3fb96bdbc";
+            sha256 = "sha256-h8IVyCUHQ9MrtujUbx14xLwLW7Tl7SeyzOnDVt22YGg=";
+          }) { inherit (super) system config; }) virt-manager;
+        };
+
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
@@ -107,6 +118,7 @@
                 nixpkgs.overlays = with overlays; [
                   flakeInputs # Give the rest access to pkgs.flakeInputs.
                   cpufreq-plugin ioslabka
+                  nixpkgs-164067
                 ];
               })
 
