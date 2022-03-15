@@ -16,7 +16,7 @@ else
 fi
 
 # set DPI
-(cd $(conf-dir-path); echo "Xft.dpi: $(nix eval .\#nixosConfigurations.$(hostname).config.services.xserver.dpi)" | xrdb -merge)
+(cd $(conf-dir-path); echo "Xft.dpi: $(cat nixos/dpi/$(hostname))" | xrdb -merge)
 
 # disable mouse acceleration
 xset mouse 0 0

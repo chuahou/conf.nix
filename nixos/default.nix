@@ -49,9 +49,6 @@
   services.xserver = {
     enable = true;
 
-    # Set DPI to a constant 96.
-    dpi = 96;
-
     displayManager.lightdm.enable = true;
     desktopManager.session = [
       {

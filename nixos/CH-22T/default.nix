@@ -13,8 +13,8 @@
 
   networking.hostName = "CH-22T";
 
-  # Increase DPI.
-  services.xserver.dpi = lib.mkForce 120;
+  # Read DPI.
+  services.xserver.dpi = import ../dpi/CH-22T;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
