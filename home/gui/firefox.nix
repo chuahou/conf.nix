@@ -17,9 +17,6 @@
             "gfx.webrender.all"        = true;
             "gfx.webrender.compositor" = true;
 
-            # load all tabs when restarting
-            "browser.sessionstore.restore_on_demand" = false;
-
             # always ask for downloads
             "browser.download.useDownloadDir" = false;
 
