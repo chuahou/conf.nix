@@ -131,6 +131,7 @@
     gparted
     jq
     killall
+    ldns
     lm_sensors
     neovim
     pciutils
