@@ -60,4 +60,7 @@ return override({
 	-- Close even on non-clean exit, so that exiting after a non-zero exit code
 	-- program will still close the window instantly.
 	exit_behavior = "Close",
+
+	-- Don't check for updates, the notification is annoying to say the least.
+	check_for_updates = false,
 })
