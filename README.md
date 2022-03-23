@@ -38,7 +38,7 @@ Personal configuration for NixOS, home-manager and others.
 1. `nixos-install --impure --flake /path/to/conf.nix#NEWHOSTNAME`
 	1. May need `mount --bind /mnt /mnt/mnt` workaround.
 
-## Previously
+## Previously on configuration repos
 
 RIP [kiwami](https://github.com/chuahou/kiwami),
 [utility repo](https://github.com/chuahou/utility>)
