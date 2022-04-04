@@ -4,6 +4,7 @@
 {
   inputs = {
     nixpkgs        = { url = "nixpkgs/nixos-unstable"; };
+    nixpkgs-stable = { url = "nixpkgs/nixos-21.11"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -53,6 +54,10 @@
 
         # Use steam-run instead for FDR.
         fdr = self: super: {
+          # Temporarily use stable steam-run to avoid strange issues.
+          steam-run = (import nixpkgs-stable {
+            inherit (super) config system;
+          }).steam-run;
           fdr = super.fdr.overrideAttrs (old: {
             libPath = [];
             dontPatchELF = true;
@@ -64,7 +69,7 @@
               do
                   cat << EOF > $out/bin/$b
                       #!${super.runtimeShell}
-                      ${super.steam-run}/bin/steam-run $out/old/bin/$b \$@
+                      ${self.steam-run}/bin/steam-run $out/old/bin/$b \$@
               EOF
                   chmod +x $out/bin/$b
               done

@@ -182,6 +182,21 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1648965846,
+        "narHash": "sha256-xaO0KS+sgZLYrhaQNjVe6eRcOUIM1mEkAjT+dRbPblU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0aac710801aec4ba545527cf41a5706028fe6271",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-21.11",
+        "type": "indirect"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1610425436,
@@ -223,6 +238,7 @@
         "nix-rice": "nix-rice",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-stable": "nixpkgs-stable",
         "secrets-CH-21N": "secrets-CH-21N",
         "secrets-CH-22T": "secrets-CH-22T",
         "zsh-vim-mode": "zsh-vim-mode"
