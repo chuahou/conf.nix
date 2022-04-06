@@ -23,10 +23,6 @@
             # don't use new tab page
             "browser.newtabpage.enabled" = false;
 
-            # load tabs on demand
-            "browser.sessionstore.restore_on_demand" = true;
-            "browser.sessionstore.restore_pinned_tabs_on_demand" = true;
-
             # enable full-screen within window (for i3wm)
             "full-screen-api.ignore-widgets" = true;
 
