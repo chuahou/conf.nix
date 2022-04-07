@@ -13,6 +13,21 @@ let
       if builtins.hasAttr "module/${ipc}" config.services.polybar.config
       then "polybar-msg hook sound_ipc 1"
       else "true";
+  suspendScript = with pkgs; writeShellScriptBin "suspend-window" ''
+    win_id=$(${xdotool}/bin/xdotool getactivewindow)
+    win_pid=$(${xdotool}/bin/xdotool getwindowpid $win_id)
+    # Check if already suspended.
+    if [ $(${procps}/bin/ps -o s= -p $win_pid) = "T" ]; then
+        # Already suspended, unsuspend.
+        kill -CONT $win_pid
+        ${config.services.picom.package}/bin/picom-trans -w $win_id --delete
+    else
+        # Suspend now.
+        kill -STOP $win_pid
+        ${config.services.picom.package}/bin/picom-trans -w $win_id 50
+    fi
+  '';
+
 in {
   home.keyboard = {
     layout = "us";
@@ -226,6 +241,9 @@ in {
             "${mod}+bracketright" = "exec --no-startup-id ${pkgs.dunst}/bin/dunstctl close";
             "${mod}+bracketleft"  = "exec --no-startup-id ${pkgs.dunst}/bin/dunstctl history-pop";
             "${mod}+backslash"    = "exec --no-startup-id ${pkgs.dunst}/bin/dunstctl close-all";
+
+            # suspend window
+            "${mod}+Shift+s" = "exec --no-startup-id ${suspendScript}/bin/suspend-window";
           } //
 
           # workspace navigation
