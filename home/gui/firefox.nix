@@ -5,7 +5,7 @@
 
 {
   programs.firefox = {
-    enable  = true;
+    enable = true;
 
     profiles =
       let me = (import ../../lib {}).me;

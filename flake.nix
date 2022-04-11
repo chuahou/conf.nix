@@ -52,12 +52,15 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
+        # Packages to overlay from a stable branch to avoid bugs and the like.
+        stable = self: super:
+          let pkgs = import nixpkgs-stable { inherit (super) config system; };
+          in {
+            inherit (pkgs) firefox steam-run;
+          };
+
         # Use steam-run instead for FDR.
         fdr = self: super: {
-          # Temporarily use stable steam-run to avoid strange issues.
-          steam-run = (import nixpkgs-stable {
-            inherit (super) config system;
-          }).steam-run;
           fdr = super.fdr.overrideAttrs (old: {
             libPath = [];
             dontPatchELF = true;
@@ -69,7 +72,7 @@
               do
                   cat << EOF > $out/bin/$b
                       #!${super.runtimeShell}
-                      ${self.steam-run}/bin/steam-run $out/old/bin/$b \$@
+                      ${super.steam-run}/bin/steam-run $out/old/bin/$b \$@
               EOF
                   chmod +x $out/bin/$b
               done
@@ -111,6 +114,7 @@
               ({ ... }: {
                 nixpkgs.overlays = with overlays; [
                   flakeInputs # Give the rest access to pkgs.flakeInputs.
+                  stable
                   cpufreq-plugin ioslabka
                 ];
               })
@@ -143,6 +147,7 @@
               configuration = import ./home {
                 overlays = with overlays; [
                   flakeInputs # Give the rest access to pkgs.flakeInputs.
+                  stable
                   cfgeq
                   cpufreq-plugin
                   fdr
