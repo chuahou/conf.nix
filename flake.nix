@@ -56,7 +56,7 @@
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
-            inherit (pkgs) firefox steam-run;
+            inherit (pkgs) steam-run;
           };
 
         # Use steam-run instead for FDR.
