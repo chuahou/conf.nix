@@ -259,7 +259,7 @@
     "secrets-CH-22T": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-pQpattmS9VmO3ZIQUFn66az8GSmB4IvYhTTCFn6SUmo=",
+        "narHash": "sha256-wDpekm2tuKsgNjgljzm+vuhkfiNQi1RseUWnoOA9VGE=",
         "path": "/persist/CH-22T/secrets.nix",
         "type": "path"
       },
