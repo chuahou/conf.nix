@@ -36,4 +36,9 @@
 
   # Enable TLP.
   services.tlp.enable = true;
+
+  # Currently X11 coredumps otherwise for some reason. Not the same error logs,
+  # but the same fix works.
+  # https://github.com/NixOS/nixpkgs/issues/170856
+  boot.kernelParams = [ "nouveau.modeset=0" ];
 }
