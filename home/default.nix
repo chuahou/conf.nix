@@ -19,4 +19,5 @@
 
   # allow unfree
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = (_: true); # temp workaround, HM#2942
 }
