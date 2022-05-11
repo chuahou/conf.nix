@@ -59,7 +59,7 @@
           padding            = 1;
           module-margin-left = 1;
           enable-ipc         = true;
-          modules-left       = "battery fs fshd mem maxtemp cpu";
+          modules-left       = "battery fs fshome mem maxtemp cpu";
           modules-center     = "i3";
           modules-right      = "dropbox dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
           inherit background foreground format-padding;
@@ -122,10 +122,10 @@
           format-mounted-padding    = format-padding;
         };
 
-        "module/fshd" = {
+        "module/fshome" = {
           type                      = "internal/fs";
           mount-0                   = "/home";
-          label-mounted             = "hd %used% / %total%";
+          label-mounted             = "home %used% / %total%";
           format-mounted-background = colours.gray.white;
           format-mounted-underline  = colours.white;
           format-mounted-padding    = format-padding;

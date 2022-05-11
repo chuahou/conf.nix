@@ -6,7 +6,7 @@
 {
   boot.initrd.luks.devices = {
     crypt.device = "/dev/disk/by-uuid/15c226ae-d5f3-4afd-8b43-1b3578211dd5";
-    hd.device = "/dev/disk/by-uuid/35262ae4-a197-4d0f-82b0-6b83b49076cd";
+    home.device = "/dev/disk/by-uuid/48bc6cb8-a9c7-49f4-bca2-41405bbcf848";
   };
 
   fileSystems =
@@ -25,11 +25,11 @@
       "/var/log" = btrfsFs "log";
 
       "/home" = {
-        device = "/dev/mapper/hd-home";
+        device = "/dev/mapper/home-home";
         fsType = "btrfs";
         options = [
           "subvol=home"
-          "noatime" "space_cache" "commit=120" "compress=zstd"
+          "noatime" "ssd" "space_cache" "commit=120" "compress=zstd"
         ];
       };
       "/boot" = {
