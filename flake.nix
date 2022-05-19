@@ -57,6 +57,7 @@
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
             inherit (pkgs) steam-run;
+            inherit (pkgs.vimPlugins) coc-nvim;
           };
 
         # Use steam-run instead for FDR.

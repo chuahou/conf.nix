@@ -48,7 +48,7 @@ in {
       vim-markdown
       vim-nix
       {
-        plugin = coc-nvim;
+        plugin = pkgs.coc-nvim;
         config = ''
           let g:coc_config_home = "${configDir}"
 
