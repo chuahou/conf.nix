@@ -6,7 +6,7 @@
 {
   boot.initrd.luks.devices = {
     crypt.device = "/dev/disk/by-uuid/15c226ae-d5f3-4afd-8b43-1b3578211dd5";
-    home.device = "/dev/disk/by-uuid/48bc6cb8-a9c7-49f4-bca2-41405bbcf848";
+    home.device = "/dev/disk/by-uuid/2f2bd65d-ce32-430f-b3df-8ad2f90f8f77";
   };
 
   fileSystems =
