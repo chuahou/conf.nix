@@ -18,6 +18,7 @@
     meld
 
     # productivity
+    anki-bin
     galculator
     gnome3.simple-scan
     libreoffice
