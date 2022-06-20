@@ -143,7 +143,7 @@
           builtins.listToAttrs (builtins.map (host: {
             name = "${host}-${home.username}";
             value = home-manager.lib.homeManagerConfiguration {
-              inherit system;
+              inherit system pkgs;
               inherit (home) username homeDirectory;
               configuration = import ./home {
                 overlays = with overlays; [
