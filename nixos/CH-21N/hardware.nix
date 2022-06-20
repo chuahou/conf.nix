@@ -41,4 +41,12 @@
   # but the same fix works.
   # https://github.com/NixOS/nixpkgs/issues/170856
   boot.kernelParams = [ "nouveau.modeset=0" ];
+
+  # NVIDIA setup.
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.prime = {
+    sync.enable = true;
+    nvidiaBusId = "PCI:1:0:0";
+    intelBusId = "PCI:0:2:0";
+  };
 }
