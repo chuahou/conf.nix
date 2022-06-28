@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2022 Chua Hou
 #
 # Syncs and updates build to current repository status.
 
@@ -9,5 +9,5 @@ sudo nix-channel --update
 
 # upgrade NixOS, home and nix-env packages
 sudo nixos-rebuild switch --flake $(dirname $0)/..#
-$(dirname $0)/home-switch.sh
+home-manager switch --flake $(dirname $0)/..#$(hostname)
 $(dirname $0)/nix-env.sh -u

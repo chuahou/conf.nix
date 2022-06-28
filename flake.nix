@@ -80,6 +80,16 @@
           });
         };
 
+        # Temporary fix until #177824 gets merged to nixos-unstable.
+        nixpkgs-177824 = self: super: {
+          inherit (import (super.fetchFromGitHub {
+            owner = "NixOS";
+            repo = "nixpkgs";
+            rev = "49cc2c709dbc3d37bb09e53bd34335d5ac86c3e1";
+            sha256 = "sha256-Z4z5k9t/e/4zI4ygxDgm39DspDdlbUuzuBTHuROkaak=";
+          }) { inherit (super) system config; }) dropbox-cli;
+        };
+
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
@@ -135,32 +145,26 @@
             });
           }) hosts);
 
-      hmConfigs =
-        let
-          inherit ((import ./lib {}).me) home;
-        in
-          builtins.listToAttrs (builtins.map (host: {
-            name = "${host}-${home.username}";
-            value = home-manager.lib.homeManagerConfiguration {
-              inherit system pkgs;
-              inherit (home) username homeDirectory;
-              configuration = import ./home {
-                overlays = with overlays; [
-                  flakeInputs # Give the rest access to pkgs.flakeInputs.
-                  stable
-                  cfgeq
-                  cpufreq-plugin
-                  fdr
-                  sioyek
-                  zsh-vim-mode
-                ];
-                inherit host;
-              };
-              stateVersion = builtins.getAttr host {
-                "CH-21N" = "20.09";
-                "CH-22T" = "21.11";
-              };
-            };
-          }) hosts);
+      homeConfigurations =
+        builtins.listToAttrs (builtins.map (host: {
+          name = host;
+          value = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ (import ./home {
+              overlays = with overlays; [
+                flakeInputs # Give the rest access to pkgs.flakeInputs.
+                stable
+                cfgeq
+                cpufreq-plugin
+                fdr
+                sioyek
+                zsh-vim-mode
+                nixpkgs-177824
+              ];
+              inherit host;
+              inherit ((import ./lib {}).me) home;
+            }) ];
+          };
+        }) hosts);
     };
 }
