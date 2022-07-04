@@ -87,6 +87,8 @@
           };
       };
     };
+  # set main user as trusted user for nix purposes
+  nix.settings.trusted-users = [ config.users.users.user.name ];
 
   # various programs/services
   programs.zsh.enable = true; # enable as interactive shell
