@@ -4,7 +4,7 @@
 {
   inputs = {
     nixpkgs        = { url = "nixpkgs/nixos-unstable"; };
-    nixpkgs-stable = { url = "nixpkgs/nixos-21.11"; };
+    nixpkgs-stable = { url = "nixpkgs/nixos-22.05"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -56,29 +56,9 @@
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
-            inherit (pkgs) steam-run;
+            # Currently unneeded.
+            # inherit (pkgs) some-pkg;
           };
-
-        # Use steam-run instead for FDR.
-        fdr = self: super: {
-          fdr = super.fdr.overrideAttrs (old: {
-            libPath = [];
-            dontPatchELF = true;
-            installPhase = ''
-              mkdir -p $out/old
-              cp -r * $out/old
-              mkdir -p $out/bin
-              for b in fdr4 _fdr4 refines _refines cspmprofiler cspmexplorerprof
-              do
-                  cat << EOF > $out/bin/$b
-                      #!${super.runtimeShell}
-                      ${super.steam-run}/bin/steam-run $out/old/bin/$b \$@
-              EOF
-                  chmod +x $out/bin/$b
-              done
-            '';
-          });
-        };
 
         # Temporary fix until #177824 gets merged to nixos-unstable.
         nixpkgs-177824 = self: super: {
@@ -156,7 +136,6 @@
                 stable
                 cfgeq
                 cpufreq-plugin
-                fdr
                 sioyek
                 zsh-vim-mode
                 nixpkgs-177824

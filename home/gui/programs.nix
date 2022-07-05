@@ -8,12 +8,6 @@
 
     # development
     cfgeq
-    fdr
-    (makeDesktopItem {
-      name        = fdr.pname or fdr.name;
-      exec        = "${fdr}/bin/fdr4";
-      desktopName = "FDR4";
-    })
     gitg
     meld
 
