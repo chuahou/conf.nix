@@ -16,6 +16,9 @@ in {
     extraConfig = {
       pull.ff            = "only";
       init.defaultBranch = "master";
+      # Avoid using script described in $VISUAL, as then it has issues telling
+      # when editing is complete.
+      core.editor = "nvim";
     };
   };
 }

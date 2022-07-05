@@ -5,10 +5,10 @@
 
 # Environment variables to set wherever needed
 rec {
-  EDITOR = "${pkgs.writeShellScript "nvim-nvr-wrapped" ''
+  EDITOR = "${pkgs.writeShellScript "nvim-remote" ''
     [ -z "$NVIM" ] \
         && exec nvim "$@" \
-        || exec ${pkgs.neovim-remote}/bin/nvr "$@"
+        || exec nvim --server $NVIM --remote "$@"
   ''}";
   VISUAL = EDITOR;
 }
