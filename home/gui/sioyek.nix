@@ -6,7 +6,7 @@
 {
   home.packages = with pkgs; [ sioyek ];
 
-  xdg.dataFile."Sioyek/prefs_user.config".text = ''
+  xdg.configFile."sioyek/prefs_user.config".text = ''
     # Black background.
     background_color 0.1 0.1 0.1
 
@@ -14,7 +14,7 @@
     link_highlight_color 0.8 0.0 0.0
   '';
 
-  xdg.dataFile."Sioyek/keys_user.config".text = ''
+  xdg.configFile."sioyek/keys_user.config".text = ''
     # Vim-style movement.
     move_right    h
     move_down     j

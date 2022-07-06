@@ -43,7 +43,6 @@
 
       overlays = with inputs; {
         cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
-        sioyek         = import pkgs/sioyek/overlay.nix;
 
         ioslabka = ioslabka.overlay;
         cfgeq    = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -136,7 +135,6 @@
                 stable
                 cfgeq
                 cpufreq-plugin
-                sioyek
                 zsh-vim-mode
                 nixpkgs-177824
               ];
