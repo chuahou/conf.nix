@@ -31,6 +31,4 @@
         fsType = "vfat";
       };
     };
-
-  swapDevices = [ { device = "/dev/mapper/data-swap"; } ];
 }
