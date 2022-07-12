@@ -8,4 +8,6 @@
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];
   users.users.user.extraGroups = [ "libvirtd" ];
+
+  virtualisation.podman.enable = true;
 }
