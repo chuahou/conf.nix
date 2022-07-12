@@ -7,12 +7,11 @@
   # Polybar changes due to system differences.
   services.polybar.config = let colours = import ../lib/gui/colours.nix; in {
     "module/battery".battery = lib.mkForce "BAT1";
-    "module/fshd" = lib.mkForce {};
 
     # Additional fan level module.
     # For some reason lib.mkAfter doesn't work with home-manager, hence this
     # copy-paste. :(
-    "bar/main".modules-left = lib.mkForce "battery fs fshd mem maxtemp cpu fanlevel";
+    "bar/main".modules-left = lib.mkForce "battery fs mem maxtemp cpu fanlevel";
     "module/fanlevel" = {
       type = "custom/script";
       exec = "${pkgs.coreutils-full}/bin/cat /proc/acpi/ibm/fan | ${pkgs.gnused}/bin/sed -n 's/level:\\s\\+\\([^\\s]\\+\\)/\\1/p'";
