@@ -15,6 +15,7 @@
       fsType  = "btrfs";
       options = [
         "device=/dev/mapper/home-home" # 2nd device.
+        "device=/dev/mapper/data-swap" # 3rd device.
         ("subvol=" + subvol)
         "noatime" "ssd" "space_cache" "commit=120" "compress=zstd"
       ];
