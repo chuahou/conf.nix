@@ -47,6 +47,11 @@
         fsType = "btrfs";
         options = [ "subvol=dev-nixpkgs" ] ++ commonOpts;
       };
+      "${homeDirectory}/.local/share/containers" = {
+        device = "dev/mapper/hd-hd";
+        fsType = "btrfs";
+        options = [ "subvol=containers" ] ++ commonOpts;
+      };
 
       "/boot" = {
         device = "/dev/disk/by-uuid/F787-F54F";
