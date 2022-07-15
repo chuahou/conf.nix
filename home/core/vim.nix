@@ -62,7 +62,7 @@ in {
           inoremap <silent><expr> <C-space> coc#refresh()
 
           " activate actions with <C-space>
-          nmap <C-space> :CocAction<CR>
+          nmap <C-space> <Plug>(coc-codeaction-line)
 
           " diagnostics navigation
           nmap <silent> [g <Plug>(coc-diagnostic-prev)
