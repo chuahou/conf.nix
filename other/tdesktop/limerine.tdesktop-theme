@@ -1,0 +1,223 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2020 Chua Hou
+// Telegram Desktop theme
+
+// ----- Colours -----
+
+NONE : #00000000;
+
+BG : #809ABF;
+
+WHITE : #FFFFFF;
+GREY0 : #F1F1F1;
+GREY1 : #E5E5E5;
+GREY2 : #999999;
+GREY3 : #555555;
+GREY4 : #222222;
+BLACK : #000000;
+
+BLUE0      : #C2DCF2;
+BLUE1      : #73C0FF;
+BLUE2      : #168ACD;
+BLUE3      : #0D5B85;
+BLUE4      : #004B75;
+BLUESHADOW : #748EA229;
+
+GREEN0      : #E6F8E5;
+GREEN1      : #DCF9D5;
+GREEN2      : #3FB837;
+GREEN3      : #0D851F;
+GREENSHADOW : #74A28029;
+
+SP_BLUE : #4E7391;
+
+GOOD : GREEN2;
+BAD  : #E48383;
+
+SP_MAIN   : #252F48;
+SP_MAIN_O : #353F58;
+SP_MAIN_R : #151F38;
+
+// ----- Configuration -----
+
+// Interface, O: mouseOver, R: Ripple, B: Bold
+MAIN_BG     : WHITE; // main background
+MAIN_BG_O   : GREY0;
+MAIN_BG_R   : GREY1;
+MAIN_FG     : BLACK; // main foreground
+MAIN_FG_O   : BLACK;
+MAIN_FG_SUB : GREY3;
+MAIN_FG_B   : GREY4;
+MAIN_FG_SP  : BLUE2;
+MAIN_SEL    : BLUE0;
+ACTIVE_BG   : BLUE3; // active elements
+ACTIVE_FG   : WHITE;
+DIALOG_BG   : BLUE2;
+
+// Widgets
+BUTTON_BG      : BLUE3; // buttons
+BUTTON_BG_O    : BLUE4;
+BUTTON_BG_R    : BLUE4;
+BUTTON_FG      : WHITE;
+BUTTON_FG_SUB  : GREY1;
+LINE_ACTIVE    : BLUE2; // input line
+LINE_ERROR     : BAD;
+FILTER_BORDER  : BLUE1; // search bar border when active
+SEL_INACTIVE   : GREY2; // selections (checkbox etc)
+SEL_ACTIVE     : ACTIVE_BG;
+TOOLTIP_BG     : MAIN_BG; // tooltip (mouseover msg time etc)
+TOOLTIP_FG     : MAIN_FG;
+TOOLTIP_BORDER : GREY1;
+
+// Incoming messages
+IN_BG     : WHITE;
+IN_FG     : BLACK;
+IN_FG_SP  : BLUE3;
+IN_FG_SUB : GREY3;
+IN_SEL    : BLUE0;
+IN_SHADOW : BLUESHADOW;
+
+// Outgoing messages
+OUT_BG     : GREEN0;
+OUT_FG     : BLACK;
+OUT_FG_SP  : GREEN2;
+OUT_FG_SUB : GREY3;
+OUT_SEL    : GREEN1;
+OUT_SHADOW : GREENSHADOW;
+
+// Message formatting
+LINK : BLUE3;
+MONO : SP_BLUE;
+
+// Side bar
+SIDEBAR_BG            : SP_MAIN;
+SIDEBAR_BG_O          : SP_MAIN_O;
+SIDEBAR_BG_R          : SP_MAIN_R;
+SIDEBAR_FG            : ACTIVE_FG;
+SIDEBAR_FG_O          : ACTIVE_FG;
+SIDEBAR_BADGE_BG      : ACTIVE_BG;
+SIDEBAR_BADGE_BG_MUTE : GREY1;
+SIDEBAR_BADGE_FG      : ACTIVE_FG;
+
+// ---- Application -----
+
+// Main interface
+windowBg              : MAIN_BG;
+windowBgOver          : MAIN_BG_O;
+windowBgRipple        : MAIN_BG_R;
+windowFg              : MAIN_FG;
+windowFgOver          : MAIN_FG_O;
+windowSubTextFg       : MAIN_FG_SUB;
+windowSubTextFgOver   : windowSubTextFg;
+windowBoldFg          : MAIN_FG_B;
+windowBoldFgOver      : windowBoldFg;
+windowBgActive        : ACTIVE_BG;
+windowFgActive        : ACTIVE_FG;
+windowActiveTextFg    : MAIN_FG_SP;
+checkboxFg            : SEL_INACTIVE;
+overviewCheckBgActive : SEL_ACTIVE;
+sliderBgInactive      : SEL_INACTIVE;
+sliderBgActive        : SEL_ACTIVE;
+mediaPlayerDisabledFg : sliderBgInactive;
+mediaviewTextLinkFg   : LINK;
+mainMenuCoverBg       : SP_MAIN;
+titleBg               : SP_MAIN;
+
+// Widgets
+activeButtonBg          : BUTTON_BG;
+activeButtonBgOver      : BUTTON_BG_O;
+activeButtonBgRipple    : BUTTON_BG_R;
+activeButtonFg          : BUTTON_FG;
+activeButtonSecondaryFg : BUTTON_FG_SUB;
+activeLineFg            : LINE_ACTIVE;
+activeLineFgError       : LINE_ERROR;
+lightButtonBgOver       : MAIN_SEL;
+lightButtonBgRipple     : lightButtonBgOver;
+attentionButtonFg       : BUTTON_FG;
+attentionButtonFgOver   : attentionButtonFg;
+attentionButtonBgOver   : BAD;
+attentionButtonBgRipple : BAD;
+filterInputBorderFg     : FILTER_BORDER;
+tooltipBg               : TOOLTIP_BG;
+tooltipFg               : TOOLTIP_FG;
+tooltipBorderFg         : TOOLTIP_BORDER;
+boxTextFgGood           : GOOD;
+boxTextFgError          : BAD;
+callArrowFg             : GOOD;
+callArrowMissedFg       : BAD;
+dialogsBgActive         : DIALOG_BG;
+dialogsDraftFgActive    : DIALOG_BG;
+
+// Incoming messages
+historyTextInFg               : IN_FG;
+historyLinkInFg               : LINK;
+msgInServiceFg                : IN_FG_SP;
+msgInServiceFgSelected        : msgInServiceFg;
+msgInBgSelected               : IN_SEL;
+msgInShadow                   : IN_SHADOW;
+msgInShadowSelected           : msgInShadow;
+historySendingInIconFg        : IN_FG_SUB;
+msgInDateFg                   : IN_FG_SUB;
+msgInDateFgSelected           : IN_FG_SUB;
+msgInReplyBarColor            : IN_FG_SP;
+msgInReplyBarSelColor         : msgInReplyBarColor;
+msgInBg                       : IN_BG;
+msgInMonoFg                   : MONO;
+msgFileInBg                   : IN_FG_SP;
+msgFileInBgOver               : msgFileInBg;
+msgFileInBgSelected           : msgFileInBg;
+msgFileThumbLinkInFg          : IN_FG_SP;
+msgFileThumbLinkInFgSelected  : msgFileThumbLinkInFg;
+msgWaveformInActive           : IN_FG_SP;
+msgWaveformInActiveSelected   : msgWaveformInActive;
+msgWaveformInInactive         : IN_FG_SUB;
+msgWaveformInInactiveSelected : msgWaveformInInactive;
+
+// Outgoing messages
+historyTextOutFg               : OUT_FG;
+historyLinkOutFg               : LINK;
+msgOutServiceFg                : OUT_FG_SP;
+msgOutServiceFgSelected        : msgOutServiceFg;
+msgOutBgSelected               : OUT_SEL;
+msgOutShadow                   : OUT_SHADOW;
+msgOutShadowSelected           : msgOutShadow;
+historySendingOutIconFg        : OUT_FG_SUB;
+msgOutDateFg                   : OUT_FG_SUB;
+msgOutDateFgSelected           : OUT_FG_SUB;
+msgOutReplyBarColor            : OUT_FG_SP;
+msgOutReplyBarSelColor         : msgOutReplyBarColor;
+msgOutBg                       : OUT_BG;
+msgOutMonoFg                   : MONO;
+msgFileOutBg                   : OUT_FG_SP;
+msgFileOutBgOver               : msgFileOutBg;
+msgFileOutBgSelected           : msgFileOutBg;
+msgFileThumbLinkOutFg          : OUT_FG_SP;
+msgFileThumbLinkOutFgSelected  : msgFileThumbLinkOutFg;
+msgWaveformOutActive           : OUT_FG_SP;
+msgWaveformOutActiveSelected   : msgWaveformOutActive;
+msgWaveformOutInactive         : OUT_FG_SUB;
+msgWaveformOutInactiveSelected : msgWaveformOutInactive;
+historyOutIconFg               : OUT_FG_SP;
+historyOutIconFgSelected       : historyOutIconFg;
+
+// Sidebar
+sideBarBg           : SIDEBAR_BG;
+sideBarBgActive     : SIDEBAR_BG_O;
+sideBarBgRipple     : SIDEBAR_BG_R;
+sideBarTextFg       : SIDEBAR_FG;
+sideBarTextFgActive : SIDEBAR_FG_O;
+sideBarIconFg       : sideBarTextFg;
+sideBarIconFgActive : sideBarTextFgActive;
+sideBarBadgeBg      : SIDEBAR_BADGE_BG;
+sideBarBadgeBgMuted : SIDEBAR_BADGE_BG_MUTE;
+sideBarBadgeFg      : SIDEBAR_BADGE_FG;
+
+// Hardcoded greyscale transparencies
+historyScrollBarBg     : #7D7D7D7A;
+historyScrollBarBgOver : #7D7D7DBC;
+historyScrollBg        : #7D7D7D4C;
+historyScrollBgOver    : #7D7D7D6B;
+msgSelectOverlay       : #D4D4D44C;
+msgStickerOverlay      : #D4D4D47F;
+msgServiceBg           : #7D7D7D7F;
+msgServiceBgSelected   : #B3B3B3A2;
