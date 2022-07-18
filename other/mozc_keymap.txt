@@ -83,7 +83,7 @@ Precomposition	Space	InsertSpace
 Prediction	Ctrl Delete	DeleteSelectedCandidate
 Suggestion	Down	PredictAndConvert
 Suggestion	Shift Enter	CommitFirstSuggestion
-Precomposition	Alt Escape	ToggleAlphanumericMode
-Precomposition	Alt Escape	IMEOff
-DirectInput	Alt Escape	InputModeHiragana
-DirectInput	Alt Escape	IMEOn
+Precomposition	Alt `	ToggleAlphanumericMode
+Precomposition	Alt `	IMEOff
+DirectInput	Alt `	InputModeHiragana
+DirectInput	Alt `	IMEOn
