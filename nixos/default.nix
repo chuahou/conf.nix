@@ -98,6 +98,9 @@
   services.upower.enable = true;
   services.cron.enable = true;
 
+  # steam
+  programs.steam.enable = true;
+
   # fonts to install system-wide
   fonts.fonts = with pkgs; [
     corefonts
