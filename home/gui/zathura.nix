@@ -4,7 +4,7 @@
 { ... }:
 
 {
-  services.picom.opacityRule = [ "92:class_g *?= 'zathura'" ];
+  services.picom.opacityRules = [ "92:class_g *?= 'zathura'" ];
 
   programs.zathura = {
     enable  = true;

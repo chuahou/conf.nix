@@ -11,13 +11,12 @@
     experimentalBackends = lib.mkForce true;
 
     shadow = lib.mkForce true;
-    extraOptions = lib.mkForce ''
-      blur:
-      {
+    settings = {
+      blur = {
         method = "dual_kawase";
         strength = 3;
       };
-    '';
+    };
   };
 
   # This value determines the Home Manager release that your
