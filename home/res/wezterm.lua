@@ -6,7 +6,6 @@ local wezterm = require 'wezterm';
 -- Allow an override.lua file to provide a function that performs overrides on
 -- the returned config table. If it does not exist, use the id function.
 local override;
-pcall(require, 'override');
 if not(pcall(require, 'override')) then
 	override = function (x) return x end;
 else
