@@ -45,7 +45,7 @@
 
   ];
 
-  services.dropbox.enable   = true;
+  services.dropbox.enable = true;
 
   xdg.mimeApps = {
     enable = true;

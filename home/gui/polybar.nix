@@ -163,7 +163,7 @@
           type = "custom/script";
           exec = "${pkgs.writeShellScriptBin "polybar-dropbox" ''
             echo -n "dropbox"
-            case $(${pkgs.dropbox-cli}/bin/dropbox status |
+            case $(${pkgs.dropbox-cli}/bin/dropbox status 2> /dev/null |
                 ${pkgs.coreutils}/bin/head -n 1 |
                 ${pkgs.gawk}/bin/awk '{ print $1 }') in
               Up)         echo ""         ;;

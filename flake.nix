@@ -59,16 +59,6 @@
             # inherit (pkgs) some-pkg;
           };
 
-        # Temporary fix until #177824 gets merged to nixos-unstable.
-        nixpkgs-177824 = self: super: {
-          inherit (import (super.fetchFromGitHub {
-            owner = "NixOS";
-            repo = "nixpkgs";
-            rev = "49cc2c709dbc3d37bb09e53bd34335d5ac86c3e1";
-            sha256 = "sha256-Z4z5k9t/e/4zI4ygxDgm39DspDdlbUuzuBTHuROkaak=";
-          }) { inherit (super) system config; }) dropbox-cli;
-        };
-
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
@@ -136,7 +126,6 @@
                 cfgeq
                 cpufreq-plugin
                 zsh-vim-mode
-                nixpkgs-177824
               ];
               inherit host;
               inherit ((import ./lib {}).me) home;
