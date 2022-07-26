@@ -46,6 +46,9 @@
       "${homeDirectory}/.dropbox-hm" = hdBtrfsFs "dropbox-hm";
       "${devDirectory}/nixpkgs" = hdBtrfsFs "dev-nixpkgs";
       "${homeDirectory}/.local/share/containers" = hdBtrfsFs "containers";
+      "${homeDirectory}/.config/Microsoft" = hdBtrfsFs "config-Microsoft";
+      "${homeDirectory}/dl/Telegram Desktop" = hdBtrfsFs "dl-Telegram_Desktop";
+      "${devDirectory}/proj" = hdBtrfsFs "dev-proj";
 
       "/boot" = {
         device = "/dev/disk/by-uuid/F787-F54F";
