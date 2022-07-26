@@ -24,6 +24,12 @@
         ] ++ commonOpts;
       };
       inherit ((import ../../lib/me.nix).home) homeDirectory devDirectory;
+      hdBtrfsFs = subvol: {
+        device = "/dev/mapper/hd-hd";
+        fsType = "btrfs";
+        options = [ "subvol=${subvol}" ] ++ commonOpts;
+      };
+
     in {
       "/"        = btrfsFs "root";
       "/nix"     = btrfsFs "nix";
@@ -37,21 +43,9 @@
         fsType = "btrfs";
         options = commonOpts;
       };
-      "${homeDirectory}/.dropbox-hm" = {
-        device = "/dev/mapper/hd-hd";
-        fsType = "btrfs";
-        options = [ "subvol=dropbox-hm" ] ++ commonOpts;
-      };
-      "${devDirectory}/nixpkgs" = {
-        device = "dev/mapper/hd-hd";
-        fsType = "btrfs";
-        options = [ "subvol=dev-nixpkgs" ] ++ commonOpts;
-      };
-      "${homeDirectory}/.local/share/containers" = {
-        device = "dev/mapper/hd-hd";
-        fsType = "btrfs";
-        options = [ "subvol=containers" ] ++ commonOpts;
-      };
+      "${homeDirectory}/.dropbox-hm" = hdBtrfsFs "dropbox-hm";
+      "${devDirectory}/nixpkgs" = hdBtrfsFs "dev-nixpkgs";
+      "${homeDirectory}/.local/share/containers" = hdBtrfsFs "containers";
 
       "/boot" = {
         device = "/dev/disk/by-uuid/F787-F54F";
