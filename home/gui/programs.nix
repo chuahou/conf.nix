@@ -39,8 +39,8 @@
     # system utilities
     appimage-run
     arandr
-    baobab
     font-manager
+    ncdu
     steam-run
 
   ];
