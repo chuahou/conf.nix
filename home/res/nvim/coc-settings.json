@@ -13,12 +13,7 @@
 			"filetypes": [
 				"haskell",
 				"lhaskell"
-			],
-			"settings": {
-				"haskell": {
-					"formattingProvider": "stylish-haskell"
-				}
-			}
+			]
 		},
 		"purescript": {
 			"command": "purescript-language-server",
@@ -41,5 +36,5 @@
 			"filetypes": ["nix"]
 		}
 	},
-	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"]
+	"coc.preferences.formatOnSaveFiletypes": ["purescript"]
 }
