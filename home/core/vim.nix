@@ -15,18 +15,6 @@ in {
   # copy editorconfig
   home.file.".editorconfig".source = ../res/editorconfig;
 
-  # xsel for clipboard support
-  home.packages = with pkgs; [ xsel ]
-
-  # language servers to be installed
-  ++ [ clang-tools haskell-language-server rnix-lsp ]
-
-  # xdotool required for vimtex's synctex
-  ++ [ xdotool ]
-
-  # ripgrep for fzf.vim
-  ++ [ ripgrep ];
-
   programs.neovim = {
     enable = true;
 
@@ -237,6 +225,16 @@ in {
 
       # misc
       fastfold # fast folding (important for vimtex)
+    ];
+
+    # Extra packages in neovim's path for plugins to access.
+    extraPackages = with pkgs; [
+      xsel # For clipboard support.
+      xdotool # For vimtex's synctex.
+      ripgrep # For fzf.vim.
+
+      # Language servers.
+      clang-tools haskell-language-server rnix-lsp
     ];
 
     viAlias      = true;
