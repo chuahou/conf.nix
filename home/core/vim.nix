@@ -24,6 +24,9 @@ in {
       " faster updates for coc/vim-gitgutter etc
       set updatetime=100
 
+      " start with folds open by default
+      set foldlevelstart=99
+
       " we use the full configuration copied
       set runtimepath^=${configDir} runtimepath+=${configDir}/after
       source ${configDir}/init.vim
