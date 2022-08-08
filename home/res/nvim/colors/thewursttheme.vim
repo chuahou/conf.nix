@@ -122,6 +122,24 @@ highlight SpellRare  ctermfg=none ctermbg=none cterm=none
 " Concealed characters
 highlight Conceal ctermfg=3 ctermbg=none cterm=none
 
+" --- For use with vim-markdown
+
+" new groups
+highlight WurstMDHide  ctermfg=7  ctermbg=none cterm=italic
+highlight WurstMDTitle ctermfg=12 ctermbg=none cterm=none
+
+" link vim-markdown groups to our groups
+highlight link htmlTag     WurstMDHide
+highlight link htmlTagName WurstMDHide
+highlight link htmlEndTag  WurstMDHide
+highlight link mkdHeading  WurstMDHide
+highlight link htmlH1      WurstMDTitle
+highlight link htmlH2      WurstMDTitle
+highlight link htmlH3      WurstMDTitle
+highlight link htmlH4      WurstMDTitle
+highlight link htmlH5      WurstMDTitle
+highlight link htmlH6      WurstMDTitle
+
 " --- Specific settings
 
 " 81 line
