@@ -228,6 +228,38 @@
         "type": "indirect"
       }
     },
+    "nvim-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659942799,
+        "narHash": "sha256-ZoO6n3rhKQfkXud3iOcIKWreKmN2TrtwfPMKcZ19BkU=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "7e410054235ea84c817fc2b93f8df359ba6545eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
+    "orgmode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659734064,
+        "narHash": "sha256-jjkZtczohN1e+m9EgreJznKba8QR/xRLObTJ837SlC8=",
+        "owner": "nvim-orgmode",
+        "repo": "orgmode",
+        "rev": "7b96f5d87f8b22fff658cebabebe3a67885750a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-orgmode",
+        "repo": "orgmode",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "cfgeq": "cfgeq",
@@ -240,8 +272,11 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nvim-treesitter": "nvim-treesitter",
+        "orgmode": "orgmode",
         "secrets-CH-21N": "secrets-CH-21N",
         "secrets-CH-22T": "secrets-CH-22T",
+        "tree-sitter-org": "tree-sitter-org",
         "zsh-vim-mode": "zsh-vim-mode"
       }
     },
@@ -268,6 +303,22 @@
       "original": {
         "path": "/persist/CH-22T/secrets.nix",
         "type": "path"
+      }
+    },
+    "tree-sitter-org": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1656459399,
+        "narHash": "sha256-7xvT66I/ikPs0PT99vMBd+0ZPdG8ma2a6WZ2su3pOqM=",
+        "owner": "milisims",
+        "repo": "tree-sitter-org",
+        "rev": "a2c1946d78fa8529bb4cfedd598fd6dbce5c79a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "milisims",
+        "repo": "tree-sitter-org",
+        "type": "github"
       }
     },
     "utils": {

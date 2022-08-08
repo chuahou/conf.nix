@@ -31,6 +31,11 @@
 
     # cfgeq
     cfgeq = { url = "github:chuahou/cfgeq"; };
+
+    # orgmode and friends
+    orgmode = { url = "github:nvim-orgmode/orgmode"; flake = false; };
+    nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false; };
+    tree-sitter-org = { url = "github:milisims/tree-sitter-org"; flake = false; };
   };
 
   outputs =
@@ -69,6 +74,35 @@
                 ];
               });
           };
+        };
+
+        # Syncing up org parser versions for nvim-orgmode/orgmode and
+        # tree-sitter-org.
+        vim-orgmode-plugins = self: super: {
+          vimPlugins = super.vimPlugins // (with super.vimPlugins; {
+            orgmode = orgmode.overrideAttrs (old: {
+              src = inputs.orgmode;
+            });
+            nvim-treesitter = nvim-treesitter.overrideAttrs (old: {
+              src = inputs.nvim-treesitter;
+            });
+          });
+          # We assert in this derivation that the expected revisions match.
+          tree-sitter-org =
+            let
+              actualRev = inputs.tree-sitter-org.rev;
+              ntsExpected = (super.lib.importJSON
+                "${inputs.nvim-treesitter}/lockfile.json").org.revision;
+              orgmodeExpected = builtins.readFile
+                (super.runCommand "orgmodeExpectedRev" {} ''
+                  sed -n -e "2s/^local ts_revision = '\([^']\+\)'$/\1/p" \
+                      ${inputs.orgmode}/lua/orgmode/init.lua \
+                      | tr -d '\n' > $out
+                '');
+            in assert actualRev == ntsExpected && actualRev == orgmodeExpected;
+            super.tree-sitter-grammars.tree-sitter-org-nvim.overrideAttrs (old: {
+              src = inputs.tree-sitter-org;
+            });
         };
 
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
@@ -138,6 +172,7 @@
                 cfgeq
                 cpufreq-plugin
                 vim-stylish-haskell
+                vim-orgmode-plugins
                 zsh-vim-mode
               ];
               inherit host;
