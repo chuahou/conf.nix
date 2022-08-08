@@ -1,0 +1,27 @@
+From da70406ac5a3ea08c902d37c1823d7ffbed0c489 Mon Sep 17 00:00:00 2001
+From: Chua Hou <human+github@chuahou.dev>
+Date: Mon, 8 Aug 2022 14:44:18 +0800
+Subject: [PATCH] Remove trailing newline when displaying output
+
+- The trailing newline from the system() call is displayed as ^@ by echom.
+- This substitute removes this trailing newline for cleaner output.
+---
+ ftplugin/haskell/stylish-haskell.vim | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ftplugin/haskell/stylish-haskell.vim b/ftplugin/haskell/stylish-haskell.vim
+index c408a68..45c5f5e 100644
+--- a/ftplugin/haskell/stylish-haskell.vim
++++ b/ftplugin/haskell/stylish-haskell.vim
+@@ -32,7 +32,7 @@ function! s:RunStylishHaskell()
+   let output = system(g:stylish_haskell_command . " " . join(g:stylish_haskell_options, ' ') . " " . bufname("%"))
+   let errors = matchstr(output, '\(Language\.Haskell\.Stylish\.Parse\.parseModule:[^\x0]*\)')
+   if v:shell_error != 0
+-    echom output
++    echom substitute(output, '\n$', '', '')
+   elseif empty(errors)
+     call s:OverwriteBuffer(output)
+     write
+-- 
+2.37.1
+

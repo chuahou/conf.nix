@@ -59,6 +59,18 @@
             # inherit (pkgs) some-pkg;
           };
 
+        # Own patch for vim-stylish-haskell plugin.
+        vim-stylish-haskell = self: super: {
+          vimPlugins = super.vimPlugins // {
+            vim-stylish-haskell =
+              super.vimPlugins.vim-stylish-haskell.overrideAttrs (old: {
+                patches = (old.patches or []) ++ [
+                  ./pkgs/patches/0001-Remove-trailing-newline-when-displaying-output.patch
+                ];
+              });
+          };
+        };
+
         # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
         flakeInputs = self: super: { flakeInputs = inputs; };
       };
@@ -125,6 +137,7 @@
                 stable
                 cfgeq
                 cpufreq-plugin
+                vim-stylish-haskell
                 zsh-vim-mode
               ];
               inherit host;
