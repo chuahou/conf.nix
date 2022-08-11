@@ -4,10 +4,10 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ wezterm ];
-
-  # Copy main config file.
-  xdg.configFile."wezterm/wezterm.lua".source = ../res/wezterm.lua;
+  programs.wezterm = {
+    enable = true;
+    extraConfig = builtins.readFile ../res/wezterm.lua;
+  };
 
   # Generate colourscheme.
   xdg.configFile."wezterm/colors/hm-colourscheme.toml".source =

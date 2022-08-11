@@ -1,7 +1,9 @@
 -- SPDX-License-Identifier: MIT
 -- Copyright (c) 2022 Chua Hou
 
-local wezterm = require 'wezterm';
+-- Done by default in home-manager's module, commented since this file is meant
+-- to be loaded as 'extraConfig'.
+-- local wezterm = require 'wezterm';
 
 -- Allow an override.lua file to provide a function that performs overrides on
 -- the returned config table. If it does not exist, use the id function.
