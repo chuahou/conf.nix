@@ -47,7 +47,8 @@
       pkgs   = nixpkgs.legacyPackages.${system};
 
       overlays = with inputs; {
-        cpufreq-plugin = import pkgs/cpufreq-plugin/overlay.nix;
+        cpufreq-plugin =
+          import pkgs/cpufreq-plugin/overlay.nix inputs.cpufreq-plugin;
 
         ioslabka = ioslabka.overlay;
         cfgeq    = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
@@ -104,9 +105,6 @@
               src = inputs.tree-sitter-org;
             });
         };
-
-        # Adds all inputs into pkgs.flakeInputs for ease of access anywhere.
-        flakeInputs = self: super: { flakeInputs = inputs; };
       };
 
       # Hosts to generate configs over.
@@ -138,7 +136,6 @@
               # extra overlays
               ({ ... }: {
                 nixpkgs.overlays = with overlays; [
-                  flakeInputs # Give the rest access to pkgs.flakeInputs.
                   stable
                   cpufreq-plugin ioslabka
                 ];
@@ -167,7 +164,6 @@
             inherit pkgs;
             modules = [ (import ./home {
               overlays = with overlays; [
-                flakeInputs # Give the rest access to pkgs.flakeInputs.
                 stable
                 cfgeq
                 cpufreq-plugin
@@ -178,6 +174,7 @@
               inherit host;
               inherit ((import ./lib {}).me) home;
             }) ];
+            extraSpecialArgs = { inherit inputs; };
           };
         }) hosts);
     };
