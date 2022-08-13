@@ -17,6 +17,12 @@
   # allow unfree software
   nixpkgs.config.allowUnfree = true;
 
+  # set NIX_PATH
+  nix.nixPath = [
+    "nixpkgs=${inputs.nixpkgs}"
+    "nixos=${inputs.nixpkgs}"
+  ];
+
   # enable all firmware
   hardware.enableAllFirmware = true;
 
