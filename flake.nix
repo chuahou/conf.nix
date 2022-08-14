@@ -100,10 +100,12 @@
                       ${inputs.orgmode}/lua/orgmode/init.lua \
                       | tr -d '\n' > $out
                 '');
-            in assert actualRev == ntsExpected && actualRev == orgmodeExpected;
-            super.tree-sitter-grammars.tree-sitter-org-nvim.overrideAttrs (old: {
-              src = inputs.tree-sitter-org;
-            });
+            in
+              assert actualRev == ntsExpected;
+              assert actualRev == orgmodeExpected;
+              super.tree-sitter-grammars.tree-sitter-org-nvim.overrideAttrs (old: {
+                src = inputs.tree-sitter-org;
+              });
         };
       };
 
