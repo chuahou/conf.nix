@@ -2,7 +2,7 @@
 # Copyright (c) 2021, 2022 Chua Hou
 
 # have exactly one of internal and external displays connected and primary
-if [ $(hostname) = "CH-21N" ]; then
+if [ $(hostname) = "CH-21NS" ]; then
 	internal=eDP-1-1
 	external=HDMI-0
 elif [ $(hostname) = "CH-22T" ]; then

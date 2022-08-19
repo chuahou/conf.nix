@@ -21,8 +21,7 @@
   boot.initrd.postDeviceCommands = lib.mkBefore ''
     # Make root blank on boot.
     mkdir -p /mnt
-    mount /dev/mapper/data-root /mnt -o \
-        device=/dev/mapper/home-home,device=/dev/mapper/data-swap
+    mount /dev/mapper/data-root /mnt
     btrfs sub list -o /mnt/root | awk '{print $NF}' |
       while read sub; do
         btrfs sub del /mnt/$sub

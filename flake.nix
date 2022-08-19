@@ -14,7 +14,7 @@
     nix-rice = { url = "github:bertof/nix-rice"; flake = false; };
     impermanence = { url = "github:nix-community/impermanence"; };
 
-    secrets-CH-21N = { url = "/persist/CH-21N/secrets.nix"; flake = false; };
+    secrets-CH-21NS = { url = "/persist/CH-21NS/secrets.nix"; flake = false; };
     secrets-CH-22T = { url = "/persist/CH-22T/secrets.nix"; flake = false; };
 
     # zsh-vim-mode plugin
@@ -110,7 +110,7 @@
       };
 
       # Hosts to generate configs over.
-      hosts = [ "CH-21N" "CH-22T" ];
+      hosts = [ "CH-21NS" "CH-22T" ];
 
     in {
 
