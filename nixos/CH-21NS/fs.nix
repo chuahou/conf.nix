@@ -13,7 +13,7 @@
         fsType  = "btrfs";
         options = [
           ("subvol=" + subvol)
-          "ssd" "noatime" "space_cache=v2" "commit=120" "compress=zstd"
+          "ssd" "noatime" "space_cache=v2" "commit=120" "compress-force=zstd"
         ];
       };
 
