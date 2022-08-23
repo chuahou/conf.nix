@@ -65,18 +65,6 @@
             # inherit (pkgs) some-pkg;
           };
 
-        # Own patch for vim-stylish-haskell plugin.
-        vim-stylish-haskell = self: super: {
-          vimPlugins = super.vimPlugins // {
-            vim-stylish-haskell =
-              super.vimPlugins.vim-stylish-haskell.overrideAttrs (old: {
-                patches = (old.patches or []) ++ [
-                  ./pkgs/patches/0001-Remove-trailing-newline-when-displaying-output.patch
-                ];
-              });
-          };
-        };
-
         # Temporarily fix Zathura build using #187813, can remove after the
         # merge hits branches.
         nixpkgs-187813 = self: super: {
@@ -195,7 +183,6 @@
                 stable
                 cfgeq
                 cpufreq-plugin
-                vim-stylish-haskell
                 vim-orgmode-plugins
                 zsh-vim-mode
                 nixpkgs-187813
