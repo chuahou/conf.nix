@@ -149,8 +149,8 @@ in {
               command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.stdenv.mkDerivation {
                 name = "wallpaper";
                 src = builtins.fetchurl {
-                  url    = "https://cdnb.artstation.com/p/assets/images/images/000/561/041/large/arseniy-chebynkin-oldbridge.jpg";
-                  sha256 = "sha256-yVATF2jg02bkdQQ6fvf0byWGMw4fQsjEuUNOJZG89xM=";
+                  url    = "https://lycoris-recoil.com/assets/img/special/tw70000/background_01.jpg";
+                  sha256 = "sha256-4hfFvgzu3jWK4pVbg7uwGiTbYJja0dZJcADV+gAI4zs=";
                 };
                 dontUnpack   = true;
                 buildPhase   = "waifu2x-converter-cpp -i $src -o $(realpath ./out.jpg)";
