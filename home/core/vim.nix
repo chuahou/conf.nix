@@ -218,30 +218,8 @@ in {
       {
         plugin = nerdtree;
         config = ''
-          augroup GoyoNERDTree
-              autocmd!
-              autocmd user GoyoEnter nested NERDTree
-              autocmd user GoyoLeave nested NERDTreeClose
-          augroup END
-
           " \n to open and focus NERDTree
           nmap <Leader>n :NERDTreeFocus<CR>
-
-          " <C-w> bindings rebound when Goyo is active
-          function! s:goyo_cw_nerdtree(command)
-              if exists("#goyo")
-                  NERDTreeClose
-              endif
-              execute "normal!" . a:command
-              if exists("#goyo")
-                  NERDTree | wincmd p
-              endif
-          endfunction
-          nnoremap <silent> <C-w>= :call <SID>goyo_cw_nerdtree("\<lt>C-w>=")<CR>
-          nnoremap <silent> <C-w>> :call <SID>goyo_cw_nerdtree("\<lt>C-w>>")<CR>
-          nnoremap <silent> <C-w>< :call <SID>goyo_cw_nerdtree("\<lt>C-w><")<CR>
-          nnoremap <silent> <C-w>+ :call <SID>goyo_cw_nerdtree("\<lt>C-w>+")<CR>
-          nnoremap <silent> <C-w>- :call <SID>goyo_cw_nerdtree("\<lt>C-w>-")<CR>
         '';
       }
 
