@@ -65,17 +65,6 @@
             # inherit (pkgs) some-pkg;
           };
 
-        # Temporarily fix Zathura build using #187813, can remove after the
-        # merge hits branches.
-        nixpkgs-187813 = self: super: {
-          inherit (import (super.fetchFromGitHub {
-            owner = "NixOS";
-            repo = "nixpkgs";
-            rev = "4625114ad447a70cadf5e0e38d3ac268a03cbbca";
-            sha256 = "sha256-x1WSa4+h0r+AdQFGaqLcgPmUbRr4KrSFRgfLKSG9cHc=";
-          }) { inherit (super) system config; }) zathuraPkgs;
-        };
-
         # Fix Sioyek build by providing mupdf 1.19.x, since upstream doesn't
         # want to upgrade to mupdf 1.20.x (see ahrm/sioyek#293).
         sioyek-mupdf-fix = self: super: {
@@ -190,7 +179,6 @@
                 cpufreq-plugin
                 vim-orgmode-plugins
                 zsh-vim-mode
-                nixpkgs-187813
                 sioyek-mupdf-fix
                 discord-firefox-fix
               ];
