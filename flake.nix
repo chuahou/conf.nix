@@ -65,21 +65,6 @@
             # inherit (pkgs) some-pkg;
           };
 
-        # Fix Sioyek build by providing mupdf 1.19.x, since upstream doesn't
-        # want to upgrade to mupdf 1.20.x (see ahrm/sioyek#293).
-        sioyek-mupdf-fix = self: super: {
-          sioyek = super.sioyek.override {
-            mupdf = super.mupdf.overrideAttrs (old: rec {
-              inherit (old) pname;
-              version = "1.19.1";
-              src = super.fetchurl {
-                url = "https://mupdf.com/downloads/archive/${pname}-${version}-source.tar.gz";
-                sha256 = "sha256-n1ajsEz0d8nQQtTNPIsopTg+daHb8YKOFuYG3JWG0M4=";
-              };
-            });
-          };
-        };
-
         # Fixes Discord not opening links in Firefox. See nixpkgs#78961.
         discord-firefox-fix = self: super: {
           discord = super.discord.override { nss = super.nss_latest; };
@@ -179,7 +164,6 @@
                 cpufreq-plugin
                 vim-orgmode-plugins
                 zsh-vim-mode
-                sioyek-mupdf-fix
                 discord-firefox-fix
               ];
               inherit host;
