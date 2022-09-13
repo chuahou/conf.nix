@@ -32,7 +32,6 @@
     vlc
 
     # communications
-    discord
     tdesktop
     teams
 
