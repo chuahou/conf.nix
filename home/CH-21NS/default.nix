@@ -8,7 +8,6 @@
   services.picom = {
     package = lib.mkForce pkgs.picom-next;
     backend = lib.mkForce "glx";
-    experimentalBackends = lib.mkForce true;
 
     shadow = lib.mkForce true;
     settings = {
