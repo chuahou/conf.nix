@@ -175,6 +175,7 @@ in {
             "${mod}+Shift+Return" = "exec ${config.programs.firefox.package}/bin/firefox";
             "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "${mod}+p"            = Print;
+            "${mod}+Shift+p"      = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot screen --path ${config.xdg.userDirs.pictures}";
             "${mod}+Shift+c"      = "exec ${pkgs.galculator}/bin/galculator";
 
             # window navigation
