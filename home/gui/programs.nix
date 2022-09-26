@@ -14,7 +14,7 @@
     # productivity
     anki-bin
     galculator
-    gnome3.simple-scan
+    gnome.simple-scan
     libreoffice
     pandoc
     pdfgrep

@@ -26,7 +26,7 @@ in rec {
     in pkgs.writeShellScriptBin "lock.sh" ''
       set -e
       mkdir -p ${picPath}
-      ${addToPath (with pkgs; [ scrot imagemagick7 i3lock dndScript ])}
+      ${addToPath (with pkgs; [ scrot imagemagick i3lock dndScript ])}
       scrot ${picPath}/screen.png
       convert ${picPath}/screen.png -blur 0x15 ${picPath}/blur.png
       donotdisturb.sh on
