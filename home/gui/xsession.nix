@@ -148,14 +148,23 @@ in {
             {
               command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.stdenv.mkDerivation {
                 name = "wallpaper";
+                # https://twitter.com/qry51811566/status/1552426744233488384
                 src = builtins.fetchurl {
-                  url    = "https://lycoris-recoil.com/assets/img/special/tw70000/background_01.jpg";
-                  sha256 = "sha256-4hfFvgzu3jWK4pVbg7uwGiTbYJja0dZJcADV+gAI4zs=";
+                  name = "wallpaper-src";
+                  url = "https://pbs.twimg.com/media/FYtTCroUEAAldz_?format=jpg&name=orig";
+                  sha256 = "sha256-84ppEyh209IyJcLraLYdDaG+AkVTtZZ6eS37n/Q7a/E=";
                 };
-                dontUnpack   = true;
-                buildPhase   = "waifu2x-converter-cpp -i $src -o $(realpath ./out.jpg)";
+                dontUnpack = true;
+                buildPhase = ''
+                  waifu2x-converter-cpp -i $src -o $(realpath ./out.jpg)
+                  convert out.jpg -crop 3783x2128+712+377 tmp.jpg
+                  mv tmp.jpg out.jpg
+                '';
                 installPhase = "cp out.jpg $out";
-                nativeBuildInputs = with pkgs; [ waifu2x-converter-cpp ];
+                nativeBuildInputs = with pkgs; [
+                  waifu2x-converter-cpp
+                  imagemagick
+                ];
               }}";
               always = true; notification = false;
             }
