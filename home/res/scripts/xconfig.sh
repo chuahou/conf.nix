@@ -29,7 +29,7 @@ do
 done
 
 # disable touchpad, enable natural scrolling
-if [ $(hostname) = "CH-21N" ]; then
+if [ $(hostname) = "CH-21NS" ]; then
 	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "libinput Natural Scrolling Enabled" 1
 	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
 fi
