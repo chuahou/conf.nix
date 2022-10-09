@@ -18,6 +18,15 @@
     };
   };
 
+  # Override wezterm config to accommodate smaller screen.
+  xdg.configFile."wezterm/override.lua".text = ''
+    return function(config)
+        -- Make font size smaller for smaller screen.
+        config["font_size"] = 12.5;
+        return config
+    end
+  '';
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
