@@ -65,6 +65,11 @@
             # inherit (pkgs) some-pkg;
           };
 
+        # Fixes Discord not opening links in Firefox. See nixpkgs#78961.
+        discord-firefox-fix = self: super: {
+          discord = super.discord.override { nss = super.nss_latest; };
+        };
+
         # Syncing up org parser versions for nvim-orgmode/orgmode and
         # tree-sitter-org.
         vim-orgmode-plugins = self: super: {
@@ -159,6 +164,7 @@
                 cpufreq-plugin
                 vim-orgmode-plugins
                 zsh-vim-mode
+                discord-firefox-fix
               ];
               inherit host;
               inherit ((import ./lib {}).me) home;
