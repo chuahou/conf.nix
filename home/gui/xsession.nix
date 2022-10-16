@@ -79,6 +79,7 @@ in {
       in {
         enable = true;
         extraConfig = ''
+          for_window [class=".*"] border pixel 2
           default_border          pixel 2
           default_floating_border pixel 2
         '';
