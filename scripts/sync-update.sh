@@ -7,4 +7,4 @@
 # upgrade NixOS, home and nix-env packages
 sudo nixos-rebuild switch --flake $(dirname $0)/..#
 home-manager switch --flake $(dirname $0)/..#$(hostname)
-nix-env -u
+nix-env -f '<nixos>' -u
