@@ -117,6 +117,8 @@
     ioslabka
     ipaexfont
     ipafont
+    lmmath
+    lmodern
     noto-fonts-cjk
     open-sans
     roboto
