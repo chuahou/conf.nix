@@ -37,6 +37,14 @@
   # Enable TLP.
   services.tlp.enable = true;
 
+  # NVIDIA setup.
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    nvidiaBusId = "PCI:1:0:0";
+    intelBusId = "PCI:0:2:0";
+  };
+
   # Enable zram swap.
   zramSwap.enable = true;
 }
