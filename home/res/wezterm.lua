@@ -17,15 +17,11 @@ end
 return override({
 	-- Font settings.
 	font = wezterm.font_with_fallback({
-		{
-			family = "Iosevka",
-			harfbuzz_features = { "calt=0", "HSKL=1" },
-			stretch = "Expanded",
-		},
+		"Latin Modern Mono",
 		"Noto Sans Mono CJK JP", -- 日本語用のフォント
 	}),
 	font_size = 13.5,
-	line_height = 1.45,
+	line_height = 1.1,
 
 	-- Disable scroll and tab bars completely.
 	enable_scroll_bar = false,
