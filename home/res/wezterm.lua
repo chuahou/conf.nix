@@ -20,8 +20,8 @@ return override({
 		"Latin Modern Mono",
 		"Noto Sans Mono CJK JP", -- 日本語用のフォント
 	}),
-	font_size = 13.5,
-	line_height = 1.1,
+	font_size = 14.5,
+	line_height = 1.3,
 
 	-- Disable scroll and tab bars completely.
 	enable_scroll_bar = false,
