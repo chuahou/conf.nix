@@ -57,6 +57,11 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
+        # Reenable Python 2 for GIMP since our plugins need it.
+        gimp-with-python = self: super: {
+          gimp = super.gimp.override { withPython = true; };
+        };
+
         # Packages to overlay from a stable branch to avoid bugs and the like.
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
@@ -157,6 +162,7 @@
                 stable
                 cfgeq
                 cpufreq-plugin
+                gimp-with-python
                 vim-orgmode-plugins
                 zsh-vim-mode
               ];
