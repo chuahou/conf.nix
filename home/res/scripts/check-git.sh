@@ -5,8 +5,8 @@
 
 print_usage() {
 	echo "USAGE:"
-	echo "    check-git       -- check repositories in $DEFAULT_DIR"
-	echo "    check-git [DIR] -- check repositories in [DIR]"
+	echo "    $0       -- check repositories in $DEFAULT_DIR"
+	echo "    $0 [DIR] -- check repositories in [DIR]"
 	exit 1
 }
 
@@ -16,6 +16,9 @@ fancy_print() {
 	echo $1
 	tput sgr 0
 }
+
+# set $git_dir to first argument if present
+git_dir=${1:-$git_dir}
 
 # iterate through subdirectories of git_dir
 for dir in $(find "$git_dir" -mindepth 1 -maxdepth 1 -type d); do
