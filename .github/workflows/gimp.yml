@@ -2,7 +2,7 @@ name: "Build GIMP with Python 2 support"
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '*/15 * * * *'
 jobs:
   build-gimp:
     runs-on: ubuntu-latest
