@@ -4,7 +4,7 @@
 {
   inputs = {
     nixpkgs        = { url = "nixpkgs/nixos-unstable"; };
-    nixpkgs-stable = { url = "nixpkgs/nixos-22.05"; };
+    nixpkgs-stable = { url = "nixpkgs/nixos-22.11"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -57,17 +57,11 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
-        # Reenable Python 2 for GIMP since our plugins need it.
-        gimp-with-python = self: super: {
-          gimp = super.gimp.override { withPython = true; };
-        };
-
         # Packages to overlay from a stable branch to avoid bugs and the like.
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
-            # Currently unneeded.
-            # inherit (pkgs) some-pkg;
+            inherit (pkgs) gimp;
           };
 
         # Syncing up org parser versions for nvim-orgmode/orgmode and
@@ -162,7 +156,6 @@
                 stable
                 cfgeq
                 cpufreq-plugin
-                gimp-with-python
                 vim-orgmode-plugins
                 zsh-vim-mode
               ];
