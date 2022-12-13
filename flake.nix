@@ -57,11 +57,24 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
+        # Reenable Python 2 for GIMP since our plugins need it.
+        # Currently some Python 2 dependencies are broken, see #13. Hence we
+        # pull from the PR that fixes it.
+        gimp-with-python = self: super: {
+          gimp = (import (super.fetchFromGitHub {
+            owner = "NixOS";
+            repo = "nixpkgs";
+            rev = "b1ecd69a5b403a3a93d2919e2d15bbc23e3347fc";
+            sha256 = "sha256-Uc2lGzq3pD97f622R/6/PiTHPuv38rsoMyjhs6Hn8Uo=";
+          }) { inherit (super) system; }).gimp.override { withPython = true; };
+        };
+
         # Packages to overlay from a stable branch to avoid bugs and the like.
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
-            inherit (pkgs) gimp;
+            # Currently unneeded.
+            # inherit (pkgs) some-pkg;
           };
 
         # Syncing up org parser versions for nvim-orgmode/orgmode and
@@ -156,6 +169,7 @@
                 stable
                 cfgeq
                 cpufreq-plugin
+                gimp-with-python
                 vim-orgmode-plugins
                 zsh-vim-mode
               ];
