@@ -121,6 +121,7 @@
     lmodern
     noto-fonts-cjk
     open-sans
+    overpass
     roboto
     roboto-slab
   ];
