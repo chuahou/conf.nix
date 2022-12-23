@@ -38,6 +38,16 @@ Personal configuration for NixOS, home-manager and others.
 1. `nixos-install --impure --flake /path/to/conf.nix#NEWHOSTNAME`
 	1. May need `mount --bind /mnt /mnt/mnt` workaround.
 
+## Setting up home-manager
+
+1. Login in virtual TTY.
+1. Connect to internet using `nmcli dev wifi list` and
+   `nmcli --ask dev wifi connect SSID`.
+1. Make necessary arrangements for home-manager.
+1. `nix-shell -p home-manager` and run
+   `home-manager switch --flake .#NEWHOSTNAME`.
+1. If Mozc refuses to work, don't forget to check its keyboard layout.
+
 ## Previously on configuration repos
 
 RIP [kiwami](https://github.com/chuahou/kiwami),
