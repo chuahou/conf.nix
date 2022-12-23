@@ -5,14 +5,19 @@
 if [ $(hostname) = "CH-21NS" ]; then
 	internal=eDP-1-1
 	external=HDMI-0
+	intgamma=1
+	intbright=1
 elif [ $(hostname) = "CH-22I" ]; then
 	internal=eDP
 	external=HDMI-A-0
+	intgamma=0.82:0.82:0.7
+	intbright=0.9
 fi
 if [ $(xrandr -q | grep -c "$external connected") -gt 0 ]; then
 	xrandr --output $external --auto --primary --output $internal --off
 else
-	xrandr --output $internal --auto --primary --output $external --off
+	xrandr --output $internal --auto --gamma $intgamma --brightness $intbright \
+		--primary --output $external --off
 fi
 
 # set DPI
