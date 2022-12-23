@@ -5,9 +5,9 @@
 if [ $(hostname) = "CH-21NS" ]; then
 	internal=eDP-1-1
 	external=HDMI-0
-elif [ $(hostname) = "CH-22T" ]; then
-	internal=eDP-1
-	external=HDMI-1
+elif [ $(hostname) = "CH-22I" ]; then
+	internal=eDP
+	external=HDMI-A-0
 fi
 if [ $(xrandr -q | grep -c "$external connected") -gt 0 ]; then
 	xrandr --output $external --auto --primary --output $internal --off
@@ -34,10 +34,9 @@ if [ $(hostname) = "CH-21NS" ]; then
 	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
 fi
 
-# disable touchscreen, enable natural scrolling on touchpad
-if [ $(hostname) = "CH-22T" ]; then
-	xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
-	xinput set-prop "Raydium Corporation Raydium Touch System" "Device Enabled" 0
+# enable natural scrolling on touchpad
+if [ $(hostname) = "CH-22I" ]; then
+	xinput set-prop "MSFT0001:00 04F3:31BE Touchpad" "libinput Natural Scrolling Enabled" 1
 fi
 
 # disable X power saving
@@ -46,9 +45,3 @@ xset s off -dpms
 # disable stream restore module if loaded
 [ $(pactl list short modules | grep module-stream-restore -c || true) -gt 0 ] &&
 	pactl unload-module module-stream-restore
-
-# cope with UK keyboard layout (ew) by mapping the physical \ button to left
-# shift
-if [ $(hostname) = "CH-22T" ]; then
-	xmodmap -e "keycode 94 = Shift_L"
-fi

@@ -11,10 +11,10 @@
     ./printing.nix
   ];
 
-  networking.hostName = "CH-22T";
+  networking.hostName = "CH-22I";
 
   # Read DPI.
-  services.xserver.dpi = import ../dpi/CH-22T;
+  services.xserver.dpi = import ../dpi/CH-22I;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -22,5 +22,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 }

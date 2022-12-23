@@ -15,7 +15,7 @@
     impermanence = { url = "github:nix-community/impermanence"; };
 
     secrets-CH-21NS = { url = "/persist/CH-21NS/secrets.nix"; flake = false; };
-    secrets-CH-22T = { url = "/persist/CH-22T/secrets.nix"; flake = false; };
+    secrets-CH-22I = { url = "/persist/CH-22I/secrets.nix"; flake = false; };
 
     # zsh-vim-mode plugin
     zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
@@ -103,7 +103,7 @@
       };
 
       # Hosts to generate configs over.
-      hosts = [ "CH-21NS" "CH-22T" ];
+      hosts = [ "CH-21NS" "CH-22I" ];
 
     in {
 
