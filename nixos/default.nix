@@ -153,6 +153,7 @@
     tree
     unzip
     wget
+    wireguard-tools
     zip
     zsh
   ];
