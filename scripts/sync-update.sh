@@ -5,6 +5,10 @@
 # Syncs and updates build to current repository status.
 
 # upgrade NixOS, home and nix-env packages
-sudo nixos-rebuild switch --flake $(dirname $0)/..#
-home-manager switch --flake $(dirname $0)/..#$(hostname)
+FLAKE_PATH=$(dirname $0)/..
+sudo nom build \
+	$FLAKE_PATH#nixosConfigurations.$(hostname).config.system.build.toplevel
+sudo nixos-rebuild switch --flake $FLAKE_PATH#
+nom build $FLAKE_PATH#homeConfigurations.CH-22I.activationPackage
+home-manager switch --flake $FLAKE_PATH#$(hostname)
 nix-env -f '<nixos>' -u

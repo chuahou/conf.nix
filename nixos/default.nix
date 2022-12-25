@@ -148,6 +148,7 @@
     ldns
     lm_sensors
     neovim
+    nix-output-monitor
     pciutils
     pv
     tree
