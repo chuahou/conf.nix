@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2022 Chua Hou
 #
 # Add cachix cache.
 
@@ -11,5 +11,8 @@
     trusted-public-keys = lib.mkAfter [
       "chuahou.cachix.org-1:YOUI9Bctw2ErS0Pao4DTLPO2wCsPSsYMUIjtF6P0P3Q="
     ];
+
+    # Avoid negative cache TTL.
+    narinfo-cache-negative-ttl = 0;
   };
 }
