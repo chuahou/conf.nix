@@ -62,6 +62,20 @@
           gimp = super.gimp.override { withPython = true; };
         };
 
+        # Enable fenced syntax for vim-nix.
+        vim-nix-fenced-syntax = self: super: {
+          vimPlugins = super.vimPlugins // {
+            vim-nix = super.vimPlugins.vim-nix.overrideAttrs (old: {
+              patches = (old.patches or []) ++ [
+                (super.fetchpatch {
+                  url = "https://patch-diff.githubusercontent.com/raw/LnL7/vim-nix/pull/28.patch";
+                  sha256 = "sha256-bwEmItIVl7Fkez7A6jfnbaNOVP1gFgdlnAK4QEQ8TOI=";
+                })
+              ];
+            });
+          };
+        };
+
         # Packages to overlay from a stable branch to avoid bugs and the like.
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
@@ -163,6 +177,7 @@
                 cfgeq
                 cpufreq-plugin
                 gimp-with-python
+                vim-nix-fenced-syntax
                 vim-orgmode-plugins
                 zsh-vim-mode
               ];
