@@ -43,3 +43,7 @@ cnoremap <C-e> <End>
 cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos() - 2]<CR>
 	" Thanks to https://github.com/tpope/vim-rsi/issues/15#issuecomment-198632142.
 cnoremap <C-d> <Del>
+
+" Prevent Shift+Space from being sent to the terminal in terminal mode. For some
+" reason, at some point this has begun sending ;2u instead of just Space.
+tnoremap <S-Space> <Space>
