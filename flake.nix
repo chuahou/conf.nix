@@ -116,6 +116,16 @@
         };
       };
 
+      # Nixpkgs config that allows Python 2 to be built despite being marked
+      # insecure (see #14). Shouldn't be too bad since nixpkgs is now using
+      # ActiveState's fork, I suppose...?
+      allowPython2InsecureModule = { ... }: {
+        nixpkgs.config.permittedInsecurePackages = [
+          "python-2.7.18.6"
+          "python-2.7.18.6-env"
+        ];
+      };
+
       # Hosts to generate configs over.
       hosts = [ "CH-21NS" "CH-22I" ];
 
@@ -150,6 +160,8 @@
                 ];
               })
 
+              allowPython2InsecureModule
+
               # main NixOS configuration
               (import ./nixos)
 
@@ -171,19 +183,22 @@
           name = host;
           value = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ (import ./home {
-              overlays = with overlays; [
-                stable
-                cfgeq
-                cpufreq-plugin
-                gimp-with-python
-                vim-nix-fenced-syntax
-                vim-orgmode-plugins
-                zsh-vim-mode
-              ];
-              inherit host;
-              inherit ((import ./lib {}).me) home;
-            }) ];
+            modules = [
+              (import ./home {
+                overlays = with overlays; [
+                  stable
+                  cfgeq
+                  cpufreq-plugin
+                  gimp-with-python
+                  vim-nix-fenced-syntax
+                  vim-orgmode-plugins
+                  zsh-vim-mode
+                ];
+                inherit host;
+                inherit ((import ./lib {}).me) home;
+              })
+              allowPython2InsecureModule
+            ];
             extraSpecialArgs = { inherit inputs; };
           };
         }) hosts);
