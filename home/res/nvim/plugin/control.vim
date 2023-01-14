@@ -44,8 +44,8 @@ cnoremap <C-k> <C-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos() - 2]<CR>
 	" Thanks to https://github.com/tpope/vim-rsi/issues/15#issuecomment-198632142.
 cnoremap <C-d> <Del>
 
-" Prevent Shift+Space and Shift+Enter from being sent to the terminal in
-" terminal mode. For some reason, at some point this has begun sending ;2u etc.
-" instead of just Space and Enter.
+" Prevent Shift+<key> from being sent to the terminal in terminal mode for the
+" following keys. For some reason, at some point this has begun sending ;2u etc.
 tnoremap <S-Space> <Space>
 tnoremap <S-Enter> <Enter>
+tnoremap <S-BS> <BS>
