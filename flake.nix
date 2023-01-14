@@ -57,10 +57,42 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
-        # Reenable Python 2 for GIMP since our plugins need it.
-        gimp-with-python = self: super: {
-          gimp = super.gimp.override { withPython = true; };
-        };
+        # Provide a "not insecure" Python 2 to packages that desperately need it
+        # for now. See #14. Shouldn't be too bad since nixpkgs is now using
+        # ActiveState's fork, I suppose...?
+        python2 = self: super:
+          let
+            # Package set with Python 2's known vulnerability removed. We assert
+            # that the old meta.knownVulnerabilities is as we expect it to be,
+            # in case there are more added/changed that we shouldn't
+            # automatically ignore.
+            expectedKnownVuln = [
+              "Python 2.7 has reached its end of life after 2020-01-01. See https://www.python.org/doc/sunset-python-2/."
+            ];
+            pkgs' = import nixpkgs {
+              inherit (super) system config;
+              overlays = [ (self: super: {
+                python27 = super.python27.overrideAttrs
+                  (old:
+                    assert old.meta.knownVulnerabilities == expectedKnownVuln;
+                    super.lib.recursiveUpdate old
+                      { meta.knownVulnerabilities = []; });
+              }) ];
+            };
+          in {
+            # Our GIMP plugins need Python 2 support.
+            gimp = super.gimp.override {
+              withPython = true;
+              python2 = pkgs'.python2;
+            };
+            # mozc needs Python 2 to build.
+            fcitx-engines = super.fcitx-engines // {
+              mozc = super.fcitx-engines.mozc.override {
+                python = pkgs'.python2;
+                inherit (pkgs'.python2Packages) gyp;
+              };
+            };
+          };
 
         # Enable fenced syntax for vim-nix.
         vim-nix-fenced-syntax = self: super: {
@@ -116,16 +148,6 @@
         };
       };
 
-      # Nixpkgs config that allows Python 2 to be built despite being marked
-      # insecure (see #14). Shouldn't be too bad since nixpkgs is now using
-      # ActiveState's fork, I suppose...?
-      allowPython2InsecureModule = { ... }: {
-        nixpkgs.config.permittedInsecurePackages = [
-          "python-2.7.18.6"
-          "python-2.7.18.6-env"
-        ];
-      };
-
       # Hosts to generate configs over.
       hosts = [ "CH-21NS" "CH-22I" ];
 
@@ -157,10 +179,9 @@
                 nixpkgs.overlays = with overlays; [
                   stable
                   cpufreq-plugin ioslabka
+                  python2 # Python 2 marked insecure #14
                 ];
               })
-
-              allowPython2InsecureModule
 
               # main NixOS configuration
               (import ./nixos)
@@ -189,15 +210,14 @@
                   stable
                   cfgeq
                   cpufreq-plugin
-                  gimp-with-python
                   vim-nix-fenced-syntax
                   vim-orgmode-plugins
                   zsh-vim-mode
+                  python2 # Python 2 marked insecure #14
                 ];
                 inherit host;
                 inherit ((import ./lib {}).me) home;
               })
-              allowPython2InsecureModule
             ];
             extraSpecialArgs = { inherit inputs; };
           };
