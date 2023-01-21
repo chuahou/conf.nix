@@ -19,8 +19,4 @@
 
   # import overlays from flakes
   nixpkgs.overlays = overlays;
-
-  # allow unfree
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = (_: true); # temp workaround, HM#2942
 }

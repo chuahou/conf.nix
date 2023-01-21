@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2022, 2023 Chua Hou
 
 {
   inputs = {
@@ -44,7 +44,6 @@
     }:
     let
       system = "x86_64-linux";
-      pkgs   = nixpkgs.legacyPackages.${system};
 
       overlays = with inputs; {
         cpufreq-plugin =
@@ -203,7 +202,10 @@
         builtins.listToAttrs (builtins.map (host: {
           name = host;
           value = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
             modules = [
               (import ./home {
                 overlays = with overlays; [
