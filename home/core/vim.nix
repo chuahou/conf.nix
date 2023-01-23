@@ -56,6 +56,9 @@ in {
           " activate actions with <C-space>
           nmap <C-space> <Plug>(coc-codeaction-line)
 
+          " renaming
+          nmap <silent> <Leader>rn <Plug>(coc-rename)
+
           " diagnostics navigation
           nmap <silent> [g <Plug>(coc-diagnostic-prev)
           nmap <silent> ]g <Plug>(coc-diagnostic-next)
