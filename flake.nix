@@ -84,13 +84,6 @@
               withPython = true;
               python2 = pkgs'.python2;
             };
-            # mozc needs Python 2 to build.
-            fcitx-engines = super.fcitx-engines // {
-              mozc = super.fcitx-engines.mozc.override {
-                python = pkgs'.python2;
-                inherit (pkgs'.python2Packages) gyp;
-              };
-            };
           };
 
         # Enable fenced syntax for vim-nix.
