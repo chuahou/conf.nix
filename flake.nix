@@ -56,35 +56,8 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
-        # Provide a "not insecure" Python 2 to packages that desperately need it
-        # for now. See #14. Shouldn't be too bad since nixpkgs is now using
-        # ActiveState's fork, I suppose...?
-        python2 = self: super:
-          let
-            # Package set with Python 2's known vulnerability removed. We assert
-            # that the old meta.knownVulnerabilities is as we expect it to be,
-            # in case there are more added/changed that we shouldn't
-            # automatically ignore.
-            expectedKnownVuln = [
-              "Python 2.7 has reached its end of life after 2020-01-01. See https://www.python.org/doc/sunset-python-2/."
-            ];
-            pkgs' = import nixpkgs {
-              inherit (super) system config;
-              overlays = [ (self: super: {
-                python27 = super.python27.overrideAttrs
-                  (old:
-                    assert old.meta.knownVulnerabilities == expectedKnownVuln;
-                    super.lib.recursiveUpdate old
-                      { meta.knownVulnerabilities = []; });
-              }) ];
-            };
-          in {
-            # Our GIMP plugins need Python 2 support.
-            gimp = super.gimp.override {
-              withPython = true;
-              python2 = pkgs'.python2;
-            };
-          };
+        # Overlay providing Python 2 to packages that need it.
+        python2 = import pkgs/python2-overlay.nix;
 
         # Enable fenced syntax for vim-nix.
         vim-nix-fenced-syntax = self: super: {
