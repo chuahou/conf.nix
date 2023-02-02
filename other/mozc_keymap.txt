@@ -18,11 +18,11 @@ Composition	Ctrl x	Delete
 Composition	Ctrl m	Commit
 Composition	Ctrl Enter	Commit
 Composition	Enter	Commit
-Composition	Ctrl 1	ConvertToHiragana
-Composition	Ctrl 2	ConvertToFullKatakana
-Composition	Ctrl 3	ConvertToHalfWidth
-Composition	Ctrl 4	ConvertToFullAlphanumeric
-Composition	Ctrl 5	ConvertToHalfAlphanumeric
+Composition	F6	ConvertToHiragana
+Composition	F7	ConvertToFullKatakana
+Composition	F8	ConvertToHalfWidth
+Composition	F9	ConvertToFullAlphanumeric
+Composition	F10	ConvertToHalfAlphanumeric
 Composition	F2	ConvertWithoutHistory
 Composition	Ctrl Shift Space	InsertFullSpace
 Composition	Ctrl Space	InsertHalfSpace
