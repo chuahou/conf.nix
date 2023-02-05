@@ -172,6 +172,9 @@ in {
             {
               command = "${powerScript}/bin/power.sh"; notification = false;
             }
+            {
+              command = "ibus-daemon --xim --replace --daemonize"; notification = false; always = true;
+            }
           ];
 
           # keybindings

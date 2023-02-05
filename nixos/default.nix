@@ -8,6 +8,7 @@
     ./cachix.nix
     ./direnv.nix
     ./gc.nix
+    ./ime.nix
     ./persist.nix
     ./piper.nix
     ./printing.nix
