@@ -170,10 +170,6 @@ in {
               always = true; notification = false;
             }
             {
-              command = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-              notification = false;
-            }
-            {
               command = "${powerScript}/bin/power.sh"; notification = false;
             }
           ];

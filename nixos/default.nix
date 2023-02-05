@@ -40,6 +40,7 @@
     networkmanager.enable = true;
     useDHCP               = false;
   };
+  programs.nm-applet.enable = true;
 
   # time settings
   time.timeZone = "Europe/London";
