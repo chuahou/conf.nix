@@ -6,7 +6,6 @@
 {
   # Picom blur and shadow only for this computer.
   services.picom = {
-    package = lib.mkForce pkgs.picom-next;
     backend = lib.mkForce "glx";
 
     shadow = lib.mkForce true;
