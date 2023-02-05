@@ -139,6 +139,7 @@
     git
     gnupg
     gparted
+    htop
     jq
     killall
     ldns
