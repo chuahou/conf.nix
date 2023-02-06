@@ -28,8 +28,8 @@
 
   # Default CPU power management.
   powerManagement = {
-    cpuFreqGovernor = "performance";
-    cpufreq.max     = 1800000;
+    cpuFreqGovernor = "schedutil";
+    cpufreq.max     = 1400000;
   };
 
   # Update CPU microcode.
