@@ -16,6 +16,9 @@
     outer = lib.mkForce 4;
   };
 
+  # Battery only reaches 99%.
+  services.polybar.config."module/battery".full-at = 99;
+
   # Use Alacritty instead of Wezterm.
   # Wezterm has some strange performance issues with integrated graphics. We
   # also use a light theme due to monitor issues.
