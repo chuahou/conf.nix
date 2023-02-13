@@ -4,6 +4,8 @@
 #
 # Updates everything.
 
+set -euo pipefail
+
 # update commits
 nix flake update
 

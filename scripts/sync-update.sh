@@ -4,6 +4,8 @@
 #
 # Syncs and updates build to current repository status.
 
+set -euo pipefail
+
 # upgrade NixOS, home and nix-env packages
 FLAKE_PATH=$(dirname $0)/..
 sudo nom build \
