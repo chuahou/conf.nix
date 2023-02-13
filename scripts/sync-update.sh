@@ -9,6 +9,6 @@ FLAKE_PATH=$(dirname $0)/..
 sudo nom build \
 	$FLAKE_PATH#nixosConfigurations.$(hostname).config.system.build.toplevel
 sudo nixos-rebuild switch --flake $FLAKE_PATH#
-nom build $FLAKE_PATH#homeConfigurations.CH-22I.activationPackage
+nom build $FLAKE_PATH#homeConfigurations.$(hostname).activationPackage
 home-manager switch --flake $FLAKE_PATH#$(hostname)
 nix-env -f '<nixos>' -u
