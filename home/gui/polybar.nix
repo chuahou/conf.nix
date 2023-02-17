@@ -40,7 +40,7 @@
           };
 
         launchTerminal = command:
-          "${pkgs.wezterm}/bin/wezterm start -- ${command} & disown";
+        "${config.programs.alacritty.package}/bin/alacritty -e ${command} & disown";
 
         launchTerminalWatch = command:
           launchTerminal "${pkgs.procps}/bin/watch -n 2 ${command}";

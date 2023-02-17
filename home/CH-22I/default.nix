@@ -19,12 +19,8 @@
   # Battery only reaches 99%.
   services.polybar.config."module/battery".full-at = 99;
 
-  # Use Alacritty instead of Wezterm.
-  # Wezterm has some strange performance issues with integrated graphics. We
-  # also use a light theme due to monitor issues.
-  xsession.windowManager.i3.config.keybindings."Mod1+Return" = lib.mkForce
-    "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty";
-  programs.alacritty = {
+  # Separate Alacritty configuration with light theme.
+  programs.alacritty = lib.mkForce {
     enable = true;
     settings = {
       env = {
