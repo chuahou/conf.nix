@@ -15,7 +15,7 @@ dnd_on () {
 }
 
 dnd_off () {
-	killall -SIGUSR2 -r '.*dunst' && rm ${state_file}
+	killall -SIGUSR2 -r '.*dunst' && rm ${state_file} -f
 	hook
 }
 
