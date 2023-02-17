@@ -36,6 +36,9 @@
     orgmode = { url = "github:nvim-orgmode/orgmode"; flake = false; };
     nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false; };
     tree-sitter-org = { url = "github:milisims/tree-sitter-org"; flake = false; };
+
+    # nix-index database
+    nix-index-database = { url = "github:Mic92/nix-index-database"; };
   };
 
   outputs =

@@ -137,6 +137,24 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1676172252,
+        "narHash": "sha256-Q5yJPpgbvOTgB0NQTJmlx3di1Sj5QQhSrjv38u6MzsQ=",
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "rev": "89e3b689e0ae9bac4c6cdc24d1085d81baeebde4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nix-rice": {
       "flake": false,
       "locked": {
@@ -215,6 +233,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1673364622,
+        "narHash": "sha256-5zQ0hJG86SwkXJSitggNxNL+ieBhsq8HKMC7EWuXyK4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "03aec194125de1fd6f486d323cee872bb4be88cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1676202775,
         "narHash": "sha256-gV/RnfVZkGLHn+5rmX2GSh5aquVHpWOJw1cnpEV03tQ=",
         "owner": "NixOS",
@@ -268,9 +302,10 @@
         "impermanence": "impermanence",
         "ioslabka": "ioslabka",
         "latex-sty": "latex-sty",
+        "nix-index-database": "nix-index-database",
         "nix-rice": "nix-rice",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
         "nvim-treesitter": "nvim-treesitter",
         "orgmode": "orgmode",
