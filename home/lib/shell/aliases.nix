@@ -61,4 +61,8 @@
 
   # nix-shell with zsh
   nix-shell = "nix-shell --run zsh";
+
+  # by default, run nix-env with <nixos> since we set NIX_PATH manually instead
+  # of using channels
+  nix-env = "nix-env -f '<nixos>'";
 }
