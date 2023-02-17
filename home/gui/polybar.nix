@@ -28,7 +28,7 @@
 
         mkIpcPair = name: interval: ipc:
           let
-            hook = "polybar-msg hook ${name}_ipc 1";
+            hook = "polybar-msg action ${name}_ipc hook.0";
           in {
             "module/${name}" = {
               type  = "custom/script";
@@ -243,7 +243,7 @@
               until polybar-msg cmd show; do ${pkgs.coreutils}/bin/sleep 1; done
               ${lib.concatMapStringsSep "\n${pkgs.coreutils}/bin/sleep 1\n"
                 (ipc: ''
-                  until polybar-msg hook ${lib.removePrefix "module/" ipc} 1; do
+                  until polybar-msg action ${lib.removePrefix "module/" ipc} hook.0; do
                     ${pkgs.coreutils}/bin/sleep 1; done
                 '') ipcs}
           ) &

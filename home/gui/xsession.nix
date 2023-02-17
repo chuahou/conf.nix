@@ -11,7 +11,7 @@ let
     let ipc = "sound_ipc";
     in
       if builtins.hasAttr "module/${ipc}" config.services.polybar.config
-      then "polybar-msg hook sound_ipc 1"
+      then "polybar-msg action sound_ipc hook.0"
       else "true";
   suspendScript = with pkgs; writeShellScriptBin "suspend-window" ''
     win_id=$(${xdotool}/bin/xdotool getactivewindow)

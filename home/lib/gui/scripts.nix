@@ -54,7 +54,7 @@ in rec {
         ${if builtins.hasAttr "module/dnd_ipc" cfg.config
           then
             ''
-              ${cfg.package}/bin/polybar-msg hook dnd_ipc 1
+              ${cfg.package}/bin/polybar-msg action dnd_ipc hook.0
             ''
           else ""}
       }
