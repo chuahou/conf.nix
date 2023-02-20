@@ -16,8 +16,8 @@
     outer = lib.mkForce 4;
   };
 
-  # Battery only reaches 99%.
-  services.polybar.config."module/battery".full-at = 99;
+  # Battery only reaches 98% sometimes.
+  services.polybar.config."module/battery".full-at = 98;
 
   # Separate Alacritty configuration with light theme.
   programs.alacritty = lib.mkForce {
