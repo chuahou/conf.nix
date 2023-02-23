@@ -51,7 +51,13 @@ in {
 
     autocd = true;
 
-    initExtra = ''
+    initExtraFirst = /* zsh */ ''
+      # p10k instant prompt.
+      FILE_PATH=${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh
+      [[ -r "$FILE_PATH" ]] && source "$FILE_PATH"
+    '';
+
+    initExtra = /* zsh */ ''
       [[ ! -f ${p10k-config-path} ]] || source ${p10k-config-path}
 
       # vi mode config
@@ -67,7 +73,7 @@ in {
       setopt autopushd
 
       # disable <C-s> <C-q> on interactive shells
-      [[ $- != *i* ]] || stty -ixon -ixoff
+      [[ $- != *i* ]] || stty -ixon -ixoff <$TTY >$TTY
     '';
 
     # plugins
