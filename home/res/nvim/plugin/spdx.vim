@@ -27,6 +27,6 @@ augroup spdxautocmd
 	autocmd BufNewFile *.hs norm ggj0i-- 
 	autocmd BufNewFile *.py,*.sh,*.zsh,*.nix norm gg0i# 
 	autocmd BufNewFile *.py,*.sh,*.zsh,*.nix norm ggj0i# 
-	autocmd BufNewFile *.sh norm ggO#!/usr/bin/env bash
-	autocmd BufNewFile *.zsh norm ggO#!/usr/bin/env zsh
+	autocmd BufNewFile *.sh exe "norm ggO\<ESC>0Da#!/usr/bin/env bash"
+	autocmd BufNewFile *.zsh exe "norm ggO\<ESC>0Da#!/usr/bin/env zsh"
 augroup END
