@@ -47,7 +47,7 @@ in rec {
     in pkgs.writeShellScriptBin "donotdisturb.sh" ''
       set -eu
 
-      ${addToPath (with pkgs; [ coreutils psmisc ])}
+      ${addToPath (with pkgs; [ coreutils libnotify psmisc ])}
 
       state_file=${stateFile}
       hook () {
