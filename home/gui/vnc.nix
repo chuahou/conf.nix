@@ -13,8 +13,14 @@ let
 
     ${mkPath (with pkgs; [ coreutils openssh openssl tigervnc ])}
 
+    if [ $# -lt 1 ]; then
+        echo "USAGE: $0 [server:port] [additional vncviewer arguments]"
+        exit 1
+    fi
+
     # Server to connect to.
     server=$1
+    shift
 
     # Temporary working directory to keep things in.
     temp_dir=$(mktemp -p $XDG_RUNTIME_DIR -d)
@@ -54,7 +60,7 @@ let
 
     # Start VNC viewer.
     sleep 2
-    vncviewer localhost:5901 -passwd $passwd_file
+    vncviewer localhost:5901 -passwd $passwd_file "$@"
 
     # Upon exit, should call cleanup.
   '';
