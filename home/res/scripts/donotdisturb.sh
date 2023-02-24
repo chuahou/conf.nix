@@ -11,14 +11,14 @@ get_status () {
 
 dnd_on () {
 	# Sending this notification fixes the case where dunst is not yet running.
-	notify-send "Turning on do not disturb"
+	notify-send "Turning on do not disturb" -t 1 -u low
 	killall -SIGUSR1 -r '.*dunst' && touch ${state_file}
 	hook
 }
 
 dnd_off () {
 	# Sending this notification fixes the case where dunst is not yet running.
-	notify-send "Turning off do not disturb"
+	notify-send "Turning off do not disturb" -t 1 -u low
 	killall -SIGUSR2 -r '.*dunst' && rm ${state_file} -f
 	hook
 }
