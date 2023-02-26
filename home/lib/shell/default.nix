@@ -17,6 +17,14 @@ in ''
   # environment variables
   ${config.lib.zsh.exportAll vars}
 
+  # XDG variables
+  ${config.lib.zsh.exportAll {
+    XDG_CACHE_HOME = config.xdg.cacheHome;
+    XDG_CONFIG_HOME = config.xdg.configHome;
+    XDG_DATA_HOME = config.xdg.dataHome;
+    XDG_STATE_HOME = config.xdg.stateHome;
+  }}
+
   # aliases
   ${lib.concatStringsSep "\n" (
     lib.mapAttrsToList (k: v: "alias ${k}=${lib.escapeShellArg v}") aliases
