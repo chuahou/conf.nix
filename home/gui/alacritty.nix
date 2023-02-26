@@ -12,16 +12,17 @@
       };
 
       window = {
-        padding = rec { x = 30; y = x; };
+        padding = rec { x = 20; y = x; };
         opacity = 0.92;
       };
       scrolling.history  = 10000;
       draw_bold_text_with_bright_colors = false;
 
-      font = {
-        normal.family = "Latin Modern Mono";
-        size = 13.5;
+      font = rec {
+        normal.family = "Mplus Code 60";
+        size = 12  ;
         offset.y = 6;
+        glyph_offset.y = offset.y / 2; # Center glyph vertically.
       };
 
       colors =

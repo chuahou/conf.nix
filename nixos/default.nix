@@ -121,6 +121,7 @@
     ipafont
     lmmath
     lmodern
+    mplus-outline-fonts.githubRelease
     noto-fonts-cjk
     open-sans
     overpass
