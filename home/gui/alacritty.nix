@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021, 2023 Chua Hou
 
-{ ... }:
+{ config, ... }:
 
 {
   programs.alacritty = {
@@ -18,11 +18,13 @@
       scrolling.history  = 10000;
       draw_bold_text_with_bright_colors = false;
 
-      font = rec {
+      font = {
         normal.family = "Mplus Code 60";
-        size = 12  ;
+        size = 12;
         offset.y = 6;
-        glyph_offset.y = offset.y / 2; # Center glyph vertically.
+
+        # Center glyph vertically.
+        glyph_offset.y = config.programs.alacritty.settings.font.offset.y / 2;
       };
 
       colors =

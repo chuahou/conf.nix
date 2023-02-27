@@ -20,18 +20,11 @@
   services.polybar.config."module/battery".full-at = 98;
 
   # Separate Alacritty configuration with light theme.
-  programs.alacritty = lib.mkForce {
-    enable = true;
-    settings = {
-      env = {
-        TERM = "xterm-256color"; # so we do not run into trouble with ssh/emacs
-      };
-      window.padding = rec { x = 20; y = x; };
-      scrolling.history  = 10000;
-      draw_bold_text_with_bright_colors = false;
+  programs.alacritty = {
+    settings = rec {
       font = {
-        normal.family = "Latin Modern Mono";
-        size = 12.5;
+        size = lib.mkForce 11;
+        offset.y = lib.mkForce 3;
       };
       import =
         let
@@ -42,7 +35,7 @@
             sha256 = "sha256-LVWo7ALlbgpbxoqOOdjIYYO9txwJVwY+F0yA1gTJ+co=";
           };
         in [ "${alacritty-theme}/themes/papercolor_light.yaml" ];
-      colors = {
+      colors = lib.mkForce {
         normal = {
           black = "#222222";
           white = "#888888";
@@ -55,7 +48,7 @@
     };
   };
   programs.neovim.plugins = with pkgs.vimPlugins; [ papercolor-theme ];
-  xdg.configFile."nvim/after/plugin/appearance.vim".text = ''
+  xdg.configFile."nvim/after/plugin/appearance.vim".text = /* vim */ ''
     colorscheme PaperColor
     set background=light
     AirlineTheme minimalist
@@ -64,6 +57,13 @@
     highlight SpecialKey ctermfg=darkgrey
     highlight Whitespace ctermfg=253
     highlight VertSplit ctermfg=8 ctermbg=8
+
+    " Make background transparent.
+    highlight Normal ctermbg=NONE
+    highlight EndOfBuffer ctermbg=NONE
+    highlight LineNr ctermbg=NONE
+    highlight SignColumn ctermbg=NONE
+    highlight FoldColumn ctermbg=None
   '';
 
   # This value determines the Home Manager release that your
