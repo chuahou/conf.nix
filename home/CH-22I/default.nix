@@ -55,7 +55,7 @@
     highlight LineNr ctermfg=Brown
     highlight ColorColumn ctermbg=15
     highlight SpecialKey ctermfg=darkgrey
-    highlight Whitespace ctermfg=253
+    highlight Whitespace ctermfg=251
     highlight VertSplit ctermfg=8 ctermbg=8
 
     " Make background transparent.
