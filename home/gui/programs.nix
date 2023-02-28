@@ -20,6 +20,7 @@
     pdfgrep
     pdftk
     ripgrep
+    zotero
 
     # media
     feh
