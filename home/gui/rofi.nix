@@ -123,8 +123,8 @@
       display-drun        = "RUN λ>";
 
       # run
-      run-command       = "${config.xsession.windowManager.i3.package}/bin/i3 exec {cmd}";
-      run-shell-command = "{terminal} -e {cmd}";
+      run-command       = "${config.xsession.windowManager.i3.package}/bin/i3 exec '{cmd}'";
+      run-shell-command = "{terminal} -e '{cmd}'";
       display-run       = "RUN $>";
 
       # window
