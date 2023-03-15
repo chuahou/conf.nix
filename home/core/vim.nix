@@ -36,7 +36,6 @@ in {
       # language plugins
       coc-clangd
       haskell-vim
-      vim-stylish-haskell
       vim-markdown
       vim-nix
       {
@@ -235,7 +234,6 @@ in {
       xsel # For clipboard support.
       xdotool # For vimtex's synctex.
       ripgrep # For fzf.vim.
-      stylish-haskell # For, surprise, surprise, stylish-haskell.
 
       # Language servers.
       clang-tools haskell-language-server rnix-lsp
