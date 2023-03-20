@@ -59,17 +59,6 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
-        # Use GIMP 2.10.32 since 2.10.34 has white text bug (see
-        # https://gitlab.gnome.org/GNOME/gimp/-/issues/9174).
-        gimp_2_10_32 = self: super: {
-          inherit (import (super.fetchFromGitHub {
-            owner = "NixOS";
-            repo = "nixpkgs";
-            rev = "d6aa02046bfaf4f44bf28b51f622787973946ad6";
-            sha256 = "sha256-HyhwVa7FlEpdHJTPYdp2NTIopp+3rCrdjUpPcN0kfwc=";
-          }) { inherit (super) system config; }) gimp;
-        };
-
         # Overlay providing Python 2 to packages that need it.
         python2 = import pkgs/python2-overlay.nix;
 
@@ -195,7 +184,6 @@
                   vim-nix-fenced-syntax
                   vim-orgmode-plugins
                   zsh-vim-mode
-                  gimp_2_10_32
                   python2 # Python 2 marked insecure #14
                 ];
                 inherit host;
