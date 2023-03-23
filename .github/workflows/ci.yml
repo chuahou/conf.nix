@@ -1,0 +1,37 @@
+name: "Build configurations with updated inputs"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+jobs:
+  build-nixos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cachix/install-nix-action@v20
+      - uses: actions/checkout@v3
+      - uses: cachix/cachix-action@v12
+        with:
+          name: chuahou
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: df -h /
+      - run: sed -i '/secrets-\([^ ]\+\) = { url = "\/persist\/\1\/secrets.nix"; flake = false; };/d' flake.nix
+      - run: nix flake update
+      - run: nix build .#nixosConfigurations.ci-common.config.system.build.toplevel
+      - run: df -h /
+  build-hm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cachix/install-nix-action@v20
+      - uses: actions/checkout@v3
+      - uses: cachix/cachix-action@v12
+        with:
+          name: chuahou
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: df -h /
+      # Delete these to free up space for us to use.
+      - run: sudo rm -rf /usr/share/dotnet "$AGENT_TOOLSDIRECTORY"
+      - run: df -h /
+      - run: sed -i '/secrets-\([^ ]\+\) = { url = "\/persist\/\1\/secrets.nix"; flake = false; };/d' flake.nix
+      - run: nix flake update
+      - run: nix build .#homeConfigurations.ci-common.activationPackage
+      - run: df -h /
