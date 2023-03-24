@@ -1,6 +1,7 @@
 # conf.nix
 
-[![](https://forthebadge.com/images/badges/no-ragrets.svg)](https://forthebadge.com)
+[![](https://forthebadge.com/images/badges/no-ragrets.svg)](https://forthebadge.com)  
+[![Build derivations with updated inputs](https://github.com/chuahou/conf.nix/actions/workflows/ci.yml/badge.svg)](https://github.com/chuahou/conf.nix/actions/workflows/ci.yml)
 
 Personal configuration for NixOS, home-manager and others.
 
