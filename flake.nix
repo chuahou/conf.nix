@@ -116,14 +116,14 @@
         };
       };
 
-      # Hosts to generate configs over.
-      hosts = [ "CH-21NS" "CH-22I" "ci-common" ];
-
     in {
 
       # Forward inputs for easier debugging. To access each input simply use
       # .#inputs.[input].
       inherit inputs;
+
+      # Hosts to generate configs over.
+      hosts = [ "CH-21NS" "CH-22I" ];
 
       # nixpkgs with all overlays applied.
       overlayed = import nixpkgs {
@@ -157,20 +157,7 @@
               # impermanence opt-in persistence
               inputs.impermanence.nixosModules.impermanence
             ];
-
-            # Pass inputs but add a special secrets-ci-common dummy for CI to
-            # build configurations.
-            specialArgs.inputs = inputs // {
-              secrets-ci-common = nixpkgs.legacyPackages.${system}.writeTextFile {
-                name = "secrets-ci-common";
-                text = /* nix */ ''{
-                  # Both these passwords are just the single character 'a'.
-                  root.hashedPassword = "$6$T8cVomFv5JCJ/FTJ$Byr.u4lbzU0ypiJZRRW5o1gTejFliqbD691TtxU9h0tQ1wG2IB9mJAneIUnA62eG/LC60F3ytRdDxIDmhCoYV1";
-                  user.hashedPassword = "$6$JiHC3R/LFjofuztY$jq.PYav8AaMHUQ78EYia/c4f6f0BFdmw9PYKLx9wUREYxvD/JuFQM4dbVXL.91es1GCG7GQVwb.V7msIebUP50";
-                }'';
-                destination = "/default.nix";
-              };
-            };
+            specialArgs = { inherit inputs; };
           };
         in
           builtins.listToAttrs (builtins.map (host: {
@@ -178,7 +165,7 @@
             value = nixpkgs.lib.nixosSystem (base // {
               modules = (base.modules or []) ++ [ (import ./nixos/${host}) ];
             });
-          }) hosts);
+          }) self.hosts);
 
       homeConfigurations =
         builtins.listToAttrs (builtins.map (host: {
@@ -205,6 +192,6 @@
             ];
             extraSpecialArgs = { inherit inputs; };
           };
-        }) hosts);
+        }) self.hosts);
     };
 }
