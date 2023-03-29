@@ -40,11 +40,18 @@ drvs=$(echo $drvs | xargs -n1 | sort -u | xargs)
 
 # Check if each derivation is on our caches, otherwise build it.
 >&2 echo "Checking/building $(wc -w <<< $drvs) derivations."
+unset FAILED # String not set as long as we don't fail any derivation.
 for drv in $drvs; do
 	narinfo=$(nix show-derivation $drv | \
 		jq -r '.[].env.out' | \
 		sed 's@^/nix/store/\([a-z0-9]\+\)-.*$@\1@').narinfo
 	curl -sfL https://cache.nixos.org/$narinfo >/dev/null \
 		|| curl -sfL https://chuahou.cachix.org/$narinfo >/dev/null \
-		|| nix build --print-out-paths --no-link $drv
+		|| nix build --print-out-paths --no-link $drv \
+		|| FAILED=yes
+		# We failed so set the string. However, we continue building the rest to
+		# populate the cache as much as possible.
 done
+
+# Return error code if one of the derivations failed.
+[[ ! -v FAILED ]]
