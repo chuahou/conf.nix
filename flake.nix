@@ -53,7 +53,10 @@
           import pkgs/cpufreq-plugin/overlay.nix inputs.cpufreq-plugin;
 
         ioslabka = ioslabka.overlay;
-        cfgeq    = self: super: { cfgeq = cfgeq.defaultPackage.${system}; };
+        cfgeq = self: super: {
+          cfgeq = super.haskell.lib.justStaticExecutables
+            cfgeq.defaultPackage.${system};
+        };
 
         zsh-vim-mode = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
