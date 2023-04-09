@@ -16,9 +16,6 @@ jobs:
           name: chuahou
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: df -h /
-      # Delete these inputs as CI has no way of updating them. We don't need
-      # them anyway.
-      - run: sed -i '/secrets-\([^ ]\+\) = { url = "\/persist\/\1\/secrets.nix"; flake = false; };/d' flake.nix
       - run: nix flake update
       - run: scripts/ci.sh
       - run: df -h /
