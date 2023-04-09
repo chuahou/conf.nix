@@ -309,36 +309,8 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nvim-treesitter": "nvim-treesitter",
         "orgmode": "orgmode",
-        "secrets-CH-21NS": "secrets-CH-21NS",
-        "secrets-CH-22I": "secrets-CH-22I",
         "tree-sitter-org": "tree-sitter-org",
         "zsh-vim-mode": "zsh-vim-mode"
-      }
-    },
-    "secrets-CH-21NS": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1660922098,
-        "narHash": "sha256-0kY5+5vFR0GjwgzzPFn5Riirg2pygGTkSOnAaf3lTVQ=",
-        "path": "/persist/CH-21NS/secrets.nix",
-        "type": "path"
-      },
-      "original": {
-        "path": "/persist/CH-21NS/secrets.nix",
-        "type": "path"
-      }
-    },
-    "secrets-CH-22I": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1671799542,
-        "narHash": "sha256-2ZPZHNUQ9eZO6UngCQs8PIcCMqrpHAb5GB/W0V6p2ww=",
-        "path": "/persist/CH-22I/secrets.nix",
-        "type": "path"
-      },
-      "original": {
-        "path": "/persist/CH-22I/secrets.nix",
-        "type": "path"
       }
     },
     "tree-sitter-org": {

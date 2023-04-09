@@ -14,9 +14,6 @@
     nix-rice = { url = "github:bertof/nix-rice"; flake = false; };
     impermanence = { url = "github:nix-community/impermanence"; };
 
-    secrets-CH-21NS = { url = "/persist/CH-21NS/secrets.nix"; flake = false; };
-    secrets-CH-22I = { url = "/persist/CH-22I/secrets.nix"; flake = false; };
-
     # zsh-vim-mode plugin
     zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
 

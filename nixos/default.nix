@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2023 Chua Hou
 
 { pkgs, config, inputs, ... }:
 
@@ -74,21 +74,21 @@
   # user accounts
   users =
     let
-      secrets = import inputs."secrets-${config.networking.hostName}";
+      passwdDir = "/persist/passwd";
     in {
       mutableUsers = false;
       users = {
         root = {
-          hashedPassword = secrets.root.hashedPassword;
+          passwordFile = "${passwdDir}/root";
         };
         user =
           let inherit (import ../lib {}) me;
           in {
-            isNormalUser   = true;
-            name           = me.home.username;
-            description    = me.name;
-            hashedPassword = secrets.user.hashedPassword;
-            shell          = pkgs.zsh;
+            isNormalUser = true;
+            name = me.home.username;
+            description = me.name;
+            passwordFile = "${passwdDir}/user";
+            shell = pkgs.zsh;
             extraGroups = [
               "wheel" "networkmanager" "video" "scanner" "lp"
             ];
