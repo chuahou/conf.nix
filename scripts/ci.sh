@@ -44,20 +44,24 @@ drvs=$(for host in $hosts; do
 done)
 drvs=$(echo $drvs | xargs -n1 | sort -u | xargs)
 
-# Check if each derivation is on our caches, otherwise build it.
->&2 echo "Checking/building $(wc -w <<< $drvs) derivations."
-unset FAILED # String not set as long as we don't fail any derivation.
-for drv in $drvs; do
+# Filter derivations by whether they exist on cache.
+>&2 echo "Checking $(wc -w <<< $drvs) derivations."
+drvs=$(for drv in $drvs; do
 	narinfo=$(nix derivation show $drv^out | \
 		jq -r '.[].outputs.out.path' | \
 		sed 's@^/nix/store/\([a-z0-9]\+\)-.*$@\1@').narinfo
 	curl -sfL https://cache.nixos.org/$narinfo >/dev/null \
 		|| curl -sfL https://chuahou.cachix.org/$narinfo >/dev/null \
-		|| nix build --print-out-paths --no-link $drv^* \
-		|| FAILED=yes
-		# We failed so set the string. However, we continue building the rest to
-		# populate the cache as much as possible.
-done
+		|| echo "$drv^*"
+		# Was not in cache, so we keep it in the list, appending ^*.
+done)
 
-# Return error code if one of the derivations failed.
-[[ ! -v FAILED ]]
+# Build derivations that were not on caches. We use --keep-going so that even if
+# some derivations fail, the rest will continue to be built and pushed to cache.
+NUM_TO_BUILD=$(wc -w <<< $drvs)
+if [ $NUM_TO_BUILD -gt 0 ]; then
+	>&2 echo "Building $(wc -w <<< $drvs) derivations."
+	nix build --print-out-paths --no-link --keep-going $(xargs <<< $drvs)
+else
+	>&2 echo "No derivations to build."
+fi
