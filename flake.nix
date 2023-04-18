@@ -80,8 +80,7 @@
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
-            # Currently unneeded.
-            # inherit (pkgs) some-pkg;
+            inherit (pkgs) dropbox-cli; # See #17.
           };
 
         # Syncing up org parser versions for nvim-orgmode/orgmode and
