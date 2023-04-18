@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p curl jq gnused findutils coreutils
+#!nix-shell -i bash -p curl jq gnused findutils coreutils nixUnstable
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2023 Chua Hou
 #
@@ -9,6 +9,10 @@
 # derivations to compile, while not containing large quantities of wasted
 # downloads and space (which would be what happens if we built the entire
 # configuration).
+#
+# Note that we use nixUnstable (see the shebang) due to
+# cachix/install-nix-action also using nixUnstable, so by doing so we can make
+# it so we use the same nix action.
 
 set -euo pipefail
 
@@ -19,7 +23,7 @@ hosts=$(nix eval .\#hosts --raw --apply 'builtins.concatStringsSep " "')
 gen_nixos_drvs () {
 	local system_path_drv=$(nix eval --raw \
 		.\#nixosConfigurations.$1.config.system.path.drvPath)
-	nix show-derivation $system_path_drv | \
+	nix derivation show "$system_path_drv^*" | \
 		jq -r '.[].inputDrvs | keys | .[]'
 }
 
@@ -33,8 +37,10 @@ gen_home_drvs () {
 drvs=$(for host in $hosts; do
 	>&2 echo "Generating NixOS configuration's derivations for $host."
 	gen_nixos_drvs $host
+	echo -n ' '
 	>&2 echo "Generating home-manager configuration's derivations for $host."
 	gen_home_drvs $host
+	echo -n ' '
 done)
 drvs=$(echo $drvs | xargs -n1 | sort -u | xargs)
 
@@ -42,12 +48,12 @@ drvs=$(echo $drvs | xargs -n1 | sort -u | xargs)
 >&2 echo "Checking/building $(wc -w <<< $drvs) derivations."
 unset FAILED # String not set as long as we don't fail any derivation.
 for drv in $drvs; do
-	narinfo=$(nix show-derivation $drv | \
-		jq -r '.[].env.out' | \
+	narinfo=$(nix derivation show $drv^out | \
+		jq -r '.[].outputs.out.path' | \
 		sed 's@^/nix/store/\([a-z0-9]\+\)-.*$@\1@').narinfo
 	curl -sfL https://cache.nixos.org/$narinfo >/dev/null \
 		|| curl -sfL https://chuahou.cachix.org/$narinfo >/dev/null \
-		|| nix build --print-out-paths --no-link $drv \
+		|| nix build --print-out-paths --no-link $drv^* \
 		|| FAILED=yes
 		# We failed so set the string. However, we continue building the rest to
 		# populate the cache as much as possible.
