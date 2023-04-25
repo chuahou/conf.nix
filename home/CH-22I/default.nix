@@ -52,18 +52,27 @@
     colorscheme PaperColor
     set background=light
     AirlineTheme minimalist
-    highlight LineNr ctermfg=Brown
-    highlight ColorColumn ctermbg=15
-    highlight SpecialKey ctermfg=darkgrey
-    highlight Whitespace ctermfg=251
-    highlight VertSplit ctermfg=8 ctermbg=8
 
-    " Make background transparent.
-    highlight Normal ctermbg=NONE
-    highlight EndOfBuffer ctermbg=NONE
-    highlight LineNr ctermbg=NONE
-    highlight SignColumn ctermbg=NONE
-    highlight FoldColumn ctermbg=None
+    function s:PaperColorHighlightOverride()
+        " Modify highlights.
+        highlight LineNr ctermfg=Brown
+        highlight ColorColumn ctermbg=15
+        highlight SpecialKey ctermfg=darkgrey
+        highlight Whitespace ctermfg=251
+        highlight VertSplit ctermfg=8 ctermbg=8
+
+        " Make background transparent.
+        highlight Normal ctermbg=NONE
+        highlight EndOfBuffer ctermbg=NONE
+        highlight LineNr ctermbg=NONE
+        highlight SignColumn ctermbg=NONE
+        highlight FoldColumn ctermbg=None
+    endfunction
+
+    augroup papercolor_highlight_override
+        autocmd!
+        autocmd ColorScheme * call s:PaperColorHighlightOverride()
+    augroup END
   '';
 
   # This value determines the Home Manager release that your
