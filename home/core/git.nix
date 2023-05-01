@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2023 Chua Hou
 
 { ... }:
 
@@ -16,6 +16,7 @@ in {
     extraConfig = {
       pull.ff            = "only";
       init.defaultBranch = "master";
+      diff.tool = "meld";
       # Avoid using script described in $VISUAL, as then it has issues telling
       # when editing is complete.
       core.editor = "nvim";
