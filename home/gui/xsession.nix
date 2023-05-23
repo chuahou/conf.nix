@@ -149,17 +149,15 @@ in {
             {
               command = "${pkgs.feh}/bin/feh --bg-fill ${pkgs.stdenv.mkDerivation {
                 name = "wallpaper";
-                # https://twitter.com/qry51811566/status/1552426744233488384
                 src = builtins.fetchurl {
                   name = "wallpaper-src";
-                  url = "https://pbs.twimg.com/media/FYtTCroUEAAldz_?format=jpg&name=orig";
-                  sha256 = "sha256-84ppEyh209IyJcLraLYdDaG+AkVTtZZ6eS37n/Q7a/E=";
+                  url = "https://assets.rockpapershotgun.com/images/2020/10/yakuza-like-a-dragon-yokohama.jpg";
+                  sha256 = "sha256-jnWWoL6piIaTZAmCUDtCkfuHIy+A8ldOmVwjHiGSYTc=";
                 };
                 dontUnpack = true;
                 buildPhase = ''
-                  waifu2x-converter-cpp -i $src -o $(realpath ./out.jpg)
-                  convert out.jpg -crop 3783x2128+712+377 tmp.jpg
-                  mv tmp.jpg out.jpg
+                  waifu2x-converter-cpp -i $src -o $(realpath ./up.jpg)
+                  convert up.jpg -gaussian-blur 16x4 out.jpg
                 '';
                 installPhase = "cp out.jpg $out";
                 nativeBuildInputs = with pkgs; [

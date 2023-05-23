@@ -26,6 +26,7 @@
         size = lib.mkForce 11;
         offset.y = lib.mkForce 3;
       };
+      window.opacity = lib.mkForce 0.85;
       import =
         let
           alacritty-theme = pkgs.fetchFromGitHub {
