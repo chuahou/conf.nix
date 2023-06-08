@@ -35,7 +35,6 @@
     # communications
     discord
     tdesktop
-    teams
 
     # system utilities
     appimage-run
@@ -53,7 +52,6 @@
     defaultApplications = {
       "x-scheme-handler/http"    = "firefox.desktop";
       "x-scheme-handler/https"   = "firefox.desktop";
-      "x-scheme-handler/msteams" = "teams.desktop";
       "text/html"                = "firefox.desktop";
       "application/pdf"          = "org.pwmt.zathura.desktop";
     };
