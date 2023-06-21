@@ -44,7 +44,7 @@
   programs.nm-applet.enable = true;
 
   # time settings
-  time.timeZone = "Europe/London";
+  time.timeZone = "Asia/Singapore";
 
   # locale
   i18n.defaultLocale = "en_SG.UTF-8";

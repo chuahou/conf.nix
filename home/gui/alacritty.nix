@@ -20,7 +20,7 @@
 
       font = {
         normal.family = "Mplus Code 60";
-        size = 12;
+        size = 13;
         offset.y = 6;
 
         # Center glyph vertically.
