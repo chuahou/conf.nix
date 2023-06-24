@@ -21,6 +21,7 @@ hosts=$(nix eval .\#hosts --raw --apply 'builtins.concatStringsSep " "')
 
 # Generates list of derivations in NixOS configuration path for hostname $1.
 gen_nixos_drvs () {
+	set -euo pipefail
 	local system_path_drv=$(nix eval --raw \
 		.\#nixosConfigurations.$1.config.system.path.drvPath)
 	nix derivation show "$system_path_drv^*" | \
@@ -29,6 +30,7 @@ gen_nixos_drvs () {
 
 # Generates list of derivations in home-manager programs path for hostname $1.
 gen_home_drvs () {
+	set -euo pipefail
 	nix eval --raw .\#homeConfigurations.$1.config.home.packages \
 		--apply 'pkgs: builtins.concatStringsSep " " (builtins.map (pkg: pkg.drvPath) pkgs)'
 }
