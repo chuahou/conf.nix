@@ -261,38 +261,6 @@
         "type": "indirect"
       }
     },
-    "nvim-treesitter": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1687244984,
-        "narHash": "sha256-RJGi61b8DW/JsfT6IyUAaVKgyWfcA5ez2aEbS8dvcl4=",
-        "owner": "nvim-treesitter",
-        "repo": "nvim-treesitter",
-        "rev": "c8f5919b66d2b792032bbef8c231536a8db881b7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-treesitter",
-        "repo": "nvim-treesitter",
-        "type": "github"
-      }
-    },
-    "orgmode": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1686984849,
-        "narHash": "sha256-oaplmuckGXK+DiNDTMTDb/B7Ljs/IwFEA+HtlT+8GQ8=",
-        "owner": "nvim-orgmode",
-        "repo": "orgmode",
-        "rev": "4a7b92671094de130897519ca3e060b640a34006",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-orgmode",
-        "repo": "orgmode",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "cfgeq": "cfgeq",
@@ -306,26 +274,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
-        "nvim-treesitter": "nvim-treesitter",
-        "orgmode": "orgmode",
-        "tree-sitter-org": "tree-sitter-org",
         "zsh-vim-mode": "zsh-vim-mode"
-      }
-    },
-    "tree-sitter-org": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1666409009,
-        "narHash": "sha256-tD9sL84LKvkhBzTU40pfd32ggxAcPG2Qk9HIhNXKM0E=",
-        "owner": "milisims",
-        "repo": "tree-sitter-org",
-        "rev": "081179c52b3e8175af62b9b91dc099d010c38770",
-        "type": "github"
-      },
-      "original": {
-        "owner": "milisims",
-        "repo": "tree-sitter-org",
-        "type": "github"
       }
     },
     "zsh-vim-mode": {

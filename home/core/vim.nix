@@ -107,24 +107,6 @@ in {
         '';
       }
 
-      # orgmode and treesitter (solely for orgmode for now)
-      (nvim-treesitter.withPlugins (_: [ pkgs.tree-sitter-org ]))
-      {
-        plugin = orgmode;
-        config = ''
-          lua <<EOF
-            require('orgmode').setup_ts_grammar()
-            require('nvim-treesitter.configs').setup({
-              highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = { 'org' }
-              }
-            })
-            require('orgmode').setup({})
-          EOF
-        '';
-      }
-
       # alignment
       tabular
 
