@@ -115,8 +115,6 @@
     fira
     fira-code
     iosevka
-    iosevkaFixed
-    ioslabka
     ipaexfont
     ipafont
     lmmath

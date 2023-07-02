@@ -52,7 +52,7 @@
           fixed-center       = true;
           font-0             = "Iosevka:pixelsize=12;3";
           font-1             = "Iosevka:pixelsize=13;2";
-          font-2             = "Iosevka Fixed:pixelsize=12;3";
+          font-2             = "Iosevka:pixelsize=12;3";
           line-size          = 2;
           line-color         = foreground;
           tray-position      = "right";

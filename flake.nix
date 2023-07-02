@@ -20,9 +20,6 @@
     # cpufreq-plugin
     cpufreq-plugin = { url = "github:chuahou/cpufreq-plugin"; flake = false; };
 
-    # ioslabka
-    ioslabka = { url = "github:chuahou/ioslabka.nix"; };
-
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
 
@@ -44,7 +41,6 @@
         cpufreq-plugin =
           import pkgs/cpufreq-plugin/overlay.nix inputs.cpufreq-plugin;
 
-        ioslabka = ioslabka.overlay;
         cfgeq = self: super: {
           cfgeq = super.haskell.lib.justStaticExecutables
             cfgeq.defaultPackage.${system};
@@ -120,7 +116,7 @@
               ({ ... }: {
                 nixpkgs.overlays = with overlays; [
                   stable
-                  cpufreq-plugin ioslabka
+                  cpufreq-plugin
                   python2 # Python 2 marked insecure #14
                 ];
               })
