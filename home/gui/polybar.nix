@@ -59,7 +59,7 @@
           padding            = 1;
           module-margin-left = 1;
           enable-ipc         = true;
-          modules-left       = "battery fs mem maxtemp cpu";
+          modules-left       = "fs mem maxtemp cpu";
           modules-center     = "i3";
           modules-right      = "dropbox dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
           inherit background foreground format-padding;
@@ -188,8 +188,8 @@
         in (hook: {
           hook-0            = "${cpufreq-plugin} | ${sed} 's/powersave/save/' | ${sed} 's/performance/perf/'";
           click-left        = "sudo ${cpufreq-plugin} gov; ${hook}";
-          scroll-up         = "sudo ${cpufreq-plugin} increase 500; ${hook}";
-          scroll-down       = "sudo ${cpufreq-plugin} decrease 500; ${hook}";
+          scroll-up         = "sudo ${cpufreq-plugin} increase 1500; ${hook}";
+          scroll-down       = "sudo ${cpufreq-plugin} decrease 1500; ${hook}";
           format-background = colours.gray.red;
           format-underline  = colours.red;
           inherit format-padding;

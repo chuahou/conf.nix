@@ -5,7 +5,7 @@
 
 let
   inherit (import ../lib/gui/scripts.nix { inherit config pkgs lib; })
-    xconfigScript lockScript volumeScript powerScript;
+    xconfigScript lockScript volumeScript;
   volumeScriptBin = "${volumeScript}/bin/volume.sh";
   soundIpcHook =
     let ipc = "sound_ipc";
@@ -166,9 +166,6 @@ in {
                 ];
               }}";
               always = true; notification = false;
-            }
-            {
-              command = "${powerScript}/bin/power.sh"; notification = false;
             }
             {
               command = "ibus-daemon --xim --replace --daemonize"; notification = false; always = true;

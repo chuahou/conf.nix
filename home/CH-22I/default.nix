@@ -16,6 +16,17 @@
     outer = lib.mkForce 4;
   };
 
+  # Enable battery module on polybar and power script.
+  services.polybar.config."bar/main".modules-left = lib.mkForce
+    "battery fs mem maxtemp cpu";
+  xsession.windowManager.i3.config.startup =
+    let
+      inherit (import ../lib/gui/scripts.nix { inherit config pkgs lib; })
+        powerScript;
+    in [ {
+      command = "${powerScript}/bin/power.sh"; notification = false;
+    } ];
+
   # Battery only reaches 98% sometimes.
   services.polybar.config."module/battery".full-at = 98;
 
