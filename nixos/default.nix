@@ -32,8 +32,12 @@
 
   # use systemd-boot
   boot.loader = {
-    systemd-boot.enable      = true;
+    systemd-boot = {
+      enable = true;
+      consoleMode = "max";
+    };
     efi.canTouchEfiVariables = true;
+    timeout = 5;
   };
 
   # networking settings
