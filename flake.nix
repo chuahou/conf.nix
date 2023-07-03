@@ -73,17 +73,6 @@
           in {
             inherit (pkgs) dropbox-cli; # See #17.
           };
-
-        # Use firefox 114.0.1 temporarily as 114.0.2 has weird issues with some
-        # animations not working, among other things.
-        firefox-114-0-1 = self: super: {
-          inherit (import (super.fetchFromGitHub {
-            owner = "NixOS";
-            repo = "nixpkgs";
-            rev = "b87ff9f99721229bb8a883af03259ff3aaae7fad";
-            sha256 = "sha256-mH852cR1Wf9d8XoXVEvonsxyzueSzhSQTn3RnMfxJy8=";
-          }) { inherit (super) system config; }) firefox;
-        };
       };
 
     in {
@@ -151,7 +140,6 @@
                   stable
                   cfgeq
                   cpufreq-plugin
-                  firefox-114-0-1
                   vim-nix-fenced-syntax
                   zsh-vim-mode
                   python2 # Python 2 marked insecure #14
