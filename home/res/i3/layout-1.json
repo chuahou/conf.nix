@@ -1,0 +1,12 @@
+{
+	"name": "Firefox",
+	"percent": 100,
+	"swallows": [
+		{
+			"class": "^firefox$",
+			"title": "—\\ Mozilla\\ Firefox$",
+			"window_role": "^browser$"
+		}
+	],
+	"type": "con"
+}

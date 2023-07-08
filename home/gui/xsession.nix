@@ -141,7 +141,17 @@ in {
 
           # startup
           startup = [
-            { command = "i3-msg workspace 1"; notification = false; }
+            { # Restore initial layout.
+              command = ''i3-msg "${builtins.concatStringsSep "; " [
+                # Do workspace 1 last as that's where we want to end up.
+                "workspace 2" "append_layout ${../res/i3/layout-2.json}"
+                "workspace 1" "append_layout ${../res/i3/layout-1.json}"
+                # Program windows will be captured appropriately.
+                "exec ${config.programs.firefox.package}/bin/firefox"
+                "exec telegram-desktop"
+                "exec discord"
+              ] }"'';
+            }
             {
               command = "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
               notification = false;
