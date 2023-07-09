@@ -19,6 +19,7 @@
     pandoc
     pdfgrep
     pdftk
+    rclone
     ripgrep
     zotero
 
