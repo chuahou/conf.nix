@@ -12,6 +12,7 @@
     ./persist.nix
     ./piper.nix
     ./printing.nix
+    ./syncthing.nix
     ./virt.nix
   ];
 
