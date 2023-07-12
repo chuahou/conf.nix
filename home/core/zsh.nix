@@ -43,10 +43,10 @@ in {
       ZSH_AUTOSUGGEST_USE_ASYNC         = "yes";
     };
 
-    # Save history in Dropbox.
+    # Save history in synced folder.
     history = {
-      path = "${config.services.dropbox.path}/zsh_history";
-      save = 256 * 1024; # Save more.
+      path = "${config.xdg.userDirs.documents}/zsh_history";
+      save = 512 * 1024 * 1024; # Save more.
     };
 
     autocd = true;
