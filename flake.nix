@@ -4,7 +4,7 @@
 {
   inputs = {
     nixpkgs        = { url = "nixpkgs/nixos-unstable"; };
-    nixpkgs-stable = { url = "nixpkgs/nixos-22.11"; };
+    nixpkgs-stable = { url = "nixpkgs/nixos-23.05"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -71,7 +71,8 @@
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
-            inherit (pkgs) dropbox-cli; # See #17.
+            # Currently unused.
+            # inherit (pkgs) package;
           };
       };
 

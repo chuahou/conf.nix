@@ -61,7 +61,7 @@
           enable-ipc         = true;
           modules-left       = "fs mem maxtemp cpu";
           modules-center     = "i3";
-          modules-right      = "dropbox dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
+          modules-right      = "dnd dnd_ipc sound_ipc sound cpufreq_ipc cpufreq date";
           inherit background foreground format-padding;
         };
 
@@ -147,26 +147,6 @@
           format            = "cpu <label>";
           format-background = colours.gray.magenta;
           format-underline  = colours.magenta;
-          inherit format-padding;
-        };
-
-        "module/dropbox" = {
-          type = "custom/script";
-          exec = "${pkgs.writeShellScriptBin "polybar-dropbox" ''
-            echo -n "dropbox"
-            case $(${pkgs.dropbox-cli}/bin/dropbox status 2> /dev/null |
-                ${pkgs.coreutils}/bin/head -n 1 |
-                ${pkgs.gawk}/bin/awk '{ print $1 }') in
-              Up)         echo ""         ;;
-              Syncing)    echo " syncing" ;;
-              Syncing...) echo " syncing" ;;
-              *)          echo " ???"     ;;
-            esac
-          ''}/bin/polybar-dropbox";
-          interval          = 5;
-          format-background = colours.gray.blue;
-          format-underline  = colours.blue;
-          click-left        = launchTerminalWatch "${pkgs.dropbox-cli}/bin/dropbox status";
           inherit format-padding;
         };
 
