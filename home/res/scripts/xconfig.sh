@@ -25,7 +25,9 @@ fi
 
 # disable mouse acceleration
 xset mouse 0 0
-for mouse in $(xinput --list | sed -n 's/^.*[Mm]ouse.*id=\([0-9]\+\).*$/\1/p')
+# Logitech G304 does not have "mouse" in its name, and presents both a keyboard
+# and a pointer device, so we select by name + pointer.
+for mouse in $(xinput --list | sed -n 's/^.*\([Mm]ouse\|Logitech G304\).*id=\([0-9]\+\).*pointer.*$/\2/p')
 do
 	if [ $(xinput list-props $mouse | \
 		grep -c "libinput Accel Profile Enabled") -ge 1 ]; then
