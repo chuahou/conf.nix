@@ -4,7 +4,7 @@
 	"swallows": [
 		{
 			"class": "^firefox$",
-			"title": "—\\ Mozilla\\ Firefox$",
+			"title": "Mozilla\\ Firefox$",
 			"window_role": "^browser$"
 		}
 	],
