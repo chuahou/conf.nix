@@ -13,4 +13,7 @@ sudo nom build \
 sudo nixos-rebuild switch --flake $FLAKE_PATH#
 nom build $FLAKE_PATH#homeConfigurations.$(hostname).activationPackage
 home-manager switch --flake $FLAKE_PATH#$(hostname)
-nix-env -f '<nixos>' -u
+nix-env -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/$(
+	jq ".nodes.$(
+		jq '.nodes.root.inputs.nixpkgs' $FLAKE_PATH/flake.lock -r).locked.rev" \
+			$FLAKE_PATH/flake.lock -r).tar.gz -u
