@@ -14,7 +14,7 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules        = [ "kvm-amd" ];
   boot.extraModulePackages  = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_6_4; # For wifi/bluetooth.
+  boot.kernelPackages = pkgs.linuxPackages_zen; # >= 6.4 for wifi/bluetooth.
 
   # Basic hardware services.
   sound.enable = true;
