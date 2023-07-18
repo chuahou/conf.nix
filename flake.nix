@@ -67,6 +67,21 @@
           };
         };
 
+        # Fix timezone issue on Firefox. See #20 or nixpkgs#238025.
+        firefox-tz = self: super: {
+          firefox = super.firefox.overrideAttrs (old: {
+            buildCommand = old.buildCommand + ''
+              cd $out
+              mv bin/firefox bin/firefox-my-unwrapped
+              cat << EOF > bin/firefox
+                  TZ=\$(readlink /etc/localtime | sed -n 's@.*/\([^/]\+/[^/]\+\)\$@\1@p') \
+                      $out/bin/firefox-my-unwrapped
+              EOF
+              chmod +x bin/firefox
+            '';
+          });
+        };
+
         # Packages to overlay from a stable branch to avoid bugs and the like.
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
@@ -143,6 +158,7 @@
                   cpufreq-plugin
                   vim-nix-fenced-syntax
                   zsh-vim-mode
+                  firefox-tz
                   python2 # Python 2 marked insecure #14
                 ];
                 inherit host;
