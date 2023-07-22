@@ -98,7 +98,7 @@
       inherit inputs;
 
       # Hosts to generate configs over.
-      hosts = [ "CH-21NS" "CH-22I" "CH-23" ];
+      hosts = [ "CH-21NS" "CH-23" ];
 
       # nixpkgs with all overlays applied.
       overlayed = import nixpkgs {

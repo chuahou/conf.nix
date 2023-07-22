@@ -7,11 +7,6 @@ if [ $(hostname) = "CH-21NS" ]; then
 	external=HDMI-0
 	intgamma=1
 	intbright=1
-elif [ $(hostname) = "CH-22I" ]; then
-	internal=eDP
-	external=HDMI-A-0
-	intgamma=0.82:0.82:0.7
-	intbright=0.9
 fi
 if [ $(xrandr -q | grep -c "$external connected") -gt 0 ]; then
 	xrandr --output $external --auto --primary --output $internal --off
@@ -39,11 +34,6 @@ done
 if [ $(hostname) = "CH-21NS" ]; then
 	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "libinput Natural Scrolling Enabled" 1
 	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
-fi
-
-# enable natural scrolling on touchpad
-if [ $(hostname) = "CH-22I" ]; then
-	xinput set-prop "MSFT0001:00 04F3:31BE Touchpad" "libinput Natural Scrolling Enabled" 1
 fi
 
 # disable X power saving
