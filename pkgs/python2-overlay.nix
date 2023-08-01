@@ -17,7 +17,14 @@ self: super:
     expectedKnownVuln = [
       "Python 2.7 has reached its end of life after 2020-01-01. See https://www.python.org/doc/sunset-python-2/."
     ];
-    pkgs' = import super.path {
+    # We use an old enough nixpkgs commit for things to work. Removals such as
+    # #245894 mean the plugin no longer builds.
+    pkgs' = import (super.fetchFromGitHub {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = "020ff5ccb510f0eb1810a42bfa0f8fcd68ba4822";
+      sha256 = "sha256-Ybb1/6EHhnrA1S7tptWOTfZRbdoqzeIJh7+cYFzfTLg=";
+    }) {
       inherit (super) system config;
       overlays = [ (self: super: {
         python27 = super.python27.overrideAttrs
