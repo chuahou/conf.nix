@@ -75,7 +75,7 @@
               mv bin/firefox bin/firefox-my-unwrapped
               cat << EOF > bin/firefox
                   TZ=\$(readlink /etc/localtime | sed -n 's@.*/\([^/]\+/[^/]\+\)\$@\1@p') \
-                      $out/bin/firefox-my-unwrapped
+                      $out/bin/firefox-my-unwrapped "\$@"
               EOF
               chmod +x bin/firefox
             '';
