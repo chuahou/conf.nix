@@ -58,10 +58,7 @@
           vimPlugins = super.vimPlugins // {
             vim-nix = super.vimPlugins.vim-nix.overrideAttrs (old: {
               patches = (old.patches or []) ++ [
-                (super.fetchpatch {
-                  url = "https://patch-diff.githubusercontent.com/raw/LnL7/vim-nix/pull/28.patch";
-                  sha256 = "sha256-bwEmItIVl7Fkez7A6jfnbaNOVP1gFgdlnAK4QEQ8TOI=";
-                })
+                ./pkgs/vim-nix.patch # Modified from #28 to resolve conflicts.
               ];
             });
           };
