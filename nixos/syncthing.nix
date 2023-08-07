@@ -20,19 +20,19 @@ in {
     # Declarative devices/folders.
     overrideDevices = true;
     overrideFolders = true;
-    devices.vps = {
-      id = "GB64E5G-KBHSVWG-YZN3S35-OTPQUDC-FE2BJCP-RQ66O2X-6AT72C2-BDZEDAW";
-      addresses = [ "tcp://10.3.0.1:59143" ];
-    };
-    folders = {
-      "Documents" = {
-        path = "${user.home}/doc";
-        devices = [ "vps" ];
+    settings = {
+      devices.vps = {
+        id = "GB64E5G-KBHSVWG-YZN3S35-OTPQUDC-FE2BJCP-RQ66O2X-6AT72C2-BDZEDAW";
+        addresses = [ "tcp://10.3.0.1:59143" ];
       };
-    };
+      folders = {
+        "Documents" = {
+          path = "${user.home}/doc";
+          devices = [ "vps" ];
+        };
+      };
 
     # Options using REST API.
-    extraOptions = {
       options = {
         listenAddresses = [ "tcp://10.3.0.31:${toString port}" ];
         startBrowser = false;

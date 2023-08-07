@@ -115,7 +115,7 @@
   programs.steam.enable = true;
 
   # fonts to install system-wide
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     corefonts
     fira
     fira-code
