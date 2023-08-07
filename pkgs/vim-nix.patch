@@ -72,13 +72,13 @@ index 7141a00..0235ecf 100644
          command vim -XNu ${vimrc} -i NONE "$@"
      }
 diff --git a/ftplugin/nix.vim b/ftplugin/nix.vim
-index 2ea7c88..134a0e7 100644
+index 310fe9a..a3170b3 100644
 --- a/ftplugin/nix.vim
 +++ b/ftplugin/nix.vim
-@@ -19,3 +19,116 @@ if get(g:, 'nix_recommended_style', 1)
-     \ softtabstop=2
+@@ -20,3 +20,116 @@ if get(g:, 'nix_recommended_style', 1)
      \ expandtab 
  endif
+ let b:match_words = '\<if\>:\<then\>:\<else\>,\<let\>:\<in\>'
 +
 +" Borrowed from vim-markdown: https://github.com/plasticboy/vim-markdown/
 +if exists('g:vim_nix_fenced_languages')
