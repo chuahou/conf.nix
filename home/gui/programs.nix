@@ -15,6 +15,7 @@
     anki-bin
     galculator
     gnome.simple-scan
+    joplin-desktop
     libreoffice
     pandoc
     pdfgrep
