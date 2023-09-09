@@ -41,7 +41,7 @@
             "app.normandy.api_url"                         = "";
             "app.normandy.enabled"                         = false;
             "app.shield.optoutstudies.enabled"             = false;
-            "browser.ping-centre.telemtry"                 = false;
+            "browser.ping-centre.telemetry"                = false;
             "datareporting.healthreport.uploadEnabled"     = false;
             "datareporting.policy.dataSubmissionEnabled"   = false;
             "toolkit.telemetry.archive.enabled"            = false;
