@@ -125,5 +125,9 @@
           ];
         }
       ];
+
+      # Shared pulseaudio.
+      hardware.pulseaudio.systemWide = true;
+      users.groups.pulse-access.members = with cfg; [ normalUser firefoxUser ];
     };
 }
