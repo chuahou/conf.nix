@@ -47,10 +47,11 @@
           cd $out
           mv bin/firefox bin/firefox-without-sudo
           cat << EOF > bin/firefox
-              set -euo pipefail
               sudo -u ${cfg.firefoxUser} ${profileSetupScript}
               ${pkgs.xorg.xhost}/bin/xhost +SI:localuser:${cfg.firefoxUser}
-              sudo -u ${cfg.firefoxUser} $out/bin/firefox-without-sudo
+              sudo --preserve-env=DISPLAY,XAUTHORITY,XMODIFIERS,GTK_IM_MODULE,QT_IM_MODULE \
+                  -u ${cfg.firefoxUser} $out/bin/firefox-without-sudo "\$@"
+              ${pkgs.xorg.xhost}/bin/xhost -SI:localuser:${cfg.firefoxUser}
           EOF
           chmod +x bin/firefox
         '';
@@ -115,7 +116,7 @@
           commands = [
             {
               command = "${firefox-sudo}/bin/firefox-without-sudo *";
-              options = [ "NOPASSWD" ];
+              options = [ "NOPASSWD" "SETENV" ];
             }
             {
               command = "${profileSetupScript}";
