@@ -119,6 +119,7 @@
                 nixpkgs.overlays = with overlays; [
                   stable
                   cpufreq-plugin
+                  firefox-tz
                   python2 # Python 2 marked insecure #14
                 ];
               })
@@ -155,7 +156,6 @@
                   cpufreq-plugin
                   vim-nix-fenced-syntax
                   zsh-vim-mode
-                  firefox-tz
                   python2 # Python 2 marked insecure #14
                 ];
                 inherit host;
