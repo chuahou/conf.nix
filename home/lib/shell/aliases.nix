@@ -51,7 +51,6 @@
 
   # editor
   e = "$VISUAL";
-  write = "$VISUAL +:Write";
 
   # enter conf.nix directory
   ccd = "cd ${(import ../../../lib {}).me.home.confDirectory}";

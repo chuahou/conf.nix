@@ -180,33 +180,6 @@ in {
         '';
       }
 
-      # goyo.vim
-      {
-        plugin = goyo-vim;
-        config = ''
-          " We only care about setting options when entering, and count on
-          " restarting to restore options, since it is not scalable to maintain.
-          function! s:writing_goyo_enter()
-              set listchars=tab:\ \ ,trail:+
-              set signcolumn=no
-              set foldcolumn=0
-              set spell
-              call goyo#execute(0, "")
-          endfunction
-
-          command! Write call <SID>writing_goyo_enter()
-        '';
-      }
-
-      # NERDTree to be automatically opened by Goyo
-      {
-        plugin = nerdtree;
-        config = ''
-          " \n to open and focus NERDTree
-          nmap <Leader>n :NERDTreeFocus<CR>
-        '';
-      }
-
       # misc
       fastfold # fast folding (important for vimtex)
     ];
