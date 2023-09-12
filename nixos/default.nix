@@ -7,6 +7,7 @@
   imports = [
     ./cachix.nix
     ./direnv.nix
+    ./firefox.nix
     ./gc.nix
     ./ime.nix
     ./persist.nix

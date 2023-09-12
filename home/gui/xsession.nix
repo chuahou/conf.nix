@@ -147,7 +147,7 @@ in {
                 "workspace 2" "append_layout ${../res/i3/layout-2.json}"
                 "workspace 1" "append_layout ${../res/i3/layout-1.json}"
                 # Program windows will be captured appropriately.
-                "exec ${config.programs.firefox.package}/bin/firefox"
+                "exec firefox"
                 "exec telegram-desktop"
                 "exec discord"
               ] }"'';
@@ -186,7 +186,7 @@ in {
           keybindings = rec {
             # applications
             "${mod}+Return"       = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty";
-            "${mod}+Shift+Return" = "exec ${config.programs.firefox.package}/bin/firefox";
+            "${mod}+Shift+Return" = "exec firefox";
             "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "${mod}+p"            = Print;
             "${mod}+Shift+p"      = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot screen --path ${config.xdg.userDirs.pictures}";
