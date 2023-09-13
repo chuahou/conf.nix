@@ -34,7 +34,7 @@ set_sink () {
 
 # returns currently chosen sink
 current_sink () {
-	local sinkname=$(pacmd stat | awk -F': ' '/^Default sink name/{print $2}')
+	local sinkname=$(pactl info | sed -n 's/^Default Sink: \(.*\)$/\1/p')
 	pactl list short sinks | awk "/$sinkname/{print \$1}"
 }
 
