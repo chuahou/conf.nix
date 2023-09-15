@@ -84,16 +84,14 @@
     in {
       mutableUsers = false;
       users = {
-        root = {
-          passwordFile = "${passwdDir}/root";
-        };
+        root.hashedPasswordFile = "${passwdDir}/root";
         user =
           let inherit (import ../lib {}) me;
           in {
             isNormalUser = true;
             name = me.home.username;
             description = me.name;
-            passwordFile = "${passwdDir}/user";
+            hashedPasswordFile = "${passwdDir}/user";
             shell = pkgs.zsh;
             extraGroups = [
               "wheel" "networkmanager" "video" "scanner" "lp"
