@@ -32,12 +32,10 @@ Personal configuration for NixOS, home-manager and others.
 1. Write host-specific config under new host under `nixos/`.
 	1. UUIDs can be found using `blkid | grep UUID`.
 1. Setup password files.
-	1. `mkdir -p /persist/passwd`
-	1. `mkpasswd -m sha-512 > /persist/passwd/root`
-	1. `mkpasswd -m sha-512 > /persist/passwd/user`
-1. `nix-env -iA nixos.nixFlakes`
+	1. `mkdir -p /mnt/persist/passwd`
+	1. `mkpasswd -m sha-512 > /mnt/persist/passwd/root`
+	1. `mkpasswd -m sha-512 > /mnt/persist/passwd/user`
 1. `nixos-install --impure --flake /path/to/conf.nix#NEWHOSTNAME`
-	1. May need `mount --bind /mnt /mnt/mnt` workaround.
 
 ## Setting up home-manager
 
