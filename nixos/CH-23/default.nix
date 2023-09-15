@@ -8,6 +8,7 @@
     ./fs.nix
     ./hardware.nix
     ./persist.nix
+    ./secure-boot.nix
   ];
 
   networking.hostName = "CH-23";

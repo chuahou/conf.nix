@@ -28,6 +28,12 @@
 
     # nix-index database
     nix-index-database = { url = "github:Mic92/nix-index-database"; };
+
+    # secure boot
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
