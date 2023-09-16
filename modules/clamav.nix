@@ -39,6 +39,11 @@
       type = lib.types.str;
       default = "true";
     };
+    preCommand = lib.mkOption {
+      description = "Command to run before starting scan.";
+      type = lib.types.str;
+      default = "true";
+    };
   };
 
   config = let cfg = config.services.clamav-regular-scan; in lib.mkIf cfg.enable {
@@ -51,6 +56,7 @@
       services.clamav-regular-scan = {
         serviceConfig = {
           Type = "oneshot";
+          ExecStartPre = cfg.preCommand;
           ExecStart = pkgs.writeShellScript "clamav-regular-scan" /* sh */ ''
           ${pkgs.clamav}/bin/clamscan -ri ${cfg.targetFolder} \
               && ${cfg.unalertCommand} || ${cfg.alertCommand}
