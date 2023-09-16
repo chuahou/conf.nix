@@ -95,6 +95,12 @@
         overlays = builtins.attrValues overlays;
       };
 
+      # NixOS modules in modules/.
+      nixosModules = {
+        clamav = import modules/clamav.nix;
+        firefox-sudo = import modules/firefox-sudo.nix;
+      };
+
       nixosConfigurations =
         let
           base = {
