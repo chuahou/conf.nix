@@ -34,6 +34,11 @@
         done
       ''}";
     };
+    unalertCommand = lib.mkOption {
+      description = "Command to run when no infected files are detected.";
+      type = lib.types.str;
+      default = "true";
+    };
   };
 
   config = let cfg = config.services.clamav-regular-scan; in lib.mkIf cfg.enable {
@@ -47,7 +52,8 @@
         serviceConfig = {
           Type = "oneshot";
           ExecStart = pkgs.writeShellScript "clamav-regular-scan" /* sh */ ''
-            ${pkgs.clamav}/bin/clamscan -ri ${cfg.targetFolder} || ${cfg.alertCommand}
+          ${pkgs.clamav}/bin/clamscan -ri ${cfg.targetFolder} \
+              && ${cfg.unalertCommand} || ${cfg.alertCommand}
           '';
         };
         wants = [ "clamav-freshclam.service" ];
