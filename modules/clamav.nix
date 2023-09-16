@@ -43,12 +43,12 @@
     unalertCommand = lib.mkOption {
       description = "Command to run when no infected files are detected.";
       type = lib.types.str;
-      default = "true";
+      default = "/bin/sh -c :";
     };
     preCommand = lib.mkOption {
       description = "Command to run before starting scan.";
       type = lib.types.str;
-      default = "true";
+      default = "/bin/sh -c :";
     };
   };
 
