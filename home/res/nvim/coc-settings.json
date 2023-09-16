@@ -41,5 +41,6 @@
 			"filetypes": ["nix"]
 		}
 	},
-	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"]
+	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"],
+	"inlayHint.enable": false
 }
