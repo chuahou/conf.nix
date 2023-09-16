@@ -19,6 +19,12 @@
       default = "hourly";
       example = "daily";
     };
+    clamscanOptions = lib.mkOption {
+      description = "Options for clamscan.";
+      type = lib.types.str;
+      default = "-ri --exclude-dir=/proc --exclude-dir=/sys --exclude-dir=/dev";
+      example = "-ri";
+    };
     alertCommand = lib.mkOption {
       description = "Command to run when infected file is detected.";
       type = lib.types.str;
@@ -58,7 +64,7 @@
           Type = "oneshot";
           ExecStartPre = cfg.preCommand;
           ExecStart = pkgs.writeShellScript "clamav-regular-scan" /* sh */ ''
-          ${pkgs.clamav}/bin/clamscan -ri ${cfg.targetFolder} \
+          ${pkgs.clamav}/bin/clamscan ${cfg.clamscanOptions} ${cfg.targetFolder} \
               && ${cfg.unalertCommand} || ${cfg.alertCommand}
           '';
         };
