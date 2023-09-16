@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2023 Chua Hou
+#
+# Runs clamav scans regularly.
+
+{ config, lib, pkgs, ... }:
+
+{
+  options.services.clamav-regular-scan = {
+    enable = lib.mkEnableOption "clamav-regular-scan";
+    targetFolder = lib.mkOption {
+      description = "Folder to scan regularly.";
+      type = lib.types.path;
+      default = "/";
+    };
+    onCalendar = lib.mkOption {
+      description = "OnCalendar systemd setting for how often/when to scan.";
+      type = lib.types.str;
+      default = "hourly";
+      example = "daily";
+    };
+  };
+
+  config = let cfg = config.services.clamav-regular-scan; in lib.mkIf cfg.enable {
+    services.clamav.updater.enable = true; # freshclam.
+
+    # Service that runs the regular clamav scan, and notifies all logged-in
+    # users via notify-send if an infected file is detected or some error
+    # occurs.
+    systemd = {
+      services.clamav-regular-scan = {
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = pkgs.writeShellScript "clamav-regular-scan" /* sh */ ''
+            ${pkgs.clamav}/bin/clamscan -ri ${cfg.targetFolder} || \
+                for ADDRESS in /run/user/*; do
+                    USERID=''${ADDRESS#/run/user/}
+                    /run/wrappers/bin/sudo -u "#$USERID" \
+                        DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" \
+                        ${pkgs.libnotify}/bin/notify-send -i dialog-warning \
+                            "clamav-regular-scan" "Infected file(s) located!"
+                done
+          '';
+        };
+        wants = [ "clamav-freshclam.service" ];
+        after = [ "clamav-freshclam.service" ];
+      };
+      timers.clamav-regular-scan = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = cfg.onCalendar;
+          Unit = "clamav-regular-scan.service";
+        };
+      };
+    };
+  };
+}
