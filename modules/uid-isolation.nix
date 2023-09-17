@@ -142,7 +142,24 @@ in {
     hardware.pulseaudio.systemWide = true;
 
     # We have to merge these manually to prevent infinite recursion.
-    inherit (allConfigsCombined) environment;
+    environment = lib.mkMerge [
+      allConfigsCombined.environment
+      {
+        systemPackages = [
+          # Shell script to copy file(s) to the shared directory and change
+          # their group permissions so applications can access it.
+          (pkgs.writeShellScriptBin "cpshare" ''
+            for path in "$@"; do
+                # -a option since we may copy directories as well.
+                cp $path ${cfg.sharedDir.path} -a
+                dest_path=${cfg.sharedDir.path}/$(basename $path)
+                chmod -R g=u $dest_path
+                chgrp -R ${cfg.sharedDir.group.name} $dest_path
+            done
+          '')
+        ];
+      }
+    ];
     security.sudo = allConfigsCombined.security.sudo;
     users = lib.mkMerge [
       allConfigsCombined.users
