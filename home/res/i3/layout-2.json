@@ -4,7 +4,6 @@
 	"swallows": [
 		{
 			"class": "^discord$",
-			"instance": "^discord$",
 			// The title criterion helps us avoid capturing the loading screen.
 			"title": "\\-\\ Discord$",
 			"window_role": "^browser\\-window$"
@@ -17,8 +16,7 @@
 	"percent": 0.23,
 	"swallows": [
 		{
-			"class": "^TelegramDesktop$",
-			"instance": "^telegram\\-desktop$"
+			"class": "^TelegramDesktop$"
 		}
 	],
 	"type": "con"

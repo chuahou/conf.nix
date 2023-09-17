@@ -148,7 +148,7 @@ in {
                 # Program windows will be captured appropriately.
                 "exec firefox"
                 "exec telegram-desktop"
-                "exec discord"
+                "exec Discord"
               ] }"'';
             }
             {

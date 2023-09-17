@@ -34,10 +34,6 @@
     kdenlive
     vlc
 
-    # communications
-    discord
-    tdesktop
-
     # system utilities
     appimage-run
     arandr
