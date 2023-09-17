@@ -85,6 +85,8 @@ let
       } ];
     };
 
+    # We have to merge individual top-level attributes manually to avoid
+    # infinite recursion.
     allConfigs = map mkConfig cfg.programs;
     allConfigsCombined = {
       environment = lib.mkMerge (map (c: c.environment) allConfigs);
@@ -139,6 +141,7 @@ in {
     # pulse-access group.
     hardware.pulseaudio.systemWide = true;
 
+    # We have to merge these manually to prevent infinite recursion.
     inherit (allConfigsCombined) environment;
     security.sudo = allConfigsCombined.security.sudo;
     users = lib.mkMerge [
