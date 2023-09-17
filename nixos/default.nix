@@ -98,6 +98,7 @@
             extraGroups = [
               "wheel" "networkmanager" "video" "scanner" "lp"
             ];
+            uid = 1000;
           };
       };
     };
