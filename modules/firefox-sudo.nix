@@ -40,23 +40,6 @@
     let
       cfg = config.programs.firefox-sudo;
 
-      # Wrap Firefox with script, so that we can take advantage of vanilla
-      # desktop files etc.
-      firefox-sudo = pkgs.firefox.overrideAttrs (old: {
-        buildCommand = old.buildCommand + ''
-          cd $out
-          mv bin/firefox bin/firefox-without-sudo
-          cat << EOF > bin/firefox
-              sudo -u ${cfg.firefoxUser} ${profileSetupScript}
-              ${pkgs.xorg.xhost}/bin/xhost +SI:localuser:${cfg.firefoxUser}
-              sudo --preserve-env=DISPLAY,XAUTHORITY,XMODIFIERS,GTK_IM_MODULE,QT_IM_MODULE \
-                  -u ${cfg.firefoxUser} $out/bin/firefox-without-sudo "\$@"
-              ${pkgs.xorg.xhost}/bin/xhost -SI:localuser:${cfg.firefoxUser}
-          EOF
-          chmod +x bin/firefox
-        '';
-      });
-
       # Profile setup script that sets up userChrome.css, user.js and
       # profiles.ini. Errors if they exist as regular files (not symlinks).
       profileSetupScript = pkgs.writeShellScript "firefox-sudo-setup" /* sh */ ''
@@ -104,30 +87,30 @@
       };
 
     in {
-      users.users.${cfg.firefoxUser} = {
-        isNormalUser = true;
-        createHome = true;
-      };
-      environment.systemPackages = [ firefox-sudo ];
-      security.sudo.extraRules = [
+      # Implement on top of the generic UID isolation module.
+      security.uid-isolation.programs = [
         {
-          users = [ cfg.normalUser ];
-          runAs = cfg.firefoxUser;
-          commands = [
-            {
-              command = "${firefox-sudo}/bin/firefox-without-sudo *";
-              options = [ "NOPASSWD" "SETENV" ];
-            }
-            {
-              command = "${profileSetupScript}";
-              options = [ "NOPASSWD" ];
-            }
-          ];
+          inputDerivation = pkgs.symlinkJoin {
+            name = "firefox-with-profile-setup";
+            paths = with pkgs; [ firefox ];
+            postBuild = /* sh */ ''
+              cd $out
+              unwrapped=$(realpath bin/.firefox-without-profile-setup)
+              mv bin/firefox $unwrapped
+              cat << EOF > bin/firefox
+                  # This is run when we are already the firefox user.
+                  ${profileSetupScript}
+                  $unwrapped "\$@"
+              EOF
+              chmod +x bin/firefox
+            '';
+          };
+          binaryName = "firefox";
+          user = { name = cfg.firefoxUser; uid = 2000; };
         }
       ];
-
-      # Shared pulseaudio.
-      hardware.pulseaudio.systemWide = true;
-      users.groups.pulse-access.members = with cfg; [ normalUser firefoxUser ];
+      security.uid-isolation.normalUser = cfg.normalUser;
     };
+
+  imports = [ ./uid-isolation.nix ];
 }
