@@ -12,6 +12,7 @@
       "/var/lib/bluetooth"
       "/var/lib/cups"
       "/var/lib/libvirt"
+      "/var/lib/opensnitch"
     ];
     files = [
       "/etc/adjtime"

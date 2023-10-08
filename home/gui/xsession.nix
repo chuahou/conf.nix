@@ -179,6 +179,10 @@ in {
             {
               command = "ibus-daemon --xim --replace --daemonize"; notification = false; always = true;
             }
+            {
+              command = "opensnitch-ui --socket unix:///home/opensnitch/osui.sock";
+              notification = false;
+            }
           ];
 
           # keybindings
