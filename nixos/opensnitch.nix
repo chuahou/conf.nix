@@ -70,6 +70,12 @@ in {
           data = builtins.toJSON list;
         };
 
+        asUser = user: {
+          operand = "user.id";
+          data = toString config.users.users.${user}.uid;
+        };
+        asRoot = asUser "root";
+
       in lib.concatMapAttrs mkRule {
         "DNS".operator = mkListOperator [
           { operand = "protocol"; data = "udp"; }
@@ -101,7 +107,7 @@ in {
           }
           { operand = "dest.port"; data = "123"; }
           { operand = "protocol"; data = "udp"; }
-          { operand = "user.id"; data = "154"; } # systemd-timesync
+          (asUser "systemd-timesync")
         ];
         "Nix (root, caches)".operator = mkListOperator [
           { operand = "process.path"; data = "${config.nix.package}/bin/nix"; }
@@ -111,7 +117,7 @@ in {
           }
           { operand = "dest.port"; data = "443"; }
           { operand = "protocol"; data = "tcp"; }
-          { operand = "user.id"; data = "0"; }
+          asRoot
         ];
         "Nix (user, GitHub)".operator = mkListOperator [
           { operand = "process.path"; data = "${config.nix.package}/bin/nix"; }
@@ -121,10 +127,7 @@ in {
           }
           { operand = "dest.port"; data = "443"; }
           { operand = "protocol"; data = "tcp"; }
-          {
-            operand = "user.id";
-            data = "${toString config.users.users.user.uid}";
-          }
+          (asUser "user")
         ];
         "Firefox (HTTP, HTTPS, QUIC)".operator = mkListOperator [
           {
@@ -139,7 +142,7 @@ in {
             operand = "dest.port"; type = "regexp";
             data = "^(80|443)$";
           }
-          { operand = "user.id"; data = "2000"; } # firefox
+          (asUser "firefox")
         ];
         "NetworkManager DHCPv6".operator = mkListOperator [
           {
@@ -153,20 +156,17 @@ in {
           { operand = "dest.port"; data = "547"; }
           { operand = "dest.ip"; data = "ff02::1:2"; }
           { operand = "protocol"; data = "udp6"; }
-          { operand = "user.id"; data = "0"; }
+          asRoot
         ];
         "Syncthing".operator = mkListOperator [
           {
             operand = "process.path";
             data = "${pkgs.syncthing}/bin/syncthing";
           }
-          {
-            operand = "user.id";
-            data = "${toString config.users.users.user.uid}";
-          }
           { operand = "dest.ip"; data = "10.3.0.1"; }
           { operand = "dest.port"; data = "59143"; }
           { operand = "protocol"; data = "tcp"; }
+          (asUser "user")
         ];
         "[ DENY ] Syncthing (data.syncthing.net)" = {
           action = "deny";
@@ -188,10 +188,7 @@ in {
           { operand = "dest.port"; data = "22"; }
           { operand = "dest.host"; data = "github.com"; }
           { operand = "protocol"; data = "tcp"; }
-          {
-            operand = "user.id";
-            data = "${toString config.users.users.user.uid}";
-          }
+          (asUser "user")
         ];
         "Telegram (HTTP, HTTPS)".operator = mkListOperator [
           # Telegram connects to too many different domains and IPs (instead of
@@ -206,7 +203,7 @@ in {
             data = "^/nix/store/[a-z0-9]+-telegram-desktop-[0-9\\.]+-uid-isolated/bin/.uid-isolation-unwrapped( --|)$";
           }
           { operand = "dest.port"; type = "regexp"; data = "^(80|443)$"; }
-          { operand = "user.id"; data = "2001"; } # telegram
+          (asUser "telegram")
         ];
         "Discord (HTTPS)". operator = mkListOperator [
           # Discord connects to too many different domains and IPs (instead of
@@ -217,7 +214,7 @@ in {
             data = "${pkgs.discord}/opt/Discord/.Discord-wrapped";
           }
           { operand = "dest.port"; data = "443"; }
-          { operand = "user.id"; data = "2002"; } # discord
+          (asUser "discord")
         ];
       };
   };
