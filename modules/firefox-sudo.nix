@@ -100,7 +100,16 @@
               cat << EOF > bin/firefox
                   # This is run when we are already the firefox user.
                   ${profileSetupScript}
-                  $unwrapped "\$@"
+                  # We intentionally drop all command line arguments, so that
+                  # Opensnitch's protection is not totally bypassed. If
+                  # arguments are passed, then any call to `firefox [url]` would
+                  # open the URL in the current Firefox process, which would be
+                  # allowed by Opensnitch since the argument is passed to the
+                  # process remoting to Firefox, and not the parent process
+                  # that's accessing the internet. We could also consider
+                  # -no-remote, but that's too extreme and makes it difficult to
+                  # open multiple Firefox windows easily from rofi etc.
+                  $unwrapped
               EOF
               chmod +x bin/firefox
             '';
