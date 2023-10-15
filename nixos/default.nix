@@ -18,6 +18,7 @@
     ./syncthing.nix
     ./uid-isolation.nix
     ./virt.nix
+    ./yubikey.nix
   ];
 
   # allow unfree software
