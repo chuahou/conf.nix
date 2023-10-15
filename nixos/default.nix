@@ -118,6 +118,9 @@
   # steam
   programs.steam.enable = true;
 
+  # allow mounting of NTFS
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # fonts to install system-wide
   fonts.packages = with pkgs; [
     corefonts
