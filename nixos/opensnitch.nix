@@ -40,7 +40,6 @@ in {
           updated = "1970-01-01T00:00:00.000000000+00:00";
           enabled = true;
           description = "";
-          precedence = false;
           nolog = false;
           action = "allow";
           duration = "always";
@@ -49,6 +48,12 @@ in {
             sensitive = false;
             list = [];
           };
+
+          # OpenSnitch iterates rules until a Deny or a Priority rule is
+          # matched. Since we do not have any Denys that overlap with Allows, we
+          # can simply set all Allows as Priority rules to stop on first match,
+          # for better efficiency.
+          precedence = true;
         };
 
         # Function that labels and adds default config below each rule.
@@ -80,27 +85,14 @@ in {
         "DNS".operator = mkListOperator [
           { operand = "protocol"; data = "udp"; }
           { operand = "dest.port"; data = "53"; }
-          {
-            operand = "dest.ip"; type = "regexp";
-            data = "^(10\\.3\\.0\\.1|10\\.64\\.0\\.1)$";
-          }
+          { operand = "dest.ip"; data = "10.3.0.1"; }
         ];
         "[ DENY ] ICMP" = {
           action = "deny";
-          operator = {
-            operand = "protocol";
-            data = "icmp";
-          };
+          operator = { operand = "protocol"; data = "icmp"; };
         };
-        "Loopback".operator = {
-          operand = "iface.out";
-          data = "lo";
-        };
+        "Loopback".operator = { operand = "iface.out"; data = "lo"; };
         "NTP (systemd-timesync)".operator = mkListOperator [
-          {
-            operand = "process.path";
-            data = "${config.systemd.package}/lib/systemd/systemd-timesyncd";
-          }
           {
             operand = "process.command";
             data = "${config.systemd.package}/lib/systemd/systemd-timesyncd";
@@ -131,10 +123,6 @@ in {
         ];
         "Firefox (HTTP, HTTPS, QUIC)".operator = mkListOperator [
           {
-            operand = "process.path";
-            data = "${pkgs.firefox}/lib/firefox/firefox";
-          }
-          {
             operand = "process.command";
             data = "${pkgs.firefox}/bin/.firefox-wrapped";
           }
@@ -145,10 +133,6 @@ in {
           (asUser "firefox")
         ];
         "NetworkManager DHCPv6".operator = mkListOperator [
-          {
-            operand = "process.path";
-            data = "${pkgs.networkmanager}/bin/NetworkManager";
-          }
           {
             operand = "process.command";
             data = "${pkgs.networkmanager}/sbin/NetworkManager --no-daemon";
@@ -180,7 +164,6 @@ in {
           ];
         };
         "Git-over-SSH (GitHub)".operator = mkListOperator [
-          { operand = "process.path"; data = "${pkgs.openssh}/bin/ssh"; }
           {
             operand = "process.command"; type = "regexp";
             data = "^/run/current-system/sw/bin/ssh( -o sendenv=git_protocol|) [^ ]+ git-(receive|upload)-pack '[^ ']+'$";
@@ -197,10 +180,6 @@ in {
           {
             operand = "process.path";
             data = "${pkgs.telegram-desktop}/bin/.telegram-desktop-wrapped";
-          }
-          { # Regex since can't access wrapped binary path easily.
-            operand = "process.command"; type = "regexp";
-            data = "^/nix/store/[a-z0-9]+-telegram-desktop-[0-9\\.]+-uid-isolated/bin/.uid-isolation-unwrapped( --|)$";
           }
           { operand = "dest.port"; type = "regexp"; data = "^(80|443)$"; }
           (asUser "telegram")
