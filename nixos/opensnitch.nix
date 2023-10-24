@@ -184,7 +184,7 @@ in {
           { operand = "dest.port"; type = "regexp"; data = "^(80|443)$"; }
           (asUser "telegram")
         ];
-        "Discord (HTTPS)". operator = mkListOperator [
+        "Discord (HTTPS)".operator = mkListOperator [
           # Discord connects to too many different domains and IPs (instead of
           # domains) to keep track practically... So we let it access all of
           # port 443.
