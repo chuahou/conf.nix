@@ -12,9 +12,7 @@
     meld
 
     # productivity
-    anki-bin
     galculator
-    gnome.simple-scan
     joplin-desktop
     libreoffice
     pandoc
@@ -22,7 +20,6 @@
     pdftk
     rclone
     ripgrep
-    zotero
 
     # media
     feh
