@@ -15,7 +15,30 @@ jobs:
         with:
           name: chuahou
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      # Free up disk space. Based on jlumbroso/free-disk-space, and:
+      # https://github.com/actions/runner-images/issues/2840
+      # https://github.com/actions/runner-images/issues/2875
       - run: df -h /
+      - run: |
+          sudo rm -rf \
+              /usr/local/lib/android \
+              /usr/share/dotnet \
+              /opt/ghc /usr/local/.ghcup \
+              /usr/local/share/boost \
+              "$AGENT_TOOLSDIRECTORY"
+          sudo apt-get purge --auto-remove -y --fix-missing \
+              '^aspnetcore-.*' \
+              '^dotnet-.*' \
+              '^llvm-.*' \
+              'php.*' \
+              '^mongodb-.*' \
+              '^mysql-.*' \
+              azure-cli google-chrome-stable firefox powershell mono-devel \
+              libgl1-mesa-dri google-cloud-cli
+          sudo docker system prune -af
+      - run: df -h /
+
       - run: nix flake update
       - run: scripts/ci.sh
       - run: df -h /
