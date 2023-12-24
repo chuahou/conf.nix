@@ -195,6 +195,15 @@ in {
           { operand = "dest.port"; data = "443"; }
           (asUser "discord")
         ];
+        "[ DENY ] Joplin" = {
+          action = "deny";
+          operator = mkListOperator [
+            {
+              operand = "process.path"; type = "regexp";
+              data = "/nix/store/[^ ]+/@joplinapp-desktop";
+            }
+          ];
+        };
       };
   };
 
