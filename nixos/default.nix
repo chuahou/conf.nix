@@ -109,13 +109,8 @@
   # various programs/services
   programs.zsh.enable = true; # enable as interactive shell
   programs.gnupg.agent.enable = true;
-  programs.light.enable = true; # backlight control
   services.blueman.enable = true; # bluetooth
   services.upower.enable = true;
-  services.cron.enable = true;
-
-  # steam
-  programs.steam.enable = true;
 
   # allow mounting of NTFS
   boot.supportedFilesystems = [ "ntfs" ];

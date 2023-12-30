@@ -12,6 +12,9 @@
 
   networking.hostName = "CH-23MS";
 
+  # Enable backlight control.
+  programs.light.enable = true;
+
   # Limit journald space usage.
   services.journald.extraConfig = ''
     SystemMaxUse=512M
