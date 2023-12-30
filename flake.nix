@@ -36,9 +36,7 @@
   };
 
   outputs =
-    inputs@{
-      self, nixpkgs, nixos-hardware, home-manager, ...
-    }:
+    inputs@{ self, nixpkgs, ... }:
     let
       system = "x86_64-linux";
 
@@ -87,13 +85,6 @@
       # Hosts to generate configs over.
       hosts = [ "CH-23" "CH-23MS" ];
 
-      # nixpkgs with all overlays applied.
-      overlayed = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = builtins.attrValues overlays;
-      };
-
       nixosConfigurations =
         let
           base = {
@@ -104,13 +95,12 @@
                 nix.extraOptions = "experimental-features = nix-command flakes";
               })
 
-              # extra overlays
+              # nixpkgs configuration
               ({ ... }: {
-                nixpkgs.overlays = with overlays; [
-                  stable
-                  cpufreq-plugin
-                  python2 # Python 2 marked insecure #14
-                ];
+                nixpkgs = {
+                  overlays = builtins.attrValues overlays;
+                  config.allowUnfree = true;
+                };
               })
 
               # main NixOS configuration
@@ -118,10 +108,22 @@
 
               # impermanence opt-in persistence
               inputs.impermanence.nixosModules.impermanence
+
+              # home-manager
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs; };
+                  users.user = import ./home;
+                };
+              }
             ];
             specialArgs = { inherit inputs; };
           };
         in
+
           builtins.listToAttrs (builtins.map (host: {
             name = host;
             value = nixpkgs.lib.nixosSystem (base // {
@@ -129,30 +131,5 @@
             });
           }) self.hosts);
 
-      homeConfigurations =
-        builtins.listToAttrs (builtins.map (host: {
-          name = host;
-          value = home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-            modules = [
-              (import ./home {
-                overlays = with overlays; [
-                  stable
-                  cfgeq
-                  cpufreq-plugin
-                  vim-nix-fenced-syntax
-                  zsh-vim-mode
-                  python2 # Python 2 marked insecure #14
-                ];
-                inherit host;
-                inherit ((import ./lib {}).me) home;
-              })
-            ];
-            extraSpecialArgs = { inherit inputs; };
-          };
-        }) self.hosts);
     };
 }

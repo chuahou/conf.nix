@@ -31,7 +31,7 @@ gen_nixos_drvs () {
 # Generates list of derivations in home-manager programs path for hostname $1.
 gen_home_drvs () {
 	set -euo pipefail
-	nix eval --raw .\#homeConfigurations.$1.config.home.packages \
+	nix eval --raw .\#nixosConfigurations.$1.config.home-manager.users.user.home.packages \
 		--apply 'pkgs: builtins.concatStringsSep " " (builtins.map (pkg: pkg.drvPath) pkgs)'
 }
 
