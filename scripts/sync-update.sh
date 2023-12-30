@@ -8,8 +8,9 @@ set -euo pipefail
 
 # upgrade NixOS, home and nix-env packages
 FLAKE_PATH=$(dirname $0)/..
-sudo nom build \
+nom build \
 	$FLAKE_PATH#nixosConfigurations.$(hostname).config.system.build.toplevel
+notify-send "sudo required"
 sudo nixos-rebuild switch --flake $FLAKE_PATH#
 nom build $FLAKE_PATH#homeConfigurations.$(hostname).activationPackage
 home-manager switch --flake $FLAKE_PATH#$(hostname)
