@@ -1,20 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021, 2022 Chua Hou
 
-# have exactly one of internal and external displays connected and primary
-if [ $(hostname) = "CH-21NS" ]; then
-	internal=eDP-1-1
-	external=HDMI-0
-	intgamma=1
-	intbright=1
-fi
-if [ $(xrandr -q | grep -c "$external connected") -gt 0 ]; then
-	xrandr --output $external --auto --primary --output $internal --off
-else
-	xrandr --output $internal --auto --gamma $intgamma --brightness $intbright \
-		--primary --output $external --off
-fi
-
 # set DPI
 (cd $(conf-dir-path); echo "Xft.dpi: $(cat nixos/dpi/$(hostname))" | xrdb -merge)
 
@@ -29,12 +15,6 @@ do
 		xinput set-prop $mouse "libinput Accel Profile Enabled" 0 1
 	fi
 done
-
-# disable touchpad, enable natural scrolling
-if [ $(hostname) = "CH-21NS" ]; then
-	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "libinput Natural Scrolling Enabled" 1
-	xinput set-prop "DELL08EC:00 06CB:CCA8 Touchpad" "Device Enabled" 0
-fi
 
 # disable X power saving
 xset s off -dpms
