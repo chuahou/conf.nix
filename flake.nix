@@ -4,14 +4,13 @@
 {
   inputs = {
     nixpkgs        = { url = "nixpkgs/nixos-unstable"; };
-    nixpkgs-stable = { url = "nixpkgs/nixos-23.05"; };
+    nixpkgs-stable = { url = "nixpkgs/nixos-23.11"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-rice = { url = "github:bertof/nix-rice"; flake = false; };
     impermanence = { url = "github:nix-community/impermanence"; };
 
     # zsh-vim-mode plugin

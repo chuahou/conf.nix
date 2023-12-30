@@ -257,22 +257,6 @@
         "type": "github"
       }
     },
-    "nix-rice": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1682952592,
-        "narHash": "sha256-1qXvqCxnWpk0ELdpmS2OMDu047gvl166CGBm+sfi8oo=",
-        "owner": "bertof",
-        "repo": "nix-rice",
-        "rev": "dddd03ed3c5e05c728b0df985f7af905b002f588",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bertof",
-        "repo": "nix-rice",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1702453208,
@@ -321,16 +305,16 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1703034876,
-        "narHash": "sha256-4bMPFv/bs5g1nEsXQwXlrAGJgjv1Ilr0ejdaTkBwQLs=",
+        "lastModified": 1703467016,
+        "narHash": "sha256-/5A/dNPhbQx/Oa2d+Get174eNI3LERQ7u6WTWOlR1eQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "312ab59e8ade69e6083017bd9b98a2919f1fb86a",
+        "rev": "d02d818f22c777aa4e854efc3242ec451e5d462a",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-23.05",
+        "ref": "nixos-23.11",
         "type": "indirect"
       }
     },
@@ -405,7 +389,6 @@
         "lanzaboote": "lanzaboote",
         "latex-sty": "latex-sty",
         "nix-index-database": "nix-index-database",
-        "nix-rice": "nix-rice",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-stable": "nixpkgs-stable_2",
