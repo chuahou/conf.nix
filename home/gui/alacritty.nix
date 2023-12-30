@@ -19,9 +19,9 @@
       draw_bold_text_with_bright_colors = false;
 
       font = {
-        normal.family = "Mplus Code 60";
-        size = 13;
-        offset.y = 6;
+        normal.family = "Unifont";
+        size = 14.5;
+        offset.y = 8;
 
         # Center glyph vertically.
         glyph_offset.y = config.programs.alacritty.settings.font.offset.y / 2;
