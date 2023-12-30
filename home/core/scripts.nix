@@ -6,7 +6,7 @@
 let
   # import helper functions and data
   inherit (import ../../lib { inherit pkgs lib; })
-    mkPath mkScriptWithDeps me;
+    mkPath me;
 in
   {
     home.packages = [
@@ -24,22 +24,5 @@ in
           mv "''${x}" "$(date -I)-''${x}"
         done
       '')
-
-      # renames a problem sheet with name, course and number
-      (pkgs.writeShellScriptBin "rename-ps" ''
-        DIR=$(realpath $(dirname $1))
-        COURSE=$(basename $(realpath ''${DIR}/../..))
-        NUM=$(basename $DIR)
-        cp $1 $DIR/chua_''${COURSE}_ps''${NUM}.pdf
-      '')
-
-      # simple CLI pomodoro timer
-      (mkScriptWithDeps {
-        deps = with pkgs; [ coreutils libnotify ncurses ] ++
-          [ (import ../lib/gui/scripts.nix {
-            inherit config pkgs lib;
-          }).dndScript ];
-        infile = ../res/scripts/pomodoro.sh;
-      })
     ];
   }
