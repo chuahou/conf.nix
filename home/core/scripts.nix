@@ -10,14 +10,11 @@ let
 in
   {
     home.packages = [
-      (let
-        dir = me.home.devDirectory;
-      in
-        pkgs.writeShellScriptBin "cgit" ''
-          ${mkPath (with pkgs; [ git findutils gnugrep ncurses ])}
-          git_dir=${dir}
-          ${builtins.readFile ../res/scripts/check-git.sh}
-        '')
+      (pkgs.writeShellScriptBin "cgit" ''
+        ${mkPath (with pkgs; [ git findutils gnugrep ncurses ])}
+        git_dir=${config.home.homeDirectory}/dev
+        ${builtins.readFile ../res/scripts/check-git.sh}
+      '')
       (pkgs.writeShellScriptBin "prepend-date" ''
         ${mkPath [ pkgs.coreutils ]}
         for x in "''${@}"; do

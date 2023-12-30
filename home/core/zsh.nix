@@ -23,7 +23,7 @@ in {
           (builtins.genList
             (x: { "${toString x}" = "cd +${toString x}"; })
             10));
-      in import ../lib/shell/aliases.nix // dirStackAliases;
+      in import ../lib/shell/aliases.nix { inherit config; } // dirStackAliases;
 
     sessionVariables = {
       # prevent less paging from disappearing

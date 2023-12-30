@@ -12,9 +12,6 @@
 
   networking.hostName = "CH-23MS";
 
-  # Read DPI.
-  services.xserver.dpi = import ../dpi/CH-23MS;
-
   # Limit journald space usage.
   services.journald.extraConfig = ''
     SystemMaxUse=512M

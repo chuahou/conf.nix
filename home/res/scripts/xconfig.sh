@@ -1,8 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021, 2022 Chua Hou
-
-# set DPI
-(cd $(conf-dir-path); echo "Xft.dpi: $(cat nixos/dpi/$(hostname))" | xrdb -merge)
+# Copyright (c) 2021, 2022, 2023 Chua Hou
 
 # disable mouse acceleration
 xset mouse 0 0

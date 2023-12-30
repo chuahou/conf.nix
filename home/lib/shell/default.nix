@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2023 Chua Hou
 #
 # Common shell setup to use for aliases, functions
 #
@@ -11,7 +11,7 @@
 { pkgs, config, lib }:
 
 let
-  aliases = import ./aliases.nix;
+  aliases = import ./aliases.nix { inherit config; };
   vars    = import ./vars.nix { inherit pkgs; };
 in ''
   # environment variables

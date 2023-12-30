@@ -67,6 +67,7 @@
   services.xserver = {
     enable = true;
 
+    dpi = 96;
     displayManager.lightdm.enable = true;
     desktopManager.session = [
       {
@@ -89,19 +90,17 @@
       mutableUsers = false;
       users = {
         root.hashedPasswordFile = "${passwdDir}/root";
-        user =
-          let inherit (import ../lib {}) me;
-          in {
-            isNormalUser = true;
-            name = me.home.username;
-            description = me.name;
-            hashedPasswordFile = "${passwdDir}/user";
-            shell = pkgs.zsh;
-            extraGroups = [
-              "wheel" "networkmanager" "video" "scanner" "lp"
-            ];
-            uid = 1000;
-          };
+        user = {
+          isNormalUser = true;
+          name = "sgepk";
+          description = "Chua Hou";
+          hashedPasswordFile = "${passwdDir}/user";
+          shell = pkgs.zsh;
+          extraGroups = [
+            "wheel" "networkmanager" "video" "scanner" "lp"
+          ];
+          uid = 1000;
+        };
       };
     };
   # set main user as trusted user for nix purposes

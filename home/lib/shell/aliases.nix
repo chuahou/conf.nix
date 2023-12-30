@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2023 Chua Hou
 #
 # Shell-agnostic aliases
+
+{ config }:
 
 {
   # basic commands
@@ -42,18 +44,11 @@
   l1    = "l -n 1";
   lshow = "git log -n 1";
 
-  # git convert https GitHub remote URL to ssh
-  gh2ssh =
-    let
-      username = (import ../../../lib {}).me.github.username;
-    in
-      ''git remote set-url origin $(git remote get-url origin | sed "s/https:\/\/\(${username}@\)\?github.com\/${username}\/\([^\.]*\)\(\.git\)\?/git@github.com:${username}\/\2/")'';
-
   # editor
   e = "$VISUAL";
 
   # enter conf.nix directory
-  ccd = "cd ${(import ../../../lib {}).me.home.confDirectory}";
+  ccd = "cd ${config.home.homeDirectory}/dev/conf.nix";
 
   # view thumbnails with feh
   thumbs = "sh -c 'feh -t --thumb-width 300 --thumb-height 300 >/dev/null 2>&1 & disown'";

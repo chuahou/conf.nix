@@ -34,7 +34,4 @@ rec {
       ${addToPath' prepend deps}
       ${builtins.readFile infile}
     '';
-
-  # information about me
-  me = import ./me.nix;
 }

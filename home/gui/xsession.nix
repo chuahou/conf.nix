@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ config, pkgs, lib, ... }:
+{ config, osConfig, pkgs, lib, ... }:
 
 let
   inherit (import ../lib/gui/scripts.nix { inherit config pkgs lib; })
@@ -40,6 +40,8 @@ in {
 
     initExtra = ''
       ${xconfigScript}/bin/xconfig.sh
+      echo "Xft.dpi: ${builtins.toString osConfig.services.xserver.dpi}" | \
+          ${pkgs.xorg.xrdb.outPath}/bin/xrdb -merge
       umask 077
     '';
 
