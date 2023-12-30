@@ -3,8 +3,14 @@
 
 { config, pkgs, osConfig, ... }:
 
-{
-  imports = builtins.concatMap (import ../lib {}).importFolder [
+let
+  # Import entire folder's expressions.
+  importFolder = folder:
+    builtins.map (file: folder + "/${file}")
+      (builtins.attrNames (builtins.readDir folder));
+
+in {
+  imports = builtins.concatMap importFolder [
     ./core
     ./gui
     ./misc

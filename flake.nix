@@ -41,6 +41,10 @@
       system = "x86_64-linux";
 
       overlays = with inputs; {
+
+        # Nix helper functions.
+        helpers = import pkgs/helpers.nix;
+
         cpufreq-plugin =
           import pkgs/cpufreq-plugin/overlay.nix inputs.cpufreq-plugin;
 

@@ -26,7 +26,6 @@ let
   nixCommand = "${pkgs.nix-output-monitor}/bin/nom";
   stateDir = "${config.xdg.dataHome}/remote-build";
 
-  inherit (import ../../lib { inherit pkgs lib; }) mkPath;
   remote-build-script = pkgs.writeShellScript "remote-build-script"
   /* bash */ ''
     set -euo pipefail

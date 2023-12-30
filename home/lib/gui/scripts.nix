@@ -5,12 +5,8 @@
 
 { config, pkgs, lib }:
 
-let
-  # import helper functions
-  inherit (import ../../../lib { inherit pkgs lib; })
-    addToPath mkPath mkScriptWithDeps;
-in rec {
-  xconfigScript = mkScriptWithDeps {
+rec {
+  xconfigScript = pkgs.ch.mkScriptWithDeps {
     deps = with pkgs; [
       xorg.xrandr xorg.xset xorg.xinput xorg.xmodmap
       gnugrep gnused pulseaudio nix
@@ -23,7 +19,7 @@ in rec {
     in pkgs.writeShellScriptBin "lock.sh" ''
       set -e
       mkdir -p ${picPath}
-      ${addToPath (with pkgs; [ scrot imagemagick i3lock dndScript ])}
+      ${pkgs.ch.addToPath (with pkgs; [ scrot imagemagick i3lock dndScript ])}
       scrot ${picPath}/screen.png
       convert ${picPath}/screen.png -blur 0x15 ${picPath}/blur.png
       donotdisturb.sh on
@@ -32,7 +28,7 @@ in rec {
       rm ${picPath}/{screen,blur}.png || true
     '';
 
-  volumeScript = mkScriptWithDeps {
+  volumeScript = pkgs.ch.mkScriptWithDeps {
     deps   = with pkgs; [ gnugrep gawk gnused pulseaudio ];
     infile = ../../res/scripts/volume.sh;
   };
@@ -44,7 +40,7 @@ in rec {
     in pkgs.writeShellScriptBin "donotdisturb.sh" ''
       set -eu
 
-      ${addToPath (with pkgs; [ coreutils libnotify psmisc ])}
+      ${pkgs.ch.addToPath (with pkgs; [ coreutils libnotify psmisc ])}
 
       state_file=${stateFile}
       hook () {
@@ -60,7 +56,7 @@ in rec {
     '';
 
   powerScript = pkgs.writeShellScriptBin "power.sh" ''
-    ${mkPath (with pkgs; [
+    ${pkgs.ch.mkPath (with pkgs; [
       coreutils gnugrep gnused libnotify pulseaudio upower systemd
     ])}
     AUDIO_FILE=${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/phone-incoming-call.oga
