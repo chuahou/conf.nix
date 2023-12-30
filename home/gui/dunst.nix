@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2023 Chua Hou
 
-{ config, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   services.dunst = {
@@ -47,4 +47,7 @@
         };
       };
   };
+
+  # Enable use of notify-send.
+  home.packages = with pkgs; [ libnotify ];
 }
