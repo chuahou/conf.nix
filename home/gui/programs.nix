@@ -26,10 +26,14 @@
     (gimp-with-plugins.override {
       plugins = with gimpPlugins; [ resynthesizer ];
     })
-    obs-studio
     spotify
-    kdenlive
+
+    # video-related
+    handbrake
+    losslesscut-bin
+    obs-studio
     vlc
+    yt-dlp
 
     # system utilities
     appimage-run
