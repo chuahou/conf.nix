@@ -16,7 +16,6 @@
         opacity = 0.92;
       };
       scrolling.history  = 10000;
-      draw_bold_text_with_bright_colors = false;
 
       font = {
         normal.family = "Unifont";
@@ -33,7 +32,6 @@
           primary = {
             background = term.bg;
             foreground = term.fg;
-            bright-foreground = term.fg-bright;
           };
           cursor.cursor = primary.foreground;
           normal = {
@@ -43,6 +41,7 @@
             inherit (colours.bright)
               black red green yellow blue magenta cyan white;
           };
+          draw_bold_text_with_bright_colors = false;
         };
     };
   };
