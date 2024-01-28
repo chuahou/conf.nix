@@ -75,8 +75,9 @@
         stable = self: super:
           let pkgs = import nixpkgs-stable { inherit (super) config system; };
           in {
-            # Currently unused.
-            # inherit (pkgs) package;
+            ibus-engines = super.ibus-engines // {
+              inherit (pkgs.ibus-engines) mozc;
+            };
           };
       };
 

@@ -1,17 +1,5 @@
-diff --git a/.travis.yml b/.travis.yml
-new file mode 100644
-index 0000000..776d5d8
---- /dev/null
-+++ b/.travis.yml
-@@ -0,0 +1,6 @@
-+language: nix
-+
-+before_script: |
-+  git clone https://github.com/junegunn/vader.vim.git
-+script: |
-+  nix-shell --command ./test/run-tests.sh
 diff --git a/default.nix b/default.nix
-index 7141a00..0235ecf 100644
+index 48fca14..9d0efbc 100644
 --- a/default.nix
 +++ b/default.nix
 @@ -9,6 +9,7 @@ let
@@ -37,10 +25,10 @@ index 7141a00..0235ecf 100644
      filetype off
      set rtp^=${vader}
      set rtp^=${src}
-@@ -39,15 +40,31 @@ stdenv.mkDerivation rec {
-     endfunction
+@@ -42,15 +43,31 @@ stdenv.mkDerivation rec {
  
-     command! Syntax call Syntax()
+     set backspace=2
+     set hlsearch
 +
 +    function! Nix_GetScriptID(fname) abort
 +      let l:snlist = '''
@@ -72,12 +60,14 @@ index 7141a00..0235ecf 100644
          command vim -XNu ${vimrc} -i NONE "$@"
      }
 diff --git a/ftplugin/nix.vim b/ftplugin/nix.vim
-index 310fe9a..a3170b3 100644
+index 310fe9a..488c73b 100644
 --- a/ftplugin/nix.vim
 +++ b/ftplugin/nix.vim
-@@ -20,3 +20,116 @@ if get(g:, 'nix_recommended_style', 1)
+@@ -19,4 +19,118 @@ if get(g:, 'nix_recommended_style', 1)
+     \ softtabstop=2
      \ expandtab 
  endif
++
  let b:match_words = '\<if\>:\<then\>:\<else\>,\<let\>:\<in\>'
 +
 +" Borrowed from vim-markdown: https://github.com/plasticboy/vim-markdown/
@@ -193,7 +183,7 @@ index 310fe9a..a3170b3 100644
 +    autocmd CursorHold,CursorHoldI <buffer> call s:NixRefreshSyntax(0)
 +augroup END
 diff --git a/syntax/nix.vim b/syntax/nix.vim
-index a4866fb..772dab1 100644
+index 5f3a544..8f2bf28 100644
 --- a/syntax/nix.vim
 +++ b/syntax/nix.vim
 @@ -46,6 +46,7 @@ syn match nixInvalidStringEscape /''\\[^nrt]/ contained
@@ -204,7 +194,7 @@ index a4866fb..772dab1 100644
  
  syn match nixFunctionCall "[a-zA-Z_][a-zA-Z0-9_'-]*"
  
-@@ -163,6 +164,8 @@ hi def link nixAttribute                 Identifier
+@@ -164,6 +165,8 @@ hi def link nixAttribute                 Identifier
  hi def link nixAttributeDot              Operator
  hi def link nixBoolean                   Boolean
  hi def link nixBuiltin                   Special
@@ -213,7 +203,7 @@ index a4866fb..772dab1 100644
  hi def link nixComment                   Comment
  hi def link nixConditional               Conditional
  hi def link nixHomePath                  Include
-@@ -187,6 +190,7 @@ hi def link nixSimpleFunctionArgument    Identifier
+@@ -189,6 +192,7 @@ hi def link nixSimpleFunctionArgument    Identifier
  hi def link nixSimpleString              String
  hi def link nixSimpleStringSpecial       SpecialChar
  hi def link nixString                    String
@@ -222,7 +212,7 @@ index a4866fb..772dab1 100644
  hi def link nixStringSpecial             Special
  hi def link nixTodo                      Todo
 diff --git a/test/nix.vader b/test/nix.vader
-index f263967..1e78ff7 100644
+index d839228..5dfddd6 100644
 --- a/test/nix.vader
 +++ b/test/nix.vader
 @@ -1,3 +1,7 @@
