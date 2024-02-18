@@ -45,6 +45,12 @@ let
   mkConfig = opts:
 
     # Wraps the program in a new derivation.
+    # Typically, the share/applications/*.desktop will have Exec= lines that
+    # don't specify the binary path, such as `Exec=firefox`. Since we replace
+    # the binary with our wrapper by name, the path will only contain our
+    # wrapper and this will work out of the box.
+    # In cases where the .desktop file contains an absolute nix store path, it
+    # will need to be patched out manually.
     let pkg = pkgs.symlinkJoin {
       name = "${opts.inputDerivation.name}-uid-isolated";
       paths = [ opts.inputDerivation ];

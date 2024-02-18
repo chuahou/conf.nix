@@ -195,6 +195,13 @@ in {
           { operand = "dest.port"; data = "443"; }
           (asUser "discord")
         ];
+        "Google Chrome".operator = mkListOperator [
+          {
+            operand = "process.path";
+            data = "${pkgs.google-chrome}/share/google/chrome/chrome";
+          }
+          (asUser "chrome")
+        ];
         "[ DENY ] Joplin" = {
           action = "deny";
           operator = mkListOperator [
