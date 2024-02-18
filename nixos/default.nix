@@ -117,6 +117,7 @@
 
   # fonts to install system-wide
   fonts.packages = with pkgs; [
+    cascadia-code
     corefonts
     fira
     fira-code

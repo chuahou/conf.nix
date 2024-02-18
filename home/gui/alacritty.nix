@@ -18,8 +18,8 @@
       scrolling.history  = 10000;
 
       font = {
-        normal.family = "Unifont";
-        size = 14.5;
+        normal.family = "Cascadia Code PL SemiLight";
+        size = 12.5;
         offset.y = 8;
 
         # Center glyph vertically.
