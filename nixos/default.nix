@@ -79,7 +79,7 @@
       }
     ];
 
-    xkbOptions = "ctrl:nocaps";
+    xkb.options = "ctrl:nocaps";
   };
 
   # user accounts
