@@ -78,6 +78,7 @@
             ibus-engines = super.ibus-engines // {
               inherit (pkgs.ibus-engines) mozc;
             };
+            inherit (pkgs) ibus-with-plugins;
           };
       };
 
