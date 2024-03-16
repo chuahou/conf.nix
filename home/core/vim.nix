@@ -191,7 +191,7 @@ in {
       ripgrep # For fzf.vim.
 
       # Language servers.
-      clang-tools haskell-language-server rnix-lsp
+      clang-tools haskell-language-server nil
     ];
 
     viAlias      = true;

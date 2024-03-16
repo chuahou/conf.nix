@@ -37,8 +37,9 @@
 			"filetypes": ["scala"]
 		},
 		"nix": {
-			"command": "rnix-lsp",
-			"filetypes": ["nix"]
+			"command": "nil",
+			"filetypes": ["nix"],
+			"rootPatterns": ["flake.nix"]
 		}
 	},
 	"coc.preferences.formatOnSaveFiletypes": ["haskell", "purescript"],
