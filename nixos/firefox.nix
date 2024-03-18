@@ -55,7 +55,12 @@ in {
   imports = [ ../modules/firefox-sudo.nix ];
   programs.firefox-sudo = {
     normalUser = config.users.users.user.name;
-    userCss = "#fullscr-toggler { display:none!important; }";
+    userCss = /* css */ ''
+      #fullscr-toggler { display:none!important; }
+
+      /* For use with Tree Style Tab. */
+      #TabsToolbar { visibility: collapse !important }
+    '';
     userPrefs = prefs;
   };
 }
