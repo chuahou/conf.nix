@@ -77,7 +77,7 @@ in {
     '';
 
     # plugins
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion      = true;
     plugins = [
       pkgs.zsh-vim-mode
