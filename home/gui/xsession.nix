@@ -83,6 +83,7 @@ in {
           for_window [class=".*"] border pixel 2
           default_border          pixel 2
           default_floating_border pixel 2
+          workspace_auto_back_and_forth yes
         '';
         config = {
           # basics
@@ -198,9 +199,14 @@ in {
             "${mod}+Shift+c"      = "exec ${pkgs.galculator}/bin/galculator";
 
             # window navigation
-            "${mod}+Tab"     = "focus mode_toggle";
+            "${mod}+`"       = "focus mode_toggle";
             "${mod}+a"       = "focus parent";
             "${mod}+Shift+a" = "focus child";
+
+            # workspace navigation
+            "${mod}+Ctrl+Left" = "workspace prev";
+            "${mod}+Ctrl+Right" = "workspace next";
+            "${mod}+Tab" = "workspace back_and_forth";
 
             # multiple monitors
             "${mod}+m"       = "move workspace to output right";
