@@ -154,14 +154,11 @@ in {
         systemPackages = [
           # Shell script to copy file(s) to the shared directory and change
           # their group permissions so applications can access it.
-          (pkgs.writeShellScriptBin "cpshare" ''
-            for path in "$@"; do
-                # -a option since we may copy directories as well.
-                cp $path ${cfg.sharedDir.path} -a
-                dest_path=${cfg.sharedDir.path}/$(basename $path)
-                chmod -R g=u $dest_path
-                chgrp -R ${cfg.sharedDir.group.name} $dest_path
-            done
+          (pkgs.writeShellScriptBin "cpshare" /* sh */ ''
+            cp "$@" ${cfg.sharedDir.path} -a
+            find ${cfg.sharedDir.path} -user $(whoami) \
+                -exec chmod g=u {} \; \
+                -exec chgrp ${cfg.sharedDir.group.name} {} \;
           '')
         ];
       }
