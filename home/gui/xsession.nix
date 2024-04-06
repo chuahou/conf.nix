@@ -137,7 +137,7 @@ in {
             criteria = [
               { class = "blueman-manager"; }
               { class = "Pavucontrol";     }
-              { class = "Galculator";      }
+              { class = "Qalculate-gtk";      }
             ];
           };
 
@@ -196,7 +196,7 @@ in {
             "Print"               = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "${mod}+p"            = Print;
             "${mod}+Shift+p"      = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot screen --path ${config.xdg.userDirs.pictures}";
-            "${mod}+Shift+c"      = "exec ${pkgs.galculator}/bin/galculator";
+            "${mod}+Shift+c"      = "exec ${pkgs.qalculate-gtk}/bin/qalculate-gtk";
 
             # window navigation
             "${mod}+`"       = "focus mode_toggle";
