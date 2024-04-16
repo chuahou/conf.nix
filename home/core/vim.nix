@@ -36,7 +36,6 @@ in {
       # language plugins
       coc-clangd
       haskell-vim
-      vim-markdown
       vim-nix
       {
         plugin = coc-nvim;
