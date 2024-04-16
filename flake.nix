@@ -89,7 +89,7 @@
       inherit inputs;
 
       # Hosts to generate configs over.
-      hosts = [ "CH-23" "CH-23MS" ];
+      hosts = [ "CH-23" ];
 
       nixosConfigurations =
         let
