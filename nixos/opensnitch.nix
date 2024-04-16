@@ -91,6 +91,10 @@ in {
           action = "deny";
           operator = { operand = "protocol"; data = "icmp"; };
         };
+        "[ DENY ] ICMP6" = {
+          action = "deny";
+          operator = { operand = "protocol"; data = "icmp6"; };
+        };
         "Loopback".operator = { operand = "iface.out"; data = "lo"; };
         "NTP (systemd-timesync)".operator = mkListOperator [
           {
