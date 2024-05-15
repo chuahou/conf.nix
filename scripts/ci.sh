@@ -1,7 +1,7 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p curl jq gnused findutils coreutils nixUnstable
+#!nix-shell -i bash -p curl jq gnused findutils coreutils
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2023 Chua Hou
+# Copyright (c) 2023, 2024 Chua Hou
 #
 # To be run on CI (e.g. GitHub actions).
 # Builds both NixOS/home configurations' paths for derivations that do not exist
@@ -9,10 +9,6 @@
 # derivations to compile, while not containing large quantities of wasted
 # downloads and space (which would be what happens if we built the entire
 # configuration).
-#
-# Note that we use nixUnstable (see the shebang) due to
-# cachix/install-nix-action also using nixUnstable, so by doing so we can make
-# it so we use the same nix action.
 
 set -euo pipefail
 
