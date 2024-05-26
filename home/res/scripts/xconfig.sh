@@ -19,3 +19,8 @@ xset s off -dpms
 # disable stream restore module if loaded
 [ $(pactl list short modules | grep module-stream-restore -c || true) -gt 0 ] &&
 	pactl unload-module module-stream-restore
+
+# Prevent suspending on idle, which causes noise for some connected 3.5mm
+# speakers.
+[ $(pactl list short modules | grep module-suspend-on-idle -c || true) -gt 0 ] &&
+	pactl unload-module module-suspend-on-idle
