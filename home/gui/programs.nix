@@ -23,9 +23,7 @@
 
     # media
     feh
-    (gimp-with-plugins.override {
-      plugins = with gimpPlugins; [ resynthesizer ];
-    })
+    gimp
     spotify
 
     # video-related

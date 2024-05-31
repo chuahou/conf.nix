@@ -57,9 +57,6 @@
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };
         };
 
-        # Overlay providing Python 2 to packages that need it.
-        python2 = import pkgs/python2-overlay.nix;
-
         # Enable fenced syntax for vim-nix.
         vim-nix-fenced-syntax = self: super: {
           vimPlugins = super.vimPlugins // {
