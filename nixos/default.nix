@@ -5,7 +5,6 @@
 
 {
   imports = [
-    ./cachix.nix
     ./clamav.nix
     ./direnv.nix
     ./firefox.nix
