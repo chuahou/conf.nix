@@ -3,8 +3,8 @@
 
 {
   inputs = {
-    nixpkgs        = { url = "nixpkgs/nixos-unstable"; };
-    nixpkgs-stable = { url = "nixpkgs/nixos-23.11"; };
+    nixpkgs = { url = "nixpkgs/nixos-24.05"; };
+    nixpkgs-prev = { url = "nixpkgs/nixos-23.11"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -68,9 +68,10 @@
           };
         };
 
-        # Packages to overlay from a stable branch to avoid bugs and the like.
+        # Packages to overlay from a previous stable branch to avoid bugs and
+        # the like.
         stable = self: super:
-          let pkgs = import nixpkgs-stable { inherit (super) config system; };
+          let pkgs = import nixpkgs-prev { inherit (super) config system; };
           in {
             ibus-engines = super.ibus-engines // {
               inherit (pkgs.ibus-engines) mozc;
