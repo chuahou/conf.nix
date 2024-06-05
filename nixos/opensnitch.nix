@@ -85,7 +85,7 @@ in {
         "DNS".operator = mkListOperator [
           { operand = "protocol"; data = "udp"; }
           { operand = "dest.port"; data = "53"; }
-          { operand = "dest.ip"; data = "10.3.0.1"; }
+          { operand = "dest.ip"; data = "100.64.0.7"; }
         ];
         "[ DENY ] ICMP" = {
           action = "deny";
