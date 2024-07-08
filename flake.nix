@@ -5,6 +5,7 @@
   inputs = {
     nixpkgs = { url = "nixpkgs/nixos-24.05"; };
     nixpkgs-prev = { url = "nixpkgs/nixos-23.11"; };
+    nixpkgs-unstable = { url = "nixpkgs/nixpkgs-unstable"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -68,15 +69,17 @@
           };
         };
 
-        # Packages to overlay from a previous stable branch to avoid bugs and
-        # the like.
-        stable = self: super:
-          let pkgs = import nixpkgs-prev { inherit (super) config system; };
+        # Packages to overlay from other branches to avoid bugs and the like.
+        nixpkgs-branches = self: super:
+          let
+            prev = import nixpkgs-prev { inherit (super) config system; };
+            unstable = import nixpkgs-unstable { inherit (super) config system; };
           in {
             ibus-engines = super.ibus-engines // {
-              inherit (pkgs.ibus-engines) mozc;
+              inherit (prev.ibus-engines) mozc;
             };
-            inherit (pkgs) ibus-with-plugins;
+            inherit (prev) ibus-with-plugins;
+            inherit (unstable) joplin-desktop;
           };
       };
 
