@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2023 Chua Hou
 
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
   prefs = {
@@ -29,6 +29,11 @@ let
 
     # enable userChrome.css
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+    # disable prefetching
+    "network.prefetch-next" = false;
+    "network.dns.disablePrefetch" = false;
+    "network.http.speculative-parallel-limit" = 0;
 
     # disable telemetry, reporting, experiments etc.
     # source:
