@@ -84,6 +84,9 @@ in {
           default_border          pixel 2
           default_floating_border pixel 2
           workspace_auto_back_and_forth yes
+
+          for_window [window_role="alert"] floating enable
+          no_focus [window_role="alert"]
         '';
         config = {
           # basics
