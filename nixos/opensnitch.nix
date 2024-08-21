@@ -206,6 +206,19 @@ in {
           }
           (asUser "chrome")
         ];
+        "Anki".operator = mkListOperator [
+          {
+            operand = "process.path"; type = "regexp";
+            data = "^/nix/store/[a-z0-9]+-anki-bin-[0-9\\.]+/share/anki/anki$";
+          }
+          {
+            operand = "dest.host"; type = "regexp";
+            data = "^(|.*\\.)ankiweb\\.net";
+          }
+          { operand = "dest.port"; data = "443"; }
+          { operand = "protocol"; data = "tcp"; }
+          (asUser "user")
+        ];
         "[ DENY ] Joplin" = {
           action = "deny";
           operator = mkListOperator [

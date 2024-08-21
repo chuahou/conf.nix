@@ -12,6 +12,7 @@
     meld
 
     # productivity
+    anki-bin
     galculator
     joplin-desktop
     libreoffice
