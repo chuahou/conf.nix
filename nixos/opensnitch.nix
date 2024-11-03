@@ -228,6 +228,13 @@ in {
             }
           ];
         };
+        "Bitwarden".operator = mkListOperator [
+          {
+            operand = "dest.host"; type = "regexp";
+            data = "^(.*)\\.bitwarden\\.(com|net)$";
+          }
+          (asUser "bitwarden")
+        ];
       };
   };
 
