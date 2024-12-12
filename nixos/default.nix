@@ -125,7 +125,7 @@
     lmmath
     lmodern
     mplus-outline-fonts.githubRelease
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     open-sans
     overpass
     roboto

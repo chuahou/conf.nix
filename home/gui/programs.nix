@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
 
     # development
-    cfgeq
     gitg
     meld
 

@@ -3,12 +3,12 @@
 
 {
   inputs = {
-    nixpkgs = { url = "nixpkgs/nixos-24.05"; };
+    nixpkgs = { url = "nixpkgs/nixos-24.11"; };
     nixpkgs-prev = { url = "nixpkgs/nixos-23.11"; };
     nixpkgs-unstable = { url = "nixpkgs/nixpkgs-unstable"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -22,9 +22,6 @@
 
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
-
-    # cfgeq
-    cfgeq = { url = "github:chuahou/cfgeq"; };
 
     # nix-index database
     nix-index-database = { url = "github:Mic92/nix-index-database"; };
@@ -48,11 +45,6 @@
 
         cpufreq-plugin =
           import pkgs/cpufreq-plugin/overlay.nix inputs.cpufreq-plugin;
-
-        cfgeq = self: super: {
-          cfgeq = super.haskell.lib.justStaticExecutables
-            cfgeq.defaultPackage.${system};
-        };
 
         zsh-vim-mode = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };

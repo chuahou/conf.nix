@@ -1,5 +1,6 @@
 " appearance settings
 
+set notermguicolors
 silent! colorscheme thewursttheme " set colourscheme if we have it
 
 set number            " show line numbers
