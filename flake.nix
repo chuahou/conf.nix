@@ -71,7 +71,7 @@
               inherit (prev.ibus-engines) mozc;
             };
             inherit (prev) ibus-with-plugins;
-            inherit (unstable) joplin-desktop;
+            inherit (unstable) joplin-desktop fzf;
           };
       };
 
