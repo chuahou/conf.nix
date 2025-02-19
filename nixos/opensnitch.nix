@@ -219,15 +219,16 @@ in {
           { operand = "protocol"; data = "tcp"; }
           (asUser "user")
         ];
-        "[ DENY ] Joplin" = {
-          action = "deny";
-          operator = mkListOperator [
-            {
-              operand = "process.path"; type = "regexp";
-              data = "/nix/store/[^ ]+/@joplinapp-desktop";
-            }
-          ];
-        };
+        "Joplin".operator = mkListOperator [
+          {
+            operand = "process.path"; type = "regexp";
+            data = "/nix/store/[^ ]+/@joplinapp-desktop";
+          }
+          { operand = "dest.host"; data = "api.joplincloud.com"; }
+          { operand = "dest.port"; data = "443"; }
+          { operand = "protocol"; data = "tcp"; }
+          (asUser "joplin")
+        ];
         "Bitwarden".operator = mkListOperator [
           {
             operand = "dest.host"; type = "regexp";

@@ -24,6 +24,11 @@
         user = { name = "bitwarden"; uid = 2003; };
       }
       {
+        inputDerivation = pkgs.joplin-desktop;
+        binaryName = "joplin-desktop";
+        user = { name = "joplin"; uid = 2004; };
+      }
+      {
         # Google Chrome has .desktop files that have the full nix store path in
         # their Exec line. To get around this, we simply remove the directory so
         # that the Exec just has 'google-chrome-stable', then our wrapper will
