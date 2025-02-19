@@ -12,8 +12,6 @@
 
     # productivity
     anki-bin
-    galculator
-    joplin-desktop
     libreoffice
     pandoc
     pdfgrep
@@ -22,7 +20,6 @@
     ripgrep
 
     # media
-    feh
     gimp
     spotify
 
@@ -35,20 +32,8 @@
 
     # system utilities
     appimage-run
-    arandr
-    font-manager
     ncdu
     steam-run
 
   ];
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "x-scheme-handler/http"    = "firefox.desktop";
-      "x-scheme-handler/https"   = "firefox.desktop";
-      "text/html"                = "firefox.desktop";
-      "application/pdf"          = "org.pwmt.zathura.desktop";
-    };
-  };
 }

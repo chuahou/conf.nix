@@ -1,22 +1,9 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2023 Chua Hou
 
-{ pkgs, lib, ... }:
+{ lib, ... }:
 
 {
-  # Picom blur and shadow only for this computer.
-  services.picom = {
-    backend = lib.mkForce "glx";
-
-    shadow = lib.mkForce true;
-    settings = {
-      blur = {
-        method = "dual_kawase";
-        strength = 3;
-      };
-    };
-  };
-
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

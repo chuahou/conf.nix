@@ -9,7 +9,7 @@ set -euo pipefail
 FLAKE_PATH=$(dirname $0)/..
 nom build \
 	$FLAKE_PATH#nixosConfigurations.$(hostname).config.system.build.toplevel
-notify-send "sudo required"
+nix-shell -p libnotify --run 'notify-send "sudo required"'
 sudo nixos-rebuild switch --flake $FLAKE_PATH#
 nix-env -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/$(
 	jq ".nodes.$(

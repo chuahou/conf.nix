@@ -17,8 +17,6 @@
   boot.kernelPackages = pkgs.linuxPackages_zen; # >= 6.4 for wifi/bluetooth.
 
   # Basic hardware services.
-  hardware.pulseaudio.enable = true;
-  services.pipewire.enable = false;
   hardware.bluetooth.enable = true;
 
   # Default CPU power management.

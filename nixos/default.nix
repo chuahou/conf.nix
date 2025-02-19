@@ -8,7 +8,6 @@
     ./direnv.nix
     ./firefox.nix
     ./gc.nix
-    ./ime.nix
     ./opensnitch.nix
     ./persist.nix
     ./piper.nix
@@ -49,7 +48,6 @@
     networkmanager.enable = true;
     useDHCP               = false;
   };
-  programs.nm-applet.enable = true;
 
   # time settings
   time.timeZone = "Asia/Singapore";
@@ -61,24 +59,12 @@
     keyMap = "us";
   };
 
-  # xserver settings
-  services.xserver = {
-    enable = true;
-
-    dpi = 96;
-    displayManager.lightdm.enable = true;
-    desktopManager.session = [
-      {
-        name = "home-manager-xsession";
-        start = ''
-          ${pkgs.runtimeShell} $HOME/.hm-xsession &
-          waitPID=$!
-        '';
-      }
-    ];
-
-    xkb.options = "ctrl:nocaps";
-  };
+  # KDE
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+  ];
 
   # user accounts
   users =
