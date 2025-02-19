@@ -93,7 +93,6 @@
   # various programs/services
   programs.zsh.enable = true; # enable as interactive shell
   programs.gnupg.agent.enable = true;
-  services.blueman.enable = true; # bluetooth
   services.upower.enable = true;
 
   # allow mounting of NTFS
