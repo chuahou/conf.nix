@@ -107,6 +107,7 @@
           };
           binaryName = "firefox";
           user = { name = cfg.firefoxUser; uid = 2000; };
+          allowedArgs = "--name firefox";
         }
       ];
       security.uid-isolation.normalUser = cfg.normalUser;

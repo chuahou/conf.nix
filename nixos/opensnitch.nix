@@ -244,6 +244,8 @@ in {
   security.uid-isolation.programs = [ {
     inputDerivation = pkgs.opensnitch-ui;
     binaryName = "opensnitch-ui";
+    commandPrefix = "env DBUS_SESSION_BUS_ADDRESS=unix:path=/dev/null";
     inherit user;
+    allowedArgs = "--socket ${config.services.opensnitch.settings.Server.Address}";
   } ];
 }

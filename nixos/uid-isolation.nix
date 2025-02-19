@@ -12,6 +12,22 @@
         inputDerivation = pkgs.tdesktop;
         binaryName = "telegram-desktop";
         user = { name = "telegram"; uid = 2001; };
+        desktopFile = {
+          name = "org.telegram.desktop.desktop";
+          content = ''
+            [Desktop Entry]
+            Name=Telegram
+            Comment=New era of messaging
+            Exec=telegram-desktop
+            Icon=telegram
+            Terminal=false
+            StartupWMClass=TelegramDesktop
+            Type=Application
+            Categories=Chat;Network;InstantMessaging;Qt;
+            MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+            Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;
+          '';
+        };
       }
       {
         inputDerivation = pkgs.discord;
@@ -27,6 +43,7 @@
         inputDerivation = pkgs.joplin-desktop;
         binaryName = "joplin-desktop";
         user = { name = "joplin"; uid = 2004; };
+        allowedArgs = "--no-sandbox";
       }
       {
         # Google Chrome has .desktop files that have the full nix store path in
@@ -52,4 +69,7 @@
     ];
     normalUser = config.users.users.user.name;
   };
+
+  # For debugging Polkit rules.
+  security.polkit.debug = true;
 }

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2023 Chua Hou
+# Copyright (c) 2023, 2025 Chua Hou
 #
 # Runs a program as a completely separate user. This achieves user-level
 # isolation with Unix permissions.
@@ -23,6 +23,30 @@ let
         type = lib.types.str;
         example = "firefox";
       };
+      commandPrefix = lib.mkOption {
+        description = "To prepend to binary name when calling it.";
+        type = lib.types.str;
+        example = "env DBUS_SESSION_BUS_ADDRESS=unix:path=/dev/null";
+        default = "";
+      };
+      commandSuffix = lib.mkOption {
+        description = "To append to binary name when calling it.";
+        type = lib.types.str;
+        example = "(command line args)";
+        default = "";
+      };
+      desktopFile = {
+        name = lib.mkOption {
+          description = "Filename for custom desktop file.";
+          type = lib.types.str;
+          default = "";
+        };
+        content = lib.mkOption {
+          description = "Custom desktop file for application if necessary.";
+          type = lib.types.str;
+          default = "";
+        };
+      };
       user = {
         name = lib.mkOption {
           description = "Username of user to run program as.";
@@ -34,6 +58,11 @@ let
           type = lib.types.int;
           example = 1101;
         };
+      };
+      allowedArgs = lib.mkOption {
+        description = "Args to allow the application to run with without authentication.";
+        type = lib.types.str;
+        default = "";
       };
     };
   };
@@ -51,24 +80,34 @@ let
     # wrapper and this will work out of the box.
     # In cases where the .desktop file contains an absolute nix store path, it
     # will need to be patched out manually.
-    let pkg = pkgs.symlinkJoin {
-      name = "${opts.inputDerivation.name}-uid-isolated";
-      paths = [ opts.inputDerivation ];
-      postBuild = /* sh */ ''
-        cd $out
-        unwrapped=$(realpath bin/.uid-isolation-unwrapped)
-        mv bin/${opts.binaryName} $unwrapped
-        cat << EOF > bin/${opts.binaryName}
-            ${pkgs.xorg.xhost}/bin/xhost +SI:localuser:${opts.user.name}
-            # Allow group to read file so shared directory works well.
-            umask 007
-            sudo --preserve-env=DISPLAY,XAUTHORITY,XMODIFIERS,GTK_IM_MODULE,QT_IM_MODULE \
-                -u ${opts.user.name} $unwrapped "\$@"
-            ${pkgs.xorg.xhost}/bin/xhost -SI:localuser:${opts.user.name}
-        EOF
-        chmod +x bin/${opts.binaryName}
-      '';
-    };
+    let
+      unwrappedPath = "bin/.uid-isolation-unwrapped";
+      pkg = pkgs.symlinkJoin {
+        name = "${opts.inputDerivation.name}-uid-isolated";
+        paths = [ opts.inputDerivation ];
+        postBuild = ''
+          cd $out
+          unwrapped=$(realpath ${unwrappedPath})
+          mv bin/${opts.binaryName} $unwrapped
+
+          cat << EOF > bin/${opts.binaryName}
+          #!/usr/bin/env bash
+          # Allow group to read file so shared directory works well.
+          umask 007
+          ${pkgs.ego}/bin/ego -u ${opts.user.name} ${opts.commandPrefix} $unwrapped "\$@" ${opts.commandSuffix}
+          EOF
+
+          chmod +x bin/${opts.binaryName}
+
+          ${if opts.desktopFile.name != "" then ''
+            mv share/applications share/applications_old
+            mkdir -p share/applications
+            cat << EOF > share/applications/${opts.desktopFile.name}
+            ${opts.desktopFile.content}
+            EOF
+          '' else ""}
+        '';
+      };
 
     in {
       environment.systemPackages = [ pkg ];
@@ -77,18 +116,24 @@ let
         createHome = true;
         inherit (opts.user) uid;
         group = cfg.sharedDir.group.name;
-        extraGroups = [ "pulse-access" ];
       };
 
-      # Allow normal user to run this program without password for sudo.
-      security.sudo.extraRules = [ {
-        users = [ cfg.normalUser ];
-        runAs = opts.user.name;
-        commands = [ {
-          command = "${pkg}/bin/.uid-isolation-unwrapped";
-          options = [ "NOPASSWD" "SETENV" ];
-        } ];
-      } ];
+      # Allow normal user to run this program without password.
+      security.polkit.extraConfig =
+        let allowedArgs = if opts.allowedArgs != "" then " ${opts.allowedArgs}" else "";
+        in ''
+          polkit.addRule(function(action, subject) {
+              if (action.id == "org.freedesktop.machine1.host-shell" &&
+                  action.lookup("user") == "${opts.user.name}" &&
+                  subject.user == "${cfg.normalUser}") {
+                  if (action.lookup("command_line") == "/bin/sh -c dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY PULSE_SERVER PULSE_COOKIE; systemctl --user start xdg-desktop-portal-gtk; exec ${pkg}/${unwrappedPath}${allowedArgs}") {
+                      return polkit.Result.YES;
+                  } else {
+                      polkit.log(JSON.stringify(action));
+                  }
+              }
+          });
+        '';
     };
 
     # We have to merge individual top-level attributes manually to avoid
@@ -97,7 +142,7 @@ let
     allConfigsCombined = {
       environment = lib.mkMerge (map (c: c.environment) allConfigs);
       users = lib.mkMerge (map (c: c.users) allConfigs);
-      security.sudo = lib.mkMerge (map (c: c.security.sudo) allConfigs);
+      security.polkit = lib.mkMerge (map (c: c.security.polkit) allConfigs);
     };
 
 in {
@@ -143,10 +188,6 @@ in {
       "d ${cfg.sharedDir.path} 2770 0 ${toString cfg.sharedDir.group.gid}"
     ];
 
-    # Enable shared pulseaudio for audio to work. Also requires adding users to
-    # pulse-access group.
-    hardware.pulseaudio.systemWide = true;
-
     # We have to merge these manually to prevent infinite recursion.
     environment = lib.mkMerge [
       allConfigsCombined.environment
@@ -163,7 +204,7 @@ in {
         ];
       }
     ];
-    security.sudo = allConfigsCombined.security.sudo;
+    security.polkit = allConfigsCombined.security.polkit;
     users = lib.mkMerge [
       allConfigsCombined.users
       {
@@ -172,9 +213,13 @@ in {
             inherit (cfg.sharedDir.group) gid;
             members = [ cfg.normalUser ];
           };
-          pulse-access.members = [ cfg.normalUser ];
         };
       }
     ];
+
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    };
   };
 }
