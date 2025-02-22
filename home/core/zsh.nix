@@ -1,14 +1,9 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2021 Chua Hou
+# Copyright (c) 2021, 2025 Chua Hou
 
 { config, lib, pkgs, ... }:
 
-let
-  p10k-config      = "p10k.zsh";
-  p10k-config-path = "${config.xdg.configHome}/${p10k-config}";
-in {
-  xdg.configFile.${p10k-config}.source = ../res/p10k.zsh;
-
+{
   programs.zsh = {
     enable   = true;
     envExtra = import ../lib/shell { inherit config lib pkgs; };
@@ -51,15 +46,7 @@ in {
 
     autocd = true;
 
-    initExtraFirst = /* zsh */ ''
-      # p10k instant prompt.
-      FILE_PATH=${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh
-      [[ -r "$FILE_PATH" ]] && source "$FILE_PATH"
-    '';
-
     initExtra = /* zsh */ ''
-      [[ ! -f ${p10k-config-path} ]] || source ${p10k-config-path}
-
       # vi mode config
       bindkey -rpM viins '^[^['
       vim-mode-bindkey viins vicmd -- up-line-or-history   Up
@@ -81,11 +68,28 @@ in {
     enableCompletion      = true;
     plugins = [
       pkgs.zsh-vim-mode
-      {
-        name = "powerlevel10k";
-        src  = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
     ];
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      character =
+        let
+          mainSymbol = ">";
+          vimcmdSymbol = "<";
+        in rec {
+          success_symbol = "[${mainSymbol}](bold green)";
+          error_symbol = "[${mainSymbol}](bold red)";
+          vimcmd_symbol = "[${vimcmdSymbol}](bold green)";
+          vimcmd_replace_symbol = "[${vimcmdSymbol}](bold purple)";
+          vimcmd_replace_one_symbol = vimcmd_replace_symbol;
+          vimcmd_visual_symbol = "[${vimcmdSymbol}](bold yellow)";
+        };
+      directory.truncate_to_repo = false;
+      git_metrics.disabled = false;
+      git_status.deleted = "!";
+    };
   };
 }
