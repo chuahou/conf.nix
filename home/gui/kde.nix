@@ -24,6 +24,7 @@
       kwin."Walk Through Windows of Current Application Alternative (Reverse)" = [ ];
       "services/org.kde.konsole.desktop"."_launch" = "Alt+Return";
       "services/io.github.Qalculate.qalculate-qt.desktop"."_launch" = "Ctrl+Alt+C";
+      "services/org.kde.plasma-systemmonitor.desktop"."_launch" = "Ctrl+Shift+Esc";
     };
     input.keyboard = {
       numlockOnStartup = "on";
