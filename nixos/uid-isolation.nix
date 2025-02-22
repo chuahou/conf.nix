@@ -3,7 +3,9 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  electronCommandSuffix = "'--enable-features=UseOzonePlatform,WaylandWindowDecorations' '--ozone-platform=wayland' --enable-wayland-ime";
+in {
   imports = [ ../modules/uid-isolation.nix ];
 
   security.uid-isolation = {
@@ -33,17 +35,20 @@
         inputDerivation = pkgs.discord;
         binaryName = "Discord";
         user = { name = "discord"; uid = 2002; };
+        commandSuffix = electronCommandSuffix;
       }
       {
         inputDerivation = pkgs.bitwarden;
         binaryName = "bitwarden";
         user = { name = "bitwarden"; uid = 2003; };
+        commandSuffix = electronCommandSuffix;
       }
       {
         inputDerivation = pkgs.joplin-desktop;
         binaryName = "joplin-desktop";
         user = { name = "joplin"; uid = 2004; };
         allowedArgs = "--no-sandbox";
+        commandSuffix = electronCommandSuffix;
       }
       {
         # Google Chrome has .desktop files that have the full nix store path in
@@ -65,6 +70,7 @@
         };
         binaryName = "google-chrome-stable";
         user = { name = "chrome"; uid = 5353; };
+        commandSuffix = electronCommandSuffix;
       }
     ];
     normalUser = config.users.users.user.name;
