@@ -67,6 +67,13 @@
         # Disable top-left corner overview.
         "Effect-overview"."BorderActivate" = 9;
       };
+      "klipperrc" = {
+        "General" = {
+          "KeepClipboardContents" = false;
+          "MaxClipItems" = 1;
+          "SelectionTextOnly" = false;
+        };
+      };
       "krunnerrc" = {
         "Plugins" = {
           "krunner_appstreamEnabled" = false;
