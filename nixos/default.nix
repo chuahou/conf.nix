@@ -8,6 +8,7 @@
     ./direnv.nix
     ./firefox.nix
     ./gc.nix
+    ./ime.nix
     ./opensnitch.nix
     ./persist.nix
     ./piper.nix
