@@ -120,13 +120,16 @@ let
 
       # Allow normal user to run this program without password.
       security.polkit.extraConfig =
-        let allowedArgs = if opts.allowedArgs != "" then " ${opts.allowedArgs}" else "";
+        let
+          allowedArgs = if opts.allowedArgs != "" then " ${opts.allowedArgs}" else "";
+          allowedPrefix = if opts.commandPrefix != "" then "${opts.commandPrefix} " else "";
+          allowedSuffix = if opts.commandSuffix != "" then " ${opts.commandSuffix}" else "";
         in ''
           polkit.addRule(function(action, subject) {
               if (action.id == "org.freedesktop.machine1.host-shell" &&
                   action.lookup("user") == "${opts.user.name}" &&
                   subject.user == "${cfg.normalUser}") {
-                  if (action.lookup("command_line") == "/bin/sh -c dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY PULSE_SERVER PULSE_COOKIE; systemctl --user start xdg-desktop-portal-gtk; exec ${pkg}/${unwrappedPath}${allowedArgs}") {
+                  if (action.lookup("command_line") == "/bin/sh -c dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY PULSE_SERVER PULSE_COOKIE; systemctl --user start xdg-desktop-portal-gtk; exec ${allowedPrefix}${pkg}/${unwrappedPath}${allowedArgs}${allowedSuffix}") {
                       return polkit.Result.YES;
                   } else {
                       polkit.log(JSON.stringify(action));

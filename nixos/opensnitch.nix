@@ -17,7 +17,7 @@ in {
       Firewall = "iptables";
 
       # Only allow separate user to access socket.
-      Server.Address = "unix:///${config.users.users.${user.name}.home}/osui.sock";
+      Server.Address = "unix://${config.users.users.${user.name}.home}/osui.sock";
 
       # Default actions when UI not connected.
       DefaultDuration = "30s";
@@ -128,7 +128,7 @@ in {
         "Firefox (HTTP, HTTPS, QUIC)".operator = mkListOperator [
           {
             operand = "process.command";
-            data = "${pkgs.firefox}/bin/.firefox-wrapped";
+            data = "${pkgs.firefox}/bin/.firefox-wrapped --name firefox";
           }
           {
             operand = "dest.port"; type = "regexp";
@@ -244,7 +244,7 @@ in {
   security.uid-isolation.programs = [ {
     inputDerivation = pkgs.opensnitch-ui;
     binaryName = "opensnitch-ui";
-    commandPrefix = "env DBUS_SESSION_BUS_ADDRESS=unix:path=/dev/null";
+    commandPrefix = "env 'DBUS_SESSION_BUS_ADDRESS=unix:path=/dev/null'";
     inherit user;
     allowedArgs = "--socket ${config.services.opensnitch.settings.Server.Address}";
   } ];
