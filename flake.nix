@@ -22,9 +22,6 @@
     # zsh-vim-mode plugin
     zsh-vim-mode = { url = "github:softmoth/zsh-vim-mode"; flake = false; };
 
-    # cpufreq-plugin
-    cpufreq-plugin = { url = "github:chuahou/cpufreq-plugin"; flake = false; };
-
     # latex.sty styles
     latex-sty = { url = "github:chuahou/latex.sty"; flake = false; };
 
@@ -47,9 +44,6 @@
 
         # Nix helper functions.
         helpers = import pkgs/helpers.nix;
-
-        cpufreq-plugin =
-          import pkgs/cpufreq-plugin/overlay.nix inputs.cpufreq-plugin;
 
         zsh-vim-mode = self: super: {
           zsh-vim-mode = { name = "zsh-vim-mode"; src = zsh-vim-mode; };

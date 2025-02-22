@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "cpufreq-plugin": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1604925071,
-        "narHash": "sha256-ObOBRVSoG6Pf42/ZKMvoqs+1UkMyg7U9fQy1JYM9GjY=",
-        "owner": "chuahou",
-        "repo": "cpufreq-plugin",
-        "rev": "80df6ac42119d6d177bf17ea413a4209f8bc1b84",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chuahou",
-        "repo": "cpufreq-plugin",
-        "type": "github"
-      }
-    },
     "crane": {
       "inputs": {
         "flake-compat": [
@@ -371,7 +355,6 @@
     },
     "root": {
       "inputs": {
-        "cpufreq-plugin": "cpufreq-plugin",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",

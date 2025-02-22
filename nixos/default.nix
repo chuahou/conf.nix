@@ -145,17 +145,4 @@
     zip
     zsh
   ];
-
-  # extra sudoers rules
-  security.sudo.extraRules = [
-    {
-      groups   = [ "wheel" ];
-      commands = [
-        {
-          command = "${pkgs.cpufreq-plugin-wrapped}/bin/cpufreq-plugin *";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
 }
