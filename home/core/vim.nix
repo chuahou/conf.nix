@@ -113,7 +113,6 @@ in {
       {
         plugin = vim-airline;
         config = ''
-          let g:airline_theme = 'angr'
           let g:airline#extensions#whitespace#mixed_indent_algo = 2
           let g:airline#extensions#checks = [
             \ 'indent', 'long', 'trailing', 'mixed-indent-file', 'conflicts' ]
@@ -128,7 +127,25 @@ in {
           let g:airline_symbols.maxlinenr = ' ln'
         '';
       }
-      vim-airline-themes
+
+      # catppuccin colour scheme
+      {
+        plugin = catppuccin-nvim;
+        type = "lua";
+        config = /* lua */ ''
+          require("catppuccin").setup({
+            flavour = "mocha",
+            no_italic = true,
+            custom_highlights = function(colors)
+              return {
+                ColorColumn = { bg = colors.pink },
+              }
+            end,
+          })
+          vim.cmd.colorscheme "catppuccin"
+          vim.g.airline_theme = "catppuccin"
+        '';
+      }
 
       # git sign column
       vim-gitgutter

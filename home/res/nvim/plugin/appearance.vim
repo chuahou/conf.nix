@@ -1,8 +1,5 @@
 " appearance settings
 
-set notermguicolors
-silent! colorscheme thewursttheme " set colourscheme if we have it
-
 set number            " show line numbers
 set relativenumber    " hybrid numbers
 set foldcolumn=1      " show fold column
