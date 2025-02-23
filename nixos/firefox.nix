@@ -18,9 +18,6 @@ let
     # always use HTTPS
     "dom.security.https_only_mode" = true;
 
-    # enable full-screen within window (for i3wm)
-    "full-screen-api.ignore-widgets" = true;
-
     # prevent Alt from showing window menu
     "ui.key.menuAccessKeyFocuses" = false;
 
