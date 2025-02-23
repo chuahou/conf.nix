@@ -72,6 +72,11 @@ in {
         user = { name = "chrome"; uid = 5353; };
         commandSuffix = electronCommandSuffix;
       }
+      {
+        inputDerivation = pkgs.android-studio;
+        binaryName = "android-studio";
+        user = { name = "dev"; uid = 2005; };
+      }
     ];
     normalUser = config.users.users.user.name;
   };
