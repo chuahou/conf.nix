@@ -10,7 +10,6 @@
       opensnitch-ui --socket ${osConfig.services.opensnitch.settings.Server.Address}
     '';
     shortcuts = {
-      kwin."Window Move" = "Alt";
       kwin."Window Maximize" = "Meta+Shift+Up";
       kwin."Switch Window Down" = "Alt+J";
       kwin."Switch Window Left" = "Alt+H";
