@@ -16,6 +16,7 @@
     pandoc
     pdfgrep
     pdftk
+    qalculate-qt
     rclone
     ripgrep
 
