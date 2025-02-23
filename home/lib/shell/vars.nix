@@ -20,9 +20,4 @@ rec {
     fi
   ''}";
   VISUAL = EDITOR;
-
-  # Fixes a lot of issues where ibus doesn't get used in applications like
-  # Joplin, or Firefox with xhost (firefox-sudo). No idea why this works, tried
-  # out of desperation after seeing it on the Arch Wiki.
-  GTK_IM_MODULE = "xim";
 }
