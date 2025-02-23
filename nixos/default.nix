@@ -55,7 +55,24 @@
   time.timeZone = "Asia/Singapore";
 
   # locale
-  i18n.defaultLocale = "en_SG.UTF-8";
+  i18n = {
+    defaultLocale = "en_SG.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "en_SE.UTF-8";
+    };
+    glibcLocales = (pkgs.glibcLocales.override {
+      allLocales = false;
+      locales = config.i18n.supportedLocales;
+    }).overrideAttrs (old: {
+      postUnpack = /* sh */ ''
+        cp ${pkgs.fetchurl {
+          url = "https://gist.githubusercontent.com/bmaupin/d64368e78cd359d309685fecbe2baf23/raw/e933a0fc2e727aa640f4a1cb1f699622876940fc/en_SE";
+          hash = "sha256-ArXL+rMDVWI4Mmcw8xoRlZFXhEeSQL0tLJf5pKEOx3s=";
+        }} $sourceRoot/localedata/locales/en_SE
+        echo 'en_SE.UTF-8/UTF-8 \' >> $sourceRoot/localedata/SUPPORTED
+      '';
+    });
+  };
   console = {
     font   = "Lat2-Terminus16";
     keyMap = "us";
