@@ -6,9 +6,12 @@
   ];
   programs.plasma = {
     enable = true;
-    startup.startupScript.opensnitch.text = /* sh */ ''
-      opensnitch-ui --socket ${osConfig.services.opensnitch.settings.Server.Address}
-    '';
+    startup.startupScript.opensnitch = {
+      text = /* sh */ ''
+        opensnitch-ui --socket ${osConfig.services.opensnitch.settings.Server.Address}
+      '';
+      runAlways = true;
+    };
     shortcuts = {
       kwin."Window Maximize" = "Meta+Shift+Up";
       kwin."Switch Window Down" = "Alt+J";
