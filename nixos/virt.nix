@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2022 Chua Hou
+# Copyright (c) 2022, 2025 Chua Hou
 
-{ pkgs, ... }:
+{ ... }:
 
 {
   virtualisation.libvirtd.enable = true;
@@ -9,4 +9,6 @@
   programs.virt-manager.enable = true;
 
   virtualisation.podman.enable = true;
+
+  virtualisation.vmware.host.enable = true;
 }

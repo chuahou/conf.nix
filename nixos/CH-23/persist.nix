@@ -9,6 +9,7 @@
     directories = [
       "/etc/NetworkManager/system-connections"
       "/etc/secureboot"
+      "/etc/vmware"
       "/var/lib/AccountsService"
       "/var/lib/alsa"
       "/var/lib/bluetooth"
