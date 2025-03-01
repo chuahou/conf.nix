@@ -10,5 +10,10 @@
 
   virtualisation.podman.enable = true;
 
-  virtualisation.vmware.host.enable = true;
+  virtualisation.vmware.host = {
+    enable = true;
+    extraConfig = ''
+      prefvmx.minVmMemPct = "100"
+    '';
+  };
 }
