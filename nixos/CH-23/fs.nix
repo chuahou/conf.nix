@@ -4,7 +4,10 @@
 { ... }:
 
 {
-  boot.initrd.luks.devices.crypt.device = "/dev/disk/by-uuid/8e64e1d9-8ae7-4c71-b5c7-092a44f3ecab";
+  boot.initrd.luks.devices = {
+    crypt.device = "/dev/disk/by-uuid/8e64e1d9-8ae7-4c71-b5c7-092a44f3ecab";
+    crypt2.device = "/dev/disk/by-uuid/d578d38e-4969-4195-a681-181720b74e90";
+  };
 
   fileSystems =
     let
