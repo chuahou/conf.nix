@@ -40,7 +40,11 @@ drvs=$(for host in $hosts; do
 	gen_home_drvs $host
 	echo -n ' '
 done)
-drvs=$(echo $drvs | xargs -n1 | sort -u | xargs)
+#drvs=$(echo $drvs | xargs -n1 | sort -u | xargs)
+
+# Remove vmware-workstation as it doesn't build on GitHub Actions thanks to
+# bwrap issues.
+drvs=$(echo $drvs | xargs -n1 | grep -v vmware-workstation | sort -u | xargs)
 
 # Filter derivations by whether they exist on cache.
 >&2 echo "Checking $(wc -w <<< $drvs) derivations."
