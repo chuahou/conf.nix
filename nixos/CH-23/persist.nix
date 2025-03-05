@@ -24,7 +24,7 @@
     ];
   };
 
-  boot.initrd.postDeviceCommands = lib.mkBefore ''
+  boot.initrd.postResumeCommands = lib.mkAfter ''
     # Make root blank on boot.
     mkdir -p /mnt
     mount /dev/mapper/data-root /mnt
