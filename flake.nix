@@ -66,10 +66,6 @@
             prev = import nixpkgs-prev { inherit (super) config system; };
             unstable = import nixpkgs-unstable { inherit (super) config system; };
           in {
-            ibus-engines = super.ibus-engines // {
-              inherit (prev.ibus-engines) mozc;
-            };
-            inherit (prev) ibus-with-plugins;
             inherit (unstable) joplin-desktop fzf;
           };
       };
