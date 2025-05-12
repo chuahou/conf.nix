@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2023 Chua Hou
+# Copyright (c) 2023-2025 Chua Hou
 
-{ config, pkgs, lib, ... }:
+{ config, inputs, pkgs, lib, ... }:
 
 let
   user = {
@@ -221,8 +221,14 @@ in {
         ];
         "Joplin".operator = mkListOperator [
           {
-            operand = "process.path"; type = "regexp";
-            data = "/nix/store/[^ ]+/@joplinapp-desktop";
+            operand = "process.path";
+            data =
+              let
+                inherit (inputs.nixpkgs-unstable.legacyPackages.${pkgs.system})
+                  appimageTools;
+              in "${appimageTools.extractType2 {
+                inherit (pkgs.joplin-desktop) src pname version;
+              }}/joplin";
           }
           { operand = "dest.host"; data = "api.joplincloud.com"; }
           { operand = "dest.port"; data = "443"; }
