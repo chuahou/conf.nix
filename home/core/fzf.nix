@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Chua Hou
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [ fzf ];
 
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = lib.mkAfter ''
     source $(fzf-share)/completion.zsh
     source $(fzf-share)/key-bindings.zsh
 

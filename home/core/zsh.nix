@@ -46,7 +46,7 @@
 
     autocd = true;
 
-    initExtra = /* zsh */ ''
+    initContent = lib.mkAfter /* zsh */ ''
       # vi mode config
       bindkey -rpM viins '^[^['
       vim-mode-bindkey viins vicmd -- up-line-or-history   Up
