@@ -22,6 +22,11 @@ in {
       # Default actions when UI not connected.
       DefaultDuration = "30s";
       DefaultAction = "deny";
+
+      # Even though this is claimed to be the default, for some reason it ends
+      # up being evaluated to /etc/opensnitchd/rules instead. Let's restore it
+      # to what it should be.
+      Rules.Path = "/var/lib/opensnitch/rules";
     };
 
     # Custom rules that should apply to every host that has this configuration
