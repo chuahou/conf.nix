@@ -7,8 +7,8 @@
   home.packages = with pkgs; [
 
     # development
+    bcompare
     gitg
-    meld
 
     # productivity
     anki-bin
