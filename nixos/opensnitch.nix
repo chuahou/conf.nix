@@ -227,13 +227,7 @@ in {
         "Joplin".operator = mkListOperator [
           {
             operand = "process.path";
-            data =
-              let
-                inherit (inputs.nixpkgs-unstable.legacyPackages.${pkgs.system})
-                  appimageTools;
-              in "${appimageTools.extractType2 {
-                inherit (pkgs.joplin-desktop) src pname version;
-              }}/joplin";
+            data = "${pkgs.joplin-desktop}/share/joplin-desktop/joplin";
           }
           { operand = "dest.host"; data = "api.joplincloud.com"; }
           { operand = "dest.port"; data = "443"; }

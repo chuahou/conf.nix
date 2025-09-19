@@ -47,7 +47,6 @@ in {
         inputDerivation = pkgs.joplin-desktop;
         binaryName = "joplin-desktop";
         user = { name = "joplin"; uid = 2004; };
-        allowedArgs = "--no-sandbox";
         commandSuffix = electronCommandSuffix;
       }
       {
