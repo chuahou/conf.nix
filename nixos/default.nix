@@ -14,7 +14,6 @@
     ./persist.nix
     ./piper.nix
     ./printing.nix
-    ./syncthing.nix
     ./uid-isolation.nix
     ./virt.nix
   ];
