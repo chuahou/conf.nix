@@ -8,7 +8,7 @@
     enable = true;
     startup.startupScript.opensnitch = {
       text = /* sh */ ''
-        opensnitch-ui --socket ${osConfig.services.opensnitch.settings.Server.Address}
+        opensnitch-ui --socket ${osConfig.services.opensnitch.settings.Server.Address} &
       '';
       runAlways = true;
     };

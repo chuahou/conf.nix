@@ -9,7 +9,7 @@
   ];
   home.packages = with pkgs; [ dropbox ];
   programs.plasma.startup.startupScript.dropbox = {
-    text = "dropbox";
+    text = "dropbox &";
     runAlways = true;
   };
 }
