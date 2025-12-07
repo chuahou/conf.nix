@@ -59,11 +59,6 @@ in {
     normalUser = config.users.users.user.name;
     userCss = /* css */ ''
       #fullscr-toggler { display:none !important; }
-
-      /* For use with Tree Style Tab. */
-      #TabsToolbar { visibility: collapse !important; }
-      #sidebar-header { font-size: 80% !important; padding: 0px !important; }
-      #sidebar-close { display: none; }
     '';
     userPrefs = prefs;
   };
