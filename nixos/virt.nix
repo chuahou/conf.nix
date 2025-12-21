@@ -9,4 +9,6 @@
   programs.virt-manager.enable = true;
 
   virtualisation.podman.enable = true;
+
+  services.flatpak.enable = true;
 }
