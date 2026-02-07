@@ -132,10 +132,6 @@ in {
         ];
         "Firefox (HTTP, HTTPS, QUIC)".operator = mkListOperator [
           {
-            operand = "process.command";
-            data = "${pkgs.firefox}/bin/.firefox-wrapped --name firefox";
-          }
-          {
             operand = "dest.port"; type = "regexp";
             data = "^(80|443)$";
           }
@@ -188,7 +184,7 @@ in {
           # port 443.
           {
             operand = "process.path";
-            data = "${pkgs.telegram-desktop}/bin/.telegram-desktop-wrapped";
+            data = "${pkgs.telegram-desktop}/bin/.Telegram-wrapped";
           }
           { operand = "dest.port"; type = "regexp"; data = "^(80|443)$"; }
           (asUser "telegram")

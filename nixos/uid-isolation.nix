@@ -11,8 +11,8 @@ in {
   security.uid-isolation = {
     programs = [
       {
-        inputDerivation = pkgs.tdesktop;
-        binaryName = "telegram-desktop";
+        inputDerivation = pkgs.telegram-desktop;
+        binaryName = "Telegram";
         user = { name = "telegram"; uid = 2001; };
         desktopFile = {
           name = "org.telegram.desktop.desktop";
@@ -20,8 +20,8 @@ in {
             [Desktop Entry]
             Name=Telegram
             Comment=New era of messaging
-            Exec=telegram-desktop
-            Icon=telegram
+            Exec=Telegram
+            Icon=org.telegram.desktop
             Terminal=false
             StartupWMClass=TelegramDesktop
             Type=Application
@@ -38,7 +38,7 @@ in {
         commandSuffix = electronCommandSuffix;
       }
       {
-        inputDerivation = pkgs.bitwarden;
+        inputDerivation = pkgs.bitwarden-desktop;
         binaryName = "bitwarden";
         user = { name = "bitwarden"; uid = 2003; };
         commandSuffix = electronCommandSuffix;

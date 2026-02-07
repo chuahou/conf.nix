@@ -15,7 +15,7 @@ let
   vars    = import ./vars.nix { inherit pkgs; };
 in ''
   # environment variables
-  ${config.lib.zsh.exportAll vars}
+  ${config.lib.zsh.exportAll vars {}}
 
   # XDG variables
   ${config.lib.zsh.exportAll {
@@ -23,7 +23,7 @@ in ''
     XDG_CONFIG_HOME = config.xdg.configHome;
     XDG_DATA_HOME = config.xdg.dataHome;
     XDG_STATE_HOME = config.xdg.stateHome;
-  }}
+  } {}}
 
   # aliases
   ${lib.concatStringsSep "\n" (
