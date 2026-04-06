@@ -71,6 +71,12 @@ in {
         user = { name = "chrome"; uid = 5353; };
         commandSuffix = electronCommandSuffix;
       }
+      {
+        inputDerivation = pkgs.signal-desktop;
+        binaryName = "signal-desktop";
+        user = { name = "signal"; uid = 2026; };
+        commandSuffix = electronCommandSuffix;
+      }
     ];
     normalUser = config.users.users.user.name;
   };
