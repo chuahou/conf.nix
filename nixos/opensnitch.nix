@@ -107,7 +107,6 @@ in {
             data = "${config.systemd.package}/lib/systemd/systemd-timesyncd";
           }
           { operand = "dest.port"; data = "123"; }
-          { operand = "protocol"; data = "udp"; }
           (asUser "systemd-timesync")
         ];
         "Nix (root, caches)".operator = mkListOperator [
