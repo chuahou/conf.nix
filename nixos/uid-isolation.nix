@@ -77,6 +77,12 @@ in {
         user = { name = "signal"; uid = 2026; };
         commandSuffix = electronCommandSuffix;
       }
+      {
+        inputDerivation = pkgs.obsidian;
+        binaryName = "obsidian";
+        user = { name = "obsidian"; uid = 2027; };
+        commandSuffix = "${electronCommandSuffix} --disable-gpu";
+      }
     ];
     normalUser = config.users.users.user.name;
   };
