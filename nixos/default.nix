@@ -164,4 +164,8 @@
     zip
     zsh
   ];
+
+  security.sudo.extraConfig = ''
+    Defaults timestamp_type=ppid
+  '';
 }
