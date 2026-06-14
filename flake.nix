@@ -3,12 +3,15 @@
 
 {
   inputs = {
-    nixpkgs = { url = "nixpkgs/nixos-25.11"; };
-    nixpkgs-prev = { url = "nixpkgs/nixos-25.05"; };
+    nixpkgs = { url = "nixpkgs/nixos-26.05"; };
+    nixpkgs-prev = { url = "nixpkgs/nixos-25.11"; };
     nixpkgs-unstable = { url = "nixpkgs/nixpkgs-unstable"; };
-    nixos-hardware = { url = "github:NixOS/nixos-hardware"; };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     plasma-manager = {
@@ -56,6 +59,19 @@
               patches = (old.patches or []) ++ [
                 ./pkgs/vim-nix.patch # Modified from #28 to resolve conflicts.
               ];
+            });
+          };
+        };
+
+        # Allow bitwarden to use EOL Electron for now.
+        bitwarden-eol-electron = self: super: {
+          bitwarden-desktop = super.bitwarden-desktop.override {
+            electron_39 = super.electron_39.overrideAttrs (old: {
+              meta = old.meta // {
+                knownVulnerabilities = super.lib.remove
+                  "Electron version 39.8.10 is EOL"
+                    old.meta.knownVulnerabilities;
+              };
             });
           };
         };

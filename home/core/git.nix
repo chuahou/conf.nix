@@ -6,13 +6,15 @@
 {
   programs.git = {
     enable = true;
-    userName = osConfig.users.users.user.description;
-    userEmail = "human+github@chuahou.dev";
     signing = {
       key = "314311D4CE92CC07DD5BDDC8A7F9181F143648FD";
       signByDefault = true;
     };
-    extraConfig = {
+    settings = {
+      user = {
+        name = osConfig.users.users.user.description;
+        email = "human+github@chuahou.dev";
+      };
       pull.ff = "only";
       init.defaultBranch = "master";
       diff.tool = "meld";

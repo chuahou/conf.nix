@@ -11,6 +11,7 @@
       media = "${home}/media";
     in {
       enable = true;
+      setSessionVariables = true;
 
       documents = "${home}/doc";
       download  = "${home}/dl";

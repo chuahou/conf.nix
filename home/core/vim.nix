@@ -39,6 +39,7 @@ in {
       vim-nix
       {
         plugin = coc-nvim;
+        type = "viml";
         config = ''
           let g:coc_config_home = "${configDir}"
 
@@ -83,6 +84,7 @@ in {
       coc-vimtex
       {
         plugin = vimtex;
+        type = "viml";
         config = ''
           " use LaTeX flavour by default
           let g:tex_flavor = 'latex'
@@ -112,6 +114,7 @@ in {
       # vim-airline
       {
         plugin = vim-airline;
+        type = "viml";
         config = ''
           let g:airline#extensions#whitespace#mixed_indent_algo = 2
           let g:airline#extensions#checks = [
@@ -143,7 +146,6 @@ in {
             end,
           })
           vim.cmd.colorscheme "catppuccin"
-          vim.g.airline_theme = "catppuccin"
         '';
       }
 
@@ -156,6 +158,7 @@ in {
       # fzf
       {
         plugin = fzf-vim;
+        type = "viml";
         config = ''
           " Buffer commands. Buffer functions thanks to
           " https://github.com/junegunn/fzf.vim/pull/733#issuecomment-559720813.
@@ -189,6 +192,7 @@ in {
       # snippets
       {
         plugin = ultisnips;
+        type = "viml";
         config = ''
           let g:UltiSnipsExpandTrigger       = '<Tab>'
           let g:UltiSnipsJumpForwardTrigger  = '<Tab>'
@@ -216,5 +220,10 @@ in {
 
     # for coc.nvim
     withNodeJs = true;
+
+    # for UltiSnips
+    withPython3 = true;
+
+    withRuby = false;
   };
 }
