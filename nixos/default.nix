@@ -84,6 +84,7 @@
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
   ];
+  services.geoclue2.enable = false;
 
   # user accounts
   users =
