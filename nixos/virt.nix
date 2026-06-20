@@ -4,10 +4,6 @@
 { ... }:
 
 {
-  virtualisation.libvirtd.enable = true;
-  users.users.user.extraGroups = [ "libvirtd" ];
-  programs.virt-manager.enable = true;
-
   virtualisation.podman.enable = true;
 
   services.flatpak.enable = true;
