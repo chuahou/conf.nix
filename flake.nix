@@ -63,19 +63,6 @@
           };
         };
 
-        # Allow bitwarden to use EOL Electron for now.
-        bitwarden-eol-electron = self: super: {
-          bitwarden-desktop = super.bitwarden-desktop.override {
-            electron_39 = super.electron_39.overrideAttrs (old: {
-              meta = old.meta // {
-                knownVulnerabilities = super.lib.remove
-                  "Electron version 39.8.10 is EOL"
-                    old.meta.knownVulnerabilities;
-              };
-            });
-          };
-        };
-
         # Packages to overlay from other branches to avoid bugs and the like.
         nixpkgs-branches = self: super:
           let

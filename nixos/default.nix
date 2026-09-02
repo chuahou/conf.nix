@@ -124,6 +124,7 @@
     corefonts
     fira
     fira-code
+    gyre-fonts
     iosevka
     ipaexfont
     ipafont
